@@ -1,51 +1,94 @@
-\documentclass[letterpaper,10pt,draftclsnofoot,onecolumn]{IEEEtran}
-\usepackage{graphicx}                                        
-\usepackage{amssymb}                                         
-\usepackage{amsmath}                                         
-\usepackage{amsthm}                                          
+\documentclass[10pt,journal,draftclsnofoot,onecolumn]{IEEEtran}
+\hyphenation{op-tical net-works semi-conduc-tor}
 
-\usepackage{alltt}                                           
-\usepackage{float}
-\usepackage{color}
-\usepackage{url}
+\usepackage[margin=.75in]{geometry}
+\usepackage{courier}
+\usepackage{ifthen}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{tabularx}
+\usepackage[strict]{chngpage}
+\usepackage{cite}
+\usepackage{graphicx}
 
-\usepackage{balance}
-\usepackage[TABBOTCAP, tight]{subfigure}
-\usepackage{enumitem}
-\usepackage{pstricks, pst-node}
+\lstset {
+	language=C,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{OliveGreen}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#}
+	showstringspaces=false,
+	showspaces=false,
+	frame=single,
+	captionpos=b
+}
 
-\usepackage{geometry}
-\geometry{textheight=8.5in, textwidth=6in}
+\newcommand{\commandline}[2][\empty] {
+	\begin{quote}
+	\texttt{#2}
+	\ifthenelse{\equal{#1}{\empty}}{}{\begin{quote}#1\end{quote}}
+	\end{quote}
+}
 
-\newcommand{\cred}[1]{{\color{red}#1}}
-\newcommand{\cblue}[1]{{\color{blue}#1}}
-
-\newcommand{\toc}{\tableofcontents}
-
-\def\name{Natasha Anisimova, Terrance Lee, Albert Morgan}
-\parindent = 0.0 in
-\parskip = 0.1 in
-\title{Problem Statement}
-\date{October 3, 2016}
-\author{Natasha Anisimova, Terrance Lee, Albert Morgan
-	
-	October 3, 2016}
 \begin{document}
+\singlespace
 
-\maketitle
-	\tableofcontents
+\title{\vspace{2in}Problem Statement}
 
+\author {
+	Anisimova, Natasha
+	\and
+	Lee, Terrance
+	\and
+	Morgan, Albert
+}
 
-\begin{abstract}
+\markboth{CS Capstone 2016-2017}{Assignment 1}
+
+\pagestyle{empty}
+\vspace*{2in}
+\begin{center}
+\huge
+Problem Statement\\
+\normalsize
+\vspace{5mm}
+CS Capstone\\
+Spring 2016\\
+\vspace{5mm}
+Natasha Anisimova\\
+Terrance Lee\\
+Albert Morgan
+\end{center}
+
+\vspace{5mm}
+
+\begin{center}
+\textbf{Abstract}
+\end{center}
+
+\begin{adjustwidth}{2in}{2in}
 In June 2017, the Oregon State University chapter of the
 American Institute of Aeronautics and Astronautics will launch a rocket in the Nevada desert.
 We will be the first university team to to launch a rocket past the boundary into space,
 known as the the K\'{a}rm\'{a}n line.
 Our team will develop the tracking software that receives
-telemetry from the rocket as it makes its ascent.
-\end{abstract}
-	
-	\section{Introduction}
-	
-	
+telemetry from the rocket during its flight.
+The software must be flexible enough to work with a variety of sensors,
+not all of which have been decided on yet.
+Additionally, the software must be robust,
+because there will be no second chances on launch day.
+This document will give an overview of the problem,
+our proposed software solution,
+and describe how we will measure its success.
+\end{adjustwidth}
+
+% \newpage
+% \pagestyle{headings}
+% \section{Section title here}
+% \subsection{Subsection title here}
+
 \end{document}
+
+
