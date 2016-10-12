@@ -16,7 +16,7 @@
 
 \acrodef{OSU}[OSU]{Oregon State University}
 \acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
-
+\acrodef{AGL}[AGL]{Above Ground Level}
 
 \lstset {
 	language=C,
@@ -94,25 +94,54 @@ and describe how we will measure its success.
 \newpage
 \pagestyle{headings}
 \section{Problem Definition}
+\subsection{The Rocket}
 In June 2017, the \ac{OSU} chapter of the
-American Institute of Aeronautics and Astronautics will launch a rocket in the Nevada desert.
-We will be the first university team to to launch a rocket past the boundary into space,
-known as the the K\'{a}rm\'{a}n line, which lies 100km above the surface of the Earth.
-Our team will develop the tracking software that receives
-telemetry from the rocket during its flight
-and displays the data in real-time for the engineering team.
-The software must be flexible enough to work with a variety of sensors,
-not all of which have been decided on yet.
-Additionally, the software must be robust,
-because there will be no second chances on launch day.
-This document will give an overview of the problem,
-our proposed software solution,
-and describe how we will measure its success.
+\ac{AIAA} will launch a rocket in the Nevada desert.
+This rocket will ascend to one hundred thousand feet \ac{AGL}.
+\subsection{The Ground Station}
+While the rocket is in flight, the \ac{OSU} rocktry team
+must be able to receive, view, and store telemetry in real-time.
+Mission critical information that must be received by the ground
+station are latitude, longitude, and altitude. The latitude
+and longitude will aid in tracking and recovery of the rocket
+after flight. Real-time altitude readings will allow the rocket
+team to determine if the objective of one hundred thousand feet
+has been met even if recovery of the rocket is impossible.
 
+The final software package must be stable and resistance to errors.
+Losing peak altitude data could cause the record of the team's
+achievement to be lost, and any error in the latitude
+and longitude records could severely hamper or derail
+the recovery of the rocket.
+
+\subsection{Stretch Goals}
+After the primary objectives outlined in the previous section
+are met, there are a number of additional optional features
+that have been requested by the rocketry team.
+Many of our clients are still new to the team, and the specific
+needs and wants may change as the project progresses.
+Stretch goals may include, in no particular order:
+
+\begin{itemize}
+\item The engineers would like to be able to record and view data
+from a number of different sensors, not just altitude,
+latitude, and longitude.
+
+\item The software package could present the data graphically.
+This could include line graphs, overlaying position data
+on maps, or more.
+
+\item The data could be made availble 
+
+\item A configurable interface could allow team members
+to select the data that they want to view in real-time.
+
+\item Automatic uploading of data to a remote host.
+
+\end{itemize}
 
 % Use the \subsection command to create a subsection:
 % \subsection{Section title}
-Write the problem definition here.
 \section{Proposed Soltion}
 Write the proposed solution here.
 \section{Performance Metrics}
