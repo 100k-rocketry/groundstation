@@ -178,16 +178,34 @@ Simulations?
 
 
 \section{Performance Metrics}
-Write the performance metrics here.
 
-Write about all the tests we will do:
+The successfulness of the project will measured by whether the data
+is successfully recorded and made accessible to the rocketry team
+on launch day. To ensure the software is ready for launch day,
+we will consider three primary performance metrics:
 
-Fully random tests (garbage data)
+\begin{itemize}
+\item Stability: the software should not crash or otherwise cease operation
+\item Robustness: the software should handle bad inputs gracefully
+\item Accuracy: the software should correctly report all telemetry
+\end{itemize}
 
-Partially random tests (one bit flipped, or good structure with bad values)
+In order to meet these requirements, a comprehensive test plan will
+be written an executed. This plan will involve sending large amounts
+of random, recorded, and live data to the software, including:
 
-Happy-path tests
+\begin{itemize}
 
+\item Completely random data
+\item Valid data with random bits flipped
+\item Data with valid structure but invalid 
+\item Randomly generated valid data
+\item Test launch data
+\item Real data collected from the transmitter (not during launch)
+\end{itemize}
+
+The software will only be considered successful if it passes all of these
+tests with no errors.
 
 \end{document}
 
