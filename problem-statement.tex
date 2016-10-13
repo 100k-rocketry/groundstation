@@ -33,164 +33,162 @@
 
 \newcommand{\commandline}[2][\empty] {
 	\begin{quote}
-	\texttt{#2}
-	\ifthenelse{\equal{#1}{\empty}}{}{\begin{quote}#1\end{quote}}
+		\texttt{#2}
+		\ifthenelse{\equal{#1}{\empty}}{}{\begin{quote}#1\end{quote}}
 	\end{quote}
 }
 
 \begin{document}
-\singlespace
-
-\title{\vspace{2in}Problem Statement}
-
-\author {
-	Anisimova, Natasha
-	\and
-	Lee, Terrance
-	\and
-	Morgan, Albert
-}
-
-\markboth{CS Capstone 2016-2017}{Assignment 1}
-
-\pagestyle{empty}
-\vspace*{2in}
-\begin{center}
-\huge
-Problem Statement\\
-\normalsize
-\vspace{5mm}
-CS Capstone\\
-Spring 2016\\
-\vspace{5mm}
-Natasha Anisimova\\
-Terrance Lee\\
-Albert Morgan
-\end{center}
-
-\vspace{5mm}
-
-\begin{center}
-\textbf{Abstract}
-\end{center}
-
-\begin{adjustwidth}{2in}{2in}
-In June 2017, the \ac{OSU} chapter of the
-American Institute of Aeronautics and Astronautics will launch a rocket in the Nevada desert.
-We will be the first university team to to launch a rocket past the boundary into space,
-known as the the K\'{a}rm\'{a}n line, which lies 100km above the surface of the Earth.
-Our team will develop the tracking software that receives
-telemetry from the rocket during its flight
-and displays the data in real-time for the engineering team.
-The software must be flexible enough to work with a variety of sensors,
-not all of which have been decided on yet.
-Additionally, the software must be robust,
-because there will be no second chances on launch day.
-This document will give an overview of the problem,
-our proposed software solution,
-and describe how we will measure its success.
-\end{adjustwidth}
-
-\newpage
-\pagestyle{headings}
-\section{Problem Definition}
-In June 2017, the \ac{OSU} chapter of the
-\ac{AIAA} will launch a rocket in the Nevada desert.
-This rocket will ascend to one hundred thousand feet \ac{AGL}.
-Designing, building, and launching the rocket will require the
-collaboration and expertise of dozens of engineers from a variety
-of disciplines, including mechanical, electrical, computer, and
-software.
-
-While the rocket is in flight, the \ac{OSU} rocketry team
-must be able to receive, view, and store telemetry in real-time.
-Mission critical information that must be received by the ground
-station are latitude, longitude, and altitude. The latitude
-and longitude will aid in tracking and recovery of the rocket
-after flight. Real-time altitude readings will allow the rocket
-team to determine if the objective of one hundred thousand feet
-has been met even if recovery of the rocket is impossible.
-
-
-% Use the \subsection command to create a subsection:
-% \subsection{Section title}
-\section{Proposed Soltion}
-
-\subsection{Desired Features}
-After the primary objectives outlined in the previous section
-are met, there are a number of additional optional features
-that have been requested by the rocketry team.
-Many of our clients are still new to the team, and the specific
-needs and wants may change as the project progresses.
-Stretch goals may include, in no particular order:
-
-\begin{itemize}
-\item The engineers would like to be able to record and view data
-from a number of different sensors, not just altitude,
-latitude, and longitude.
-
-\item The software package could present the data graphically.
-This could include line graphs, overlaying position data
-on maps, or more.
-
-\item The data could be made available 
-
-\item A configurable interface could allow team members
-to select the data that they want to view in real-time.
-
-\item Automatic uploading of data to a remote host.
-
-\end{itemize}
-
-The Computer Science team is 
-working closely with the ECE team, we are considering having two servers 
-present at the ground station. One would exist as a web server, this would
-serve and display data about the rocket on a local Wi-Fi network. We will
-write customized software that retrieves data from an external source and
-formats it before making it available to the web server. The second server,
- or application server, is where that software will exist. This server will
- read data from the serial port and log it. Since the Rocket Team hopes to 
- use this software in future launches we plan on making it easy to install.
- In order to test the software created we will be using data collected from
- previous competitions that have been completed by OSU's Rocket Team. This is
- also how we will be able to display the working software before the actual
- launch in mid-June.
-
-\subsection{The Ground Station}
-
-The final software package must be stable and resistance to errors.
-Losing peak altitude data could cause the record of the team's
-achievement to be lost, and any error in the latitude
-and longitude records could severely hamper or derail
-the recovery of the rocket.
-
-\subsection{Launch Simulation}
-
-A feature that would be helpful to have but not necessary, is simulating a launch
-through the use of code. One example of this would be manually changing the rocket's 
-percieved altitude in order to test the detachment of the payload and release of the
-parachutes. This would help the Mechanical Engineers test to see if 
-the rocket preforms as expected. 
-
-\section{Performance Metrics}
-
-The successfulness of the project will measured by whether the data
-is successfully recorded and made accessible to the rocketry team
-on launch day. To ensure the software is ready for launch day,
-we will consider three primary performance metrics:
-
-\begin{itemize}
-\item Stability: the software should not crash or otherwise cease operation
-\item Robustness: the software should handle bad inputs gracefully
-\item Accuracy: the software should correctly report all telemetry
-\end{itemize}
-
-In order to meet these requirements, a comprehensive test plan will
-be written an executed. This plan will involve sending large amounts
-of random, recorded, and live data to the software and recording the results.
-The software will only be considered successful if it passes all of these
-tests with no errors.
-
+	\singlespace
+	
+	\title{\vspace{2in}Problem Statement}
+	
+	\author {
+		Anisimova, Natasha
+		\and
+		Lee, Terrance
+		\and
+		Morgan, Albert
+	}
+	
+	\markboth{CS Capstone 2016-2017}{Assignment 1}
+	
+	\pagestyle{empty}
+	\vspace*{2in}
+	\begin{center}
+		\huge
+		Problem Statement\\
+		\normalsize
+		\vspace{5mm}
+		CS Capstone\\
+		Spring 2016\\
+		\vspace{5mm}
+		Natasha Anisimova\\
+		Terrance Lee\\
+		Albert Morgan
+	\end{center}
+	
+	\vspace{5mm}
+	
+	\begin{center}
+		\textbf{Abstract}
+	\end{center}
+	
+	\begin{adjustwidth}{2in}{2in}
+		In June 2017, the \ac{OSU} chapter of the
+		American Institute of Aeronautics and Astronautics will launch a rocket in the Mojave Desert.
+		We will be the first university team to launch a rocket into the Stratosphere, to one hundred thousand feet above sea level
+		Our team will develop the tracking software that receives
+		telemetry from the rocket during its flight
+		and displays the data in real-time for the engineering team.
+		The software must be flexible enough to work with a variety of sensors.
+		The software must be robust,
+		because there will be no second chances on launch day.
+		This document will give an overview of the problem,
+		its proposed solution,
+		and describe how we will measure its success.
+	\end{adjustwidth}
+	
+	\newpage
+	\pagestyle{headings}
+	\section{Problem Definition}
+	In June 2017, the \ac{OSU} chapter of the
+	\ac{AIAA} will launch a rocket in the Mojave Desert.
+	This rocket will ascend to one hundred thousand feet \ac{AGL}.
+	Designing, building, and launching the rocket will require the
+	collaboration and expertise of dozens of engineers from a variety
+	of disciplines, including mechanical, electrical, computer, and
+	software.
+	
+	While the rocket is in flight, the \ac{OSU} rocketry team
+	must be able to receive, view, and store telemetry in real-time.
+	Mission critical information that must be received by the ground
+	station are latitude, longitude, and altitude. The latitude
+	and longitude will aid in tracking and recovery of the rocket
+	after flight. Real-time altitude readings will allow the rocket
+	team to determine if the objective of one hundred thousand feet
+	has been met even if recovery of the rocket is impossible.
+	
+	
+	% Use the \subsection command to create a subsection:
+	% \subsection{Section title}
+	\section{Proposed Solution}
+	
+	\subsection{Desired Features}
+	After the primary objectives outlined in the previous section
+	are met, there are a number of additional optional features
+	that have been requested by the rocketry team.
+	Many of our clients are still new to the team, and the specific
+	needs and wants may change as the project progresses.
+	Stretch goals may include, in no particular order:
+	
+	\begin{itemize}
+		\item The engineers would like to be able to record and view data
+		from a number of different sensors, not just altitude,
+		latitude, and longitude.
+		
+		\item The software package could present the data graphically.
+		This could include line graphs, overlaying position data
+		on maps, or more.
+		
+		\item The data could be made available 
+		
+		\item A configurable interface could allow team members
+		to select the data that they want to view in real-time.
+		
+		\item Automatic uploading of data to a remote host.
+		
+	\end{itemize}
+	
+	The Computer Science team is 
+	working closely with the ECE team, we are considering having two servers 
+	present at the ground station. One would exist as a web server, this would
+	serve and display data about the rocket on a local Wi-Fi network. We will
+	write customized software that retrieves data from an external source and
+	formats it before making it available to the web server. The second server,
+	or application server, is where that software will exist. This server will
+	read data from the serial port and log it. Since the Rocket Team hopes to 
+	use this software in future launches we plan on making it easy to install.
+	In order to test the software created we will be using data collected from
+	previous competitions that have been completed by OSU's Rocket Team. This is
+	also how we will be able to display the working software before the actual
+	launch in mid-June.
+	
+	\subsection{The Ground Station}
+	
+	The final software package must be stable and resistance to errors.
+	Losing peak altitude data could cause the record of the team's
+	achievement to be lost, and any error in the latitude
+	and longitude records could severely hamper or derail
+	the recovery of the rocket.
+	
+	\subsection{Launch Simulation}
+	
+	A feature that would be helpful to have but not necessary, is simulating a launch
+	through the use of code. One example of this would be manually changing the rocket's 
+	perceived altitude in order to test the detachment of the payload and release of the
+	parachutes. This would help the Mechanical Engineers test to see if 
+	the rocket preforms as expected. 
+	
+	\section{Performance Metrics}
+	
+	The successfulness of the project will measured by whether the data
+	is successfully recorded and made accessible to the rocketry team
+	on launch day. To ensure the software is ready for launch day,
+	we will consider three primary performance metrics:
+	
+	\begin{itemize}
+		\item Stability: the software should not crash or otherwise cease operation
+		\item Robustness: the software should handle bad inputs gracefully
+		\item Accuracy: the software should correctly report all telemetry
+	\end{itemize}
+	
+	In order to meet these requirements, a comprehensive test plan will
+	be written an executed. This plan will involve sending large amounts
+	of random, recorded, and live data to the software and recording the results.
+	The software will only be considered successful if it passes all of these
+	tests with no errors.
+	
 \end{document}
 
 
