@@ -12,7 +12,7 @@
 \usepackage{cite}
 \usepackage{graphicx}
 \usepackage{acronym}
-
+\usepackage{color}
 
 \acrodef{OSU}[OSU]{Oregon State University}
 \acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
@@ -100,7 +100,26 @@
 	collaboration and expertise of dozens of engineers from a variety
 	of disciplines, including mechanical, electrical, computer, and
 	software.
-	
+
+	Many rockets record data during the flight. This data may include
+	altitude, latitude, longitude, and more. Latitude and longitude
+	data is helpful for locating the rocket after it lands, but
+	if the data is located on the rocket, then the data is useless
+	for this task. Altitude data will tell the rocketry team if we have
+	met the objective of one hundred thousand feet, but if the rocket
+	is damage or cannot be located for any reason, then the record
+	of this achievement may be lost.
+
+	However, the chicken-and-egg problem of not knowing the location
+	of the rocket before the rocket is found may be avoided by sending
+	telemtry from the rocket in real-time. Data may be received wirelessly
+	by the rocketry team while the rocket is in flight, giving them
+	access to many useful data, including the rocket's last known location
+	and the highest altitude reached.
+
+
+	{\textit{\color{red} Do we still need this next paragraph? Maybe the previous two paragraphs obviate the need for it.}}
+
 	While the rocket is in flight, the \ac{OSU} rocketry team
 	must be able to receive, view, and store telemetry in real-time.
 	Mission critical information that must be received by the ground
@@ -181,7 +200,7 @@
 	or using hand-crafted data.
 	If the desired web server function is complete, then people will be given the ability
 	to connect to our server with their personal computers and view the data themselves.
-	Ideally, this would be done by working closely
+	Ideally, this task would be done by working closely
 	with the avionics team to highlight the combined achievements of our
 	hardware and software.
 	
