@@ -121,18 +121,6 @@
 	and the highest altitude reached. This telemetry will aid in the
 	rocket's recovery and provide a log of the rocket's flight even if
 	recovery is impossible.
-
-	{\textit{\color{red} Do we still need this next paragraph? Maybe the previous two paragraphs obviate the need for it.}}
-
-	While the rocket is in flight, the \ac{OSU} rocketry team
-	must be able to receive, view, and store telemetry in real-time.
-	Mission critical information that must be received by the ground
-	station are latitude, longitude, and altitude. The latitude
-	and longitude will aid in tracking and recovery of the rocket
-	after flight. Real-time altitude readings will allow the rocket
-	team to determine if the objective of one hundred thousand feet
-	has been met even if recovery of the rocket is impossible.
-	
 	
 	% Use the \subsection command to create a subsection:
 	% \subsection{Section title}
@@ -142,30 +130,12 @@
 
 	With the aid of the computer engineers in the avionics team,
 	the software team will design, build, and deploy a ground station
-	capable of receiving and displaying essential telemetry in real time.
+	capable of receiving and displaying essential telemetry in real-time.
 	At a minimum, this telemetry includes highest recorded altitude and
-	last known latitude and longitude.
+	last known latitude and longitude. In addition to displaying
+	the data in real-time, this data should be logged so it can
+	be accessed later.
 
-	The software team proposes building a dedicated ground station,
-	to receive, log, and make available telemetry in real-time.
-	The avionics team will provide the hardware platform, which should
-	have the ability to:
-
-	\begin{itemize}
-	\item Receive telemetry from the rocket
-	\item Run a modern multitasking operating system
-	\item Broadcast a wireless access point
-	\item Write to non-volatile storage
-	\item Display data on a screen without external devices
-	\end{itemize}
-
-	The software team will develop a package for the ground station that
-	will acquire, format and log the telemetry in real-time.
-	Mission critical data will be displayed on the built-in display so that
-	no external devices will be necessary to meet the minimum requirements.
-	This data will be logged to non-volatile storage, so it may be
-	downloaded onto another device at a later time.
-	
 	\subsection{Desired Features}
 
 	After the primary objectives outlined in the previous section
