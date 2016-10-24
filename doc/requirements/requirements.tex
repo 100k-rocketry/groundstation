@@ -1,0 +1,109 @@
+\documentclass[10pt,journal,draftclsnofoot,onecolumn]{IEEEtran}
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\usepackage[margin=.75in]{geometry}
+\usepackage{courier}
+\usepackage{ifthen}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{tabularx}
+\usepackage[strict]{chngpage}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{acronym}
+\usepackage{color}
+
+\acrodef{OSU}[OSU]{Oregon State University}
+\acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
+\acrodef{AGL}[AGL]{Above Ground Level}
+
+\lstset {
+	language=C,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{OliveGreen}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#}
+	showstringspaces=false,
+	showspaces=false,
+	frame=single,
+	captionpos=b
+}
+
+\newcommand{\commandline}[2][\empty] {
+	\begin{quote}
+		\texttt{#2}
+		\ifthenelse{\equal{#1}{\empty}}{}{\begin{quote}#1\end{quote}}
+	\end{quote}
+}
+
+\begin{document}
+	\singlespace
+	
+	\title{\vspace{2in}Problem Statement}
+	
+	\author {
+		Anisimova, Natasha
+		\and
+		Lee, Terrance
+		\and
+		Morgan, Albert
+	}
+	
+	\markboth{CS Capstone 2016-2017}{Requirements}
+	
+	\pagestyle{empty}
+	\vspace*{2in}
+	\begin{center}
+		\huge
+		Requirements\\
+		\normalsize
+		\vspace{5mm}
+		CS Capstone\\
+		Spring 2016\\
+		\vspace{5mm}
+		Natasha Anisimova\\
+		Terrance Lee\\
+		Albert Morgan
+	\end{center}
+	
+	\vspace{5mm}
+	
+	\begin{center}
+		\textbf{Abstract}
+	\end{center}
+	
+	\begin{adjustwidth}{2in}{2in}
+	
+	% PUT ABSTRACT HERE
+	
+	\end{adjustwidth}
+	
+	\newpage
+	\pagestyle{headings}
+
+
+	% PUT CONTENT HERE
+
+	\vspace{1in}
+	\noindent Nancy Squires
+
+	\vspace{1in}
+	\noindent Natasha Anisimova
+
+	\vspace{1in}
+	\noindent Terrance Lee
+
+	\vspace{1in}
+	\noindent Albert Morgan\\
+	
+
+
+
+
+
+
+\end{document}
+
+
