@@ -85,15 +85,43 @@
 
 
 	\section{Introduction}
+	
 	\subsection{Purpose}
+	This document will specify the requirements for the 
+	It is intended for use by the OSU High-Altitude Rocketry Team.
+	
 	\subsection{Scope}
+	This document covers the requirements for the Groundstation software.
+	The Groundstation software will gather telemetry from a rocket during flight.
+	After the telemetry is gathered, it will be logged and displayed graphically in real-time.
+	This software will provide three benefits to the users:
+	\begin{enumerate}
+		\item Real-time data will allow critical data such as the rocket's location to be tracked.
+		\item The graphical representation will make the data easy to interpret.
+		\item Logging will allow the data to be analyzed at a later date.
+	\end{enumerate}	
+			
 	\subsection{Definition}
-	\subsection{References}
+	
+	\begin{itemize}
+		\item \textbf{Real-time:} Each datum received from the rocket must be processed and displayed in 1 second.
+		\item \textbf{Redundant sensors:} Redundant sensors are the same type of sensor providing the same type of data.
+		\item \textbf{Accuracy:} The Groundstation software must not introduce any errors in the telemetry it logs and displays.
+		\item \textbf{Robustness:} In the event that the Groundstation software receives data that is garbled or otherwise does adhere to the protocol, it must continue to receive and display data and not break the real-time requirement.
+		\item \textbf{Reliability:} In the event of a crash, the Groundstation software should automatically start and begin all normal functions in under 10 seconds.
+		\item \textbf{Raspberry Pi:} A small, inexpensive computing platform.
+		\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
+		\item \textbf{Graphical display:} Data that is displayed using a chart, for example, a line graph or overlayed on a map, as opposed to numerical data in a table.
+	\end{itemize}	
+	
 	\subsection{Overview}
+		
 	
 	\section{Overall description}
 	\subsection{Product perspective}
+	Groundstation will receive data from a serial interface, via hardware and a protocol provided by the avionics team.
 	\subsection{Product functions}
+	
 	\subsection{User characteristics}
 	\subsection{Constraints}
 	\subsection{Assumptions and dependencies}
