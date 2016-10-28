@@ -112,6 +112,7 @@
 		\item \textbf{Raspberry Pi:} A small, inexpensive computing platform.
 		\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
 		\item \textbf{Graphical display:} Data that is displayed using a chart, for example, a line graph or overlayed on a map, as opposed to numerical data in a table.
+		\item \textbf{Non-volatile storage:} Storage that will not be erased when the system is powered down. For example, a hard drive or flash storage.
 	\end{itemize}	
 	
 	\subsection{Overview}
@@ -120,11 +121,28 @@
 	\section{Overall description}
 	\subsection{Product perspective}
 	Groundstation will receive data from a serial interface, via hardware and a protocol provided by the avionics team.
+	Additionally, Groundstation will provide a software interface that allows users to view the telemetry, graphically, in real-time.
 	\subsection{Product functions}
+	The Groundstation software provides two major functions while the rocket is in flight:
+	
+	\begin{enumerate}
+		\item Telemetry logging to non-volatile storage.
+		\item Display of real-time graphical data. 
+	\end{enumerate}
 	
 	\subsection{User characteristics}
+	The users of this software will be limited engineering students and advisors who are part of the OSU High-Altitude Rocketry Team.
+	These users will be expected to be familiar with the software and the rocket launch.
+	
 	\subsection{Constraints}
+	\begin{itemize}
+		\item Because the remote nature of launch sites, the software must operate without an Internet connection.
+		\item The software must be as reliable as is reasonably possible, and additional features must not compromise the reliability.
+		\item Groundstation will receive telemetry via a protocol that is TBD by the avionics team.
+	\end{itemize}
 	\subsection{Assumptions and dependencies}
+	Groundstation will be designed to run on a Raspberry Pi.
+	
 	\subsection{Apportioning of requirements}
 	
 	\section{Specific requirements}
