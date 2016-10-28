@@ -113,6 +113,8 @@
 		\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
 		\item \textbf{Graphical display:} Data that is displayed using a chart, for example, a line graph or overlayed on a map, as opposed to numerical data in a table.
 		\item \textbf{Non-volatile storage:} Storage that will not be erased when the system is powered down. For example, a hard drive or flash storage.
+		\item \textbf{Telemetry:} Data received from the rocket while the rocket is in flight.
+		\item \textbf{Binary data:} Telemetry that is one of two states, for example, ''stage 2 activated'' and ''stage 2 not activated''
 	\end{itemize}	
 	
 	\subsection{Overview}
@@ -146,6 +148,21 @@
 	\subsection{Apportioning of requirements}
 	
 	\section{Specific requirements}
+	
+	The stimulus for all specific requirements is receiving a new piece of telemetry. The specific responses will be described here.
+		
+	\begin{itemize}
+		\item The graphical diplay shall be updated in real-time.
+		\item Telemetry collected from redundant sensors shall be averaged out, and users can elect to view the averaged data or the data from individual sensors.
+		\item Groundstation shall integrate with Google Earth and plot the rocket's trajectory so that the rocket's current location can be easily visualized.
+		\item The telemetry shall be able to be displayed in multiple formats, including overlaying on a map and binary data representation.
+		However, not all data makes sense to be displayed in all formats.
+		For example, it would not make sense to display staging data on a map, or show a binary representation of latitude.
+		\item All data shall be logged to non-volatile storage.
+		\item There shall be a voice output that will announce some or all of the data in real-time.
+		\item Groundstation shall be able to display different types of data, including lean-angle, latitude, longitude, altitude, and stating success/failure. The format that each of these types of data shall be displayed in shall be decided at a later date.
+		\item Groundstation shall support real-time video from the rocket.
+	\end{itemize}
 	
 	\subsection{External interface requirements}
 	\subsubsection{User interfaces}
