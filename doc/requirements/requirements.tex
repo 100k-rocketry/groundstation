@@ -267,9 +267,24 @@
 	
 	\subsection{Performance requirements}
 	\subsection{Design constraints}
-	With the Raspberry Pi B+ model that we will have it has a 700 MHz single-core ARM1176JZF-S with 512 MB of SDRAM memory.  It has 4 USB port, a HDMI port, and an Ethernet port.  This has a 5v power source and 3.0 W power rating.
+	With the Raspberry Pi 3 model B that we will have it has a 1.2 GHz quad-core 64-bit ARM Cortex-A53 
+	with 1 GB of SDRAM memory.  It has 4 USB port, a HDMI port, and an Ethernet port.  This has a 5v 
+	power source and 4.0 W power rating.
 
-	% PUT CONTENT HERE
+\subsection{Reliability}
+	We need the GS system to be reliable.  Since most software has reliability issues
+	during testing/debugging phases and the worn out/obsolete phases.  Our main reliability
+	issue is during the testing/debugging phases. As long as we do all of our testing/debugging
+	before we do any of our launches we should not have any issues with reliability. 
+
+\subsection{Availability}
+	The availability of the software is based both on the software as well as the 
+	hardware. The Raspberry Pi has a Ethernet port to plug directly into it as well as
+	a wireless Bluetooth for connectivity. If the system goes down on the hardware side
+	we can restart it with a reboot command from the main PC that will be hooked up to it.
+	If GS goes down, then we can reboot the software itself to bring it back online. 
+	
+\subsection{Maintainability}
 
 \printindex
 
