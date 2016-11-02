@@ -115,11 +115,11 @@
 	While the telemetry is being gathered, it will be logged and displayed graphically in real-time.
 	This software will provide the following benefits to the users:
 	\begin{enumerate}
-		\item Real-time data will allow the rocket's location to be tracked before recovery.
+		\item Real-time data will allow the rocket's location to be tracked during flight.
+		Allowing this data to be accessed before recovery will aid in the recovery itself.
 		\item The graphical display will make the data easy to interpret.
 		\item Logging will allow the data to be analyzed at a later date.
 		\item Altitude data will give evidence of whether the objective of one hundred thousand feet was met.
-		\item Tracking the location of the rocket will aid in its recovery.
 	\end{enumerate}	
 			
 	\subsection{Definitions}
@@ -128,8 +128,8 @@
 		\index{Accuracy}
 		\item \textbf{Accuracy:} The absence of errors in the telemetry GS receives, logs, and displays.
 		\index{Binary data}
-		\item \textbf{Binary data:} Telemetry that represents one of two states, for example, ''stage 2 activated'' and
-		''stage 2 not activated.''
+		\item \textbf{Binary data:} Telemetry that represents one of two states, for example, ``stage 2 activated'' and
+		``stage 2 not activated.''
 		\index{Corruption}
 		\item \textbf{Corruption:} The process by which data is altered or made unreadable.
 		\index{Crash}
@@ -168,9 +168,9 @@
 		\item \textbf{Telemetry:} Data received from the rocket while the rocket is in flight.
 		\index{Telemetry packet}
 		\index{Packet}
-		\item \textbf{Telemetry packet:} The rocket will send a telemetry update once per second. Each one of these updates is a ''telemetry packet.''
+		\item \textbf{Telemetry packet:} The rocket will send a telemetry update once per second. Each one of these updates is a ``telemetry packet.''
 		\index{Vizualation}
-		\item \textbf{Vizualization:} Information or data, transformed into an visual context.
+		\item \textbf{Visualization:} Information or data, transformed into an visual context.
 	\end{itemize}	
 	
 	\subsection{Overview}
@@ -203,11 +203,13 @@
 	The users of this software will be limited to engineering students and advisors who are part of the OSU High-Altitude
 	Rocketry Team.
 	These users will be expected to be familiar with the software and the rocket launch.
+	Because the software team works closely with the rest of the rocketry team on regular basis,
+	any training necessary will be conducted in-person.
 	
 	\subsection{Constraints}
 	\index{Constraints}
 	\begin{itemize}
-		\item Because the remote nature of launch sites, the software must operate without an Internet connection.
+		\item Because of the remote nature of launch sites, the software must operate without an Internet connection.
 		\item The software must be as reliable as is reasonably possible, and additional features must not compromise the reliability.
 		\item Groundstation will receive telemetry via a protocol that is TBD by the avionics team.
 	\end{itemize}
