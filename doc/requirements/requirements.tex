@@ -126,19 +126,21 @@
 	
 	\begin{itemize}
 		\index{Accuracy}
-		\item \textbf{Accuracy:} GS must not introduce any errors in the telemetry it receives, logs, and displays.
-		\index{Base page}
-		\item \textbf{Base page:} A page provided by GS that will show latitude, longitude, and altitude telemetry.
+		\item \textbf{Accuracy:} The absence of errors in the telemetry GS receives, logs, and displays.
 		\index{Binary data}
 		\item \textbf{Binary data:} Telemetry that represents one of two states, for example, ''stage 2 activated'' and
 		''stage 2 not activated.''
 		\index{Corruption}
 		\item \textbf{Corruption:} The process by which data is altered or made unreadable.
+		\index{Crash}
+		\item \textbf{Crash:} A software crash; the event in which a piece of software ceases operation unexpectedly.
 		\index{Groundstation}
 		\index{GS}
 		\item \textbf{GS:} Groundstation, the name of our software.
 		\index{Graphical display}
 		\item \textbf{Graphical display:} Data that is displayed using a visualization.
+		\index{Live}
+		\item \textbf{Live:} Updated in real-time.
 		\index{Page}
 		\item \textbf{Page:} A web page that users of GS may connect to in order to view the telemetry.
 		%\index{Lean angle}
@@ -163,7 +165,10 @@
 		\index{Storage}
 		\item \textbf{Storage:} A device where data is logged.		
 		\index{Telemetry}
-		\item \textbf{Telemetry:} Data received from the rocket while the rocket is in flight.		
+		\item \textbf{Telemetry:} Data received from the rocket while the rocket is in flight.
+		\index{Telemetry packet}
+		\index{Packet}
+		\item \textbf{Telemetry packet:} The rocket will send a telemetry update once per second. Each one of these updates is a ''telemetry packet.''
 		\index{Vizualation}
 		\item \textbf{Vizualization:} Information or data, transformed into an visual context.
 	\end{itemize}	
@@ -194,18 +199,21 @@
 	\end{enumerate}
 	
 	\subsection{User characteristics}
+	\index{Users}
 	The users of this software will be limited to engineering students and advisors who are part of the OSU High-Altitude
 	Rocketry Team.
 	These users will be expected to be familiar with the software and the rocket launch.
 	
 	\subsection{Constraints}
+	\index{Constraints}
 	\begin{itemize}
 		\item Because the remote nature of launch sites, the software must operate without an Internet connection.
 		\item The software must be as reliable as is reasonably possible, and additional features must not compromise the reliability.
 		\item Groundstation will receive telemetry via a protocol that is TBD by the avionics team.
 	\end{itemize}
 	\subsection{Assumptions and dependencies}
-	Groundstation will be designed to run on a Raspberry Pi.
+	\index{Raspberry Pi}
+	Groundstation will run on a Raspberry Pi with no Internet connectivity.
 	
 	\subsection{Apportioning of requirements}
 	
@@ -225,14 +233,15 @@
 	Users will interact with GS by connecting via a web browser. The Raspberry Pi and other associated hardware,
 	to be provided by the avionics team,
 	will broadcast a wireless network that users will connect to and access GS through a web browser.
-	From this page, users will be able to see the last known latitude and longitude of the rocket,
-	as well as a scatterplot showing the rocket's altitude over time.
+	From this page, users will be able to access the graphical display of the telemetry.
 	
 	GS will support Google Chrome version 54 and higher. Users running other browsers or older versions of Chrome
 	may not be able to connect to GS.
 	\subsubsection{Hardware interfaces}
 	GS will run on a Raspberry Pi broadcasting a wireless network. Users will connect to GS with their personal computers
 	via the wireless network.
+
+	Data is received from a serial interface using a protocol that will be determined by the avionics team.
 	
 	\subsection{System Features}
 	
@@ -249,57 +258,51 @@
 		The data from the serial port will be written to directly to non-volatile storage in order to limit
 		the possibility of corruption.
 		\item The graphical display shall be updated in real-time.
-		\item GS will provide a base page that displays latitude and longitude in numerical format and
-		a line graph of altitude data.
-		If contact to the rocket is lost, then the last known latitude and longitude will be displayed.	
-
-%		\item Telemetry collected from redundant sensors shall be averaged out, and users can elect to view the averaged data or the data from individual sensors.
-%		\item Groundstation shall integrate with Google Earth and plot the rocket's trajectory so that the rocket's current location can be easily visualized.
-%		\item The telemetry shall be able to be disp	layed in multiple formats, including overlaying on a map and binary data representation.
-%		However, not all data makes sense to be displayed in all formats.
-%		For example, it would not make sense to display staging data on a map, or show a binary representation of latitude.
-
-%		\item There shall be a voice output that will announce some or all of the data in real-time.
-%		\item Groundstation shall be able to display different types of data, including lean-angle, latitude, longitude, altitude, and stating success/failure. The format that each of these types of data shall be displayed in shall be decided at a later date.
-%		\item Groundstation shall support real-time video from the rocket.
+		\item Users will connect to GS and be able to view a visualzation of the telemetry in real-time.
+		\item GS will support a live line graph visualization for altitude data.
+		\item GS will have the ability to show the most recently recorded latitude and longitude in a numerical format.
 	\end{itemize}
 	
 	\subsection{Performance requirements}
-	\subsection{Design constraints}
-	With the Raspberry Pi 3 model B that we will have it has a 1.2 GHz quad-core 64-bit ARM Cortex-A53 
-	with 1 GB of SDRAM memory.  It has 4 USB port, a HDMI port, and an Ethernet port.  This has a 5v 
-	power source and 4.0 W power rating.
+	
+	\begin{itemize}
+		\item When a new telemetry packet is received, GS will log the telemetry and update all visualizations in under one second.
+		\item GS will support a minimum of 20 concurrent users.
+	\end{itemize}
 
+
+	\subsection{Design constraints}
+	\index{Design contraints}
+	\index{Contraints}
+	\index{Raspberry Pi}
+	GS will run on a Raspberry Pi 3 model B, which has a 1.2 GHz quad-core 64-bit ARM Cortex-A53 processor
+	with 1 GB of SDRAM memory.
 
 	\subsection{Software system attributes}
 
-	\subsubsection{Stability}
-	GS should be 
-
 	\subsubsection{Reliability}
-	We need the GS system to be reliable.  Since most software has reliability issues
-	during testing/debugging phases and the worn out/obsolete phases.  Our main reliability
-	issue is during the testing/debugging phases. As long as we do all of our testing/debugging
-	before we do any of our launches we should not have any issues with reliability. 
+	\index{Reliability}
+	In the event that GS crashes, it should automatically restart and continue
+	operation in under five seconds.
 
-	\subsubsection{Availability}
-	The availability of the software is based both on the software as well as the 
-	hardware. The Raspberry Pi has a Ethernet port to plug directly into it as well as
-	a wireless Bluetooth for connectivity. If the system goes down on the hardware side
-	we can restart it with a reboot command from the main PC that will be hooked up to it.
-	If GS goes down, then we can reboot the software itself to bring it back online. 
-	
-\subsection{Maintainability}
+	\subsubsection{Robustness}
+	\index{Robustness}
+	If GS receives corrupted or otherwise incorrectly formatted telemetry, it should not crash.
+	Additionally, the users should not be able to crash GS from the web interface.
+
+	\subsubsection{Accuracy}
+	\index{Accuracy}
+	GS should not introduce any errors in the telemetry it recieves.
+	Data should be logged and displayed with 100\% accuracy.
 
 \printindex
 
-\begin{minipage}{\textwidth}
-	
+% Signatures% Signatures% Signatures% Signatures% Signatures
+\begin{minipage}{\textwidth}	
 	\sigline{Nancy Squires}
 	\sigline{Natasha Anisimova}
 	\sigline{Terrance Lee}
-	\sigline{Albert Morgan}\\
-	
+	\sigline{Albert Morgan}	
 \end{minipage}
 
 
