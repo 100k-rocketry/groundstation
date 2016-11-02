@@ -13,6 +13,9 @@
 \usepackage{graphicx}
 \usepackage{acronym}
 \usepackage{color}
+\usepackage{makeidx}
+
+\makeindex
 
 \acrodef{OSU}[OSU]{Oregon State University}
 \acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
@@ -122,7 +125,9 @@
 	\subsection{Definitions}
 	
 	\begin{itemize}
+		\index{Accuracy}
 		\item \textbf{Accuracy:} GS must not introduce any errors in the telemetry it receives, logs, and displays.
+		\index{Binary data}
 		\item \textbf{Binary data:} Telemetry that is one of two states, for example, ''stage 2 activated'' and
 		''stage 2 not activated.''
 		\item \textbf{GS:} Groundstation, the name of our software.
@@ -164,6 +169,7 @@
 	GS provides two major functions while the rocket is in flight:
 	
 	\begin{enumerate}
+		\index{Logging}
 		\item Telemetry logging to non-volatile storage.
 		\item Display of real-time graphical data. 
 	\end{enumerate}
@@ -235,8 +241,10 @@
 
 	% PUT CONTENT HERE
 	
-	
-	\begin{minipage}{\textwidth}
+
+
+
+\begin{minipage}{\textwidth}
 	
 	\sigline{Nancy Squires}
 	\sigline{Natasha Anisimova}
@@ -245,6 +253,8 @@
 	
 \end{minipage}
 
+
+\printindex
 
 \end{document}
 
