@@ -113,7 +113,7 @@
 	\subsection{Scope}
 	Groundstation will gather telemetry from a rocket during flight.
 	While the telemetry is being gathered, it will be logged and displayed graphically in real-time.
-	This software will provide three benefits to the users:
+	This software will provide the following benefits to the users:
 	\begin{enumerate}
 		\item Real-time data will allow the rocket's location to be tracked before recovery.
 		\item A graphical display will make the data easy to interpret.
@@ -127,25 +127,45 @@
 	\begin{itemize}
 		\index{Accuracy}
 		\item \textbf{Accuracy:} GS must not introduce any errors in the telemetry it receives, logs, and displays.
+		\index{Base page}
+		\item \textbf{Base page:} A page provided by GS that will show latitude, longitude, and altitude telemetry.
 		\index{Binary data}
 		\item \textbf{Binary data:} Telemetry that is one of two states, for example, ''stage 2 activated'' and
 		''stage 2 not activated.''
+		\index{Corruption}
+		\item \textbf{Corruption:} The process by which some data is altered or made unreadable.
+		\index{Groundstation}
+		\index{GS}
 		\item \textbf{GS:} Groundstation, the name of our software.
+		\index{Graphical display}
 		\item \textbf{Graphical display:} Data that is displayed using a visualization. For example, a line graph or overlayed
 		on a map, as opposed to numerical data in a table.
-		\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
+		\index{Page}
+		\item \textbf{Page:} A web page that users of GS may connect to in order to view the telemetry.
+		%\index{Lean angle}
+		%\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
+		\index{Non-volatile storage}
+		\index{Storage}
 		\item \textbf{Non-volatile storage:} Storage that will not be erased when the system is powered down.
 		For example, a hard drive or flash storage.
+		\index{Raspberry Pi}
 		\item \textbf{Raspberry Pi:} A small, inexpensive computing platform.		
+		\index{Real-time}
 		\item \textbf{Real-time:} Each telemetry datum received from the rocket must be processed and
 		displayed in under one second.
+		\index{Redundant sensors}
 		\item \textbf{Redundant sensors:} Two or more sensors that provide the same type of data.
+		\index{Reliability}
 		\item \textbf{Reliability:} In the event of a software crash, the Groundstation software should automatically
 		start and begin all normal functions in under five seconds.
+		\index{Robustness}
 		\item \textbf{Robustness:} In the event that GS receives data that is garbled or otherwise does adhere
 		to the protocol, it must continue to receive and display data and not break the real-time requirement.
+		\index{Storage}
 		\item \textbf{Storage:} A device where data is logged.		
+		\index{Telemetry}
 		\item \textbf{Telemetry:} Data received from the rocket while the rocket is in flight.		
+		\index{Vizualation}
 		\item \textbf{Vizualization:} Information or data, transformed into an visual context.
 	\end{itemize}	
 	
@@ -203,9 +223,17 @@
 	
 	\subsection{External interface requirements}
 	\subsubsection{User interfaces}
-	A Graphical User Interface (GUI)
+	Users will interact with GS by connecting via a web browser. The Raspberry Pi and other associated hardware,
+	to be provided by the avionics team,
+	will broadcast a wireless network that users will connect to and access GS through a web browser.
+	From this page, users will be able to see the last known latitude and longitude of the rocket,
+	as well as a scatterplot showing the rocket's altitude over time.
+	
+	GS will support Google Chrome version 54 and higher. Users running other browsers or older versions of Chrome
+	may not be able to connect to GS.
 	\subsubsection{Hardware interfaces}
-	Speakers, Keyboard or Mouse for hardware interface.
+	GS will run on a Raspberry Pi broadcasting a wireless network. Users will connect to GS with their personal computers
+	via the wireless network.
 	
 	\subsection{System Features}
 	
@@ -217,16 +245,18 @@
 		
 	\begin{itemize}
 		\item GS will collect data from a serial interface using a yet-to-be-determined protocol designed by the High-Altitude Rocketry Team's avionics section.
+		\item GS will log all telemetry in real-time to non-volatile storage so that it can be analyzed
+		after the launch.
+		The data from the serial port will be written to directly to non-volatile storage in order to limit
+		the possibility of corruption.
 		\item The graphical display shall be updated in real-time.
-		\item All data shall be logged in real-time to non-volatile storage.
-
-
-
-
+		\item GS will provide a base page that displays latitude and longitude in numerical format and
+		a line graph of altitude data.
+		If contact to the rocket is lost, then the last known latitude and longitude will be displayed.	
 
 %		\item Telemetry collected from redundant sensors shall be averaged out, and users can elect to view the averaged data or the data from individual sensors.
 %		\item Groundstation shall integrate with Google Earth and plot the rocket's trajectory so that the rocket's current location can be easily visualized.
-%		\item The telemetry shall be able to be displayed in multiple formats, including overlaying on a map and binary data representation.
+%		\item The telemetry shall be able to be disp	layed in multiple formats, including overlaying on a map and binary data representation.
 %		However, not all data makes sense to be displayed in all formats.
 %		For example, it would not make sense to display staging data on a map, or show a binary representation of latitude.
 
@@ -240,7 +270,6 @@
 	With the Raspberry Pi B+ model that we will have it has a 700 MHz single-core ARM1176JZF-S with 512 MB of SDRAM memory.  It has 4 USB port, a HDMI port, and an Ethernet port.  This has a 5v power source and 3.0 W power rating.
 
 	% PUT CONTENT HERE
-	
 
 \printindex
 

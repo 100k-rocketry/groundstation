@@ -6,3 +6,6 @@
 *.ps
 *.out
 *.gz
+*.idx
+*.ilg
+*.ind
