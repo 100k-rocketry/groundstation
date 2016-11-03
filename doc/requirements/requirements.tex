@@ -48,6 +48,14 @@
 	\noindent #1	
 }
 
+\newcommand*{\SignatureAndDate}[1]{
+	\vspace{1in}
+	\par\noindent\makebox[2.5in]{\hrulefill} \hspace{.5in} \makebox[2.0in]{\hrulefill}
+	\par\noindent\makebox[2.5in][l]{#1}      \hspace{.5in} \makebox[2.0in][l]{Date}
+}
+
+
+
 \begin{document}
 	\singlespace
 	
@@ -148,16 +156,16 @@
 		\item \textbf{Graphical display:} Data that is displayed using a visualization.
 		\index{Live}
 		\item \textbf{Live:} Updated in real-time.
+		\index{Non-volatile storage}
+		\index{Storage}
+		\item \textbf{Non-volatile storage:} Storage that will not be erased when the system is powered down.
+		For example, a hard drive or flash storage.
 		\index{Page}
 		\item \textbf{Page:} A web page that users of GS may connect to in order to view the telemetry.
 		\index{Process}
 		\item \textbf{Process:} A running program on a computer.
 		%\index{Lean angle}
 		%\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
-		\index{Non-volatile storage}
-		\index{Storage}
-		\item \textbf{Non-volatile storage:} Storage that will not be erased when the system is powered down.
-		For example, a hard drive or flash storage.
 		\index{Raspberry Pi}
 		\item \textbf{Raspberry Pi:} A small, inexpensive computing platform.		
 		\index{Real-time}
@@ -221,7 +229,7 @@
 	\begin{itemize}
 		\item Because of the remote nature of launch sites, the software must operate without an Internet connection.
 		\item The software must be as reliable as is reasonably possible, and additional features must not compromise the reliability.
-		\item Groundstation will receive telemetry via a protocol that is TBD by the avionics team.	
+		\item Groundstation will receive telemetry via a protocol that is to-be-determined by the avionics team.	
 	\index{Browser}
 	\index{Web browser}
 	GS will support most modern desktop web browsers, including:
@@ -274,8 +282,7 @@
 	\index{System Features}
 	\subsection{System Features}
 	
-	The stimulus for all specific requirements is receiving a telemetry packet. The specific responses will be described here.
-
+	The stimulus for all specific requirements is receiving a telemetry packet. The specific responses to each telemetry packet are:
 	\begin{itemize}
 		\item GS will collect data from a serial interface using a yet-to-be-determined protocol designed by the High-Altitude Rocketry Team's avionics section.
 		\item GS will log all telemetry in real-time to non-volatile storage so that it can be analyzed
@@ -326,10 +333,14 @@
 
 % Signatures% Signatures% Signatures% Signatures% Signatures
 \begin{minipage}{\textwidth}	
-	\sigline{Nancy Squires}
-	\sigline{Natasha Anisimova}
-	\sigline{Terrance Lee}
-	\sigline{Albert Morgan}	
+	\SignatureAndDate{Nancy Squires}
+	\SignatureAndDate{Natasha Anisimova}
+	\SignatureAndDate{Terrance Lee}
+	\SignatureAndDate{Albert Morgan}
+%\sigline{Nancy Squires}
+	%\sigline{Natasha Anisimova}
+	%\sigline{Terrance Lee}
+	%\sigline{Albert Morgan}	
 \end{minipage}
 
 
