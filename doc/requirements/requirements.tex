@@ -106,10 +106,12 @@
 
 	\section{Introduction}
 	
+	\index{Purpose}
 	\subsection{Purpose}
 	This document will specify the requirements for the Groundstation (GS) software.
 	It is intended for use by the OSU High-Altitude Rocketry Team.
 	
+	\index{Scope}
 	\subsection{Scope}
 	GS will gather telemetry from a rocket during flight.
 	While the telemetry is being gathered, it will be logged and displayed graphically in real-time.
@@ -122,6 +124,7 @@
 		\item Altitude data will give evidence of whether the objective of one hundred thousand feet was met.
 	\end{enumerate}	
 			
+	\index{Definitions}
 	\subsection{Definitions}
 	
 	\begin{itemize}
@@ -134,6 +137,10 @@
 		\item \textbf{Corruption:} The process by which data is altered or made unreadable.
 		\index{Crash}
 		\item \textbf{Crash:} A software crash; the event in which a piece of software ceases operation unexpectedly.
+		\index{Die}
+		\item \textbf{Die:} A process dies when it ceases operation and is removed by the operating system.
+		The difference between dying and crashing is that a crash may cause the program to become non-responsive,
+		whereas dying causes the process to end.
 		\index{Groundstation}
 		\index{GS}
 		\item \textbf{GS:} Groundstation, the name of our software.
@@ -143,6 +150,8 @@
 		\item \textbf{Live:} Updated in real-time.
 		\index{Page}
 		\item \textbf{Page:} A web page that users of GS may connect to in order to view the telemetry.
+		\index{Process}
+		\item \textbf{Process:} A running program on a computer.
 		%\index{Lean angle}
 		%\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
 		\index{Non-volatile storage}
@@ -183,6 +192,7 @@
 		
 	
 	\section{Overall description}
+	\index{Product perspective}
 	\subsection{Product perspective}
 	GS will receive data from a serial interface, via hardware and a protocol provided by the avionics team.
 	Due to the launch site not having any connection to the Internet or mobile service, GS will not interact with
@@ -211,9 +221,23 @@
 	\begin{itemize}
 		\item Because of the remote nature of launch sites, the software must operate without an Internet connection.
 		\item The software must be as reliable as is reasonably possible, and additional features must not compromise the reliability.
-		\item Groundstation will receive telemetry via a protocol that is TBD by the avionics team.
+		\item Groundstation will receive telemetry via a protocol that is TBD by the avionics team.	
+	\index{Browser}
+	\index{Web browser}
+	GS will support most modern desktop web browsers, including:
+	\begin{itemize}
+			\item Chrome version 54 or higher.
+			\item Edge version 14 or higher.
+			\item Firefox version 49 or higher.
+			\item Safari version 10 and or higher.
+		\end{itemize}
+	
 	\end{itemize}
+
+	\index{Assumptions and dependencies}
 	\subsection{Assumptions and dependencies}
+	\index{Raspberry Pi}
+	\index{Internet}
 	\index{Raspberry Pi}
 	Groundstation will run on a Raspberry Pi with no Internet connectivity.
 	
@@ -228,31 +252,30 @@
 	Figure \ref{fig:gantt} shows a gantt chart outlining our schedule from now until the first test rocket launch.
 	Although the final rocket launch is on 23 June, all core systems of GS should be finished by the test launch in mid-May.
 		
+	\index{Specific requirements}
 	\section{Specific requirements}
 	
+	\index{External interface requirements}
 	\subsection{External interface requirements}
+	\index{User interfaces}
 	\subsubsection{User interfaces}
 	Users will interact with GS by connecting via a web browser. The Raspberry Pi and other associated hardware,
 	to be provided by the avionics team,
 	will broadcast a wireless network that users will connect to and access GS through a web browser.
 	From this page, users will be able to access the graphical display of the telemetry.
 	
-	GS will support Google Chrome version 54 and higher. Users running other browsers or older versions of Chrome
-	may not be able to connect to GS.
+	\index{Hardware interfaces}
 	\subsubsection{Hardware interfaces}
 	GS will run on a Raspberry Pi broadcasting a wireless network. Users will connect to GS with their personal computers
 	via the wireless network.
 
 	Data is received from a serial interface using a protocol that will be determined by the avionics team.
 	
+	\index{System Features}
 	\subsection{System Features}
 	
-	The stimulus for all specific requirements is receiving a new piece of telemetry. The specific responses will be described here.
+	The stimulus for all specific requirements is receiving a telemetry packet. The specific responses will be described here.
 
-
-% I've commented out the non-essential requirements here.
-% These are poorly defined "stretch" goals, and don't belong in this document.
-		
 	\begin{itemize}
 		\item GS will collect data from a serial interface using a yet-to-be-determined protocol designed by the High-Altitude Rocketry Team's avionics section.
 		\item GS will log all telemetry in real-time to non-volatile storage so that it can be analyzed
@@ -265,6 +288,7 @@
 		\item GS will have the ability to show the most recently recorded latitude and longitude in a numerical format.
 	\end{itemize}
 	
+	\index{Performance requiremwents}
 	\subsection{Performance requirements}
 	
 	\begin{itemize}
@@ -273,19 +297,20 @@
 	\end{itemize}
 
 
+
 	\subsection{Design constraints}
 	\index{Design contraints}
 	\index{Contraints}
 	\index{Raspberry Pi}
-	GS will run on a Raspberry Pi 3 model B, which has a 1.2 GHz quad-core 64-bit ARM Cortex-A53 processor
+	GS will run on the hardware chosen by the avionics team at the beginning of the project.
+	At a minimum, this hardware will be a Raspberry Pi 3 model B, which has a 1.2 GHz quad-core 64-bit ARM Cortex-A53 processor
 	with 1 GB of SDRAM memory.
 
 	\subsection{Software system attributes}
 
 	\subsubsection{Reliability}
 	\index{Reliability}
-	In the event that GS crashes, it should automatically restart and continue
-	operation in under five seconds.
+	In the event a GS process dies, a new process should begin and continue operation in under five seconds.
 
 	\subsubsection{Robustness}
 	\index{Robustness}
