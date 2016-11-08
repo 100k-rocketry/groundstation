@@ -1,16 +1,15 @@
-DOCUMENT_NAME = requirements
-GANTT_NAME = ganttchart
+DOCUMENT_NAME = technology-review
 
 writeup:
 	latex $(DOCUMENT_NAME).tex	
-	makeindex $(DOCUMENT_NAME).idx
+	# makeindex $(DOCUMENT_NAME).idxw
+	bibtex $(DOCUMENT_NAME).aux
+	latex $(DOCUMENT_NAME).tex
 	latex $(DOCUMENT_NAME).tex
 	dvips $(DOCUMENT_NAME).dvi
 	ps2pdf $(DOCUMENT_NAME).ps
 
-gantt:
-	inkscape -z -D --file=$(GANTT_NAME).svg --export-eps=$(GANTT_NAME).eps
 
 clean:
-	rm -f *.out *.log *.dvi *.aux *.ps *.pdf *.toc *.ind *.ilg *.idx
+	rm -f *.out *.log *.dvi *.aux *.ps *.pdf *.toc *.ind *.ilg *.idx *.bbl *.blg
 
