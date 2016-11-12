@@ -1,6 +1,5 @@
 export PATH := /usr/local/apps/tex_live/current/bin/x86_64-linux:$(PATH)
 DOCUMENT_NAME = technology-review
-#LATEX_PATH = /usr/local/apps/tex_live/current/bin/x86_64-linux
 
 writeup:
 	latex $(DOCUMENT_NAME).tex	
