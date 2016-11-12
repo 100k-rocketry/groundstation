@@ -121,17 +121,25 @@
 
 	\section{Web server}
 	This section will describe the various options for the web server. Author: Albert Morgan.
+	\index{Apache}
 	\subsection{Apache}
 	% Advantages:
 	% Powerful module system	
 	Apache is the most popular web server option, with over 50\% of the market share~\cite{apache-usage-statistics}.
-	Apache uses a powerful and flexible module system~\cite{apache-vs-nginx-practical-considerations}.
+	Apache uses a powerful and flexible module system that allows for a variety of different behaviors. ~\cite{apache-vs-nginx-practical-considerations}
+	Each connection to an Apache server spawns a new thread or process, depending on which modules are used.
+	This feature has advantages and disadvantages.
+	Because each connection spawns a new thread, if the thread serving one connection crashes, it won't affect the other connections.
+	However, because each connection spawns a new thread, the overhead for that thread must be paid for each new connection.
+
+	\index{NGINX}
 	\subsection{NGINX}
 	% NGINX advantages:
 	% fast processing
 	% concurrency (don't need this, though)
 	% resource efficiency
 	% responsiveness
+	NGINX, the 2\textsuperscript{nd} most popular web server on the Internet, was created to solve the C10k problem, which 
 	
 	\subsection{Tomcat}
 	\subsection{Conclusion}
