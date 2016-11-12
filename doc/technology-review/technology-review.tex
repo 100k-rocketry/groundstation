@@ -102,48 +102,66 @@
 	
 	\newpage
 	
-	Here's how to cite something\cite{geom}.
+	Here's how to cite something~\cite{geom}.
 	Check the \LaTeX source.
 	The actual sources are in groundstation.bib, add new sources as necessary.
 	We can re-use this file so we don't have to rewrite it again in the future, so give your sources useful names.
 	The name of the example I used is super general and probably not a good name.
 	Note that if you don't cite a source from the .bib file, it doesn't show up in the references, which is why we can re-use that file.
+	
+	Pro-tip: put a tilde in between the cite command and the word before it to prevent \LaTeX from putting the citation on a new line.
 
 	\newpage
 
 	% Uncomment this to make the table of contents	
-	% \tableofcontents
-	%\newpage
+	\tableofcontents
+	\newpage
 	
 	\pagestyle{headings}
 
 
 
 	\section{Web server}
+	\index{Web server}
 	This section will describe the various options for the web server. Author: Albert Morgan.
-	\index{Apache}
+
 	\subsection{Apache}
+	\index{Apache}
 	% Advantages:
 	% Powerful module system	
 	Apache is the most popular web server option, with over 50\% of the market share~\cite{apache-usage-statistics}.
-	Apache uses a powerful and flexible module system that allows for a variety of different behaviors. ~\cite{apache-vs-nginx-practical-considerations}
+	Apache uses a powerful and flexible module system that allows for a variety of different behaviors~\cite{apache-vs-nginx-practical-considerations}
 	Each connection to an Apache server spawns a new thread or process, depending on which modules are used.
 	This feature has advantages and disadvantages.
 	Because each connection spawns a new thread, if the thread serving one connection crashes, it won't affect the other connections.
 	However, because each connection spawns a new thread, the overhead for that thread must be paid for each new connection.
 
-	\index{NGINX}
 	\subsection{NGINX}
+	\index{NGINX}
 	% NGINX advantages:
 	% fast processing
 	% concurrency (don't need this, though)
 	% resource efficiency
 	% responsiveness
-	NGINX, the 2\textsuperscript{nd} most popular web server on the Internet, was created to solve the C10k problem, which 
+	NGINX is 2\textsuperscript{nd} most popular web server on the Internet~\cite{nginx-usage-statistics}.
+	Web servers such as Apache that use a one-thread-per-connection model can have problems with large number of simultaneous connections, an issue known as the C10k problem~\cite{apache-vs-nginx-practical-considerations}~\cite{c10k-problem}.
+	NGINX solves this issue by having one thread serve many connections.
+	This approach reduces the overhead caused by spawning so many threads, and makes NGINX very lightweight and scalable~\cite{nginx-vs-apache-our-view}.
 	
-	\subsection{Tomcat}
+	\subsection{Lighttpd}
+	\index{Lighttpd}
+	Lighttpd, pronounced ``lighty'', is a web server that is optimized for low memory footprints and fast response.
+	It is optimized for serving a large number of concurrent keep-alive connections, such as serving high-volume AJAX driven web sites~\cite{lighttpd}.
+
 	\subsection{Conclusion}
-	Apache and NGINX are both powerful options for this
+	All three web servers listed above have advantages for this project.
+	Apache's one-thread-per-connection approach increases stability.
+	NGINX and Lighttpd are both lightweight, which is important for running an application on a low-power system like a Raspberry Pi.
+	However, Groundstation does not have to support more than 20 concurrent users, so the memory and processor savings for choosing a lightweight option will be minimal.
+	Additionally, stability is a primary concern of the High-Altitude Rocketry Challenge.
+	For these reasons, I recommend Apache.
+
+
 	\section{Web backend}
 	This section will describe the options for the web backend. Author: Albert Morgan.
 	\subsection{Node}
