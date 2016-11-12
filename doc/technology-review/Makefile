@@ -1,8 +1,11 @@
+export PATH := /usr/local/apps/tex_live/current/bin/x86_64-linux:$(PATH)
 DOCUMENT_NAME = technology-review
+#LATEX_PATH = /usr/local/apps/tex_live/current/bin/x86_64-linux
 
 writeup:
 	latex $(DOCUMENT_NAME).tex	
-	# makeindex $(DOCUMENT_NAME).idxw
+	latex $(DOCUMENT_NAME).tex	
+	makeindex $(DOCUMENT_NAME).idx
 	bibtex $(DOCUMENT_NAME).aux
 	latex $(DOCUMENT_NAME).tex
 	latex $(DOCUMENT_NAME).tex
