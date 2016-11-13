@@ -14,6 +14,7 @@
 \usepackage{acronym}
 \usepackage{color}
 \usepackage{makeidx}
+\usepackage{url}
 
 \makeindex
 
@@ -166,11 +167,13 @@
 	
 	\subsection{Node}
 	\index{Node}
+	\index{V8}
+	\index{JavaScript}
 	Node allows web backends to be written in JavaScript using V8, the same engine that powers Google Chrome~\cite{node}.
 	The client side of the web application will certainly use JavaScript, and writing the back-end  in JavaScript as well will reduce the overhead in learning and programming in new languages.
 	Additionally, because JavaScript would be used on the front-end and back-end, it may be possible to reuse code between these two systems.
 	
-	Benchmarks show that Node is much faster than 
+	Benchmarks show that Node is over 5 times as fast as PHP, even when using just-in-time compilation~\cite{comparing-node-vs-php-performance}.
 	
 	\subsection{PHP}
 	\index{PHP}
