@@ -21,6 +21,7 @@
 \acrodef{OSU}[OSU]{Oregon State University}
 \acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
 \acrodef{AGL}[AGL]{Above Ground Level}
+\acrodef{JSON}[JSON]{JavaScript Object Notation}
 
 \lstset {
 	language=C,
@@ -154,7 +155,8 @@
 	\index{Lighttpd}
 	\index{Web server}
 	Lighttpd, pronounced ``lighty'', is a web server that is optimized for low memory footprints and fast response.
-	It is optimized for serving a large number of concurrent keep-alive connections, such as serving high-volume AJAX driven web sites~\cite{lighttpd}.
+	It is optimized for serving a large number of concurrent keep-alive connections, such as serving high-volume AJAX driven web sites~\cite{lighttpd}. Many web sites use lighttpd for static content delivery while using another web server, such as Apache,
+	for dynamic content~\cite{powered-by-lighttpd}.
 
 	\subsection{Conclusion}
 	All three web servers listed above have advantages for this project.
@@ -178,19 +180,36 @@
 	The client side of the web application will certainly use JavaScript, and writing the back-end  in JavaScript as well will reduce the overhead of learning and programming in new languages.
 	Additionally, because JavaScript would be used on the front-end and back-end, it may be possible to reuse code between these two systems.
 	
+	Node uses an event driven architecture, and is built to work with \ac{JSON} data.
+	With Node, is it easy to create a web application that response to small events and sends small bits of data to the client~\cite{event-driven-architecture-node-js}.
+	Because Node uses JavaScript, it integrates naturally with \ac{JSON}
+		
 	Benchmarks show that Node is over 5 times as fast as PHP, even when using just-in-time compilation~\cite{comparing-node-vs-php-performance}.
 	
 	\subsection{PHP}
 	\index{PHP}
 	PHP has been around the web since 1994 and is used in over 80\% of web sites today~\cite{history-of-php}~\cite{usage-of-server-side-programming-languages-for-websites}.
 	Given its maturity and wide adoption, there are a lot of packages, documentation, and example available for developers.
-	
+	PHP's primary advantage is the ease in which is can be incorporated into an static page.
+	Using PHP tags, HTML and PHP code can be intertwined seamlessly.
 	
 	\subsection{Ruby}
+
+	\subsection{Conclusion}
+	Node is fast, which is important for the Groundstation server, which will run on a Raspberry Pi.
+	Node also uses an event driven architecture, which is perfect for our software. Data will be received at regular intervals and need to be pushed out the clients quickly. For these reasons, I recommend using Node.
+
+
 	\section{Persistence}
 	This section will describe how the data will be stored. Author: Albert Morgan.
-	\subsection{Flat files}
-	\subsection{MySQL}
+	\subsection{Raw files}
+	\index{Raw files}
+	The simplest persistence method is to save the raw data stream to a file as it comes in.
+	This method would be very low cost, in terms of development time and processing and memory impact.
+	The data would simply be read from the serial port and saved to a file, where it could be reconstructed at a later time.
+	Saving the data at this point, before any processing is done will 
+	\subsection{JSON}
+	\index{JSON}	
 	\subsection{???}
 
 	% Make the index
