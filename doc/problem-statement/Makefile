@@ -1,3 +1,4 @@
+export PATH := /usr/local/apps/tex_live/current/bin/x86_64-linux:$(PATH)
 DOCUMENT_NAME = problem-statement
 
 writeup:
