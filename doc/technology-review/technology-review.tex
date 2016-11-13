@@ -177,8 +177,8 @@
 	\index{Google Chrome}
 	\index{Chrome}
 	Node allows web backends to be written in JavaScript using V8, the same engine that powers Google Chrome~\cite{node}.
-	The client side of the web application will certainly use JavaScript, and writing the back-end  in JavaScript as well will reduce the overhead of learning and programming in new languages.
-	Additionally, because JavaScript would be used on the front-end and back-end, it may be possible to reuse code between these two systems.
+	The client side of the web application will certainly use JavaScript, and writing the backend  in JavaScript as well will reduce the overhead of learning and programming in new languages.
+	Additionally, because JavaScript would be used on the front-end and backend, it may be possible to reuse code between these two systems.
 	
 	Node uses an event driven architecture, and is built to work with \ac{JSON} data.
 	With Node, is it easy to create a web application that response to small events and sends small bits of data to the client~\cite{event-driven-architecture-node-js}.
@@ -194,23 +194,51 @@
 	Using PHP tags, HTML and PHP code can be intertwined seamlessly.
 	
 	\subsection{Ruby}
+	Ruby is an open source programming language designed for simplicity and productivity~\cite{ruby}.
+	It is well-known on the web as part of the framework Ruby on Rails, which allows for embedded Ruby to be inserted directly into HTML~\cite{getting-started-with-rails}.
+	However, compared to PHP, Ruby on Rails has a steep learning curve.
+	Ruby's syntax can be hard for a beginner to read, and it draws some concepts from functional programming, which can be difficult for a new user~\cite{ruby-on-rails-vs-php-the-good-the-bad}.
+	
 
 	\subsection{Conclusion}
 	Node is fast, which is important for the Groundstation server, which will run on a Raspberry Pi.
 	Node also uses an event driven architecture, which is perfect for our software. Data will be received at regular intervals and need to be pushed out the clients quickly. For these reasons, I recommend using Node.
 
 
-	\section{Persistence}
-	This section will describe how the data will be stored. Author: Albert Morgan.
-	\subsection{Raw files}
-	\index{Raw files}
-	The simplest persistence method is to save the raw data stream to a file as it comes in.
-	This method would be very low cost, in terms of development time and processing and memory impact.
+	\section{Logging}
+	\index{Logging}
+	\index{Telemetry}
+	\index{Data}
+	This section will describe how the telemetry will be stored. Author: Albert Morgan.
+	\subsection{Raw data}
+	\index{Raw data}
+	The simplest logging method is to save the raw data stream to a file as it comes in.
+	This method would be very low cost, in terms of development time, processing, and memory usage.
 	The data would simply be read from the serial port and saved to a file, where it could be reconstructed at a later time.
-	Saving the data at this point, before any processing is done will 
+	Saving the data at this point, before any processing is done, will reduce the chance of any corruption.
+	
 	\subsection{JSON}
-	\index{JSON}	
-	\subsection{???}
+	\index{JSON}
+	\ac{JSON} is a data format that is easy for both machines and humans read and write.
+	The telemetry may be stored after it is transformed from its raw form from the serial port to \ac{JSON}.
+	The server will be converting the raw data to \ac{JSON} already in preparation to send it to the client, so there will be no additional overhead in the conversion.
+	However, itt is likely that the \ac{JSON} data will take up more space than the raw data due to additional formatting, so it will take up more space in the storage media~\cite{json}.
+	
+	\subsection{Database}
+	\index{Database}
+	\index{SQL}	
+	Storing the telemetry in a database as it comes in will allow for fast random-access reading and writing of the data.
+	This would allow the server to easily grab a certain subset of the data.
+	For example, the server could send the client only data that was generated in the last 2 minutes, or data that comes off of one particular sensor.
+	Data could easily be retrieved using queries in a language such as SQL.
+	
+	\subsection{Conclusion}
+	Because the system only needs to store data from a single launch, the size of the data set will be relatively small.
+	The overhead of sending all of the data would be minimal, so the benefits of using a queryable database would be small.
+	In the event that the system goes down, it would need to start back up again and begin operation very fast.
+	Storing the data in \ac{JSON} format would allow the data to be quickly loaded back into memory without significant processing.
+	Additionally, if the data is stored in \ac{JSON} format, the server would not need to keep the entirety of it in memory to server it to a connecting client, freeing up resources on the Raspberry Pi.
+	For these reasons, I recommend that the data be logged after it is converted into \ac{JSON} format
 
 	% Make the index
 	\printindex
