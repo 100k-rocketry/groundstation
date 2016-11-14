@@ -239,21 +239,43 @@
 	Storing the data in \ac{JSON} format would allow the data to be quickly loaded back into memory without significant processing.
 	Additionally, if the data is stored in \ac{JSON} format, the server would not need to keep the entirety of it in memory to server it to a connecting client, freeing up resources on the Raspberry Pi.
 	For these reasons, I recommend that the data be logged after it is converted into \ac{JSON} format
-	
-
-	\subsection{Apache}
 
 	\section{Data Visualization}
 	\index{Data Visualzation}
 	This section will describe the various options for the data visualization. Author: Natasha Anisimova.
 	
-	\subsection{3D representation}
-	
 	\subsection{2D representation}
+	2 dimensional representations of maps are usually equal in the x and y dimensions. 
+	Graphs and charts are representations that most users are comfortable with but they can also be a little dull.
+	For displaying the location of a land bound vehicle or person 2D graph is useful. 
+	The ground can be viewed as a 2D plane. With a rocket the height, latitude, and longitude has to be taken into 
+	account and displayed. 
+	The most important aspects of the software project are to find rocket’s location in the end and be able to tell 
+	if it reached the team’s one hundred-thousand-foot goal. 
+	
+	\subsection{3D representation}
+	2 dimensional topographic maps are hard to read if one has not had a lot of experience with them. 
+	Considering that most of the team will be mechanical engineers and no earth science majors will be participating, a 
+	3 dimensional map makes more sense. 
+	Cartographers in the past decade have shifted to creating 3D perspective maps. 
+	These types of maps are more expensive and time intensive to produce. 
+	The extra time that is put into the visualization makes it more appealing to the readers. 
+	It is easy to visualize and understand.
 	
 	\subsection{Numerical Display}
+	A numerical display is often given when looking for the longitude and latitude of a specific point on a map. 
+	It would also be useful when displaying the highest altitude of the rocket. 
+	This is a number that would constantly be reviewed and needed. 
+	A graph can display the data but it would still take a second to get that information. 
+	Having a table will all the most crucial aspects of the project with the values would make the webpage so much more usable.
 	
 	\subsection{Conclusion}
+	3D visualization for the location of the rocket as well as a small numerical display is the best way to go. 
+	Thankfully, Professor Mike Bailey has created software that can create or extract the topology of a certain area 
+	making it much more manageable. 
+	The High-Altitude Rocketry team will only need the Lucerne Dry Lake area of the Mojave Desert. 
+	The images for the area can be pulled from NASA’s website and from there they can be texture mapped to the topology. 
+	The numerical display will be used to give a more accurate and direct way of giving the data to the users. 
 	
 	\section{User Interface Interaction Model}
 	\index{User Interface Interaction Model}
