@@ -245,10 +245,11 @@
 	This section will describe the various options for the data visualization. Author: Natasha Anisimova.
 	
 	\subsection{2D representation}
-	2 dimensional representations of maps are usually equal in the x and y dimensions. 
+	2 dimensional representations of maps are usually equal in the x and y dimensions~\cite{2d-is-better-than-3d}. 
 	Graphs and charts are representations that most users are comfortable with but they can also be a little dull.
-	For displaying the location of a land bound vehicle or person 2D graph is useful. 
-	The ground can be viewed as a 2D plane. With a rocket the height, latitude, and longitude has to be taken into 
+	For displaying the location of a land bound vehicle or person 2D graph is useful~\cite{2ds-company-3ds-a-crowd}. 
+	The ground can be viewed as a 2D plane ~\cite{2d-and-3d-presentation-of-spatial-data}.
+	With a rocket the height, latitude, and longitude has to be taken into 
 	account and displayed. 
 	The most important aspects of the software project are to find rocket’s location in the end and be able to tell 
 	if it reached the team’s one hundred-thousand-foot goal. 
@@ -259,8 +260,8 @@
 	3 dimensional map makes more sense. 
 	Cartographers in the past decade have shifted to creating 3D perspective maps. 
 	These types of maps are more expensive and time intensive to produce. 
-	The extra time that is put into the visualization makes it more appealing to the readers. 
-	It is easy to visualize and understand.
+	The extra time that is put into the visualization makes it more appealing to the readers~\cite{evaluating-the-effectiveness-of-2d-vs-3d-trailhead-maps}. 
+	It is easy to visualize and understand ~\cite{3d-represenation-for-software-visualization}.
 	
 	\subsection{Numerical Display}
 	A numerical display is often given when looking for the longitude and latitude of a specific point on a map. 
@@ -293,21 +294,21 @@
 	Double buffering also solves any problems with the program being in the middle of plotting data and the user getting
 	a black screen. 
 	Instead it shows the old frame until the new one is ready to be displayed. 
-	Unfortunately, OpenGL does not run on the web.
+	Unfortunately, OpenGL does not run on the web ~\cite{why-you-should-use-webgl}.
 	
 	\subsection{WebGL}
 	WebGL is the Javascript API that allows you to create 3D graphics in the browser. 
 	Three.js is a tool used on top of WebGL, making it easier to create those 3D graphics. 
 	It is used when creating more complicated 3D scenes (textures, models, and rendering). 
 	Several different types of browsers support it as well, from Desktop Opera to Firefox and Chrome. 
-	WebGL is also the easiest 3D application to use as well as the best tested and documented. 
+	WebGL is also the easiest 3D application to use as well as the best tested and documented ~\cite{webgl-best-practices}. 
 	Performance wise it is also very fast even though programs are written in JavaScript. 
 	
 	\subsection{Conclusion}
 	WebGL is the most fitting choice to go with for this project.
 	OpenGL is not supported by web browsers, while Unity is not as widely readily supported by web browsers as WebGL.
 	The WebGL application can be used while still having the comfortable environment of the web development
-	environment that HTML and JavaScript have to offer. 
+	environment that HTML and JavaScript have to offer ~\cite{why-use-webgl-for-graphics-research}. 
 	While there is a high learning curve, there is plenty of support for it at OSU as well as information on the web.
 	The only major downside to it, is that Internet Explorer does not support it but that browser is used by few and 
 	far in between. 
@@ -320,7 +321,7 @@
 	
 	\subsection{Paper Prototypes and User Interviews}
 	In order to understand what are users are most comfortable with it would be most cost effective and time efficient
-	to create paper prototypes. 
+	to create paper prototypes ~\cite{what-is-prototyping}. 
 	A small sample of the High-Altitude Rocketry Team could be taken through a user study where we would try and figure
 	what would work. 
 	Feedback would be taken then and there.
@@ -331,7 +332,7 @@
 	A lot of flight simulator games efficiently display the information of the planes' or rockets' location, altitude,
 	velocity and status.
 	They are often able to do this with various dials on either side of the screen, much like a dashboard of a car.
-	Having that recognizable display for the users would greatly reduce any misunderstandings that could occur. 
+	Having that recognizable display for the users would greatly reduce any misunderstandings that could occur ~\cite{flight-simulation-in-aerospace}. 
 	Units and dials would be labeled for clarity. 
 	Colors would be used to help emphasize important goals and perhaps how close they are to being reached.
 	
@@ -339,7 +340,7 @@
 	The Finnish Astronautical Society has launch several different rockets since 2011 and successfully displayed the
 	data that they have received from the rockets while they have been in space. 
 	As mentioned per their website, most of the data is streamed to a ground station in real-time using a radio link and
-	then from there onto an Internet server. 
+	then from there onto an Internet server ~\cite{real-time-rocket-telementry-experiment}. 
 	Their solution to the problem of keeping track of their rocket is very similar to what we have planned except that they
 	have a few different sensors and equipment.
 	They have considerably more information about all their launches on their website, making it a bit cluttered but the 
