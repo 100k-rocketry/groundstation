@@ -282,12 +282,37 @@
 	This section will describe the various options for the user interface interaction model. Author: Natasha Anisimova.
 	
 	\subsection{Unity}
+	Unity 3D is an engine, not so much an application. 
+	This software is going to be used by about thirty to forty people, if not more, and most of them would not have the
+	Unity3D Web-Player installed. 
+	Unity is a game development tool and since this project is focusing on just creating a useful visualization of the 
+	data that is collected, Unity is not suitable for this particular case.
 	
 	\subsection{OpenGL}
+	OpenGL has one of the fastest languages to develop with, C++. 
+	Double buffering also solves any problems with the program being in the middle of plotting data and the user getting
+	a black screen. 
+	Instead it shows the old frame until the new one is ready to be displayed. 
+	Unfortunately, OpenGL does not run on the web.
 	
 	\subsection{WebGL}
+	WebGL is the Javascript API that allows you to create 3D graphics in the browser. 
+	Three.js is a tool used on top of WebGL, making it easier to create those 3D graphics. 
+	It is used when creating more complicated 3D scenes (textures, models, and rendering). 
+	Several different types of browsers support it as well, from Desktop Opera to Firefox and Chrome. 
+	WebGL is also the easiest 3D application to use as well as the best tested and documented. 
+	Performance wise it is also very fast even though programs are written in JavaScript. 
 	
 	\subsection{Conclusion}
+	WebGL is the most fitting choice to go with for this project.
+	OpenGL is not supported by web browsers, while Unity is not as widely readily supported by web browsers as WebGL.
+	The WebGL application can be used while still having the comfortable environment of the web development
+	environment that HTML and JavaScript have to offer. 
+	While there is a high learning curve, there is plenty of support for it at OSU as well as information on the web.
+	The only major downside to it, is that Internet Explorer does not support it but that browser is used by few and 
+	far in between. 
+	WebGL is supported by mobile devices if the software is expanded to them in the future.
+	
 	
 	\section{User Interface Organization}
 	\index{User Interface Organization}
