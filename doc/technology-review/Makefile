@@ -13,5 +13,5 @@ writeup:
 
 
 clean:
-	rm -f *.out *.log *.dvi *.aux *.ps *.pdf *.toc *.ind *.ilg *.idx *.bbl *.blg
+	rm -f *.out *.log *.dvi *.aux *.ps *.toc *.ind *.ilg *.idx *.bbl *.blg
 
