@@ -239,45 +239,122 @@
 	Storing the data in \ac{JSON} format would allow the data to be quickly loaded back into memory without significant processing.
 	Additionally, if the data is stored in \ac{JSON} format, the server would not need to keep the entirety of it in memory to server it to a connecting client, freeing up resources on the Raspberry Pi.
 	For these reasons, I recommend that the data be logged after it is converted into \ac{JSON} format
-	
-
-	\subsection{Apache}
 
 	\section{Data Visualization}
 	\index{Data Visualzation}
 	This section will describe the various options for the data visualization. Author: Natasha Anisimova.
 	
-	\subsection{3D representation}
-	
 	\subsection{2D representation}
+	2 dimensional representations of maps are usually equal in the x and y dimensions. 
+	Graphs and charts are representations that most users are comfortable with but they can also be a little dull.
+	For displaying the location of a land bound vehicle or person 2D graph is useful. 
+	The ground can be viewed as a 2D plane. With a rocket the height, latitude, and longitude has to be taken into 
+	account and displayed. 
+	The most important aspects of the software project are to find rocket’s location in the end and be able to tell 
+	if it reached the team’s one hundred-thousand-foot goal. 
+	
+	\subsection{3D representation}
+	2 dimensional topographic maps are hard to read if one has not had a lot of experience with them. 
+	Considering that most of the team will be mechanical engineers and no earth science majors will be participating, a 
+	3 dimensional map makes more sense. 
+	Cartographers in the past decade have shifted to creating 3D perspective maps. 
+	These types of maps are more expensive and time intensive to produce. 
+	The extra time that is put into the visualization makes it more appealing to the readers. 
+	It is easy to visualize and understand.
 	
 	\subsection{Numerical Display}
+	A numerical display is often given when looking for the longitude and latitude of a specific point on a map. 
+	It would also be useful when displaying the highest altitude of the rocket. 
+	This is a number that would constantly be reviewed and needed. 
+	A graph can display the data but it would still take a second to get that information. 
+	Having a table will all the most crucial aspects of the project with the values would make the webpage so much more usable.
 	
 	\subsection{Conclusion}
+	3D visualization for the location of the rocket as well as a small numerical display is the best way to go. 
+	Thankfully, Professor Mike Bailey has created software that can create or extract the topology of a certain area 
+	making it much more manageable. 
+	The High-Altitude Rocketry team will only need the Lucerne Dry Lake area of the Mojave Desert. 
+	The images for the area can be pulled from NASA’s website and from there they can be texture mapped to the topology. 
+	The numerical display will be used to give a more accurate and direct way of giving the data to the users. 
 	
 	\section{User Interface Interaction Model}
 	\index{User Interface Interaction Model}
 	This section will describe the various options for the user interface interaction model. Author: Natasha Anisimova.
 	
 	\subsection{Unity}
+	Unity 3D is an engine, not so much an application. 
+	This software is going to be used by about thirty to forty people, if not more, and most of them would not have the
+	Unity3D Web-Player installed. 
+	Unity is a game development tool and since this project is focusing on just creating a useful visualization of the 
+	data that is collected, Unity is not suitable for this particular case.
 	
 	\subsection{OpenGL}
+	OpenGL has one of the fastest languages to develop with, C++. 
+	Double buffering also solves any problems with the program being in the middle of plotting data and the user getting
+	a black screen. 
+	Instead it shows the old frame until the new one is ready to be displayed. 
+	Unfortunately, OpenGL does not run on the web.
 	
 	\subsection{WebGL}
+	WebGL is the Javascript API that allows you to create 3D graphics in the browser. 
+	Three.js is a tool used on top of WebGL, making it easier to create those 3D graphics. 
+	It is used when creating more complicated 3D scenes (textures, models, and rendering). 
+	Several different types of browsers support it as well, from Desktop Opera to Firefox and Chrome. 
+	WebGL is also the easiest 3D application to use as well as the best tested and documented. 
+	Performance wise it is also very fast even though programs are written in JavaScript. 
 	
 	\subsection{Conclusion}
+	WebGL is the most fitting choice to go with for this project.
+	OpenGL is not supported by web browsers, while Unity is not as widely readily supported by web browsers as WebGL.
+	The WebGL application can be used while still having the comfortable environment of the web development
+	environment that HTML and JavaScript have to offer. 
+	While there is a high learning curve, there is plenty of support for it at OSU as well as information on the web.
+	The only major downside to it, is that Internet Explorer does not support it but that browser is used by few and 
+	far in between. 
+	WebGL is supported by mobile devices if the software is expanded to them in the future.
+	
 	
 	\section{User Interface Organization}
 	\index{User Interface Organization}
 	This section will describe the various options for the user interface organization. Author: Natasha Anisimova.
 	
-	\subsection{Paper prototypes and User Interviews}
+	\subsection{Paper Prototypes and User Interviews}
+	In order to understand what are users are most comfortable with it would be most cost effective and time efficient
+	to create paper prototypes. 
+	A small sample of the High-Altitude Rocketry Team could be taken through a user study where we would try and figure
+	what would work. 
+	Feedback would be taken then and there.
+	In some cases the feedback could be implemented quickly into the paper prototypes so that the user could see how it
+	would affect the layout.
 	
 	\subsection{Flight Simulator Displays}
+	A lot of flight simulator games efficiently display the information of the planes' or rockets' location, altitude,
+	velocity and status.
+	They are often able to do this with various dials on either side of the screen, much like a dashboard of a car.
+	Having that recognizable display for the users would greatly reduce any misunderstandings that could occur. 
+	Units and dials would be labeled for clarity. 
+	Colors would be used to help emphasize important goals and perhaps how close they are to being reached.
 	
-	\subsection{Finnish Astronomical Association}
+	\subsection{Finnish Astronautical Society}
+	The Finnish Astronautical Society has launch several different rockets since 2011 and successfully displayed the
+	data that they have received from the rockets while they have been in space. 
+	As mentioned per their website, most of the data is streamed to a ground station in real-time using a radio link and
+	then from there onto an Internet server. 
+	Their solution to the problem of keeping track of their rocket is very similar to what we have planned except that they
+	have a few different sensors and equipment.
+	They have considerably more information about all their launches on their website, making it a bit cluttered but the 
+	content of their website is something that would be useful to follow.
 	
 	\subsection{Conclusion}
+	For the organization of the user interface it would be useful to pull inspiration from websites or implementations
+	that already exist but also have the freedom of easily changing it and being creative. 
+	The paper prototypes would be useful for making sure that the software is easily tailored in the early stages of the 
+	web page. 
+	We have currently been pulling user stories from the team in order to know what would be most important for them to 
+	see on the web page. 
+	Continuing with that trend, we can continue to create the webpage with their feedback. 
+	This would also ensure that they are not shocked or bewildered when seeing the final product before the launch date
+	or on site.
 	
 	\section{Retrieval}
 \subsection{Retrieval Options}
