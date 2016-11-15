@@ -367,22 +367,10 @@
 	or on site.
 	
 	\section{Retrieval}
-	Author: Terrance Lee.
-	\subsection{Retrieval Options}
-	 For retrieval of data and tracking of the rocket we have decided to use either C, C++, or Python as our choices for 
-	 the languages.  
-	 We chose these languages because they can all be used for data collecting.
- 	\subsection{Retrieval Goal/s}
-	 Our main goal for this design is to retrieve data from the rockets sensors. 
-	 These sensors are either being made or purchased by the electrical engineering team. 
-	 Our global positioning system, accelerometer, gyroscope, and altimeter will provide us the data that we will need, and 
-	 some of that data will also be used for tracking the rockets position as well.
-  	\subsection{Retrieval Criteria}
- 	The criteria for the languages for retrieval are the libraries, and either their references or their resources.
-   	\subsection{Retrieval Comparison}
-   	\begin{enumerate}
-   	\item
-    	The C language has an extensive library which has many choices we can use. 
+	This section describes the languages available to use for the telemetry retrieval from the serial port. Author: Terrance Lee.
+
+   	\subsection{C}
+    The C language has an extensive library which has many choices we can use. 
 	The main one for the sensors is the extensive math.h library. 
 	It allows us to do any math functions. Plus we can do error conditions in our code if needed. 
 	When it comes to references C has many. 
@@ -390,8 +378,9 @@
 	used C (Hauben, Part I). 
 	This has allowed many references including the internet, books, and instructors. C’s disadvantage is that it is a very 
 	low level language and can be security flawed.\\
-   	\item
-    	The C++ library is just as extensive as the C library except that it has made it so that it can be supported in an
+
+	\subsection{C++}
+   	The C++ library is just as extensive as the C library except that it has made it so that it can be supported in an
 	object oriented programming language. 
 	For example, it has to bring out a <cmath> library so it works with C++ (Schildt 181). 
 	C++ is not as old as C. For example, in 1998 an ANSI/ISO standard for C++ was adopted (Schildt xix). 
@@ -399,19 +388,25 @@
 	Also, since it is OOP it is easier to write than C but you have a lot more to learn. 
 	That is its disadvantage no developer can use its entire set of code that C++ provides. 
 	It would take an extremely long time. Just like C, there are many resources for C++ out there if we run into a problem.\\
-   	\item
+
+	\subsection{Python}
    	The Python library is very extensive. 
 	The new Python version 3.6 has about 37 main libraries which is sub-sectioned so that when you program you can be more
 	specific (The Python Software Foundation, 3.6.0b4). 
 	The main libraries that we need are the data types, numeric, and the mathematical modules. 
 	When it comes to references it seems that Python users understand that many schools do not have a class for it. 
 	For example, when I was researching the libraries it had a reference page for the library. 
-	Especially when it comes to the internet, there are a lot of references to help if you run into issues with coding in Python.
+	Especially when it comes to the Internet, there are a lot of references to help if you run into issues with coding in Python.
 	Python’s disadvantage is that it is not popular. 
 	Not many companies have given it a chance yet, and it hasn’t had a big break through.  
-   	\end {enumerate}
-    	\subsection{Retrieval Conclusion}
-    	All of these options are great. They all have extensive libraries and have great references. 
+
+   	\subsection{Conclusion}
+  	Our main goal for this design is to retrieve data from the rockets sensors. 
+   	These sensors are either being made or purchased by the electrical engineering team. 
+   	Our global positioning system, accelerometer, gyroscope, and altimeter will provide us the data that we will need, and 
+   	some of that data will also be used for tracking the rockets position as well.
+   	
+    All of these options are great. They all have extensive libraries and have great references. 
 	If we run into any issues we have plenty of references online, as well as books and actual people we know that we can connect
 	with and speak to about it. 
 	I did some extra research and spoke to instructors and people that have used data collecting software in their career field
@@ -419,13 +414,15 @@
 	I asked them which language they preferred. 
 	I got mixed results when it came to which one was the best language to use. 
 	I believe that was because everyone has their favorite language that they prefer.  
-     	\subsection{Retrieval Selection}
+
       	After speaking to the team we decided that the best language to use for the retrieval of data would be C. 
 	It meets all of the criteria and beyond. 
 	It has all of the libraries that we would need to retrieve the data from the sensors on the rocket. 
 	If we lose GPS from a sensor we can still calculate the position of the rocket with those libraries as well. 
 	With the amount of resources and references that are available to C if we have an issue we should be able to find the solution
 	to our problem quickly so that we do not get stalled on it for long.  
+
+
      	\section{Interaction Modes}
 	Author: Terrance Lee.
 	\subsection{Interaction Modes Options}
