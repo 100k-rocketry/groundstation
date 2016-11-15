@@ -99,11 +99,11 @@
 	%\begin{adjustwidth}{0.75in}{0.75in}
 	
 	%Abstract goes here
-	Groundstation software is made up several different components: collection of data, storage of data, interpolation of data, and 
-	display of data. 
-	How each section is executed will be revised and decided upon in the following document by individual members of the team. 
-	The benefits and disadvantages of using various technologies or methods is weighed and the most optimal solution is picked.
-	
+	The \textit{Groundstation} software will collect telemetry from a rocket while is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
+	display of data.	
+	This document will examine nine different components of the system.
+	For each of these components, three different technologies will be described and evaluated for use in this component.
+	Finally, a recommendation will be made about which technology should be used.	
 	%\end{adjustwidth}
 	
 	\newpage
@@ -139,7 +139,7 @@
 	Apache uses a powerful and flexible module system that allows for a variety of different behaviors~\cite{apache-vs-nginx-practical-considerations}.
 	Each connection to an Apache server spawns a new thread or process, depending on which modules are used.
 	This feature has advantages and disadvantages.
-	Because each connection spawns a new thread, if the thread serving one connection crashes, it won't affect the other connections.
+	Because each connection spawns a new thread, if the thread serving one connection crashes, it will not affect the other connections.
 	However, because each connection spawns a new thread, the overhead for that thread must be paid for each new connection.
 
 	\subsection{NGINX}
@@ -241,8 +241,8 @@
 	The overhead of sending all of the data would be minimal, so the benefits of using a queryable database would be small.
 	In the event that the system goes down, it would need to start back up again and begin operation very fast.
 	Storing the data in \ac{JSON} format would allow the data to be quickly loaded back into memory without significant processing.
-	Additionally, if the data is stored in \ac{JSON} format, the server would not need to keep the entirety of it in memory to server it to a connecting client, freeing up resources on the Raspberry Pi.
-	For these reasons, I recommend that the data be logged after it is converted into \ac{JSON} format
+	Additionally, if the data is stored in \ac{JSON} format, the server would not need to keep the entirety of it in memory to serve it to a connecting client, freeing up resources on the Raspberry Pi.
+	For these reasons, I recommend that the data be logged after it is converted into \ac{JSON} format.
 
 	\section{Data Visualization}
 	\index{Data Visualzation}
@@ -367,7 +367,7 @@
 	or on site.
 	
 	\section{Retrieval}
-	This section will compare programming languages to be used for retrieving telemetry from the serial port. Author: Terrance Lee.
+	This section will compare programming languages for retrieving telemetry from the serial port. Author: Terrance Lee.
    	\subsection{C}
    	The C language has an extensive library which has many choices we can use. 
 	The main one for the sensors is the extensive math.h library. 
@@ -432,7 +432,7 @@
     	The third option is using both the PC and mobile. 
 	With this option we will have all the advantages of both. 
 	We will still have a disadvantage which is that we will have to program in multiple languages and formats. 
-    	\subsection{Interaction Modes Conclusion}
+    	\subsection{Conclusion}
      	With the PC once the team gets the information they will be able to save it right there on their team computers and move it
 	easily through USB or other devices. 
 	With the mobile our biggest issue is not the programming but the lack of cell service.
