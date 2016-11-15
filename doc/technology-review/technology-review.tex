@@ -99,8 +99,9 @@
 	%\begin{adjustwidth}{0.75in}{0.75in}
 	
 	%Abstract goes here
-	The \textit{Groundstation} software will collect telemetry from a rocket while is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
-	display of data.	
+	The \textit{Groundstation} software package will collect telemetry from a rocket while is in flight and graphically display the
+	telemetry in real-time. Groundstation is made up several different components regarding the data received: collection, storage,
+	interpolation, and display.	
 	This document will examine nine different components of the system.
 	For each of these components, three different technologies will be described and evaluated for use in this component.
 	Finally, a recommendation will be made about which technology should be used.	
@@ -115,12 +116,12 @@
 	\pagestyle{headings}
 
 	\section{Web Server}
-	\index{Web server}
+	\index{Web Server}
 	This section will describe the various options for the web server. Author: Albert Morgan.
 
 	\subsection{Apache}
 	\index{Apache}
-	\index{Web server}
+	\index{Web Server}
 	% Advantages:
 	% Powerful module system	
 	Apache is the most popular web server option, with over 50\% of the market share~\cite{apache-usage-statistics}.
@@ -156,7 +157,7 @@
 	NGINX and Lighttpd are both lightweight, which is important for running an application on a low-power system like a Raspberry Pi.
 	However, Groundstation does not have to support more than 20 concurrent users, so the memory and processor savings for choosing a lightweight option will be minimal.
 	Additionally, stability is a primary concern of the High-Altitude Rocketry Challenge.
-	For these reasons, I recommend Apache.
+	For these reasons, we recommend Apache.
 
 
 	\section{Web Backend}
@@ -168,13 +169,13 @@
 	\index{JavaScript}
 	\index{Google Chrome}
 	\index{Chrome}
-	Node allows web backends to be written in JavaScript using V8, the same engine that powers Google Chrome~\cite{node}.
+	Node allows web backends to be written in JavaScript using V8, the same JavaScript engine that powers Google Chrome~\cite{node}.
 	The client side of the web application will certainly use JavaScript, and writing the backend  in JavaScript as well will reduce the overhead of learning and programming in new languages.
 	Additionally, because JavaScript would be used on the front-end and backend, it may be possible to reuse code between these two systems.
 	
 	Node uses an event driven architecture, and is built to work with \ac{JSON} data.
 	With Node, is it easy to create a web application that response to small events and sends small bits of data to the client~\cite{event-driven-architecture-node-js}.
-	Because Node uses JavaScript, it integrates naturally with \ac{JSON}
+	Because Node uses JavaScript, it integrates naturally with \ac{JSON}.
 		
 	Benchmarks show that Node is over 5 times as fast as PHP, even when using just-in-time compilation~\cite{comparing-node-vs-php-performance}.
 	
@@ -182,7 +183,7 @@
 	\index{PHP}
 	PHP has been around the web since 1994 and is used in over 80\% of web sites today~\cite{history-of-php}~\cite{usage-of-server-side-programming-languages-for-websites}.
 	Given its maturity and wide adoption, there are a lot of packages, documentation, and example available for developers.
-	PHP's primary advantage is the ease in which is can be incorporated into an static page.
+	PHP's primary advantage is the ease in which is can be incorporated into an static webpage.
 	Using PHP tags, HTML and PHP code can be intertwined seamlessly.
 	
 	\subsection{Ruby}
@@ -194,7 +195,7 @@
 
 	\subsection{Conclusion}
 	Node is fast, which is important for the Groundstation server, which will run on a Raspberry Pi.
-	Node also uses an event driven architecture, which is perfect for our software. Data will be received at regular intervals and need to be pushed out the clients quickly. For these reasons, I recommend using Node.
+	Node also uses an event driven architecture, which is perfect for our software. Data will be received at regular intervals and need to be pushed out the clients quickly. For these reasons, we recommend using Node.
 
 
 	\section{Logging}
@@ -213,7 +214,7 @@
 	\index{JSON}
 	\ac{JSON} is a data format that is easy for both machines and humans read and write.
 	The telemetry may be stored after it is transformed from its raw form from the serial port to \ac{JSON}.
-	The server will be converting the raw data to \ac{JSON} already in preparation to send it to the client, so there will be no additional overhead in the conversion.
+	The server will already be converting the raw data to \ac{JSON} in preparation to send it to the client, so there will be no additional overhead in the conversion.
 	However, it is likely that the \ac{JSON} data will take up more space than the raw data due to additional formatting, so it will take up more space in the storage media~\cite{json}.
 	
 	\subsection{Database}
@@ -230,30 +231,29 @@
 	In the event that the system goes down, it would need to start back up again and begin operation very fast.
 	Storing the data in \ac{JSON} format would allow the data to be quickly loaded back into memory without significant processing.
 	Additionally, if the data is stored in \ac{JSON} format, the server would not need to keep the entirety of it in memory to serve it to a connecting client, freeing up resources on the Raspberry Pi.
-	For these reasons, I recommend that the data be logged after it is converted into \ac{JSON} format.
+	For these reasons, we recommend that the data be logged after it is converted into \ac{JSON} format.
 
 	\section{Data Visualization}
 	\index{Data Visualzation}
 	This section will describe the various options for the data visualization. Author: Natasha Anisimova.
 	
-	\subsection{2D representation}
-	2 dimensional representations of maps are usually equal in the x and y dimensions~\cite{2d-is-better-than-3d}. 
-	Graphs and charts are representations that most users are comfortable with but they can also be a little dull.
-	For displaying the location of a land bound vehicle or person 2D graph is useful~\cite{2ds-company-3ds-a-crowd}. 
+	\subsection{2D-Representation}
+	2-dimensional representations of maps are usually equal in the x and y dimensions~\cite{2d-is-better-than-3d}. 
+	Graphs and charts are representations that most users are comfortable with, but they can also be a little dull.
+	For displaying the location of a land-bound vehicle or person, a 2D graph is useful~\cite{2ds-company-3ds-a-crowd}. 
 	The ground can be viewed as a 2D plane ~\cite{2d-and-3d-presentation-of-spatial-data}.
-	With a rocket the height, latitude, and longitude has to be taken into 
-	account and displayed. 
-	The most important aspects of the software project are to find rocket’s location in the end and be able to tell 
-	if it reached the team’s one hundred-thousand-foot goal. 
+	With a rocket the altitude, latitude, and longitude has to be taken into account and displayed. 
+	The most important aspects of the software project are to find the rocket's location in the end and to be able to tell 
+	if it reached the team's one-hundred-thousand-foot goal. 
 	
-	\subsection{3D representation}
-	2 dimensional topographic maps are hard to read if one has not had a lot of experience with them. 
-	Considering that most of the team will be mechanical engineers and no earth science majors will be participating, a 
-	3 dimensional map makes more sense. 
+	\subsection{3D-Representation}
+	2-dimensional topographic maps are hard to read if one has not had a lot of experience with them. 
+	Considering that most of the team will be mechanical engineer,s and no earth science majors will be participating, a 
+	3-dimensional map makes more sense. 
 	Cartographers in the past decade have shifted to creating 3D perspective maps. 
 	These types of maps are more expensive and time intensive to produce. 
 	The extra time that is put into the visualization makes it more appealing to the readers~\cite{evaluating-the-effectiveness-of-2d-vs-3d-trailhead-maps}. 
-	It is easy to visualize and understand ~\cite{3d-represenation-for-software-visualization}.
+	The 3D representation is easy to visualize and understand ~\cite{3d-represenation-for-software-visualization}.
 	
 	\subsection{Numerical Display}
 	A numerical display is often given when looking for the longitude and latitude of a specific point on a map. 
@@ -308,7 +308,7 @@
 	environment that HTML and JavaScript have to offer ~\cite{why-use-webgl-for-graphics-research}. 
 	While there is a high learning curve, there is plenty of support for it at OSU as well as information on the web.
 	The only major downside to it, is that Internet Explorer does not support it but that browser is used by few and 
-	far in between. 
+	far in between ~\cite{internet-ex}. 
 	WebGL is supported by mobile devices if the software is expanded to them in the future.
 	
 	
