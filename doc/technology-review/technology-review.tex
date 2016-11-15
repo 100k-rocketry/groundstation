@@ -107,24 +107,12 @@
 	%\end{adjustwidth}
 	
 	\newpage
-	
-	%Here's how to cite something~\cite{apache-usage-statistics}.
-	%Check the \LaTeX source.
-	%The actual sources are in groundstation.bib, add new sources as necessary.
-	%We can re-use this file so we don't have to rewrite it again in the future, so give your sources useful names.
-	%Note that if you don't cite a source from the .bib file, it doesn't show up in the references, which is why we can re-use that file.
-	
-	%Pro-tip: put a tilde in between the cite command and the word before it to prevent \LaTeX from putting the citation on a new line.
-
-	\newpage
 
 	% Uncomment this to make the table of contents	
 	\tableofcontents
 	\newpage
 	
 	\pagestyle{headings}
-
-
 
 	\section{Web server}
 	\index{Web server}
@@ -367,8 +355,10 @@
 	or on site.
 	
 	\section{Retrieval}
+	\index{Retrieval}
 	This section will compare programming languages for retrieving telemetry from the serial port. Author: Terrance Lee.
    	\subsection{C}
+   	\index{C}
    	The C language has an extensive library which has many choices we can use. 
 	The main one for the sensors is the extensive math.h library. 
 	It allows us to do any math functions. Plus we can do error conditions in our code if needed. 
@@ -378,6 +368,7 @@
 	This has allowed many references including the internet, books, and instructors. C’s disadvantage is that it is a very low level language and can be security flawed.
 
 	\subsection{C++}
+	\index{C++}
    	The C++ library is just as extensive as the C library except that it has made it so that it can be supported in an
 	object oriented programming language. 
 	For example, it has to bring out a cmath library so it works with C++.
@@ -388,6 +379,7 @@
 	It would take an extremely long time. Just like C, there are many resources for C++ out there if we run into a problem.
 
 	\subsection{Python}
+	\index{Python}
    	The Python library is very extensive. 
 	The new Python version 3.6 has about 37 main libraries which is sub-sectioned so that when you program you can be more specific~\cite{the-python-standard-library}.
 	The main libraries that we need are the data types, numeric, and the mathematical modules. 
@@ -416,30 +408,39 @@
 	to our problem quickly so that we do not get stalled on it for long.  
     
     \section{Interaction Modes}
+    \index{Interaction Modes}
  	Support needs to be given for an interaction mode, PC or mobile, so that the High-Altitude Rocketry team can see the data. Author: Terrance Lee.
 
    	\subsection{PC}
-    	The PC interaction mode is the most available to the teams, it has the largest screen size, and it has the most
+   	\index{PC}
+   	The PC interaction mode is the most available to the teams, it has the largest screen size, and it has the most
 	flexibility when coding. The disadvantage with it is that it is larger than mobile so the team will have to carry it around. 
 	It can use up more power than the mobile too, but the battery can be more robust.
+
    	\subsection{Mobile}
-     	The mobile mode is also available to most of the people on the team as long as they have a smart phone. 
+   	\index{Mobile}
+   	The mobile mode is also available to most of the people on the team as long as they have a smart phone. 
 	The mobile option will give them a lighter option to carry around and will not waste as much power. 
 	The disadvantage is that it will have a smaller screen and we have less flexibility when coding. 
 	Also, team members will only be able to use android phones with this option. 
 	We will not have cell service either when we are out at location.
+
    	\subsection{PC and Mobile}
-    	The third option is using both the PC and mobile. 
+    \index{PC}
+    \index{Mobile}
+    The third option is using both the PC and mobile. 
 	With this option we will have all the advantages of both. 
 	We will still have a disadvantage which is that we will have to program in multiple languages and formats. 
-    	\subsection{Conclusion}
-     	With the PC once the team gets the information they will be able to save it right there on their team computers and move it
+
+   	\subsection{Conclusion}
+   	With the PC once the team gets the information they will be able to save it right there on their team computers and move it
 	easily through USB or other devices. 
 	With the mobile our biggest issue is not the programming but the lack of cell service.
 	Without cell service, if the team wants to look at any data they are reliant on the Raspberry PI Wi-Fi only. 
 	That is not going to be on all the time either. 
 	If we use both it has to be as a stretch goal because of the time constraints.  
-      	Since speaking to the team and going over the criteria, the best option for this series that I would recommend would be to use
+
+   	Since speaking to the team and going over the criteria, the best option for this series that I would recommend would be to use
 	the PC for the interaction mode. 
 	It is reliable, most available, flexible when coding, and has a large screen size. 
 	If multiple people are looking at the screen they are pushing each other out of the way to see it. 
@@ -449,30 +450,38 @@
 	are compatible. 
 	That should not be that big of an issue because we only need to have the computers on for launch and test launch too.
 	
-        \section{Toolkit to generate the User Interface (UI)}
+    \section{Toolkit to generate the User Interface (UI)}
+    \index{User Interface}
+    \index{Toolkit to generate the User Interface}
  	For the toolkits to generate the UI the options are Prototyping toolkits, jQuery UI, and the Dojo toolkit.
-	These are all part of the top ten JavaScript Web UI Libraries, Frameworks and Toolkits (Deering, JavaScript). 
+	These are all part of the top ten JavaScript Web UI Libraries, Frameworks and Toolkits~\cite{10-javascript-web-ui-libraries-frameworks-and-toolkits}.
 	Author: Terrance Lee.
 
    	\subsection{Prototype UI}
-    	Our first option is the Prototype UI toolkits. 
+   	\index{Prototype UI}
+   	Our first option is the Prototype UI toolkits. 
 	Their advantages are that it is reliable and it has the functionality for our purpose. 
 	It will allow us to generate the UI we want. Also it has great documentation.
 	The disadvantage is that they cost money. 
-	The cheaper they are the less functionality, and the more expensive the more functionality (Jia, Prototyping Tools). 
+	The cheaper they are the less functionality, and the more expensive the more functionality. 
 	The best one I found was called Mockplus, but its biggest disadvantage besides money is that it has a lack of responsive design
-	features (Jia, Prototyping Tools).
+	features~\cite{pros-and-cons-of-four-prototyping-tools}.
 	One big advantage though is that ease of use due to its drag and drop feature.
+
    	\subsection{jQuery}
-    	The second option is jQuery. With jQuery it is free to use, it is easy to use, and has great documentation.
-	One disadvantage with jQuery is that it has limited functionality in some cases (JQuery).
+   	\index{jQuery}
+   	The second option is jQuery. With jQuery it is free to use, it is easy to use, and has great documentation.
+	One disadvantage with jQuery is that it has limited functionality in some cases~\cite{jquery-disadvantages-and-advantages}.
+
    	\subsection{Dojo}
-    	Our last option is the Dojo toolkit. 
-	The Dojo toolkit is under the academic free license version 2.1 so the license is free (Reliam Inc, Dojo License).
+   	\index{Dojo}
+   	Our last option is the Dojo toolkit. 
+	The Dojo toolkit is under the academic free license version 2.1 so the license is free~\cite{dojo-toolkit-license}.
 	Its other advantage is that it is easy to use.
 	Its disadvantages are that it does not have great documentation and its functionality for our purpose.
 	Dojo has a great framework but what we need is something with a good library.
-    	\subsection{Conclusion}
+
+   	\subsection{Conclusion}
      	They seem to all have good advantages. 
 	Prototype toolkits are for more professional type work.
 	If you were doing a project and you could afford one of the high-end ones they seem like the way to go.
