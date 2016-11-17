@@ -1,0 +1,207 @@
+\documentclass[10pt,draftclsnofoot,onecolumn]{IEEEtran}
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\usepackage[margin=.75in]{geometry}
+\usepackage{courier}
+\usepackage{ifthen}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{tabularx}
+\usepackage[strict]{chngpage}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{acronym}
+\usepackage{color}
+\usepackage{makeidx}
+\usepackage{url}
+
+\makeindex
+
+\acrodef{OSU}[OSU]{Oregon State University}
+\acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
+\acrodef{AGL}[AGL]{Above Ground Level}
+\acrodef{JSON}[JSON]{JavaScript Object Notation}
+
+\lstset {
+	language=C,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{OliveGreen}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#}
+	showstringspaces=false,
+	showspaces=false,
+	frame=single,
+	captionpos=b
+}
+
+\newcommand{\commandline}[2][\empty] {
+	\begin{quote}
+		\texttt{#2}
+		\ifthenelse{\equal{#1}{\empty}}{}{\begin{quote}#1\end{quote}}
+	\end{quote}
+}
+
+\newcommand{\sigline}[1][\empty] {
+	\vspace{1in}
+	\hrule width0.5\textwidth
+	\vspace{1mm}
+	\noindent #1	
+}
+
+\newcommand*{\SignatureAndDate}[1]{
+	\vspace{1in}
+	\par\noindent\makebox[2.5in]{\hrulefill} \hspace{.5in} \makebox[2.0in]{\hrulefill}
+	\par\noindent\makebox[2.5in][l]{#1}      \hspace{.5in} \makebox[2.0in][l]{Date}
+}
+
+
+
+\begin{document}
+	\singlespace
+	
+	\title{\vspace{2in}Design}
+	
+	\author {
+		Anisimova, Natasha
+		\and
+		Lee, Terrance
+		\and
+		Morgan, Albert
+	}
+	
+	\markboth{CS Capstone 2016-2017}{Groundstation}
+	
+	\pagestyle{empty}
+	\vspace*{2in}
+	\begin{center}
+		\huge
+		Groundstation: Design\\
+		\normalsize
+		\vspace{5mm}
+		\textbf{
+			Team \#25\\
+			High-Altitude Rocketry Challenge\\
+		}
+		\vspace{1mm}
+		Natasha Anisimova\\
+		Terrance Lee\\
+		Albert Morgan
+	\end{center}
+	
+	\vspace{5mm}
+	
+	\begin{center}
+		\textbf{Abstract}
+	\end{center}
+	
+	%\begin{adjustwidth}{0.75in}{0.75in}
+	
+	%Abstract goes here
+	The \textit{Groundstation} software will collect telemetry from a rocket while is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
+	display of data.	
+	This document will examine nine different components of the system.
+	For each of these components, three different technologies will be described and evaluated for use in this component.
+	Finally, a recommendation will be made about which technology should be used.	
+	%\end{adjustwidth}
+	
+	\newpage
+
+	% Uncomment this to make the table of contents	
+	%\tableofcontents
+	%\newpage
+
+	\section{Introduction}
+
+	\begin{enumerate}
+	\item Identitication of the SSD
+	\item stakeholders
+	\item concerns
+	\item selected viewpoints
+	\item design views
+	\item design overlays
+	\item rationale
+	\end{enumerate}
+
+	Maybe we don't need all of this stuff in the intro? I think some of it is covered below.
+
+
+	\section{Context}
+
+	Here's a section for the context design viewpoint.
+	Context covers systems services and users.
+	It has the following subsections:
+
+	\subsection{Concerns}
+	Design concerns come from the requirements. So, things like "The users need to visualize the data in real-time"
+	and "We need to get telemetry from the rocket in real-time".
+
+	There are four types of elements: entity, relationship, attribute, constraint
+
+	\subsection{Example entity}
+	Entities are library, a system, framework, class, etc... It has the following sections
+	\begin{itemize}
+		\item Type: Framework, library, class, object, etc...
+		\item Purpose: Why does this entity exist?
+	\end{itemize}
+
+
+
+	\subsection{Example relationship}
+	We probably want a lot of these.
+	They describe how entities work together.
+	One might be "We get data from the rocket, and it goes to the processing entity".
+	Another might be "We sent th eprocessed data to the web browser".
+
+
+	\subsection{Attribute is a fact}
+	They usually answer questions, and are sort-of in Q\&A format.
+	What language are we using? Answer: we're going to use Node. Like that.
+
+	\subsection {Constraint}
+	``There ain't no Internet in the desert'' and stuff like that.
+
+
+
+	\subsection{Example name}
+
+
+	\subsection{Elements}
+	This is a list of entities, relationships, attibutes, or constraints
+
+
+	\subsection{Methods}
+
+	\subsection{Source}
+	
+	If we need to cite something, it goes in here.
+
+
+
+	\section{Interaction}
+	Talk about how the system will get data from the serial port and how it will get sent to the web browser.
+
+	\section{Algorithm}
+	Stuff about the event-driven architecture maybe.
+
+
+	
+	\pagestyle{headings}
+
+	% CONTENT GOES HERE
+	
+%	\printindex
+
+%\bibliography{groundstation}
+%\bibliographystyle{IEEEtran}
+
+\newpage
+\begin{minipage}{\textwidth}	
+	\SignatureAndDate{Nancy Squires}
+	\SignatureAndDate{Natasha Anisimova}
+	\SignatureAndDate{Terrance Lee}
+	\SignatureAndDate{Albert Morgan}
+\end{minipage}
+
+\end{document}
