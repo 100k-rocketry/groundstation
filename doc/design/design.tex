@@ -126,10 +126,6 @@
 
 	Maybe we don't need all of this stuff in the intro? I think some of it is covered below.
 
-
-	
-	
-	
 	
 	
 	\section{Structure Viewpoint}
@@ -140,13 +136,20 @@
 	\subsubsection{Type}
 	Program
 	\subsubsection{Contents}
-	The web server will run on the Raspberry Pi and facilitate communication between.
+	The web server will run on the Raspberry Pi. The web server has three primary functions:
+	\begin{itemize}
+	\item Server web pages to the clients.
+	\item Receive telemetry from the serial port and convert it into json.
+	\item Make the json data available to the clients.
+	\end{itemize}
+	Groundstation will use the Apache~\cite{Apache} web server.	
 	
 	
 	
 	
 	
 	
+	\{\Huge Everything after this is an example}
 	
 	
 	
