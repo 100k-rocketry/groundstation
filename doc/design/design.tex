@@ -67,6 +67,57 @@
 	#5
 }
 
+\newcommand{\newentity}[5]{
+	\subsection{#1} (Author: #2)
+	\subsubsection{Name}
+	#3
+	\subsubsection{Type}
+	#4
+	\subsubsection{Purpose}
+	#5
+	\subsubsection{Contents}
+	#6
+}
+
+\newcommand{\newrelationship}[5]{
+	\subsection{#1} (Author: #2)
+	\subsubsection{Name}
+	#3
+	\subsubsection{Type}
+	#4
+	\subsubsection{Contents}
+	#5
+}
+
+\newcommand{\newconstraint}[5]{
+	\subsection{#1} (Author: #2)
+	\subsubsection{Name}
+	#3
+	\subsubsection{Type}
+	#4
+	\subsubsection{Source}
+	#6
+	\subsubsection{Target}
+	#7
+	\subsubsection{Contents}
+	#8
+}
+
+\newcommand{\newattribute}[5]{
+	\subsection{#1} (Author: #2)
+	\subsubsection{Name}
+	#3
+	\subsubsection{Type}
+	#4
+	\subsubsection{Purpose}
+	#5
+	\subsubsection{Contents}
+	#6	
+}
+
+
+
+
 \begin{document}
 	\singlespace
 	
@@ -155,6 +206,22 @@
 			\item Make the json data available to the clients.
 		\end{itemize}
 		Groundstation will use the Apache~\cite{Apache} web server.
+	}
+
+
+	\newelement
+	{Entity}
+	{Albert Morgan}
+	{Web browser}
+	{Program}
+	{	The client will use a web browser to connect to the Groundstation web server and access the content.
+		The web browser may be any of:
+		\begin{itemize}
+			\item Chrome version 54 or higher
+			\item Edge version 14 or higher
+			\item Firefox version 49 or higher
+			\item Safari version 10 or higher
+		\end{itemize}
 	}
 
 
