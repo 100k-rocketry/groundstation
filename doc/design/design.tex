@@ -18,10 +18,7 @@
 
 \makeindex
 
-\acrodef{OSU}[OSU]{Oregon State University}
-\acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
-\acrodef{AGL}[AGL]{Above Ground Level}
-\acrodef{JSON}[JSON]{JavaScript Object Notation}
+\acrodef{NPM}[NPM]{Node Package Manager}
 
 \lstset {
 	language=C,
@@ -57,7 +54,7 @@
 }
 
 \newcommand{\newentity}[5]{
-	\noindent\textbf{Entity} (Author:{#1})
+	\noindent\textbf{Entity} (Author: {#1})
 	
 	\noindent\textit{Name:} {#2}
 	
@@ -188,24 +185,21 @@
 
 	\newentity
 	{Your name here}
-	{The name of the entity}
-	{See section 4.6.2.2. Proccess/Library/Framework/Class/Module/Data Store/etc}
-	{Why does it exists?}
-	{Stuff here.}
-
-	\newentity
-	{Your name here}
 	{PC}
 	{Component}
 	{Why does it exists?}
 	{Stuff here.}
 
 	\newentity
-	{Your name here}
-	{Node Package Manager}
+	{Albert Morgan}
+	{Package Manager}
 	{Subprogram}
-	{Manages packages}
-	{Stuff here.}
+	{
+		The package manager will install, track, and update software dependencies on the server.
+	}
+	{
+		Because Groundstation will be using Node and JavaScript for both the frontend and backend, \ac{NPM} will be used~\cite{npm}. \ac{NPM} has a large repository of both server-side and client-side JavaScript packages.
+	}
 
 	\newentity
 	{Your name here}
