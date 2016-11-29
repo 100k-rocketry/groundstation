@@ -1,3 +1,10 @@
+# Presentation 1
+```
+Put comments about a slide in block quotes so we can separate it from the spoken prose.
+End each slide with a horizontal rule.
+```
+---
+
 ## Introduction
 ### 1 min
 
