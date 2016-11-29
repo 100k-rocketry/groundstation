@@ -159,7 +159,7 @@
 	display of data.	
 	This document will examine nine different components of the system.
 	For each of these components, three different technologies will be described and evaluated for use in this component.
-	Finally, a recommendation will be made about which technology should be used.	
+	Finally, a recommendation will be made about which technology should be used.
 	%\end{adjustwidth}
 	
 	\newpage
@@ -184,7 +184,7 @@
 
 	
 	
-	\section{Structure Viewpoint}
+	\section{Structure View}
 		
 	
 	
@@ -217,18 +217,35 @@
 	{Stuff here.}
 
 	\newentity
-	{Your name here}
+	{Albert Morgan}
 	{Backend}
 	{Component}
-	{Web server software stuff}
-	{Stuff here.}
+	{
+		The purpose of the backend is the facilitate communication between the rocket and the user.
+		The backend takes care of all data collection, transformation, logging, and serving that data to the user.
+	}
+	{
+		Stuff here.
+	}
 
 	\newentity
 	{Your name here}
 	{Node}
 	{Subprogram}
-	{Runs the backend}
-	{Stuff here.}
+	{Node is the software that runs the backend.}
+	{
+		The backend will run on Node. Several choices were considered to run the backend, particularly Node, PHP, and Ruby.
+		The backend was chosen two criteria:
+		\begin{itemize}
+			\item Speed. The backend will run on a Raspberry Pi, so speed is important to minimize the system resources used.
+			\item Interoperability. The backend needs to work with multiple components, including the logging software, the data coming in from the serial port, serving the frontend to the user.
+		\end{itemize}
+		Node uses an event driven architecture, which is ideal for reading data from the serial port.
+		PHP and Ruby on Rails are both HTML preprocessors, so they don't get activated until the web site is requested.
+		Node, on the other hand, runs continuously in the background and uses an event driven architecture.
+		The event driven architecture is ideal for reading the data from the serial port.
+		Additionally, Node much faster than either ruby or PHP.	
+	}
 
 	\newentity
 	{Your name here}
