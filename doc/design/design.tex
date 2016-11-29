@@ -57,25 +57,27 @@
 }
 
 \newcommand{\newentity}[5]{
-	\subsection{Entity} (Author: #1)
-	\subsubsection{Name}
-	#2
-	\subsubsection{Type}
-	#3
-	\subsubsection{Purpose}
-	#4
-	\subsubsection{Contents}
-	#5
+	\noindent\textbf{Entity} (Author:{#1})
+	
+	\noindent\textit{Name:} {#2}
+	
+	\noindent\textit{Type:} {#3}
+	
+	\noindent\textit{Purpose:} {#4}
+	
+	\noindent\textit{Contents:} {#5}
+	\vspace{.5cm}
 }
 
 \newcommand{\newrelationship}[4]{
-	\subsection{Relationship} (Author: #1)
-	\subsubsection{Name}
-	#2
-	\subsubsection{Type}
-	#3
-	\subsubsection{Contents}
-	#4
+	\noindent\textbf{Relationship} (Author: #1)
+
+	\noindent\textit{Name:} #2
+
+	\noindent\textit{Type:} #3
+
+	\noindent\textit{Contents:} #4
+	\vspace{.5cm}
 }
 
 \newcommand{\newconstraint}[6]{
@@ -281,7 +283,6 @@
 		\item Make the json data available to the clients.
 		\end{itemize}
 	}
-	{Program}
 	{	The web server will run on the Raspberry Pi. The web server has three primary functions:
 		Groundstation will use the Apache~\cite{apache} web server.
 	}
