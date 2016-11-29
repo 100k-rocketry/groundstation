@@ -8,5 +8,6 @@ engineers on the project all receive the data they need on launch data.
 Collecting the telemetry in real-time will reduce the chances of a failure-to-recover by allowing the ground team to track the rocket during its flight.
 The graphical display will make the telemetry instantly understandable without time-consuming analysis.
 The presentation will provide an status update.
+
 ---
 	
