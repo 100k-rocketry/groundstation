@@ -1,5 +1,5 @@
-# Introduction
-## 1 min
+## Introduction
+### 1 min
 
 In June 2017, the OSU chapter of the AIAA will launch a rocket in the Mojave Desert.
 The software team will develop the tracking software that receives telemetry from the rocket during its flight, logs, and 
@@ -11,5 +11,6 @@ by allowing the ground team to track the rocket during its flight.
 The graphical display will make the telemetry instantly understandable to the OSU rocketry team without time-consuming analysis.
 Logging the data will ensure that it is accessible for analysis at a later date.
 This presentation will provide an status update of the project.
+
 ---
 	
