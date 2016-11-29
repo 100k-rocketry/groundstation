@@ -1,5 +1,6 @@
 # Presentation 1
 ```
+Each of these sections represents an individual slide, or group of slides, in our presentation.
 Put comments about a slide in block quotes so we can separate it from the spoken prose.
 End each slide with a horizontal rule.
 ```
