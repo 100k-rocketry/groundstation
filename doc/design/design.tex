@@ -54,27 +54,35 @@
 }
 
 \newcommand{\newentity}[5]{
-	\noindent\textbf{Entity} (Author: {#1})
+	\begin{minipage}{\linewidth}
+	\noindent\textbf{#2}
 	
-	\noindent\textit{Name:} {#2}
+	\noindent Entity
 	
+	\noindent\textit{Author:} {#1}
+		
 	\noindent\textit{Type:} {#3}
 	
 	\noindent\textit{Purpose:} {#4}
 	
 	\noindent\textit{Contents:} {#5}
 	\vspace{.5cm}
+	\end{minipage}
 }
 
 \newcommand{\newrelationship}[4]{
-	\noindent\textbf{Relationship} (Author: #1)
-
-	\noindent\textit{Name:} #2
+	\begin{minipage}{\linewidth}
+	\noindent\textbf{#2}
+	
+	\noindent Relationship
+	
+	\noindent\textit{Author:} #1
 
 	\noindent\textit{Type:} #3
 
 	\noindent\textit{Contents:} #4
 	\vspace{.5cm}
+	\end{minipage}
 }
 
 \newcommand{\newconstraint}[6]{
@@ -259,13 +267,6 @@
 	{Gets high}
 	{ZOOM}
 	
-	\newrelationship
-	{Your name here}
-	{jQuery}
-	{Libary}
-	{UI stuff}
-	{Queries the J}
-
 	\newentity
 	{Albert Morgan}
 	{Web server}
