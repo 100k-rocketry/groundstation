@@ -9,7 +9,6 @@ End each slide with a horizontal rule.
 ### 1 min
 
 ```
-Put comments about the slide in inline-quotes like this.
 This introduction should be generic enough that we can reuse it for future presentations.
 ```
 
