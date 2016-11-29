@@ -56,63 +56,52 @@
 	\par\noindent\makebox[2.5in][l]{#1}      \hspace{.5in} \makebox[2.0in][l]{Date}
 }
 
-
-\newcommand{\newelement}[5]{
-	\subsection{#1} (Author: #2)
-	\subsubsection{Name}
-	#3
-	\subsubsection{Type}
-	#4
-	\subsubsection{Contents}
-	#5
-}
-
 \newcommand{\newentity}[5]{
-	\subsection{#1} (Author: #2)
+	\subsection{Entity} (Author: #1)
 	\subsubsection{Name}
-	#3
+	#2
 	\subsubsection{Type}
-	#4
+	#3
 	\subsubsection{Purpose}
-	#5
-	\subsubsection{Contents}
-	#6
-}
-
-\newcommand{\newrelationship}[5]{
-	\subsection{#1} (Author: #2)
-	\subsubsection{Name}
-	#3
-	\subsubsection{Type}
 	#4
 	\subsubsection{Contents}
 	#5
 }
 
-\newcommand{\newconstraint}[5]{
-	\subsection{#1} (Author: #2)
+\newcommand{\newrelationship}[4]{
+	\subsection{Relationship} (Author: #1)
 	\subsubsection{Name}
-	#3
+	#2
 	\subsubsection{Type}
+	#3
+	\subsubsection{Contents}
 	#4
+}
+
+\newcommand{\newconstraint}[6]{
+	\subsection{Constraint} (Author: #1)
+	\subsubsection{Name}
+	#2
+	\subsubsection{Type}
+	#3
 	\subsubsection{Source}
-	#6
+	#4
 	\subsubsection{Target}
-	#7
+	#5
 	\subsubsection{Contents}
-	#8
+	#6
 }
 
 \newcommand{\newattribute}[5]{
-	\subsection{#1} (Author: #2)
+	\subsection{Attribute} (Author: #1)
 	\subsubsection{Name}
-	#3
+	#2
 	\subsubsection{Type}
-	#4
+	#3
 	\subsubsection{Purpose}
-	#5
+	#4
 	\subsubsection{Contents}
-	#6	
+	#5	
 }
 
 
@@ -194,26 +183,115 @@
 	
 	% LOOK AT MY NEWELEMENT COMMAND EXAMPLEHERE
 	
-	\newelement
-	{Entity}
+
+	\newentity
+	{Your name here}
+	{The name of the entity}
+	{See section 4.6.2.2. Proccess/Library/Framework/Class/Module/Data Store/etc}
+	{Why does it exists?}
+	{Stuff here.}
+
+	\newentity
+	{Your name here}
+	{PC}
+	{Component}
+	{Why does it exists?}
+	{Stuff here.}
+
+	\newentity
+	{Your name here}
+	{Node Package Manager}
+	{Subprogram}
+	{Manages packages}
+	{Stuff here.}
+
+	\newentity
+	{Your name here}
+	{Frontend}
+	{Component}
+	{User interface}
+	{Stuff here.}
+
+	\newentity
+	{Your name here}
+	{Backend}
+	{Component}
+	{Web server software stuff}
+	{Stuff here.}
+
+	\newentity
+	{Your name here}
+	{Node}
+	{Subprogram}
+	{Runs the backend}
+	{Stuff here.}
+
+	\newentity
+	{Your name here}
+	{Serialport}
+	{Library}
+	{Node serialport library}
+	{Stuff here.}
+
+	\newentity
+	{Your name here}
+	{Log}
+	{Data store}
+	{This is where data gets logged}
+	{Stuff here.}
+	
+	
+	\newentity
+	{Your name here}
+	{jQuery}
+	{Libary}
+	{UI stuff}
+	{Queries the J}
+	
+	\newentity
+	{Your name here}
+	{3.js}
+	{Libary}
+	{UI stuff}
+	{All of your 3 needs}
+
+
+	\newentity
+	{Your name here}
+	{Rocket}
+	{Component}
+	{Gets high}
+	{ZOOM}
+	
+	\newrelationship
+	{Your name here}
+	{jQuery}
+	{Libary}
+	{UI stuff}
+	{Queries the J}
+
+	\newentity
 	{Albert Morgan}
 	{Web server}
+	{Process}
+	{	The web server will serve three primary functions:
+		\begin{itemize}
+		\item Server web pages to the clients.
+		\item Receive telemetry from the serial port and convert it into json.
+		\item Make the json data available to the clients.
+		\end{itemize}
+	}
 	{Program}
 	{	The web server will run on the Raspberry Pi. The web server has three primary functions:
-		\begin{itemize}
-			\item Server web pages to the clients.
-			\item Receive telemetry from the serial port and convert it into json.
-			\item Make the json data available to the clients.
-		\end{itemize}
-		Groundstation will use the Apache~\cite{Apache} web server.
+		Groundstation will use the Apache~\cite{apache} web server.
 	}
 
 
-	\newelement
-	{Entity}
+	\newentity
 	{Albert Morgan}
 	{Web browser}
-	{Program}
+	{Process}
+	{The web server}
 	{	The client will use a web browser to connect to the Groundstation web server and access the content.
 		The web browser may be any of:
 		\begin{itemize}
@@ -225,77 +303,6 @@
 	}
 
 
-%	\subsection{Entity}
-%	\subsubsection{Name}
-%	Web server.
-%	\subsubsection{Type}
-%	Program
-%%	The web server will run on the Raspberry Pi. The web server has three primary functions:
-%	\begin{itemize}
-%	\item Server web pages to the clients.
-%	\item Receive telemetry from the serial port and convert it into json.
-%	\item Make the json data available to the clients.
-%	\end{itemize}
-%	Groundstation will use the Apache~\cite{Apache} web server.
-	
-	
-	
-	
-	
-	\vspace{1in}
-	{\Huge Everything after this is just brainstorming}
-	
-	
-	
-	\section{Context}
-
-	Here's a section for the context design viewpoint.
-	Context covers systems services and users.
-	It has the following subsections:
-
-	\subsection{Concerns}
-	Design concerns come from the requirements. So, things like "The users need to visualize the data in real-time"
-	and "We need to get telemetry from the rocket in real-time".
-
-	There are four types of elements: entity, relationship, attribute, constraint
-
-	\subsection{Example entity}
-	Entities are library, a system, framework, class, etc... It has the following sections
-	\begin{itemize}
-		\item Type: Framework, library, class, object, etc...
-		\item Purpose: Why does this entity exist?
-	\end{itemize}
-
-
-
-	\subsection{Example relationship}
-	We probably want a lot of these.
-	They describe how entities work together.
-	One might be "We get data from the rocket, and it goes to the processing entity".
-	Another might be "We sent th eprocessed data to the web browser".
-
-
-	\subsection{Attribute is a fact}
-	They usually answer questions, and are sort-of in Q\&A format.
-	What language are we using? Answer: we're going to use Node. Like that.
-
-	\subsection {Constraint}
-	``There ain't no Internet in the desert'' and stuff like that.
-
-
-
-	\subsection{Example name}
-
-
-	\subsection{Elements}
-	This is a list of entities, relationships, attibutes, or constraints
-
-
-	\subsection{Methods}
-
-	\subsection{Source}
-	
-	If we need to cite something, it goes in here.
 
 
 
