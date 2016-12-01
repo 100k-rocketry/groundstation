@@ -228,6 +228,7 @@
 		\item Log the data so that it may be analyzed at a later date
 	\end{itemize}
 
+	\index{Structure view}
 	\section{Structure View}
 		
 	
@@ -484,7 +485,7 @@
 	}
 	
 	\newrelationship
-	{Your name here}
+	{Albert Morgan}
 	{NPM / Frontend}
 	{Connected}
 	{NPM will be used to install all frontend software dependencies.}
@@ -499,8 +500,8 @@
 
 
 	% INTERACTION SECTION
-	\index{Interaction}
-	\section{Interaction}
+	\index{Interaction view}
+	\section{Interaction View}
 
 	\entityref{Rocket}
 	{Structure View - Rocket}
@@ -532,9 +533,9 @@
 		Data will be stored in the log file and transmitted to the user as a list of JSON objects in the following format:\\
 
 \noindent\{\\
-sensor: ...,\\
-value: ...,\\
-timestamp: ...\\
+\hspace*{.5cm}sensor: ...,\\
+\hspace*{.5cm}value: ...,\\
+\hspace*{.5cm}timestamp: ...\\
 \}\\
 
 		The JSON object has the following attributes:
@@ -548,12 +549,29 @@ timestamp: ...\\
 			\item\textbf{Timestamp}: The time and date that the data was received.
 			This value is an integer representing the number of milliseconds that have elapsed since the epoch (January 1, 1970).
 		\end{itemize}
+	
+			JSON objects will be transmitted to the client as a single object with a list of smaller objects inside. For example:\\
+
+\noindent\{\\
+\hspace*{.5cm}\{\\
+\hspace*{1cm}sensor: altimeter,\\
+\hspace*{1cm}value: 900,\\
+\hspace*{1cm}timestamp: 00584747458945\\
+\hspace*{.5cm}\},\\
+\hspace*{.5cm}\{\\
+\hspace*{1cm}sensor: tilt,\\
+\hspace*{1cm}value: 4,\\
+\hspace*{1cm}timestamp: 00584747458945\\
+\hspace*{.5cm}\}\\
+\}
+
 	}
 	
 
+	\index{Interface view}
+	\section{Interface View}
 	
-	\index{Interface}
-	\section{Interface}
+
 
 	\newinterface
 	{Natasha Anisimova}
@@ -565,12 +583,16 @@ timestamp: ...\\
 		resizes the window of the web browser. If the user clicks and drags in a particular direction
 		the 3D environment will move in that direction. If the user just moves the mouse without clicking, the mouse will move freely on the screen. To make orientation easier in this environment there will be a set of buttons, shown in the figure below, that will have preset views readily available for the user. The top most button will show a bird's eye view. The left button will show a three-fourths view facing the left side of the launch site. The right will do the same except facing the right side of the launch site. Last but not least, the bottom button in this set will give a view that is directly aligned with the ground, or X plain, looking out into the horizon. With the help of these buttons the user should never feel like they are unable to get back to looking at the journey of the rocket. The scroll button will zoom in and out, with the point of origin being the launch location of the rocket.
 		
+<<<<<<< HEAD
 		put diagram of camera controls here + citation for it:
 		%\begin{figure}
 		%	\includegraphics[width=\linewidth]{cameracontrols.eps}
 		%	\caption{A diagram of the camera view controls.}
 		%	\label{fig:1}
 		%\end{figure}
+=======
+		put diagram of camera controls here:
+>>>>>>> 36ea92529e650dfb7d6fd083f8cd35a02e46ce45
 		
 		Figure \ref{fig:1} Shows camera view controls.
 		
@@ -585,6 +607,14 @@ timestamp: ...\\
 		
 	%	Figure \ref{fig:2} Shows the layers of the Earth's atmosphere.
 	}
+
+	
+	\begin{figure}
+	\includegraphics[width=5cm]{cameracontrols.eps}
+	\caption{A diagram of the camera view controls.}
+	\label{fig:1}
+	\end{figure}
+
 
 	\newinterface
 	{Natasha Anisimova}
