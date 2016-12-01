@@ -15,12 +15,15 @@
 \usepackage{color}
 \usepackage{makeidx}
 \usepackage{url}
+\usepackage{listings}
+\usepackage{verbatim}
 
 \makeindex
 
 \acrodef{NPM}[NPM]{Node Package Manager}
 \acrodef{OSU}[OSU]{Oregon State University}
 \acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
+\acrodef{COCOM}[COCOM]{Coordinating Committee for Multilateral Export Controls}
 
 \lstset {
 	language=C,
@@ -188,7 +191,7 @@
 	
 	%Abstract goes here
 	The \textit{Groundstation} software will collect telemetry from a rocket while is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
-	display of data.	
+	display of data.
 	This document will describe in detail the design of Groundstation.
 	%\end{adjustwidth}
 		
@@ -262,8 +265,8 @@
 	{User Interface}
 	{
 		The frontend of the web server will create and display the information that it was given by the backend. Given
-		that the information has to do with location: longitude, latitude, and altitude, a 3D display is prefered. The
-		frontend will consist of programs using 3.js and WebGL to create the vizualization necessary to quickly understand the
+		that the information has to do with location: longitude, latitude, and altitude, a 3D display is preferred. The
+		frontend will consist of programs using 3.js and WebGL to create the visualization necessary to quickly understand the
 		location of the rocket.
 	}
 
@@ -352,7 +355,7 @@
 	{3.js is a JavaScript 3D library used to create and display animated 3D computer graphics using WebGL.}
 	{	Since the information about the rocket will be displayed by using a web browser through a local Wi-Fi network, 
 		making sure the information is displayed on time and correctly is crucial. 3.js allows for easy and rapid development
-		of WebGL applications, which means we can make the most of the specialised graphics hardware on the users'
+		of WebGL applications, which means we can make the most of the specialized graphics hardware on the users'
 		PCs that it gives access to.
 	}
 
@@ -508,11 +511,44 @@
 	\entityref{Web Browser}
 	{Structure View - Web Browser}
 	
+
+
 	\newrelationship
 	{Albert Morgan}
-	{Serialport use}
-	{Use}
-	{Stuff}
+	{Telemetry Protocol}
+	{Signal}
+	{
+		Once every second, the rocket will send a telemetry packet to the Groundstation.
+		This packet will be received and transformed into a protocol that will be transmitted to the
+		Groundstation software package via the serial port.
+		The specification of this protocol will be determined by the avionics team at a later date.
+	}
+
+	\newrelationship
+	{Albert Morgan}
+	{JSON Protocol}
+	{Signal}
+	{
+		Data will be stored in the log file and transmitted to the user as a list of JSON objects in the following format:\\
+
+\noindent\{\\
+sensor: ...,\\
+value: ...,\\
+timestamp: ...\\
+\}\\
+
+		The JSON object has the following attributes:
+		\begin{itemize}
+			\item\textbf{Sensor}: the sensor that the data is recorded from.
+			This is an arbitrary string that uniquely identifies a specific sensor on the rocket.
+			This string may be anything, and the user interface must understand which sensors provide which data.
+			The specification of which strings correspond to which sensors will be done at a later date, after the protocol is defined.
+			\item\textbf{Value}: the value that has been read off the sensor.
+			The type of this data will depend on the specific sensor.
+			\item\textbf{Timestamp}: The time and date that the data was received.
+			This value is an integer representing the number of milliseconds that have elapsed since the epoch (January 1, 1970).
+		\end{itemize}
+	}
 	
 
 	
@@ -558,7 +594,11 @@
 		\item \textbf{Accuracy:} The absence of errors in the telemetry GS receives, logs, and displays.
 		\index{Binary data}
 		\item \textbf{Binary data:} Telemetry that represents one of two states, for example, ``stage 2 activated'' and
-		``stage 2 not activated.''
+		``stage 2 not activated.''		
+		\index{COCOM limits}
+		\item \textbf{COCOM limits:} The \ac{COCOM} limits apply hard limits to the speed and altitude of a GPS device.
+		If a device exceeds these limits, it will stop providing GPS data.
+		This is done to ensure that the device cannot be used as a missile.		
 		\index{Corruption}
 		\item \textbf{Corruption:} The process by which data is altered or made unreadable.
 		\index{Crash}
@@ -606,6 +646,8 @@
 		\item \textbf{Telemetry packet:} The rocket will send a telemetry update once per second. Each one of these updates is a ``telemetry packet.''
 		\index{Vizualation}
 		\item \textbf{Visualization:} Information or data, transformed into an visual context.
+		\index{X, Y, Z coordinates}
+		\item \textbf{X, Y, Z coordinates:} A three coordinate system that pinpoints a point in 3D space.
 	\end{itemize}
 
 	\printindex
