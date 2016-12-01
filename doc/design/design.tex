@@ -114,6 +114,17 @@
 }
 
 
+\newcommand{\entityref}[2]{
+	\begin{minipage}{\linewidth}
+	\textbf{#1}
+	
+	Entity
+	
+	See \textit{#2}
+	\end{minipage}
+	\vspace{.5cm}
+}
+
 
 
 \begin{document}
@@ -348,7 +359,7 @@
 	\newentity
 	{Albert Morgan}
 	{Web server}
-	{Process}
+	{Part}
 	{	The web server will serve three primary functions:
 		\begin{itemize}
 		\item Server web pages to the clients.
@@ -367,8 +378,7 @@
 		Lighttpd~\cite{lighttpd} was also considered. Although Lighttpd is much more lightweight than Apache,
 		it is not nearly as mature.
 		Because stability is a primary concern, Apache was selected.
-}
-
+	}
 
 	\index{Web browser}
 	\index{Chrome}
@@ -390,7 +400,8 @@
 		\end{itemize}
 	}
 
-
+	\index{Web browser}
+	\index{Web server}
 	\newrelationship
 	{Albert Morgan}
 	{Web browser / Web server}
@@ -415,6 +426,8 @@
 	{Part of}
 	{The JavaScript Library 3.js will be used with WebGL to create the Frontend of Groundstation.}
 	
+	\index{Node}
+	\index{Backend}
 	\newrelationship
 	{Albert Morgan}
 	{Node / Backend}
@@ -429,6 +442,8 @@
 	{Use}
 	{Stuff}
 	
+	\index{Log}
+	\index{Backend}
 	\newrelationship
 	{Albert Morgan}
 	{Log / Backend}
@@ -452,15 +467,26 @@
 	{Connected}
 	{NPM will be used to install all frontend software dependencies.}
 	
+	\index{NPM}
+	\index{Backend}
 	\newrelationship
 	{Albert Morgan}
 	{NPM / Backend}
 	{Part of}
 	{NPM is part of the backend, and will be used to update and install all backend software dependencies.}
 
-	\section{Interaction}
-	Talk about how the system will get data from the serial port and how it will get sent to the web browser.
 
+	% INTERACTION SECTION
+	\index{Interaction}
+	\section{Interaction}
+
+	\entityref{Rocket}
+	{Structure View - Rocket}
+	
+	\entityref{Backend}
+	{Structure View - Backend}
+	
+	
 	\section{Algorithm}
 	Stuff about the event-driven architecture maybe.
 
@@ -520,9 +546,7 @@
 		\item \textbf{Visualization:} Information or data, transformed into an visual context.
 	\end{itemize}
 
-
 	\printindex
-
 
 \bibliography{groundstation}
 \bibliographystyle{IEEEtran}
