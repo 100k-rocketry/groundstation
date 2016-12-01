@@ -72,6 +72,25 @@
 	\end{minipage}
 }
 
+
+\newcommand{\newinterface}[5]{
+	\begin{minipage}{\linewidth}
+		\noindent\textbf{#2}
+		
+		\noindent Entity
+		
+		\noindent\textit{Author:} {#1}
+		
+		\noindent\textit{Function:} {#3}
+		
+		\noindent\textit{Interface:} {#4}		
+		
+		\noindent\textit{Contents:} {#5}
+		\vspace{.5cm}
+	\end{minipage}
+}
+
+
 \newcommand{\newrelationship}[4]{
 	\begin{minipage}{\linewidth}
 	\noindent\textbf{#2}
@@ -397,7 +416,7 @@
 			\item Edge version 14 or higher
 			\item Firefox version 49 or higher
 			\item Safari version 10 or higher
-		\end{itemize}
+		\end{itemize}002
 	}
 
 	\index{Web browser}
@@ -483,8 +502,19 @@
 	\entityref{Rocket}
 	{Structure View - Rocket}
 	
-	\entityref{Backend}
-	{Structure View - Backend}
+	\entityref{Web Server}
+	{Structure View - Web Server}
+	
+	\entityref{Web Browser}
+	{Structure View - Web Browser}
+	
+	\newrelationship
+	{Albert Morgan}
+	{Serialport use}
+	{Use}
+	{Stuff}
+	
+
 	
 	\index{Interface}
 	\section{Interface}
