@@ -395,12 +395,12 @@
 	{Albert Morgan}
 	{Web browser / Web server}
 	{Connected}
-	{The web browser connects to the web server over a WiFi network.}
+	{The web browser connects to the web server over a WiFi network via the HTTP protocol.}
 	
 	\newrelationship
 	{Natasha Anisimova}
-	{Frontend composition}
-	{Composition}
+	{Frontend / Backend}
+	{Connected}
 	{The Frontend will take what the Backend of the software gives it and use 3.js to create and display information to the user.}
 	
 	\newrelationship
@@ -430,40 +430,33 @@
 	{Stuff}
 	
 	\newrelationship
-	{Your name here}
-	{Log composition}
-	{Composition}
-	{Stuff}
+	{Albert Morgan}
+	{Log / Backend}
+	{Part of}
+	{
+		The log is part of the backend, and will be written to by and exist on the same device that runs the backend.
+	}
 	
 	\newrelationship
-	{Your name here}
-	{Web browser use}
-	{Use}
-	{Uses the web server}
-	
-	\newrelationship
-	{Your name here}
-	{Frontend / Backend relationship}
-	{Composition}
-	{Backend servers frontend}
-	
-	\newrelationship
-	{Your name here}
+	{Albert Morgan}
 	{Backend / Rocket}
-	{Use}
-	{Gets data from the rocket}
+	{Connected}
+	{The back end will retrieve data from the rocket through the serial port.
+		The exact protocol used will be determined at a later date by the \ac{OSU} \ac{AIAA}
+		High-Altitude Rocketry avionics team.
+	}
 	
 	\newrelationship
 	{Your name here}
 	{NPM / Frontend}
-	{Use}
-	{Frontend uses NPM}
+	{Connected}
+	{NPM will be used to install all frontend software dependencies.}
 	
 	\newrelationship
-	{Your name here}
+	{Albert Morgan}
 	{NPM / Backend}
-	{Use}
-	{Backend uses NPM}
+	{Part of}
+	{NPM is part of the backend, and will be used to update and install all backend software dependencies.}
 
 	\section{Interaction}
 	Talk about how the system will get data from the serial port and how it will get sent to the web browser.
