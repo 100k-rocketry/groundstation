@@ -532,9 +532,9 @@
 		Data will be stored in the log file and transmitted to the user as a list of JSON objects in the following format:\\
 
 \noindent\{\\
-sensor: ...,\\
-value: ...,\\
-timestamp: ...\\
+\hspace*{.5cm}sensor: ...,\\
+\hspace*{.5cm}value: ...,\\
+\hspace*{.5cm}timestamp: ...\\
 \}\\
 
 		The JSON object has the following attributes:
@@ -548,6 +548,22 @@ timestamp: ...\\
 			\item\textbf{Timestamp}: The time and date that the data was received.
 			This value is an integer representing the number of milliseconds that have elapsed since the epoch (January 1, 1970).
 		\end{itemize}
+	
+			JSON objects will be transmitted to the client as a single object with a list of smaller objects inside. For example:\\
+
+\noindent\{\\
+\hspace*{.5cm}\{\\
+\hspace*{1cm}sensor: altimeter,\\
+\hspace*{1cm}value: 900,\\
+\hspace*{1cm}timestamp: 00584747458945\\
+\hspace*{.5cm}\},\\
+\hspace*{.5cm}\{\\
+\hspace*{1cm}sensor: tilt,\\
+\hspace*{1cm}value: 4,\\
+\hspace*{1cm}timestamp: 00584747458945\\
+\hspace*{.5cm}\}\\
+\}
+
 	}
 	
 
