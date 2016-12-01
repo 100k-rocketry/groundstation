@@ -161,41 +161,40 @@
 	display of data.	
 	This document will describe in detail the design of Groundstation.
 	%\end{adjustwidth}
+		
+	\pagestyle{headings}
 	
 	\newpage
 
 	% Uncomment this to make the table of contents	
-	%\tableofcontents
-	%\newpage
+	\tableofcontents
+	\newpage
 
 	\section{Introduction}
 
 	\subsection{Identification}
 	This document will provide and in-depth software design description of the Groundstation software package.
 	
+	\subsection{Date of Issue}
+	This document is issued on December 1, 2016.
+	At this time, the design of the software is complete, but no work as begun on the implementation.
+	
+	\subsection{Scope}
+	This document will provide details about the Groundstation software package.
+	The concerns of the software will begin when the telemetry is received via the serial port on the Raspberry Pi.
+	Collecting the data from the rocket and converting it into a protocol readable through the serial port is the
+	concern of the \ac{OSU} \ac{AIAA} High-Alititude Rocketry Team avionics section.
+		
 	\subsection{Stakeholders}
-	The stakeholder of the Groundstation software package is the \ac{OSU} \ac{AIAA} High-Altitude Rocketry Team.
-	This group of multidisciplinary engineering students who are working to together to build the rocket.
+	The stakeholders of the Groundstation software package are members of the \ac{OSU} \ac{AIAA} High-Altitude Rocketry Team.
+	The \ac{OSU} \ac{AIAA} High-altitude rocketry team is a group of multidisciplinary engineering students who are working to together to build the rocket.
+	The stakeholders require the ability to:
 	\begin{itemize}
-		\item The ability to view the data in real time in order to track the altitude and aid in recovery.
-		\item The abilk
+		\item View the telemetry in real time in order to track the altitude and aid in recovery
+		\item View the data graphically so that it is easy to understand
+		\item Log the data so that it may be analyzed at a later date
 	\end{itemize}
-	
 
-	\begin{enumerate}
-	\item Identitication of the SSD
-	\item stakeholders
-	\item concerns
-	\item selected viewpoints
-	\item design views
-	\item design overlays
-	\item rationale
-	\end{enumerate}
-
-	Maybe we don't need all of this stuff in the intro? I think some of it is covered below.
-
-	
-	
 	\section{Structure View}
 		
 	
@@ -454,13 +453,65 @@
 	\section{Algorithm}
 	Stuff about the event-driven architecture maybe.
 
+	\section{Glossary}
+		\begin{itemize}
+		\index{Accuracy}
+		\item \textbf{Accuracy:} The absence of errors in the telemetry GS receives, logs, and displays.
+		\index{Binary data}
+		\item \textbf{Binary data:} Telemetry that represents one of two states, for example, ``stage 2 activated'' and
+		``stage 2 not activated.''
+		\index{Corruption}
+		\item \textbf{Corruption:} The process by which data is altered or made unreadable.
+		\index{Crash}
+		\item \textbf{Crash:} A software crash; the event in which a piece of software ceases operation unexpectedly.
+		\index{Die}
+		\item \textbf{Die:} A process dies when it ceases operation and is removed by the operating system.
+		The difference between dying and crashing is that a crash may cause the program to become non-responsive,
+		whereas dying causes the process to end.
+		\index{Groundstation}
+		\index{GS}
+		\item \textbf{GS:} Groundstation, the name of our software.
+		\index{Graphical display}
+		\item \textbf{Graphical display:} Data that is displayed using a visualization.
+		\index{Live}
+		\item \textbf{Live:} Updated in real-time.
+		\index{Non-volatile storage}
+		\index{Storage}
+		\item \textbf{Non-volatile storage:} Storage that will not be erased when the system is powered down.
+		For example, a hard drive or flash storage.
+		\index{Page}
+		\item \textbf{Page:} A web page that users of GS may connect to in order to view the telemetry.
+		\index{Process}
+		\item \textbf{Process:} A running program on a computer.
+		%\index{Lean angle}
+		%\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
+		\index{Raspberry Pi}
+		\item \textbf{Raspberry Pi:} A small, inexpensive computing platform.		
+		\index{Real-time}
+		\item \textbf{Real-time:} Each telemetry datum received from the rocket must be processed and
+		displayed in under one second.
+		\index{Redundant sensors}
+		\item \textbf{Redundant sensors:} Two or more sensors that provide the same type of data.
+		\index{Reliability}
+		\item \textbf{Reliability:} In the event of a software crash, the Groundstation software should automatically
+		start and begin all normal functions in under five seconds.
+		\index{Robustness}
+		\item \textbf{Robustness:} In the event that GS receives data that is garbled or otherwise does adhere
+		to the protocol, it must continue to receive and display data and not break the real-time requirement.
+		\index{Storage}
+		\item \textbf{Storage:} A device where data is logged.		
+		\index{Telemetry}
+		\item \textbf{Telemetry:} Data received from the rocket while the rocket is in flight.
+		\index{Telemetry packet}
+		\index{Packet}
+		\item \textbf{Telemetry packet:} The rocket will send a telemetry update once per second. Each one of these updates is a ``telemetry packet.''
+		\index{Vizualation}
+		\item \textbf{Visualization:} Information or data, transformed into an visual context.
+	\end{itemize}
 
-	
-	\pagestyle{headings}
 
-	% CONTENT GOES HERE
-	
-%	\printindex
+	\printindex
+
 
 \bibliography{groundstation}
 \bibliographystyle{IEEEtran}
