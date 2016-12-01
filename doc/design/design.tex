@@ -157,9 +157,7 @@
 	%Abstract goes here
 	The \textit{Groundstation} software will collect telemetry from a rocket while is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
 	display of data.	
-	This document will examine nine different components of the system.
-	For each of these components, three different technologies will be described and evaluated for use in this component.
-	Finally, a recommendation will be made about which technology should be used.
+	This document will describe in detail the design of Groundstation.
 	%\end{adjustwidth}
 	
 	\newpage
@@ -216,20 +214,27 @@
 	{User interface}
 	{Stuff here.}
 
+	\index{Backend}
 	\newentity
 	{Albert Morgan}
 	{Backend}
 	{Component}
 	{
 		The purpose of the backend is the facilitate communication between the rocket and the user.
-		The backend takes care of all data collection, transformation, logging, and serving that data to the user.
 	}
 	{
-		Stuff here.
+		The backend takes care of all data collection, transformation, logging, and serving that data to the user.
+		A Node server will handle reading the data from the serial port, transforming the data into JSON,
+		storing the data, and making the data available to the user.
 	}
 
+	\index{Node}
+	\index{Backend}
+	\index{PHP}
+	\index{Ruby}
+	\index{Raspberry Pi}
 	\newentity
-	{Your name here}
+	{Albert Morgan}
 	{Node}
 	{Subprogram}
 	{Node is the software that runs the backend.}
@@ -254,12 +259,25 @@
 	{Node serialport library}
 	{Stuff here.}
 
+	\index{Log}
+	\index{JSON}
 	\newentity
-	{Your name here}
+	{Albert Morgan}
 	{Log}
 	{Data store}
-	{This is where data gets logged}
-	{Stuff here.}
+	{Store the data in non-volatile storage for later retrieval and update new connecting clients}
+	{
+		Groundstation will store telemetry in JSON format.
+		The log should limit the possibility of the corruption of the data due to a programming error
+		and make the data easily accessible for newly connecting clients.
+		Several choices were considered for the logging, including relational databases, JSON documents, and logging the telemetry.
+		A relational database would be unnecessary because the data does not have any relations that need to be tracked;
+		each telemetry packet is an independent piece of information.
+		Logging the telemetry as it comes in from the rocket would limit the possibility of corruption.
+		A programming error in the JSON parsing routines could cause all of the data to be unusable.
+		However, storing the data in JSON format would make it very easy for new clients that connect to the server in the middle of the rocket flight to be updated with all of the past data.
+		For this reason, the telemetry will be stored in a JSON format.
+	}
 	
 	
 	\newentity
@@ -288,6 +306,10 @@
 	{Gets high}
 	{ZOOM}
 	
+	\index{Web server}
+	\index{Raspberry Pi}
+	\index{JSON}
+	\index{Telemetry}
 	\newentity
 	{Albert Morgan}
 	{Web server}
@@ -296,7 +318,7 @@
 		\begin{itemize}
 		\item Server web pages to the clients.
 		\item Receive telemetry from the serial port and convert it into json.
-		\item Make the json data available to the clients.
+		\item Make the JSON data available to the clients.
 		\end{itemize}
 	}
 	{	The web server will run on the Raspberry Pi. The web server has three primary functions:
@@ -304,6 +326,11 @@
 	}
 
 
+	\index{Web browser}
+	\index{Chrome}
+	\index{Edge}
+	\index{Firefox}
+	\index{Safari}
 	\newentity
 	{Albert Morgan}
 	{Web browser}
@@ -392,12 +419,6 @@
 	{Use}
 	{Frontend uses NPM}
 	
-	\newrelationship
-	{Your name here}
-	{NPM / Backend}
-	{Use}
-	{Backend uses NPM}
-
 	\newrelationship
 	{Your name here}
 	{NPM / Backend}
