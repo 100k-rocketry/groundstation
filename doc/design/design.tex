@@ -219,13 +219,23 @@
 	{
 		Because Groundstation will be using Node and JavaScript for both the frontend and backend, \ac{NPM} will be used~\cite{npm}. \ac{NPM} has a large repository of both server-side and client-side JavaScript packages.
 	}
-
+	
+	\index{Visualization}
+	\index{JavaScript}
+	\index{3.js}
+	\index{Frontend}
+	\index{WebGL}
 	\newentity
 	{Natasha Anisimova}
 	{Frontend}
 	{Component}
-	{User interface}
-	{Stuff here.}
+	{User Interface}
+	{
+		The frontend of the web server will create and display the information that it was given by the backend. Given
+		that the information has to do with location: longitude, latitude, and altitude, a 3D display is prefered. The
+		frontend will consist of programs using 3.js and WebGL to create the vizualization necessary to quickly understand the
+		location of the rocket.
+	}
 
 	\index{Backend}
 	\newentity
@@ -300,6 +310,11 @@
 	{UI stuff}
 	{Queries the J}
 	
+	\index{Visualization}
+	\index{JavaScript}
+	\index{User Interface}
+	\index{WebGL}
+	\index{Web browser}
 	\newentity
 	{Natasha Anisimova}
 	{3.js}
@@ -311,13 +326,20 @@
 		PCs that it gives access to.
 	}
 
-
+	\index{Rocket}
+	\index{Longitude}
+	\index{Latitude}
+	\index{Altitude}
 	\newentity
-	{Your name here}
+	{Natasha Anisimova}
 	{Rocket}
 	{Component}
-	{Gets high}
-	{ZOOM}
+	{Physical manifestation of the object being tracked.}
+	{
+		The rocket will have sensors attached to it that will transmit information about its altitude, GPS coordinates, tilt.
+		While the rocket is on its journey the GPS signal will cut out due to US government laws meaning that the longitude
+		and latitude will have to be calculated based upon the other information that is recieved. 
+	}
 	
 	\index{Web server}
 	\index{Raspberry Pi}
@@ -389,8 +411,8 @@
 	
 	\newrelationship
 	{Natasha Anisimova}
-	{3.js composition}
-	{Composition}
+	{3.js}
+	{Part of}
 	{The JavaScript Library 3.js will be used with WebGL to create the Frontend of Groundstation.}
 	
 	\newrelationship
