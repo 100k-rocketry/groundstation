@@ -157,9 +157,7 @@
 	%Abstract goes here
 	The \textit{Groundstation} software will collect telemetry from a rocket while is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
 	display of data.	
-	This document will examine nine different components of the system.
-	For each of these components, three different technologies will be described and evaluated for use in this component.
-	Finally, a recommendation will be made about which technology should be used.
+	This document will describe in detail the design of Groundstation.
 	%\end{adjustwidth}
 	
 	\newpage
@@ -223,10 +221,11 @@
 	{Component}
 	{
 		The purpose of the backend is the facilitate communication between the rocket and the user.
-		The backend takes care of all data collection, transformation, logging, and serving that data to the user.
 	}
 	{
-		Stuff here.
+		The backend takes care of all data collection, transformation, logging, and serving that data to the user.
+		A Node server will handle reading the data from the serial port, transforming the data into JSON,
+		storing the data, and making the data available to the user.
 	}
 
 	\index{Node}
