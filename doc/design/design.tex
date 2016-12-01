@@ -335,9 +335,18 @@
 		\item Make the JSON data available to the clients.
 		\end{itemize}
 	}
-	{	The web server will run on the Raspberry Pi. The web server has three primary functions:
+	{
+		The web server needs to be stable so that there is no data loss during the flight.
+		Additionally, the web server should be as lightweight as possible to minimize the resource consumption on the Raspberry Pi.
 		Groundstation will use the Apache~\cite{apache} web server.
-	}
+		This web server was chosen over other options primary for it's stability.
+		Apache uses a one-thread-per-connection model, so if one thread crashes, it will not affect the rest of the connections.
+		NGINX~\cite{nginx} was also considered. On large-scale servers, it is much more lightweight because it uses a many-connections-per-thread
+		model. However, the number of connections will be small and the reuse of threads could reduce stability.
+		Lighttpd~\cite{lighttpd} was also considered. Although Lighttpd is much more lightweight than Apache,
+		it is not nearly as mature.
+		Because stability is a primary concern, Apache was selected.
+}
 
 
 	\index{Web browser}
