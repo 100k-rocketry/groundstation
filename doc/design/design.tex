@@ -339,11 +339,11 @@
 	
 	
 	\newentity
-	{Your name here}
-	{jQuery}
+	{Terrance lee}
+	{JQuery}
 	{Libary}
-	{UI stuff}
-	{Queries the J}
+	{Make it easier to use JavaScript on our website. }
+	{Our main concern with JQuery is that it may have limited functionality.  JQuery has an extensive library, but if your website has a lot of customization in it, there is a chance of running into limited functionality with it.  There are two ways to counter this issue.  One is keep the website simple.  Our main focus is to collect data from the rocket and display it.  Keeping a simple website with that in mind should not be a problem.  The second way if we need to customize more than it can handle is by using raw JavaScript for the parts that are causing the issue.}
 	
 	\index{Visualization}
 	\index{JavaScript}
@@ -525,7 +525,18 @@
 	% INTERACTION SECTION
 	\index{Interaction view}
 	\section{Interaction View}
+\newentity
+	{Terrance Lee}
+	{PC}
+	{Component}
+	{To be a tool to interact with the Raspberry Pi and the user.}
+	{With the interaction of the PC and the Raspberry Pi our concern is the loss of connection due to the loss of the Wi-Fi signal.  The Raspberry Pi is just like any other Wi-Fi router and has the same issues that can drop signals.  The major issue we have to be concerned about is overheating.  We are going to be in New Mexico, out in the desert.  In Black Rock, NM we may experience temperatures up to 101 degrees.  We may be in a hotter area.  To counter this, we will have the ground station in an open area so that it can get plenty of air flow.  The second is that we will put in shade.  We will have to bring an umbrella or a tent.  This will allow the ground station to breath and stay cool.  The umbrella or tent will bring the temperature down as well.} 
 
+	\newrelationship
+	{Terrance Lee}
+	{PC}
+	{Component}
+	{With the interaction between the website and the user we still need the PC as a tool. Our concern  in between these two is usability.  With that concern we want to make sure that everyone can understand how to navigate the website so that they do not get loss.  There are two things we want to focus on to counter this. The first thing is to use Krug’s first law of usability, the web-page should be obvious and self-explanatory.  When we make our website we need to make it so that the High-altitude Rocket team can get from point A to point B easily.   That way if they need to navigate multiple pages they won’t get lost.    The second is the “keep it simple” principle (KIS).  Doing this will help the Rocket team when they have to use anything on the page that they are on. If it is simple to use, then there is less of a chance of mistakes or misunderstandings.}
 	\entityref{Rocket}
 	{Structure View - Rocket}
 	
@@ -648,6 +659,35 @@
 		\label{fig:3}
 	\end{figure}
 	\end{center}
+
+\entityref{JQuery}
+	{Structure View - JQuery}
+    
+\newrelationship
+	{Terrance Lee}
+	{JQuery interface}
+	{interface}
+	{ Our other concern with JQuery is the interface with the user. We want to build our dials, sliders or buttons using JQuery.  The concern is not whether or not it will work, but if it is right for the sub-teams.  We have at least five sub teams plus their members using them.  JQuery has a vast selection of PC controls. If we select the wrong setup for the team it may make it difficult for the teams to use. To counter this, we have to think about usability.  The first thing we should do is find data each team needs from the rocket.  Next find out if they are going to need PC controls. If so, then find out which ones would suit them best through user stories.  }	
+	
+   \index{Resource view}
+	\section{Resource View}
+    
+     
+   \newentity
+	{Terrance Lee}
+	{Math.Js}
+	{Library}
+	{Node Math library}
+	{Our concern with Retrieval is loss of certain sensors.  Do to CoCom limits we lose the GPS sensor until it is under 1200 mph and under 60,000 feet. This will happen after apogee.  Also we lose accurate reading from the altimeter after 100,000 feet due to restrictions of the sensor itself.  It cannot read accurately after that height; it will just read a constant pressure until the rocket gets below that 100,000 feet. To counter act these loses we have other sensors like accelerometer and gyroscope which we can use physics and math formulas to get a location of the rocket.  With Math.js this allows us to use formulas and any other math equations to achieve this. }
+     \entityref{Node}
+	{Structure View - Node}
+    
+    \newrelationship
+	{Terrance Lee}
+	{Node}
+	{Part of}
+	{	Node is will allow us to store to the server while we are collecting the data. The data will stay on the server until we power it down.  This should allow us plenty of time to save it to our computers and hard drives.  This allows us time for resets due to software issues as well.  
+		}
 	%\allowdisplaybreaks
 	\clearpage
 	\newpage
