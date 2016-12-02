@@ -59,7 +59,7 @@
 }
 
 \newcommand{\newentity}[5]{
-	\begin{minipage}{\linewidth}
+
 	\noindent\textbf{#2}
 	
 	\noindent Entity
@@ -69,15 +69,15 @@
 	\noindent\textit{Type:} {#3}
 	
 	\noindent\textit{Purpose:} {#4}
-	
+
 	\noindent\textit{Contents:} {#5}
 	\vspace{.5cm}
-	\end{minipage}
+
 }
 
 
 \newcommand{\newinterface}[5]{
-	\begin{minipage}{\linewidth}
+
 		\noindent\textbf{#2}
 		
 		\noindent Entity
@@ -87,15 +87,13 @@
 		\noindent\textit{Function:} {#3}
 		
 		\noindent\textit{Interface:} {#4}		
-		
+
 		\noindent\textit{Contents:} {#5}
 		\vspace{.5cm}
-	\end{minipage}
 }
 
 
 \newcommand{\newrelationship}[4]{
-	\begin{minipage}{\linewidth}
 	\noindent\textbf{#2}
 	
 	\noindent Relationship
@@ -105,8 +103,8 @@
 	\noindent\textit{Type:} #3
 
 	\noindent\textit{Contents:} #4
+
 	\vspace{.5cm}
-	\end{minipage}
 }
 
 \newcommand{\newconstraint}[6]{
@@ -137,13 +135,13 @@
 
 
 \newcommand{\entityref}[2]{
-	\begin{minipage}{\linewidth}
-	\textbf{#1}
+
+	\noindent\textbf{#1}
 	
-	Entity
+	\noindent Entity
 	
-	See \textit{#2}
-	\end{minipage}
+	\noindent See \textit{#2}
+
 	\vspace{.5cm}
 }
 
@@ -644,7 +642,6 @@
 	%\allowdisplaybreaks
 	\clearpage
 	\newpage
-	\begin{minipage}{\textwidth}
 	\section{Glossary}
 		\begin{itemize}
 		\index{Accuracy}
@@ -706,9 +703,7 @@
 		\index{X, Y, Z coordinates}
 		\item \textbf{X, Y, Z coordinates:} A three coordinate system that pinpoints a point in 3D space.
 	\end{itemize}
-
 	\printindex
-\end{minipage}
 \bibliography{groundstation}
 \bibliographystyle{IEEEtran}
 
