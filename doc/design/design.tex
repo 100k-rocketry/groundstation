@@ -190,7 +190,7 @@
 	%\begin{adjustwidth}{0.75in}{0.75in}
 	
 	%Abstract goes here
-	The \textit{Groundstation} software will collect telemetry from a rocket while is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
+	The \textit{Groundstation} software will collect telemetry from a rocket while it is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
 	display of data.
 	This document will describe in detail the design of Groundstation.
 	%\end{adjustwidth}
@@ -360,6 +360,7 @@
 		PCs that it gives access to.
 	}
 
+
 	\index{Rocket}
 	\index{Longitude}
 	\index{Latitude}
@@ -402,6 +403,14 @@
 		it is not nearly as mature.
 		Because stability is a primary concern, Apache was selected.
 	}
+
+	\begin{center}
+	\begin{figure}[htbp!]
+		\centering\includegraphics[width=160mm]{UMLdiagram1.jpg}
+		\caption{A UML diagram of what the web server is and how it is connected to everything else.}
+		\label{fig:4}
+	\end{figure}
+	\end{center}
 
 	\index{Web browser}
 	\index{Chrome}
@@ -447,7 +456,15 @@
 	{Natasha Anisimova}
 	{3.js}
 	{Part of}
-	{The JavaScript Library 3.js will be used with WebGL to create the Frontend of Groundstation.}
+	{The JavaScript Library 3.js will be used with WebGL to create the frontend of Groundstation. Figure \ref{fig:4} goes through how 3.js is a part of the creation of the frontend}
+	
+	\begin{center}
+	\begin{figure}[htbp!]
+			\centering\includegraphics[width=100mm]{RelationshipDiagram.jpg}
+			\caption{A diagram of how 3.js is connected to WebGL and the frontend.}
+			\label{fig:4}
+	\end{figure}
+	\end{center}
 	
 	\index{Node}
 	\index{Backend}
@@ -583,7 +600,7 @@
 	}
 	\begin{center}
 	\begin{figure}[htbp!]
-		\centering\includegraphics[width=5cm]{cameracontrols.eps}
+		\centering\includegraphics[width=3.5cm]{cameracontrols.eps}
 		\caption{A diagram of the camera view controls.}
 		\label{fig:1}
 	\end{figure}
@@ -596,7 +613,6 @@
 	{Displays the current location of the rocket in the launch environment.}
 	{The user can interact with the view by using a mouse or track pad.}
 	{
-
 		As for the 3D environment itself, that will consist of the topological map of the launch site, Spaceport America in New Mexico, with satellite images of the area mapped to it from NASA. If the user zooms past the point that the topological map covers it will just be a flat gray plane that goes on forever in every which way the ground would be. Since the rocket's goal is to reach 100,000 kilometers in height, labeling the different levels of the atmosphere that it enters would be helpful. Each level can be a transparent shade of blue, going from light to dark. Figure \ref{fig:2} shows the layers of the Earth's atmosphere.
 	}
 	\begin{center}
