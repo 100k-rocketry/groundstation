@@ -264,7 +264,8 @@
 	{User Interface}
 	{
 		The frontend of the web server will create and display the information that it was given by the backend. Given
-		that the information has to do with location: longitude, latitude, and altitude, a 3D display is preferred. The
+		that the information has to do with location
+		(longitude, latitude, and altitude), a 3D display is preferred. The
 		frontend will consist of programs using 3.js and WebGL to create the visualization necessary to quickly understand the
 		location of the rocket.
 	}
@@ -280,7 +281,7 @@
 	{
 		The backend takes care of all data collection, transformation, logging, and serving that data to the user.
 		A Node server will handle reading the data from the serial port, transforming the data into JSON,
-		storing the data, and making the data available to the user.
+		storing the data, and making the data available to the user over the wireless network.
 	}
 
 	\index{Node}
@@ -294,11 +295,11 @@
 	{Subprogram}
 	{Node is the software that runs the backend.}
 	{
-		The backend will run on Node. Several choices were considered to run the backend, particularly Node, PHP, and Ruby.
+		The backend will run on Node. Several choices were considered to run the backend, particularly Node~\cite{node}, PHP~\cite{php}, and Ruby~\cite{ruby}.
 		The backend was chosen two criteria:
 		\begin{itemize}
 			\item Speed. The backend will run on a Raspberry Pi, so speed is important to minimize the system resources used.
-			\item Interoperability. The backend needs to work with multiple components, including the logging software, the data coming in from the serial port, serving the frontend to the user.
+			\item Interoperability. The backend needs to work with multiple components, including the logging software, the data coming in from the serial port, and serving the frontend to the user.
 		\end{itemize}
 		Node uses an event driven architecture, which is ideal for reading data from the serial port.
 		PHP and Ruby on Rails are both HTML preprocessors, so they don't get activated until the web site is requested.
@@ -325,12 +326,14 @@
 		Groundstation will store telemetry in JSON format.
 		The log should limit the possibility of the corruption of the data due to a programming error
 		and make the data easily accessible for newly connecting clients.
-		Several choices were considered for the logging, including relational databases, JSON documents, and logging the telemetry.
+		Several choices were considered for the logging, including relational databases, JSON documents, and logging the raw telemetry.
+		
 		A relational database would be unnecessary because the data does not have any relations that need to be tracked;
 		each telemetry packet is an independent piece of information.
 		Logging the telemetry as it comes in from the rocket would limit the possibility of corruption.
 		A programming error in the JSON parsing routines could cause all of the data to be unusable.
 		However, storing the data in JSON format would make it very easy for new clients that connect to the server in the middle of the rocket flight to be updated with all of the past data.
+		Additionally, a JSON document would be easy to expand into a NoSQL database such as MongoDB~\cite{mongodb}.
 		For this reason, the telemetry will be stored in a JSON format.
 	}
 	
@@ -355,7 +358,7 @@
 	{	Since the information about the rocket will be displayed by using a web browser through a local Wi-Fi network, 
 		making sure the information is displayed on time and correctly is crucial. 3.js allows for easy and rapid development
 		of WebGL applications, which means we can make the most of the specialized graphics hardware on the users'
-		PCs that it gives access to.
+		PCs.
 	}
 
 
@@ -369,9 +372,10 @@
 	{Component}
 	{Physical manifestation of the object being tracked.}
 	{
-		The rocket will have sensors attached to it that will transmit information about its altitude, GPS coordinates, tilt.
-		While the rocket is on its journey the GPS signal will cut out due to US government laws meaning that the longitude
-		and latitude will have to be calculated based upon the other information that is recieved. 
+		The rocket will have sensors attached to it that will transmit information about its altitude, GPS coordinates, and tilt.
+		While the rocket is on its journey, the GPS signal will cut out due to the COCOM limit.
+		Because of the COCOM limit, that the longitude
+		and latitude will have to be calculated based upon the other information that is received. 
 	}
 	
 	\index{Web server}
@@ -384,19 +388,22 @@
 	{Part}
 	{	The web server will serve three primary functions:
 		\begin{itemize}
-		\item Server web pages to the clients.
-		\item Receive telemetry from the serial port and convert it into json.
-		\item Make the JSON data available to the clients.
+		\item Serve web pages to the clients
+		\item Receive telemetry from the serial port and convert it into JSON
+		\item Make the JSON data available to the clients
 		\end{itemize}
 	}
 	{
-		The web server needs to be stable so that there is no data loss during the flight.
+		The web server needs to be stable so there is no data loss during the flight.
 		Additionally, the web server should be as lightweight as possible to minimize the resource consumption on the Raspberry Pi.
 		Groundstation will use the Apache~\cite{apache} web server.
-		This web server was chosen over other options primary for it's stability.
-		Apache uses a one-thread-per-connection model, so if one thread crashes, it will not affect the rest of the connections.
+		This web server was chosen over other options primarily for its stability.
+		Apache uses a one-thread-per-connection model~\cite{nginx-vs-apache-our-view}, so if one thread crashes, it will not affect the rest of the connections.
 		NGINX~\cite{nginx} was also considered. On large-scale servers, it is much more lightweight because it uses a many-connections-per-thread
-		model. However, the number of connections will be small and the reuse of threads could reduce stability.
+		model.
+		This allows NGINX to stay responsive even when there are thousands of connections.
+		However, the number of connections will be small and the reuse of threads could reduce stability.
+		For example, the thread serving the connection could crash and disconnect everyone using the software.
 		Lighttpd~\cite{lighttpd} was also considered. Although Lighttpd is much more lightweight than Apache,
 		it is not nearly as mature.
 		Because stability is a primary concern, Apache was selected.
@@ -427,7 +434,8 @@
 			\item Edge version 14 or higher
 			\item Firefox version 49 or higher
 			\item Safari version 10 or higher
-		\end{itemize}002
+		\end{itemize}
+		These browsers were selected to be supported because they represent the most recent versions of the most popular web browsers in use today.
 	}
 
 	\index{Web browser}
@@ -487,14 +495,14 @@
 	{Log / Backend}
 	{Part of}
 	{
-		The log is part of the backend, and will be written to by and exist on the same device that runs the backend.
+		The log is part of the backend, and will be written to by the backend and exist on the same device that runs the backend.
 	}
 	
 	\newrelationship
 	{Albert Morgan}
 	{Backend / Rocket}
 	{Connected}
-	{The back end will retrieve data from the rocket through the serial port.
+	{The backend will retrieve data from the rocket through the serial port.
 		The exact protocol used will be determined at a later date by the \ac{OSU} \ac{AIAA}
 		High-Altitude Rocketry avionics team.
 	}
@@ -534,18 +542,21 @@
 	{Telemetry Protocol}
 	{Signal}
 	{
-		Once every second, the rocket will send a telemetry packet to the Groundstation.
+		Once every second, the rocket will send a telemetry packet to the groundstation
+		(the groundstation hardware, not the Groundstation software packagex).
 		This packet will be received and transformed into a protocol that will be transmitted to the
 		Groundstation software package via the serial port.
 		The specification of this protocol will be determined by the avionics team at a later date.
 	}
 
+		
 	\newrelationship
 	{Albert Morgan}
 	{JSON Protocol}
 	{Signal}
 	{
 		Data will be stored in the log file and transmitted to the user as a list of JSON objects in the following format:\\
+
 
 \noindent\{\\
 \hspace*{.5cm}sensor: ...,\\
@@ -555,13 +566,13 @@
 
 		The JSON object has the following attributes:
 		\begin{itemize}
-			\item\textbf{Sensor}: the sensor that the data is recorded from.
+			\item\textbf{Sensor}: This is the name of the sensor that the data is recorded from.
 			This is an arbitrary string that uniquely identifies a specific sensor on the rocket.
 			This string may be anything, and the user interface must understand which sensors provide which data.
 			The specification of which strings correspond to which sensors will be done at a later date, after the protocol is defined.
-			\item\textbf{Value}: the value that has been read off the sensor.
+			\item\textbf{Value}: This is the value that has been read off the sensor.
 			The type of this data will depend on the specific sensor.
-			\item\textbf{Timestamp}: The time and date that the data was received.
+			\item\textbf{Timestamp}: This is the time and date that the data was received.
 			This value is an integer representing the number of milliseconds that have elapsed since the epoch (January 1, 1970).
 		\end{itemize}
 	
@@ -579,9 +590,7 @@
 \hspace*{1cm}timestamp: 00584747458945\\
 \hspace*{.5cm}\}\\
 \}
-
-	}
-	
+}
 
 	\index{Interface view}
 	\section{Interface View}
@@ -594,7 +603,7 @@
 	{
 		The view will be a 3D environment that will resize as the user
 		resizes the window of the web browser. If the user clicks and drags in a particular direction
-		the 3D environment will move in that direction. If the user just moves the mouse without clicking, the mouse will move freely on the screen. To make orientation easier in this environment there will be a set of buttons, shown in the figure below, that will have preset views readily available for the user. The top most button will show a bird's eye view. The left button will show a three-fourths view facing the left side of the launch site. The right will do the same except facing the right side of the launch site. Last but not least, the bottom button in this set will give a view that is directly aligned with the ground, or X plain, looking out into the horizon. With the help of these buttons the user should never feel like they are unable to get back to looking at the journey of the rocket. The scroll button will zoom in and out, with the point of origin being the launch location of the rocket. Figure \ref{fig:1} shows camera view controls that will be located in the top right corner of the browser.
+		the 3D environment will move in that direction. If the user just moves the mouse without clicking, the mouse will move freely on the screen. To make orientation easier in this environment, there will be a set of buttons, shown in the figure below, that will have preset views readily available for the user. The top-most button will show a bird's eye view. The left button will show a three-fourths view facing the left side of the launch site. The right button will do the same as the left button except facing the right side of the launch site. Finally, the bottom button in this set will give a view that is directly aligned with the ground, or XZ plane, looking out into the horizon. With the help of these buttons, the user should never feel like they are unable to get back to looking at the journey of the rocket. The scroll button will zoom in and out, with the point of origin being the launch location of the rocket. Figure \ref{fig:1} shows camera view controls that will be located in the top right corner of the browser.
 	}
 	\begin{center}
 	\begin{figure}[htbp!]
@@ -611,7 +620,7 @@
 	{Displays the current location of the rocket in the launch environment.}
 	{The user can interact with the view by using a mouse or track pad.}
 	{
-		As for the 3D environment itself, that will consist of the topological map of the launch site, Spaceport America in New Mexico, with satellite images of the area mapped to it from NASA. If the user zooms past the point that the topological map covers it will just be a flat gray plane that goes on forever in every which way the ground would be. Since the rocket's goal is to reach 100,000 kilometers in height, labeling the different levels of the atmosphere that it enters would be helpful. Each level can be a transparent shade of blue, going from light to dark. Figure \ref{fig:2} shows the layers of the Earth's atmosphere.
+		The 3D environment will consist of the topological map of the launch site (Spaceport America in New Mexico), with satellite images from NASA of the area mapped to it. If the user zooms past the point that the topological map covers, the ground will be displayed as a flat gray plane that goes on forever in every which way the ground would be. Since the rocket's goal is to reach 100,000 feet in height, labeling the different levels of the atmosphere that it enters would be helpful. Each level will be a transparent shade of blue, going from light to dark. Figure \ref{fig:2} shows the layers of the Earth's atmosphere.
 	}
 	\begin{center}
 	\begin{figure}[htbp!]
@@ -702,6 +711,8 @@
 		\item \textbf{Visualization:} Information or data, transformed into an visual context.
 		\index{X, Y, Z coordinates}
 		\item \textbf{X, Y, Z coordinates:} A three coordinate system that pinpoints a point in 3D space.
+		\index{XZ plane}
+		\item \textbf{XZ plane:} A plane extending in the XZ directions. I.e., parallel to the ground.
 	\end{itemize}
 	\printindex
 \bibliography{groundstation}
