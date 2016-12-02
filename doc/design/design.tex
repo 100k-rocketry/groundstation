@@ -581,13 +581,13 @@
 		resizes the window of the web browser. If the user clicks and drags in a particular direction
 		the 3D environment will move in that direction. If the user just moves the mouse without clicking, the mouse will move freely on the screen. To make orientation easier in this environment there will be a set of buttons, shown in the figure below, that will have preset views readily available for the user. The top most button will show a bird's eye view. The left button will show a three-fourths view facing the left side of the launch site. The right will do the same except facing the right side of the launch site. Last but not least, the bottom button in this set will give a view that is directly aligned with the ground, or X plain, looking out into the horizon. With the help of these buttons the user should never feel like they are unable to get back to looking at the journey of the rocket. The scroll button will zoom in and out, with the point of origin being the launch location of the rocket. Figure \ref{fig:1} shows camera view controls that will be located in the top right corner of the browser.
 	}
-
+	\begin{center}
 	\begin{figure}[htbp!]
-		\includegraphics[width=5cm]{cameracontrols.eps}
+		\centering\includegraphics[width=5cm]{cameracontrols.eps}
 		\caption{A diagram of the camera view controls.}
 		\label{fig:1}
 	\end{figure}
-
+	\end{center}
 
 
 	\newinterface
@@ -599,32 +599,36 @@
 
 		As for the 3D environment itself, that will consist of the topological map of the launch site, Spaceport America in New Mexico, with satellite images of the area mapped to it from NASA. If the user zooms past the point that the topological map covers it will just be a flat gray plane that goes on forever in every which way the ground would be. Since the rocket's goal is to reach 100,000 kilometers in height, labeling the different levels of the atmosphere that it enters would be helpful. Each level can be a transparent shade of blue, going from light to dark. Figure \ref{fig:2} shows the layers of the Earth's atmosphere.
 	}
-
+	\begin{center}
 	\begin{figure}[htbp!]
-		\includegraphics[width = 120mm]{earth-atmosphere-layers.eps}
+		\centering\includegraphics[width = 120mm]{earth-atmosphere-layers.eps}
 		\caption{A diagram of the Earth's atmosphere.}
 		\label{fig:2}
 	\end{figure}
-
+	\end{center}
 
 %	Figure \ref{fig:2} Shows the layers of the Earth's atmosphere.
-
+\newpage
 	\newinterface
 	{Natasha Anisimova}
 	{Numerical Data}
 	{Shows numerical data for the location of the rocket.}
 	{The user can view or hide the table.}
 	{
-		asdfasdfasdf
+		Visual data can be hard to interpret without any numerical data to put it into perspective. Due to this, a table with the altitude, longitude, and latitude will be a part of the user interface. This table will be updated every time that a telemetry packet is received and given to the frontend of the web server.
 		Figure \ref{fig:3} shows an example of how the table could be visible or hidden based off of what the user wanted.
 	}
-
-	\begin{figure}[htbp!]
-		\includegraphics[width=\linewidth]{hideshowtable.eps}
+	\begin{center}
+	\begin{figure}
+		\centering\includegraphics[width=\linewidth]{hideshowtable.eps}
 		\caption{A diagram of how to show or hide a table.}
 		\label{fig:3}
 	\end{figure}
-
+	\end{center}
+	%\allowdisplaybreaks
+	\clearpage
+	\newpage
+	\begin{minipage}{\textwidth}
 	\section{Glossary}
 		\begin{itemize}
 		\index{Accuracy}
@@ -688,7 +692,7 @@
 	\end{itemize}
 
 	\printindex
-
+\end{minipage}
 \bibliography{groundstation}
 \bibliographystyle{IEEEtran}
 
