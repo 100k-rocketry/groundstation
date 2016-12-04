@@ -35,4 +35,11 @@ Albert Morgan
 This section describes the clients. It should also be reusable
 ```
 
+The product owner is Dr. Nancy Squires, a senior instructor of Mechnical Engineering here at OSU.
+However, she is not our client.
+Our clients are the members of the High-Altitude Rocketry Team, who are other engineers doing other parts of the rocket as their own capstone project.
+Although Dr. Squires leads the group, she is very hands-off and lets the engineering students make decisions for themselves.
+
+Our clients, the engineering students, have their own problems to solve with the rocket, and the are also very hands-off with the software.
+It is up to us, the software team, to figure out what our clients needs are and deliver a product that means everyone's timeline.
 ---
