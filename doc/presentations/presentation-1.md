@@ -100,8 +100,16 @@ The frontend will also be written in JavaScript, because it will be designed to 
 * Node uses an event-driven architecture, unlike PHP or Ruby which uses a request-driven architecture. Because our system is inherently event based (each telemetry packet is an event), the architecture of Node is ideal for our purposes.
 * Node is faster than either PHP or Ruby.
 
+The Node server will wait for telemetry packets from the serial port.
+When a new packet arrives, it will convert it from the serial protocol (which is to-be-determined) to JSON, JavaScript Object Notation.
+JSON is a very commonly used format for sending data over the web.
 
+After the data is converted into JSON, it is logged.
+We also considered logging the data before it is converted into JSON.
+The advantage of logging before conversion is that a bug in the conversion process will not corrupt the data.
+However, logging the data as JSON will make it easy to pull up that data and send it to any new connecting clients without having to convert the same data into JSON twice.
 
+Next, the new data is sent to client, which will be running one of our supported web browsers, and their interface will be automatically updated.
 
 ---
 
