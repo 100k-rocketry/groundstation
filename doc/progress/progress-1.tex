@@ -24,6 +24,7 @@
 \acrodef{OSU}[OSU]{Oregon State University}
 \acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
 \acrodef{COCOM}[COCOM]{Coordinating Committee for Multilateral Export Controls}
+\acrodef{AGL}[AGL]{Above Ground Level}
 
 \lstset {
 	language=C,
@@ -113,11 +114,55 @@
 	\tableofcontents
 	\newpage
 
+\section{Purpose and Goals}
+	In June 2017, the \ac{OSU} chapter of the
+	\ac{AIAA} will launch a rocket in the Mojave Desert.
+	This rocket will ascend to one hundred thousand feet \ac{AGL}.
+	Designing, building, and launching the rocket will require the
+	collaboration and expertise of dozens of engineers from a variety
+	of disciplines, including mechanical, electrical, computer, and
+	software.
+	
+	Many rockets record data during the flight. This data may include
+	altitude, latitude, longitude, and more.
+	Latitude and longitude
+	data is helpful for locating the rocket after it lands, but
+	if the data is located on the rocket, then it is useless
+	for this task.
+	Altitude data will tell the rocketry team if we have
+	met the objective of one hundred thousand feet, but if the rocket
+	is damaged or cannot be located for any reason, then the record
+	of this achievement may be lost.
+	
+	However, the chicken-and-egg problem of not being able to access
+	the location data before the rocket is found may be avoided by sending
+	telemetry from the rocket in real-time.
+	Telemetry may be received wirelessly
+	by the rocketry team while the rocket is in flight, giving them
+	access to useful information such as the rocket's last known location
+	and the highest altitude reached. This telemetry will aid in the
+	rocket's recovery and provide a log of the rocket's flight even if
+	recovery is impossible.
+
+\section{Current Progress}
+Currently, we have fully designed the system. However, very little development with has begun.
+Natasha has done some proof-of-concepts with 3.js to ensure that it will work on everyone's systems,
+but no work has begun on the backend or final user interface.
 
 \section{Retrospective}
 
-\begin{tabular}{p{0.3\linewidth} | p{0.3\linewidth} | p{0.3\linewidth}}
+\begin{tabular}{| p{0.3\linewidth} | p{0.3\linewidth} | p{0.3\linewidth} |}
+\hline
 Positives & Deltas & Actions\\
+\hline
+
+& After reviewing the development log for the last ten weeks, it was clear that we barely met most of our deadlines.
+Instead of doing a large amount of work at the last minute, we should do a little bit of work over the course of the time we have on an assignment.
+& In order to better meet our deadlines, we will institute an internal timeline in addition to the due-dates provided by the assignment description. We will use Git issues and milestones to set deadlines and assign tasks.
+These tasks will break up the whole assignment into bitesized pieces that can be completed throughout the work period.
+If this is not sufficient, we will look at more feature-rich options such as waffle.io or Git projects.
+\\
+
 \hline
 \end{tabular}
 
