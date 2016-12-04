@@ -94,6 +94,7 @@ However, there are some drawbacks to this design.
 After writing the Technology Review, we realized that Node.js, which was originally researched as an option for just the web backend, would be ideal to take over all backend tasks.
 Node.js allows backend programs to be written using Chrome's V8 JavaScript engine.
 The frontend will also be written in JavaScript, because it will be designed to run in a web browser.
+Using Node.js has many advantages:
 * Writing the backend in JavaScript as well will allow more work to be done without switching gears.
 * Custom libraries can be shared between the frontend and the backend.
 * NPM, the Node Package Manager, can easily track packages for both the frontend and the backend.
