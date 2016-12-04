@@ -7,6 +7,7 @@ End each slide with a horizontal rule.
 ---
 
 ## Introduction
+Albert Morgan
 ### 1 min
 
 ```
