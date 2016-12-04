@@ -51,7 +51,7 @@ If we had a client telling us exactly what the backend was going to be, or what 
 
 ## Telemetry
 Albert Morgan
-### ? min
+### 1 min
 
 ```
 Reference for COCOM Limit:
@@ -73,7 +73,7 @@ This piece of the project will account for many factors, such as wind speed, til
 
 ## Backend
 Albert Morgan
-### ? Min
+### 3 Min
 
 ```
 Talking about the design of the backend. This should also be reusable.
