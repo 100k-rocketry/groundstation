@@ -78,6 +78,22 @@ Albert Morgan
 Talking about the design of the backend. This should also be reusable.
 ```
 
+Our backend is designed to run on a Raspberry Pi.
+This decision was made because the Raspberry Pi is cheap, portable, and easy to power.
+Although they are not as powerful as a desktop PC, modern iterations of the Raspberry Pi have more than enough processing power for our project.
+
+Early iterations of our backend design subdivided it into the web server, which would serve pages to the client,
+and the application server, which would read telemetry from the serial port and make it available to the web server.
+A design like this would likely use a combination of C and PHP or Ruby.
+However, there are some drawbacks to this design.
+* Writing software in two languages means having to switch gears more often
+* No one-solution package manager
+* Integrating the C process with the web backend is an extra step
+
+The backend will run on Node.js.
+Node.js allows backend programs to be written using Chrome's V8 JavaScript engine.
+
+
 ---
 
 ## Overview of first 10 weeks Terrance
