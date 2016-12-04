@@ -47,5 +47,10 @@ On one hand, we are able to make many of the critical design decisions ourselves
 On the other hand, we are left with all of the responsibility of the design.
 If we had a client telling us exactly what the backend was going to be, or what kind of user interface they want, it would be much less work for the software team.
 
-
 ---
+
+## The Rocket
+Albert Morgan
+### 1 min
+
+
