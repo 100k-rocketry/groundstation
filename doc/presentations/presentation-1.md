@@ -53,4 +53,18 @@ If we had a client telling us exactly what the backend was going to be, or what 
 Albert Morgan
 ### 1 min
 
+```
+Reference for COCOM Limit:
+http://support.spectracom.com/articles/FAQ/Why-are-there-altitude-and-velocity-limits-for-GPS-equipment
+```
+
 While the rocket is in flight, it will transmit data back to the groundstation using packet radio over the amateur radio spectrum.
+This transmission will send back data from the rocket's sensors.
+This data includes reading from latitude, longtiude, altitude, and tilt sensors.
+However, not all of the data will be available at all times.
+Limits imposed by the Coordinating Committee for Multilateral Export Controls, or COCOM, will cause the GPS on-board th rocket to shut down under certain conditions.
+The COCOM limits engage when the GPS reaches an altitude of 60,000 feet and a velocity of 1000 knots, or 1200 miles per hour.
+The High-Altitude Rocketry Avionics Team estimates that the rocket will meet these criteria and the GPS receiver will shut down about halfway through the ascent, and remain offline until the rocket reaches apogee, the highest point in it's trajectory.
+
+
+
