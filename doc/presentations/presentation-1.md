@@ -42,4 +42,5 @@ Although Dr. Squires leads the group, she is very hands-off and lets the enginee
 
 Our clients, the engineering students, have their own problems to solve with the rocket, and the are also very hands-off with the software.
 It is up to us, the software team, to figure out what our clients needs are and deliver a product that means everyone's timeline.
+
 ---
