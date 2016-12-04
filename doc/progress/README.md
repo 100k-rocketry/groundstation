@@ -1,3 +1,2 @@
-# CS Capstone Technology Review
-[Assignment description](http://eecs.oregonstate.edu/capstone/cs/capstone.cgi?hw=design)  
-[Standards Document](http://ieeexplore.ieee.org/document/5167255/?arnumber=5167255)
+# CS Capstone Progress Reports
+Progress reports are numbered. *progress-1*
