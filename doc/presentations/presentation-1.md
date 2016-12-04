@@ -32,7 +32,7 @@ Albert Morgan
 ### 1 min
 
 ```
-This section describes the clients. It should also be reusable
+This section describes the clients. It should also be reusable.
 ```
 
 The product owner is Dr. Nancy Squires, a senior instructor of Mechnical Engineering here at OSU.
