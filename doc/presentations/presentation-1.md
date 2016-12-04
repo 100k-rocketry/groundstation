@@ -49,14 +49,6 @@ If we had a client telling us exactly what the backend was going to be, or what 
 
 ---
 
-## The Team
-Albert Morgan
-### ? min
-
-We work with a very large 
-
----
-
 ## Telemetry
 Albert Morgan
 ### ? min
