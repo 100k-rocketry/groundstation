@@ -53,4 +53,4 @@ If we had a client telling us exactly what the backend was going to be, or what 
 Albert Morgan
 ### 1 min
 
-
+While the rocket is in flight, it will transmit data back to the groundstation using packet radio over the amateur radio spectrum.
