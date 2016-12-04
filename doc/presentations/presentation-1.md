@@ -49,9 +49,17 @@ If we had a client telling us exactly what the backend was going to be, or what 
 
 ---
 
+## The Team
+Albert Morgan
+### ? min
+
+
+
+---
+
 ## Telemetry
 Albert Morgan
-### 1 min
+### ? min
 
 ```
 Reference for COCOM Limit:
