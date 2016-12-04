@@ -66,5 +66,5 @@ Limits imposed by the Coordinating Committee for Multilateral Export Controls, o
 The COCOM limits engage when the GPS reaches an altitude of 60,000 feet and a velocity of 1000 knots, or 1200 miles per hour.
 The High-Altitude Rocketry Avionics Team estimates that the rocket will meet these criteria and the GPS receiver will shut down about halfway through the ascent, and remain offline until the rocket reaches apogee, the highest point in it's trajectory.
 
-
+In order to combat this lack of data, one non-capstone member of our team is working with members of the physics department to build a system that will predict the rocket's position while GPS data is unavailable.
 
