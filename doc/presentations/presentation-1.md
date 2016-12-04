@@ -42,5 +42,10 @@ Although Dr. Squires leads the group, she is very hands-off and lets the enginee
 
 Our clients, the engineering students, have their own problems to solve with the rocket, and the are also very hands-off with the software.
 It is up to us, the software team, to figure out what our clients needs are and deliver a product that means everyone's timeline.
+This flexibility is both a blessing and a curse.
+On one hand, we are able to make many of the critical design decisions ourselves, and we don't have anyone asking us to do the impossible.
+On the other hand, we are left with all of the responsibility of the design.
+If we had a client telling us exactly what the backend was going to be, or what kind of user interface they want, it would be much less work for the software team.
+
 
 ---
