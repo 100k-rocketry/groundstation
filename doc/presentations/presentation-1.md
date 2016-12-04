@@ -68,6 +68,18 @@ The High-Altitude Rocketry Avionics Team estimates that the rocket will meet the
 
 In order to combat this lack of data, one non-capstone member of our team is working with members of the physics department to build a system that will predict the rocket's position while GPS data is unavailable.
 
+---
+
+## Backend
+Albert Morgan
+### ? Min
+
+```
+Talking about the design of the backend. This should also be reusable.
+```
+
+---
+
 ## Overview of first 10 weeks Terrance
 ## 5 min
 At the beginning of the project we met with the rest of the OSU AIAA chapter. This included Mechanical engineers, Electrical engineers as well as underclassmen.  They all were very helpful in giving us an overview of how the whole situation works. Most of them have been part of the chapter since last year if not longer.  Before we started any of the documents we setup our GitHub so that we could add content to the project.  We setup our blog as well as a telegram so that we could communicate with each other outside of school. When we worked on our problem statement we got it done in a fashionable time frame.  We were able to answer all the question that was needed, the project abstract, problem definition, proposed solution, and our performance metrics. Next we had our requirements document.  This allowed us to describe what is in our document.  The biggest thing out of this document was the definitions. This allowed anyone who read this or any document from here on out to understand what the technical words we were talking about.  This is important because not everyone is versed in rocketry or software.  We also were able to put in a visual perspective, called a Gantt chart for the overall project. In the technology review we did some good research.  This we broke down to our individual sections.  My part for this I, was given Retrieval, Interaction modes, and Toolkit to generate the user interface (UI).  We each research three topics from the sections and picked one that worked out best for each section.  This allows the reader to see and learn more about each section and see of a rough draft of the design right before the design document.  The last document was the design document.  We took our selections from the technology review and went more in depth.   We set it up so that it was from certain viewpoints and talked about any concerns.  With the concerns we also wrote how to counter them.  In the design document certain aspects came together so we had relationships or certain sections were in the same viewpoint.
