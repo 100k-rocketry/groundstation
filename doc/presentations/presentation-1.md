@@ -77,3 +77,18 @@ Over the term it was not without issues.  The first two documents, the problem s
 
 ## Winter Break and Winter Term Goals
 Now we finished all our documents.  We have a base idea of what we want to do for our software.  Our goal is to do some coding over the break.  For winter term we need to get the software going for the telemetry because the team is doing several tests during this time.  One on a plane and a couple test rocket launches.  
+
+## User Interface Design
+Natasha Anisimova
+
+## Reflection
+Natasha Anisimova
+-----We all may want to work/ go over this
+
+McGrath:
+
+A retrospective is a reflection on the last development period. This will take the form of a table in your document, with three columns (use the p{0.3\linewidth} to the tabular environment for each column):
+positives column: anything good that happened
+deltas column: changes that need to be implemented
+actions column: specific actions that will be implemented in order to create the necessary changes
+
