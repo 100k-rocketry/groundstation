@@ -1,0 +1,141 @@
+\documentclass[10pt,draftclsnofoot,onecolumn]{IEEEtran}
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\usepackage[margin=.75in]{geometry}
+\usepackage{courier}
+\usepackage{ifthen}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{tabularx}
+\usepackage[strict]{chngpage}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{acronym}
+\usepackage{color}
+\usepackage{makeidx}
+
+\makeindex
+
+\acrodef{OSU}[OSU]{Oregon State University}
+\acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
+\acrodef{AGL}[AGL]{Above Ground Level}
+
+\lstset {
+	language=C,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{OliveGreen}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#}
+	showstringspaces=false,
+	showspaces=false,
+	frame=single,
+	captionpos=b
+}
+
+\newcommand{\commandline}[2][\empty] {
+	\begin{quote}
+		\texttt{#2}
+		\ifthenelse{\equal{#1}{\empty}}{}{\begin{quote}#1\end{quote}}
+	\end{quote}
+}
+
+\newcommand{\sigline}[1][\empty] {
+	\vspace{1in}
+	\hrule width0.5\textwidth
+	\vspace{1mm}
+	\noindent #1	
+}
+
+\newcommand*{\SignatureAndDate}[1]{
+	\vspace{1in}
+	\par\noindent\makebox[2.5in]{\hrulefill} \hspace{.5in} \makebox[2.0in]{\hrulefill}
+	\par\noindent\makebox[2.5in][l]{#1}      \hspace{.5in} \makebox[2.0in][l]{Date}
+}
+
+
+
+\begin{document}
+	\singlespace
+	
+	\title{\vspace{2in}Problem Statement}
+	
+	\author {
+		Anisimova, Natasha
+		\and
+		Lee, Terrance
+		\and
+		Morgan, Albert
+	}
+	
+	\markboth{CS Capstone 2016-2017}{Groundstation}
+	
+	\pagestyle{empty}
+	\vspace*{2in}
+	\begin{center}
+		\huge
+		Groundstation: Fall Progress Report \\
+		\normalsize
+		\vspace{5mm}
+		\textbf{
+			Team \#25\\
+			High-Altitude Rocketry Challenge\\
+		}
+		\vspace{1mm}
+		Natasha Anisimova\\
+		Terrance Lee\\
+		Albert Morgan
+	\end{center}
+	
+	\vspace{5mm}
+	
+	\begin{center}
+		\textbf{Abstract}
+	\end{center}
+	
+	%\begin{adjustwidth}{0.75in}{0.75in}
+	
+	The \textit{Groundstation} software will collect telemetry from a rocket while it is in flight and graphically display the telemetry in real-time.
+	Collecting the telemetry in real-time will reduce the chances of a failure-to-recover by allowing the ground team to track the rocket during its flight.
+	The graphical display will make the telemetry instantly understandable without time-consuming analysis.
+	This document will detail the specific requirements of the Groundstation software.
+
+	
+	%\end{adjustwidth}
+	
+	\newpage
+	
+	\tableofcontents
+	\newpage
+	
+	\pagestyle{headings}
+
+
+	\section{Introduction}
+	
+	\index{Purpose}
+	\subsection{Purpose}
+	This document will specify the requirements for the Groundstation (GS) software.
+	It is intended for use by the OSU High-Altitude Rocketry Team.
+	
+	\section{Reflection}
+
+\printindex
+
+% Signatures% Signatures% Signatures% Signatures% Signatures
+\begin{minipage}{\textwidth}	
+	\SignatureAndDate{Nancy Squires}
+	\SignatureAndDate{Natasha Anisimova}
+	\SignatureAndDate{Terrance Lee}
+	\SignatureAndDate{Albert Morgan}
+%\sigline{Nancy Squires}
+	%\sigline{Natasha Anisimova}
+	%\sigline{Terrance Lee}
+	%\sigline{Albert Morgan}	
+\end{minipage}
+
+
+\end{document}
+
+
