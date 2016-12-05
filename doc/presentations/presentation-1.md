@@ -112,8 +112,6 @@ However, logging the data as JSON will make it easy to pull up that data and sen
 
 Next, the new data is sent to client, which will be running one of our supported web browsers, and their interface will be automatically updated.
 
----
-
 ## Overview of first 10 weeks Terrance
 ## 5 min
 At the beginning of the project we met with the rest of the OSU AIAA chapter. This included Mechanical engineers, Electrical engineers as well as underclassmen.  They all were very helpful in giving us an overview of how the whole situation works. Most of them have been part of the chapter since last year if not longer.  Before we started any of the documents we setup our GitHub so that we could add content to the project.  We setup our blog as well as a telegram so that we could communicate with each other outside of school. When we worked on our problem statement we got it done in a fashionable time frame.  We were able to answer all the question that was needed, the project abstract, problem definition, proposed solution, and our performance metrics. Next we had our requirements document.  This allowed us to describe what is in our document.  The biggest thing out of this document was the definitions. This allowed anyone who read this or any document from here on out to understand what the technical words we were talking about.  This is important because not everyone is versed in rocketry or software.  We also were able to put in a visual perspective, called a Gantt chart for the overall project. In the technology review we did some good research.  This we broke down to our individual sections.  My part for this I, was given Retrieval, Interaction modes, and Toolkit to generate the user interface (UI).  We each research three topics from the sections and picked one that worked out best for each section.  This allows the reader to see and learn more about each section and see of a rough draft of the design right before the design document.  The last document was the design document.  We took our selections from the technology review and went more in depth.   We set it up so that it was from certain viewpoints and talked about any concerns.  With the concerns we also wrote how to counter them.  In the design document certain aspects came together so we had relationships or certain sections were in the same viewpoint.
@@ -123,6 +121,24 @@ Over the term it was not without issues.  The first two documents, the problem s
 
 ## Winter Break and Winter Term Goals
 Now we finished all our documents.  We have a base idea of what we want to do for our software.  Our goal is to do some coding over the break.  For winter term we need to get the software going for the telemetry because the team is doing several tests during this time.  One on a plane and a couple test rocket launches.  
+
+---
+## Plans
+Albert Morgan
+### ? Min
+
+Now that we have completed all of the documentation for the term, we plan on getting started on the code.
+Over the break, we have two objectives.
+We will create a prototype of the 3D user interface.
+By the end of the break, we hope to have a working model of the terrain rendering engine.
+However, there are still some technical hurdles to overcome, such as how to render distant terrain in high-resolution without overloading the client's PCs.
+
+Additionally, we will research better methods for tracking our work so we can better meet our deadlines in the future.
+We plan on researching the full capabilities of Git issues and Git projects.
+If these solutions turn out to be inadequate, we will research other options such as waffle.io.
+
+---
+
 
 ## User Interface Design
 Natasha Anisimova
