@@ -119,9 +119,6 @@ At the beginning of the project we met with the rest of the OSU AIAA chapter. Th
 ## Issues
 Over the term it was not without issues.  The first two documents, the problem statement and the requirements document we got done in a couple days before it was due.  Not really to many issue with those two documents.  With the last two documents it was different story.  Both, the technology review and the design document, we ended up getting them both done the day they were due or late the night before.  With the technology review I made a mistake on the citing in latex, my teammates had to save me because I was out of town the day it was due. My teammates told me about the issues I had cited like normal MLA format, but there is a specific latex way to cite.  We also had an issue with changing a viewpoint on the design document as well as a formatting confusion.  The formatting confusion was an easy a miss understanding on the design document itself.  We just agreed to keep the good formatting that Albert had.  With the changing of the viewpoint we just decided at the last minute that the viewpoint we chose was better for our situation. We wanted to make sure that we had the correct setup for this document.  Lastly, for the issue with finishing documents at the last minute.  We decide to use the GitHub issues feature.  This allows us more internal deadlines so that we shouldn’t fall behind.
 
-## Winter Break and Winter Term Goals
-Now we finished all our documents.  We have a base idea of what we want to do for our software.  Our goal is to do some coding over the break.  For winter term we need to get the software going for the telemetry because the team is doing several tests during this time.  One on a plane and a couple test rocket launches.  
-
 ---
 ## Plans
 Albert Morgan
@@ -136,6 +133,11 @@ However, there are still some technical hurdles to overcome, such as how to rend
 Additionally, we will research better methods for tracking our work so we can better meet our deadlines in the future.
 We plan on researching the full capabilities of Git issues and Git projects.
 If these solutions turn out to be inadequate, we will research other options such as waffle.io.
+
+During Winter term, we will start working on the backend.
+In March, the High-Altitude Rocketry Team is conducting a test of avionics system and our backend should be complete by then so we can test it.
+
+
 
 ---
 
