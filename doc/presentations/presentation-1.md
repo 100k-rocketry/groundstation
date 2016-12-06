@@ -14,7 +14,7 @@ Albert Morgan
 This introduction should be generic enough that we can reuse it for future presentations.
 ```
 
-In June 2017, the OSU chapter of the AIAA will launch a rocket in the Mojave Desert.
+In June 2017, the OSU chapter of the American Institute of Aeronautics and Astronautics will launch a rocket in the Black Rock Desert.
 The software team will develop the tracking software that receives telemetry from the rocket during its flight, logs, and 
 displays the data in real-time for the entire OSU rocketry team.
 This software must be flexible, robust, and accurate in order to ensure that the variety of 
