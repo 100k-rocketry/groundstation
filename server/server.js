@@ -1,7 +1,12 @@
 var express = require('express');
 var path = require('path');
 
+var scripts = require('./scripts');
+
 var app = express();
+
+scripts.init(app);
+
 var port = process.env.GROUNDSTATION_PORT || 8080
 
 app.use('/', express.static(path.join(__dirname, 'public')));
