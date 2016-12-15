@@ -2,9 +2,10 @@
   "name": "groundstation",
   "version": "1.0.0",
   "description": "Rocket tracking software for the OSU AIAA High-Altitude Rocketry Team.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "node index.js"
   },
   "author": "Natasha Anisimova, Terrance Lee, Albert Morgan",
   "license": "ISC",
