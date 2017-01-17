@@ -2,9 +2,12 @@
 var express = require('express');
 var path = require('path');
 
-// Local modules
-var routes = require('./routes');
-routes.init();
 
+var app = require('./app');
 
+var sensor = require('./sensor');
+//sensor.sendPacket();
 
+sensor.on("newPacket", function(packet) {
+	console.log(packet);
+});
