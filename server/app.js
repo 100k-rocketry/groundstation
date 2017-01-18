@@ -10,8 +10,8 @@ path = require('path');
 
 var express = require('express');
 
-// Get environment variables
 var port = process.env.GROUNDSTATION_PORT || 8080
+// Get environment variables
 
 var scripts = [
 	"three/build/three.js",
@@ -46,6 +46,19 @@ for(var i = 0; i < scripts.length; i++) {
 }	
 
 console.log();
+
+// Start up the websocket events
+var expressWs = require('express-ws')(app);
+
+
+app.ws('/', function(ws, req) {
+	console.log(ws);
+	ws.on('message', function(msg) {
+		console.log("Got a messve");
+		ws.send("bar");
+		console.log(ws);
+	});
+});
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
