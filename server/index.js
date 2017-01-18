@@ -2,23 +2,7 @@
 var express = require('express');
 var path = require('path');
 
-
-var EventEmitter = require("events").EventEmitter;
- 
-var sensorEmitter = new EventEmitter();
-
-// This gets triggered when a new packet comes in.
-/*
-sensorEmitter.on("newPacket", function () {
-    console.log("event has occured");
-});
-*/
-
-// Fire a fake packet every second
-setInterval(function() {
-	sensorEmitter.emit("newPacket", {"sensor": "altimeter", "value": 800, "timestamp": "3645345343"});
-}, 1000);
-
+var telemetryEmitter = require("./telemetry");
 
 /*
 	Sets up routes from /scripts/... to the actual JavaScript files in node_modules.
@@ -72,17 +56,36 @@ var expressWs = require('express-ws')(app);
 
 
 app.ws('/', function(ws, req) {
+
+	console.log("Acquired new connection from " + ws.upgradeReq.headers.origin);
+		
+	// The client listener handles sending a websocket packet to a specific
+	// client whenever a new telemetry packet is received.
+	// A new clientListner
+	clientListener = function(packet) {
+		try {
+			ws.send(JSON.stringify(packet));
+		} catch(e) {
+			// Something went wrong, so log the error and remove the event listener
+			// so we don't try to send more packets in the future.
+			console.log("Encountered error while sending message. Dropping connection.");
+			console.log(e);
+			telemetryEmitter.removeListener('packetPacket', clientListener);
+		}
+	}
 	
-	sensorEmitter.on('newPacket', function() {
-		ws.send("blah");
+	// When we get 
+	telemetryEmitter.on('newPacket', clientListener);
+	
+	ws.on('close', function() {		
+		telemetryEmitter.removeListener('newPacket', clientListener);
 	});
 	
-	console.log(ws);
-	ws.on('message', function(msg) {
-		console.log("Got a messve");
-		ws.send("bar");
-		console.log(ws);
-	});
+
+	
+//	ws.on('message', function(msg) {
+//		console.log(ws);
+//	});
 });
 
 app.use('/', express.static(path.join(__dirname, 'public')));
