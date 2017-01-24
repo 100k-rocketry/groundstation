@@ -62,7 +62,9 @@ app.ws('/', function(ws, req) {
 	// The client listener handles sending a websocket packet to a specific
 	// client whenever a new telemetry packet is received.
 	// A new clientListner
-	clientListener = function(packet) {
+	var clientListener = function(packet) {
+		console.log();
+		console.log("Sending packet");
 		try {
 			ws.send(JSON.stringify(packet));
 		} catch(e) {
@@ -70,14 +72,15 @@ app.ws('/', function(ws, req) {
 			// so we don't try to send more packets in the future.
 			console.log("Encountered error while sending message. Dropping connection.");
 			console.log(e);
-			telemetryEmitter.removeListener('packetPacket', clientListener);
+			telemetryEmitter.removeListener('newPacket', clientListener);
 		}
 	}
-	
+
 	// When we get 
 	telemetryEmitter.on('newPacket', clientListener);
 	
-	ws.on('close', function() {		
+	ws.on('close', function() {
+		console.log("Closing connection from " + ws.upgradeReq.headers.origin);
 		telemetryEmitter.removeListener('newPacket', clientListener);
 	});
 	

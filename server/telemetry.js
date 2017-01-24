@@ -16,6 +16,7 @@ telemetryEmitter.timestamp = 0;
 telemetryEmitter.sendPacket = function() {
 	//console.log(this);
 	this.emit("newPacket", {"sensor": "altimeter", "value": this.altitude, "timestamp": this.timestamp});
+	this.emit("newPacket", {"sensor": "barometer", "value": 353, "timestamp": this.timestamp});
 	this.altitude += 10;
 	this.timestamp += 1;
 };
