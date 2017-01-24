@@ -25,7 +25,6 @@ var scripts = [
 	"three/build/three.js",
 ];
 
-
 // Set up the express app
 var app = express();
 
