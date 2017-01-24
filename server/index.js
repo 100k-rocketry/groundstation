@@ -2,7 +2,11 @@
 var express = require('express');
 var path = require('path');
 
-var telemetryEmitter = require("./telemetry");
+var logger = require('./logger');
+var telemetryEmitter = require('./telemetry');
+
+telemetryEmitter.on('newPacket', logger.logPacket);
+
 
 /*
 	Sets up routes from /scripts/... to the actual JavaScript files in node_modules.
@@ -103,8 +107,6 @@ app.get('*', function(req, res) {
 app.listen(port, function () {
 	console.log("Listening on port", port);
 });		
-
-
 
 /*sensor.on("newPacket", function(packet) {
 	ws.send(JSON.stringify(packet));
