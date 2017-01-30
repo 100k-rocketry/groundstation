@@ -1,4 +1,4 @@
-var exampleSocket = new WebSocket("ws://localhost:8080/");
+var exampleSocket = new WebSocket("ws://" + window.location.host);
 
 exampleSocket.onmessage = function(event) {
 	// Use JSON.parse(event.data) to turn back into an object
