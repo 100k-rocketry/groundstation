@@ -1,5 +1,6 @@
 var fs = require('fs');
 var os = require('os');
+var jsoncsv = require('json-csv');
 
 var logfile = process.env.GROUNDSTATION_LOGFILE || 'gs.log'
 
@@ -22,17 +23,53 @@ module.exports.logPacket = function(packet) {
 		fs.write(fd, packet.sensor + ', ' + packet.value + ', ' + packet.timestamp + os.EOL);
 	}
 	
-	var jsoncsv = require('json-csv')
-
-jsoncsv.csvBuffered(data, options, callback)
-
-var callback = function(err,csv) {
- //csv contains string that are already converted to CSV format
-}
-
-var jsoncsv = require('json-csv)
-
-var readable_source = <emits data row by row>
-
-readable_source.pipe(jsoncsv.csv(info))
+	jsoncsv.csvBuffered({
+  data : packet ,
+  fields : [
+    {
+        name : 'altimeter',
+        label : 'altimeter',
+      
+	},
+    {
+        name : 'latitude',
+        label : 'latitude'
+    },
+    {
+        name : 'longitude',
+        label : 'longitude'
+    }
+	{
+        name : 'accelerometer_x',
+        label : 'accelerometer_x'
+    }
+	{
+        name : 'accelerometer_y',
+        label : 'accelerometer_y'
+    }
+	{
+       name : 'accelerometer_z',
+        label : 'accelerometer_z'
+    }
+	{
+        name : 'yaw',
+        label : 'yaw'
+    }
+	{
+        name : 'pitch',
+        label : 'pitch'
+    }
+	{
+        name : 'roll',
+        label : 'roll'
+    }
+	{
+       name : 'timestamp',
+        label : 'timestamp'
+    }
+	
+  ]},
+  function(err,csv) {
+    console.log(csv);
+});
 }
