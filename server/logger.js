@@ -24,7 +24,7 @@ module.exports.logPacket = function(packet) {
 	}
 	
 	jsoncsv.csvBuffered({
-  data : packet ,
+  data : [packet] ,
   fields : [
     {
         name : 'altimeter',
@@ -38,31 +38,31 @@ module.exports.logPacket = function(packet) {
     {
         name : 'longitude',
         label : 'longitude'
-    }
+    },
 	{
         name : 'accelerometer_x',
         label : 'accelerometer_x'
-    }
+    },
 	{
         name : 'accelerometer_y',
         label : 'accelerometer_y'
-    }
+    },
 	{
        name : 'accelerometer_z',
         label : 'accelerometer_z'
-    }
+    },
 	{
         name : 'yaw',
         label : 'yaw'
-    }
+    },
 	{
         name : 'pitch',
         label : 'pitch'
-    }
+    },
 	{
         name : 'roll',
         label : 'roll'
-    }
+    },
 	{
        name : 'timestamp',
         label : 'timestamp'
