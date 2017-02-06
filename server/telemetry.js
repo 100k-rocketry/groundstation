@@ -39,3 +39,10 @@ setInterval(() => { telemetryEmitter.sendPacket(); }, 1000);
 
 module.exports = telemetryEmitter;
 
+/* SERIAL PORT STUFF: WORK IN PROGRESS */
+
+var port = new SerialPort('COM1');
+
+port.on('open', function() {
+	console.log('Connected to serial port');
+});
