@@ -19,16 +19,15 @@ fs.open(logfile, 'a+', function(err, newfd) {
 console.log('Log file ' + logfile + 'opened.');
 
 module.exports.logPacket = function(packet) {
-	if (fd != -1) {
-		fs.write(fd, packet.sensor + ', ' + packet.value + ', ' + packet.timestamp + os.EOL);
-	}
+	//if (fd != -1) {
+	//	fs.write(fd, packet.sensor + ', ' + packet.value + ', ' + packet.timestamp + os.EOL);
+	//}
 	
-	jsoncsv.csvBuffered({
-  data : [packet] ,
+	jsoncsv.csvBuffered([packet], {
   fields : [
     {
         name : 'altimeter',
-        label : 'altimeter',
+        label : 'altimeter'
       
 	},
     {
