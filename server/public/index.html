@@ -1,10 +1,36 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<script language = "javascript">
+
+	function InitializeWebGL(){
+		var canvas = document.getElementById("gl");
+		var gl = canvas.getContext("webgl") ||
+							canvas.getContext("experimental-webgl") ||
+							canvas.getContext("moz-webgl") ||
+							canvas.getContext("webkit-3d");
+		if (gl)
+		{
+			var extensions = gl.getSupportedExtensions();
+			console.log(gl);
+			console.log(extensions);
+
+			gl.viewportWidth = canvas.width;
+			gl.viewportHeight = canvas.height;
+
+			gl.clearColor( 0.0, 0.0, 0.0, 1.0);
+			gl.clear(gl.COLOR_BUFFER_BIT);
+		}
+		else {
+			console.log("Your browser does not support OpenGL")
+		}
+	}
+	</script>
 </head>
-<body>
+<body onload = "InitializeWebGL()">
 <div id="telemetry">
 </div>
 </body>
 <script src="/scripts/index.js"></script>
+<canvas id = "gl" width = "640" height = "480"></canvas>
 </html>
