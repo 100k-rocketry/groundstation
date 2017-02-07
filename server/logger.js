@@ -25,52 +25,5 @@ module.exports.logPacket = function(packet) {
 			fs.write(fd, packet.altimeter + ', ' + packet.latitude + ', ' + packet.longitude + ', ' + packet.accelerometer_x + ', ' + packet.accelerometer_y + ', ' 
 		+ packet.accelerometer_z + ', ' + packet.yaw + ', ' + packet.pitch + ', ' + packet.roll + ', ' + packet.timestamp + ', ' + os.EOL);
 		}
-	/*jsoncsv.csvBuffered([packet], {
-  fields : [
-    {
-        name : 'altimeter',
-        label : 'altimeter'
-      
-	},
-    {
-        name : 'latitude',
-        label : 'latitude'
-    },
-    {
-        name : 'longitude',
-        label : 'longitude'
-    },
-	{
-        name : 'accelerometer_x',
-        label : 'accelerometer_x'
-    },
-	{
-        name : 'accelerometer_y',
-        label : 'accelerometer_y'
-    },
-	{
-       name : 'accelerometer_z',
-        label : 'accelerometer_z'
-    },
-	{
-        name : 'yaw',
-        label : 'yaw'
-    },
-	{
-        name : 'pitch',
-        label : 'pitch'
-    },
-	{
-        name : 'roll',
-        label : 'roll'
-    },
-	{
-       name : 'timestamp',
-        label : 'timestamp'
-    }
 	
-  ]},
-  function(err,csv) {
-    console.log(csv);
-});*/
 }
