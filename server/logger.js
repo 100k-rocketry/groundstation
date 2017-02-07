@@ -23,7 +23,8 @@ module.exports.logPacket = function(packet) {
 	//	fs.write(fd, packet.sensor + ', ' + packet.value + ', ' + packet.timestamp + os.EOL);
 	//}
 		fs.write(fd, packet.altimeter + ', ' + packet.latitude + ', ' + packet.longitude + ', ' + packet.accelerometer_x + ', ' + packet.accelerometer_y + ', ' 
-		+ packet.accelerometer_z ', ' + packet.yaw + ', ' + packet.pitch + ', ' + packet.roll + ', ' + packet.timestamp + ', ' + os.EOL  )}
+		+ packet.accelerometer_z ', ' + packet.yaw + ', ' + packet.pitch + ', ' + packet.roll + ', ' + packet.timestamp + ', ' + os.EOL  );
+		}
 	/*jsoncsv.csvBuffered([packet], {
   fields : [
     {
