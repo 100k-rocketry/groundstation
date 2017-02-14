@@ -1,5 +1,5 @@
 var EventEmitter = require("events").EventEmitter;
-var SerialPort = require("serialport");
+var SerialPort = require("usb");
  
 var telemetryEmitter = new EventEmitter();
 
@@ -15,8 +15,6 @@ telemetryEmitter.timestamp = 0;
 
 // Sends a fake packet
 telemetryEmitter.sendPacket = function() {
-	//this.emit("newPacket", {"sensor": "altimeter", "value": this.altitude, "timestamp": this.timestamp});
-	//this.emit("newPacket", {"sensor": "barometer", "value": 353, "timestamp": this.timestamp});
 	this.emit("newPacket", 
 		{
 			"altimeter": 11,
