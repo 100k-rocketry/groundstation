@@ -489,6 +489,71 @@
 	The limited functionality is a disadvantage only in some cases.
 	We believe that we should not run into that issue because we just need it for some of its basic features.
 	
+	\section{Web Server Revision}
+	This section will describe revisions to the web server technology. Author: Albert Morgan.
+
+	\subsection{Node}
+	\index{Web server}
+	\index{Node}
+	Node~\cite{node} has a built in web server.
+	Using this web server instead of a standalone server such as Apache or NGINX will allow us to use one single technology stack.
+	Keeping technologies in Node will have several benefits.
+	First, because the rest of the application is written in Node, using a Node-based web server will allow for better integration.
+	Second, keeping the development in Node will allow the development team to work faster.
+	Using a separate technology would mean having to learn how to configure and use that technology,
+	but if everything uses Node, then configuring and integrating it with the rest of the system will be much easier.
+	Finally, using Node instead of another technology means less hassle with installation.
+	Using Node instead of a separate web server technology means that there will be less components for our end-users to install.
+
+	\subsection{Revised Conclusion}
+	Because we don't need the flexibility of Apache or the scalability of NGINX, we have decided to use Node for our web server.
+	Groundstation is designed to be installed and deployed by other engineers in an environment which would not have access to the Internet.
+	This means that if anything goes wrong, support may be hard to get.
+	Keeping everything in one technology means easier installation with less steps.
+	If everything is part of Node, installation of our software may becomes as easy as
+	``Install node, download the repository, and type 'npm start'.''
+	For these reasons, we have decided to use Node for the web server.
+
+	\section{Logging Revision}
+	\index{Logging}
+	\index{CSV}
+	\index{Comma-separated values}
+	\index{JSON}
+	This section will describe revisions to the logging system. Author: Albert Morgan
+
+	\subsection{Comma-Separated Values}
+	Comma-separated values, or CSV, is a simple file format in which a row of data is stored as individual datums separated by columns.
+	This format has many benefits.
+	First, it is easy to read.
+	CSV files can easily be opened, read, and modified by a human with a simple text editor.
+	Second, CSV files are easy to import into applications such as Microsoft Excel.
+	Keeping the logged data in a file format that is easy to work with will make post-launch analysis of the data much easier.
+
+
+	\section{Revised Conclusion}
+	We initially chose JSON to log the launch data.
+	JSON would make it very easy to import the data into a Node object,
+	making it much easier for the web server to work with the data.
+	However, as we thought about the problem more, there were clear problems with JSON.
+	The biggest problem is delimiters.
+	Every JSON object must have a closing curly brace.
+	Without the brace, it is not a valid JSON format.
+	One of the reasons we are logging the data is to recover in the event of an unscheduled program halt.
+	However, if the program halts unexpectedly, it will not have had the opportunity to write the proper closing braces to the JSON file.
+	A CSV does not suffer from this drawback.
+	Considering the ease of working it CSV and the ability to use applications such as Microsoft Excel to work with the data,
+	we have decided to use a CSV file for the log.
+
+	
+	\section*{Revision History}
+
+	\begin{tabular}{l | l | l}
+	Name & Section Title & Date\\ \hline
+	Albert Morgan & Web Server Revision & 2016-02-14\\
+	Albert Morgan & Logging Revision & 2016-02-14\\
+	\end{tabular}
+
+
 	% Make the index
 	\printindex
 
