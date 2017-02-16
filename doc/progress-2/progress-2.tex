@@ -547,20 +547,39 @@ I also started writing some of the backend over the break. It would make sense t
 \subsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
+	Every Monday we are going to be putting everything that each of the separate branches has, take care of any conflicts, and merge everything into the master branch. This way both sides have an updated version of the project. We will have to revise some documents since several of our design decisions have changed since we wrote the document back in Fall term. I will be added more code over the weekend, unfortunately this week was a bit hectic with exams.
 	\item \textbf{Progress: }
+	The code for the WebGL Canvas now co-exists with the rest of the server. Due to the fact that everything needs to be integrated, we have split the project into two branches. There is a separate demo where the width of the WebGL Canvas changes depending on the user's browser size. This will insure that the user will not be missing anything. Vertex and fragment code for displacement mapping can be divided up into separate files so the code is more manageable. 
 	\item \textbf{Problems: }
+	One problem that I have run into is making sure that my code does not have any web dependencies. In the end it seems like most things we can just download but then that means just filling up more memory on the Raspberry Pi. 
 \end{itemize}
 \subsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
+	This week I have two things I would like to get done:
+
+    \begin{enumerate}
+	\item Write the telemetry reader and telemetry mocking code to read the data.
+    \item Get the Raspberry Pi set up (operating system installed, node.js set up, etc.)
+	\end{enumerate}
+
 	\item \textbf{Progress: }
+	This week Terrance and I worked on some of the logging together. We looked at using a library that converts JSON to CSV, but in the end we decided not to use it, because it added far too much complexity for a simple task (what took 40 lines of code using the library, setting up the exact way the JSON should be converted to CSV took 1 line of code without the library). We don't really need the flexibility that using the library offers. Additionally, the library entered the data in the CSV strangely: added headers to every single row.
+
+I bought a mess of USB cables and an SD card this week, so we can get started actually using the Raspberry Pi. This should also aid in the development of the telemetry reading code, because we can easily mock the data coming in the USB port.
+
+Additionally, it looks like the 'usb' library will be better suited than the 'serialport' library for data acquisition. Unsurprisingly, usb handles USB devices better than serialport.
 	\item \textbf{Problems: }
+	No major problems, although I'm not sure how we can verify that the USB device connected to the Raspberry Pi is actual data from the rocket, and not someone's phone or something. I don't think this should be an issue, because there should be exactly one device connected: the telemetry receiver.
 \end{itemize}
 \subsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
+	I want to look more into how to setup if a stage stops transmitting. Also work on updating our paperwork that needs to be done. I have a midterm on Monday so I will have to do my updates after that. I want to have them done by Wednesday so if there are any mistakes I have plenty of time to fix them.
 	\item \textbf{Progress: }
+	Al and I have been playing around with logging. We got some more specifics with how the packets are coming in from the rocket but not really which order they are coming in from the EE team. They will not know until they turn on the radio. I found a basic template to help with the logging conversion from JSON to CSV but for some reason it was setup wrong. So Al and I came up with a much simpler way to do this. I also spoke to my old networking teacher about an issue that we may come across because how the EEs have the radio receiving. They have one receiver for both stages so we receive one packet from one stage then the next. If one stage blows up or crashes or stops transmitting if we do not prepare a code in there that after a certain amount of time doesn't receive that packet to move on and keep collecting the packets it will just sit there waiting. 
 	\item \textbf{Problems: }
+	The only real issue was with One note but that is because I am not an expert with the online one and also I have not used one note in a while. I think my issues is that I just have not used it in a while and have to get back in the flow of it. My issue was get used to where stuff was and forgetting little things. Besides that nothing really major on the coding side so far. 
 \end{itemize}
 
 \end{document}
