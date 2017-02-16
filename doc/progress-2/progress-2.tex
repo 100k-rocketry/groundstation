@@ -145,9 +145,11 @@
 	recovery is impossible.
 
 \section{Current Progress}
-Currently, we have fully designed the system. However, very little development with has begun.
-Natasha has done some proof-of-concepts with 3.js to ensure that it will work on everyone's systems,
-but no work has begun on the backend or final user interface.
+We have a design and a good framework for the entire system.
+We have a way to receive packets, fire events that send those packets to the client,
+log the packets, start the web server, show the packets on the client's browser, etc.
+Now we begin on the details of the system, such as implementing the specific telemetry packet protocol and making the user interface look like its final form.
+
 
 \section{Retrospective}
 
@@ -156,11 +158,13 @@ but no work has begun on the backend or final user interface.
 Positives & Deltas & Actions\\
 \hline
 
-& After reviewing the development log for the last ten weeks, it was clear that we barely met most of our deadlines.
-Instead of doing a large amount of work at the last minute, we should do a little bit of work over the course of the time we have on an assignment.
-& In order to better meet our deadlines, we will institute an internal timeline in addition to the due-dates provided by the assignment description. We will use Git issues and milestones to set deadlines and assign tasks.
-These tasks will break up the whole assignment into bitesized pieces that can be completed throughout the work period.
-If this is not sufficient, we will look at more feature-rich options such as waffle.io or Git projects.
+& Now that serious development work as begun, we already have had some problems with one person's work conflicting with another person's.
+Specifically, a commit that broke one part of the code prevented another team member from doing their work.
+& We have already started being more rigorous about our branches. We have two branches: frontend-dev and backend-dev.
+If the backend breaks, development cannot continue on the frontend, so keeping the development efforts separate is necessary.
+Every Monday, during our weekly meetings, the first thing we do is merge the work we did in both branches into master, then merge master
+into both branches.
+We will continue to try to improve our branching policy as the project continues.
 \\
 
 \hline
