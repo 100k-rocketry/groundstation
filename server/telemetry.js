@@ -19,26 +19,26 @@ telemetryEmitter.sendPacket = function() {
 	this.emit("newPacket", 
 		{
 			"altimeter": this.altitude,
-			"latitude": 45.11,
-			"longitude": 100.12,
-			"accelerometer_x": 1,
-			"accelerometer_y": 2,
-			"accelerometer_z": 3,
-			"yaw": 4,
-			"pitch": 5,
-			"roll": 6,
+			"latitude": this.latitude,
+			"longitude": this.longitude,
+			"accelerometer_x": this.accelerometer_x,
+			"accelerometer_y": this.accelerometer_y,
+			"accelerometer_z": this.accelerometer_z,
+			"yaw": this.yaw,
+			"pitch": this.pitch,
+			"roll": this.roll,
 			"timestamp": this.timestamp
 		});
-telemetryEmitter.altitude += 10;
-telemetryEmitter.timestamp += 1;
-telemetryEmitter.latitude += 0.01;
-telemetryEmitter.longitude -= 0.01;
-telemetryEmitter.accelerometer_x += 0.03;
-telemetryEmitter.accelerometer_y -= 0.02;
-telemetryEmitter.accelerometer_z += 1.134;
-telemetryEmitter.yaw += 0.0134;
-telemetryEmitter.pitch += 0.01934;
-telemetryEmitter.roll += 0.014343;
+	this.altitude += 10;
+	this.timestamp += 1;
+	this.latitude += 0.01;
+	this.longitude -= 0.01;
+	this.accelerometer_x += 0.03;
+	this.accelerometer_y -= 0.02;
+	this.accelerometer_z += 1.134;
+	this.yaw += 0.0134;
+	this.pitch += 0.01934;
+	this.roll += 0.014343;
 };
 
 // Fire a fake packet every second
