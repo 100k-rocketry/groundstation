@@ -337,7 +337,7 @@
 	\newentity
 	{Terrance lee}
 	{JQuery}
-	{Libary}
+	{Library}
 	{Make it easier to use JavaScript on our website. }
 	{Our main concern with JQuery is that it may have limited functionality.  JQuery has an extensive library, but if your website has a lot of customization in it, there is a chance of running into limited functionality with it.  There are two ways to counter this issue.  One is keep the website simple.  Our main focus is to collect data from the rocket and display it.  Keeping a simple website with that in mind should not be a problem.  The second way if we need to customize more than it can handle is by using raw JavaScript for the parts that are causing the issue.}
 	
@@ -349,7 +349,7 @@
 	\newentity
 	{Natasha Anisimova}
 	{3.js}
-	{Libary}
+	{Library}
 	{3.js is a JavaScript 3D library used to create and display animated 3D computer graphics using WebGL.}
 	{	Since the information about the rocket will be displayed by using a web browser through a local Wi-Fi network, 
 		making sure the information is displayed on time and correctly is crucial. 3.js allows for easy and rapid development
@@ -684,6 +684,124 @@
 	{Part of}
 	{	Node is will allow us to store to the server while we are collecting the data. The data will stay on the server until we power it down.  This should allow us plenty of time to save it to our computers and hard drives.  This allows us time for resets due to software issues as well.  
 		}
+	
+	
+	\section{Revisions}
+
+
+	\index{Log}
+	\index{CSV}
+	\newentity
+	{Albert Morgan}
+	{Log Revised}
+	{Data store}
+	{Store the data in non-volatile storage for later retrieval and update new connecting clients}
+	{
+		Groundstation will store telemetry in CSV.
+		The log should limit the possibility of the corruption of the data due to a programming error
+		and make the data easily accessible for newly connecting clients.
+		Several choices were considered for the logging, including relational databases, JSON documents, CSV, and logging the raw telemetry.
+		
+		A relational database would be unnecessary because the data does not have any relations that need to be tracked;
+		each telemetry packet is an independent piece of information.
+		Logging the telemetry as it comes in from the rocket would limit the possibility of corruption.
+		JSON format would make it easy to import the data into a running Node application, but may become corrupted if the program halts
+		unexpectedly.
+		Additionally, programming error in the JSON parsing routines could easily cause all of the data to be unusable.
+		CSV format will be used for two reasons.
+		First, there are no special ending characters, such as curly braces, that need to be inserted at the end of objects.
+		The data will be easily readable even if the process halts unexpectedly and isn't able to finish formatting the log.
+		Second, CSV files are easy to import into applications such as Microsoft Excel.
+		Our teammates will be able to easily load up the data into an application of their choice for analysis after the launch.
+
+	}
+
+
+	\index{Web Server}
+	\index{Raspberry Pi}
+	\index{JSON}
+	\index{Telemetry}
+	\index{Node}
+	\newentity
+	{Albert Morgan}
+	{Web Server Revised}
+	{Part}
+	{	The web server will serve three primary functions:
+		\begin{itemize}
+		\item Serve web pages to the clients
+		\item Receive telemetry from the serial port and convert it into JSON
+		\item Make the JSON data available to the clients
+		\end{itemize}
+	}
+	{
+		The web server needs to be stable so there is no data loss during the flight.
+		Additionally, the web server should be as lightweight as possible to minimize the resource consumption on the Raspberry Pi.
+		Groundstation will use the Node's~\cite{node} built-in web server.
+		This web server was chosen over other options primarily for its stability.
+		Apache uses a one-thread-per-connection model~\cite{nginx-vs-apache-our-view}, so if one thread crashes, it will not affect the rest of the connections.
+		NGINX~\cite{nginx} was also considered. On large-scale servers, it is much more lightweight because it uses a many-connections-per-thread
+		model.
+		This allows NGINX to stay responsive even when there are thousands of connections.
+		However, the number of connections will be small and the reuse of threads could reduce stability.
+		For example, the thread serving the connection could crash and disconnect everyone using the software.
+		Lighttpd~\cite{lighttpd} was also considered. Although Lighttpd is much more lightweight than Apache,
+		it is not nearly as mature.
+		Finally, we considered Node's built-in web server.
+		Node's built-in web server would allow us integrate the rest of our code (which is written in Node) with the web server.
+		Because we are already writing a lot of code based on the Node framework,
+		writing the web server in the same language (JavaScript) will lower the time taken to develop.
+		The extra time and ease of use will allow us to devote more time to testing and stability,
+		effectively negating the benefit of using a more mature platform such as Apache.
+		Finally, not using another piece of software for the web server will lower the time and effort it takes to install the software.
+		This may be important if the software needs to be installed quickly on launch day.
+
+		For all of the reasons listed, the built-in Node web server was selected.
+	}
+
+
+
+
+	\newrelationship
+	{Albert Morgan}
+	{JSON Protocol Revised}
+	{Signal}
+	{
+		Data will be stored in the log file and transmitted to the user as a list of JSON objects in the following format:\\
+
+
+\noindent\{\\
+\hspace*{.5cm}id: ...,\\
+\hspace*{.5cm}latitude: ...,\\
+\hspace*{.5cm}longitude: ...,\\
+\hspace*{.5cm}accelerometer\_x: ...,\\
+\hspace*{.5cm}accelerometer\_y: ...,\\
+\hspace*{.5cm}accelerometer\_z: ...,\\
+\hspace*{.5cm}yaw: ...,\\
+\hspace*{.5cm}pitch: ...,\\
+\hspace*{.5cm}roll: ...,\\
+\hspace*{.5cm}timestamp: ...\\
+\}\\
+
+		The JSON object has the following attributes:
+		\begin{itemize}
+			\item\textbf{id}: This is the id of the rocket component that the packet comes from. There are two stages to the rocket: the booster and the sustainer, and each of them will be sending packets.
+The id field will inform client which part of the rocket this packet comes from, '0' for the booster, and '1' for the sustainer.
+			\item\textbf{timestamp}: This is the time and date that the data was received.
+			This value is an integer representing the number of seconds that have elapsed since the epoch (January 1, 1970).
+			\item\textbf{other}: All other fields represent individual sensor readings. The units of these fields will be metric, except for angles, which will be encoded as degrees.
+		\end{itemize}
+}
+	
+
+\section*{Revision History}
+\vspace{0.5cm}
+\begin{tabular}{l | l | l}
+Name & Section Title & Date\\ \hline
+Albert Morgan & Log Revised & 2017-02-15\\
+Albert Morgan & Web Server Revised & 2017-02-15\\
+Albert Morgan & JSON Protocl Revised & 2017-02-15\\
+\end{tabular}
+
 	%\allowdisplaybreaks
 	\clearpage
 	\newpage
