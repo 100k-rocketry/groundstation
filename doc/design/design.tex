@@ -263,7 +263,10 @@
 		that the information has to do with location
 		(longitude, latitude, and altitude), a 3D display is preferred. The
 		frontend will consist of programs using 3.js and WebGL to create the visualization necessary to quickly understand the
-		location of the rocket.
+		location of the rocket. There is a problem with the data being sent and having a 3D display. The Avonics team has
+		a 3-axis gyroscope and the GPS will only be turning on at apogee. Gyroscopes tend to drift on their own so the direction
+		of the rocket's flight will not be one-hundred percent accurate until the GPS. Having a simple 2D graph of the rocket's
+		flight path to fall back on would be helpful in case the GPS does not turn on.
 	}
 
 	\index{Backend}
