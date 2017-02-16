@@ -1,36 +1,112 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 	<script language = "javascript">
+	function resize(canvas) {
+		// Lookup the size the browser is displaying the canvas.
+		var displayWidth  = canvas.clientWidth;
+		var displayHeight = canvas.clientHeight;
+
+		// Check if the canvas is not the same size.
+		if (canvas.width  != displayWidth ||
+				canvas.height != displayHeight) {
+
+					// Make the canvas the same size
+					canvas.width  = displayWidth;
+					canvas.height = displayHeight;
+			}
+	}
 
 	function InitializeWebGL(){
-		var canvas = document.getElementById("gl");
+		var canvas = document.getElementById("canvas");
 		var gl = canvas.getContext("webgl") ||
 							canvas.getContext("experimental-webgl") ||
 							canvas.getContext("moz-webgl") ||
 							canvas.getContext("webkit-3d");
 		if (gl)
 		{
-			var extensions = gl.getSupportedExtensions();
-			console.log(gl);
-			console.log(extensions);
-
-			gl.viewportWidth = canvas.width;
-			gl.viewportHeight = canvas.height;
-
-			gl.clearColor( 0.0, 0.0, 0.0, 1.0);
-			gl.clear(gl.COLOR_BUFFER_BIT);
+						var extensions = gl.getSupportedExtensions();
+						console.log(gl);
+						console.log(extensions);
+						gl.viewportWidth = canvas.width;
+						gl.viewportHeight = canvas.height;
+						gl.clearColor( 0.0, 0.0, 0.0, 1.0);
+						gl.clear(gl.COLOR_BUFFER_BIT);
 		}
 		else {
 			console.log("Your browser does not support OpenGL")
 		}
+
 	}
 	</script>
+	<style>
+#telemetryrocket {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#telemetryrocket td, #telemetryrocket th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#telemetryrocket tr:nth-child(even){background-color: #f2f2f2;}
+
+#telemetryrocket tr:hover {background-color: #ddd;}
+
+#telemetryrocket th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #C34500;
+    color: white;
+}
+</style>
 </head>
 <body onload = "InitializeWebGL()">
+	<table id="telemetryrocket">
+  <tr>
+    <th>Altimeter</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+		<th>Accelerometer X</th>
+		<th>Accelerometer Y</th>
+		<th>Accelerometer Z</th>
+		<th>Yaw</th>
+		<th>Pitch</th>
+		<th>Roll</th>
+		<th>Timestamp</th>
+  </tr>
+  <tr>
+    <td id = "telemetry.packet.altimeter"></td>
+    <td>2</td>
+    <td>3</td>
+		<td>4</td>
+		<td>5</td>
+		<td>6</td>
+		<td>7</td>
+		<td>8</td>
+		<td>9</td>
+		<td>10</td>
+  </tr>
+	<tr>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+		<td>5</td>
+		<td>6</td>
+		<td>7</td>
+		<td>8</td>
+		<td>9</td>
+		<td>10</td>
+	</tr>
+	</table>
+<canvas id = "canvas" width = "680" height = "480"></canvas>
 <div id="telemetry">
 </div>
 </body>
 <script src="/scripts/index.js"></script>
-<canvas id = "gl" width = "640" height = "480"></canvas>
 </html>
