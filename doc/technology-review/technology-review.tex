@@ -544,16 +544,8 @@
 	Considering the ease of working it CSV and the ability to use applications such as Microsoft Excel to work with the data,
 	we have decided to use a CSV file for the log.
 
-	
-	\section*{Revision History}
-
-	\begin{tabular}{l | l | l}
-	Name & Section Title & Date\\ \hline
-	Albert Morgan & Web Server Revision & 2016-02-14\\
-	Albert Morgan & Logging Revision & 2016-02-14\\
-	\end{tabular}
-	
 	\section{Retrieval Revision}
+	This section will describe the revision of the retrieval.  Author:  Terrance Lee
 	\index{Retrieval Revision}
 	\subsection{Node}
 	\index{Node}
@@ -562,17 +554,26 @@
 	many different ways to display the data that is retrieved from each stage of the rocket.  Advantages of Node is that it is very 
 	asynchronous, event driven, highly scalable, no buffering and it is open source.  A disadvantage of Node is that it does not
 	support multithreading programming. 
-	Author: Terrance Lee
 	
 	\subsection{Conclusion Revised}
-	\index{retrieval Revised}
+	\index{Retrieval Revised}
 	We decided that to use Node.js for retrieval.  The main reason is that we are using Node.js for our server and we want to use
 	the minimumn amount of languages for this project.  Luckly Node is flexible enough that we can use it for both our server and
 	the retrieval of our data.  For the data that we are retrieving from the rocket, Node works just fine.  We do not need to be 
 	able to any kind of multithreading for this particular system. It is event driven which is what we are trying to do and since
 	there is no buffering those two advantages are what we really need during retrieval of the data during flight.
-	Author: Terrance Lee
+	
+	
+	\section*{Revision History}
 
+	\begin{tabular}{l | l | l}
+	Name & Section Title & Date\\ \hline
+	Albert Morgan & Web Server Revision & 2016-02-14\\
+	Albert Morgan & Logging Revision & 2016-02-14\\
+	Terrance Lee & Retrieval Revision & 2016-02-16\\
+	\end{tabular}
+	
+	
 	% Make the index
 	\printindex
 
