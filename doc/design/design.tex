@@ -263,10 +263,7 @@
 		that the information has to do with location
 		(longitude, latitude, and altitude), a 3D display is preferred. The
 		frontend will consist of programs using 3.js and WebGL to create the visualization necessary to quickly understand the
-		location of the rocket. There is a problem with the data being sent and having a 3D display. The Avonics team has
-		a 3-axis gyroscope and the GPS will only be turning on at apogee. Gyroscopes tend to drift on their own so the direction
-		of the rocket's flight will not be one-hundred percent accurate until the GPS. Having a simple 2D graph of the rocket's
-		flight path to fall back on would be helpful in case the GPS does not turn on.
+		location of the rocket.
 	}
 
 	\index{Backend}
@@ -794,6 +791,26 @@ The id field will inform client which part of the rocket this packet comes from,
 			\item\textbf{other}: All other fields represent individual sensor readings. The units of these fields will be metric, except for angles, which will be encoded as degrees.
 		\end{itemize}
 }
+	\index{Visualization}
+	\index{JavaScript}
+	\index{3.js}
+	\index{Frontend}
+	\index{WebGL}
+	\newentity
+{Natasha Anisimova}
+{Frontend}
+{Component}
+{User Interface}
+{
+	The frontend of the web server will create and display the information that it was given by the backend. Given
+	that the information has to do with location
+	(longitude, latitude, and altitude), a 3D display is preferred. The
+	frontend will consist of programs using 3.js and WebGL to create the visualization necessary to quickly understand the
+	location of the rocket. There is a problem with the data being sent and having a 3D display. The Avonics team has
+	a 3-axis gyroscope and the GPS will only be turning on at apogee. Gyroscopes tend to drift on their own so the direction
+	of the rocket's flight will not be one-hundred percent accurate until the GPS. Having a simple 2D graph of the rocket's
+	flight path to fall back on would be helpful in case the GPS does not turn on.
+}
 	
 
 \section*{Revision History}
@@ -802,7 +819,8 @@ The id field will inform client which part of the rocket this packet comes from,
 Name & Section Title & Date\\ \hline
 Albert Morgan & Log Revised & 2017-02-15\\
 Albert Morgan & Web Server Revised & 2017-02-15\\
-Albert Morgan & JSON Protocl Revised & 2017-02-15\\
+Albert Morgan & JSON Protocol Revised & 2017-02-15\\
+Natasha Anisimova & User Interface Revised & 2017-02-17\\
 \end{tabular}
 
 	%\allowdisplaybreaks
