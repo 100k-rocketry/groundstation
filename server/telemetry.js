@@ -1,6 +1,6 @@
 var EventEmitter = require("events").EventEmitter;
-var SerialPort = require("usb");
- 
+var usb = require("usb");
+
 var telemetryEmitter = new EventEmitter();
 
 telemetryEmitter.altitude = 0;
@@ -16,7 +16,7 @@ telemetryEmitter.roll = 0;
 
 // Sends a fake packet
 telemetryEmitter.sendPacket = function() {
-	this.emit("newPacket", 
+	this.emit("newPacket",
 		{
 			"altimeter": this.altitude,
 			"latitude": this.latitude,
@@ -45,3 +45,18 @@ telemetryEmitter.sendPacket = function() {
 setInterval(() => { telemetryEmitter.sendPacket(); }, 1000);
 
 module.exports = telemetryEmitter;
+
+usb.on('attach', function(device) {
+
+	device.open();
+	var iface = device.interface(1);
+	iface.detachKernelDriver();
+	iface.claim();
+	var endpoint = iface.endpoints[0];
+
+	endpoint.startPoll();
+	endpoint.on('data', function(d) {
+		console.log(d);
+	});
+
+});
