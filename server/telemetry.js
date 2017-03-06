@@ -55,8 +55,8 @@ dataEmitter.on('data', function(data) {
 	var accelerometer_z = -1;
 	var yaw = -1;
 	var pitch = -1;
-	var roll = -1;	
-	
+	var roll = -1;
+
 	// mode
 	mode = data.readUInt8(0);
 	// altimeter
@@ -78,34 +78,44 @@ dataEmitter.on('data', function(data) {
 	pitch = data.readInt16LE(20);
 	// gyro z
 	roll = data.readInt16LE(22);
-	
+
 	telemetryEmitter.emit('newPacket', {
+		"part": "sustainer",
 		"altimeter": altitude,
 		"latitude": latitude,
 		"longitude": longitude,
 		"accelerometer_x": accelerometer_x,
 		"accelerometer_y": accelerometer_y,
 		"accelerometer_z": accelerometer_z,
+		"magnetometer_x": accelerometer_x,
+		"magnetometer_y": accelerometer_y,
+		"magnetometer_z": accelerometer_z,
 		"yaw": yaw,
 		"pitch": pitch,
 		"roll": roll,
 		"timestamp": 0
 	});
-	
-	console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
+
+	//console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
 });
 
 module.exports = telemetryEmitter;
-
-usb.on('attach', function(device) {
-	device.open();
-	var iface = device.interface(1);
-	iface.detachKernelDriver();
-	iface.claim();
-	var endpoint = iface.endpoints[0];
-
-	endpoint.startPoll();
-	endpoint.on('data', function(d) {
-		console.log(d);
-	});
-});
+//
+//usb.on('attach', function(device) {
+//	console.log(device);
+//	device.open();
+//	var iface = device.interface(1);
+//	iface.detachKernelDriver();
+//	iface.claim();
+//	console.log();
+//	console.log(iface.endpoints[0]);
+//	console.log();
+//	console.log(iface.endpoints[1]);
+//	var endpoint = iface.endpoints[1];
+//
+//	endpoint.startPoll();
+//	endpoint.on('data', function(d) {
+//		console.log(d);
+//	});
+//});
+//
