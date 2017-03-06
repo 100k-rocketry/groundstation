@@ -1,6 +1,7 @@
 var EventEmitter = require("events").EventEmitter;
-var SerialPort = require("usb");
- 
+var dataEmitter = require("./data");
+var usb = require('usb');
+
 var telemetryEmitter = new EventEmitter();
 
 telemetryEmitter.altitude = 0;
@@ -16,7 +17,7 @@ telemetryEmitter.roll = 0;
 
 // Sends a fake packet
 telemetryEmitter.sendPacket = function() {
-	this.emit("newPacket", 
+	this.emit("newPacket",
 		{
 			"altimeter": this.altitude,
 			"latitude": this.latitude,
@@ -42,6 +43,79 @@ telemetryEmitter.sendPacket = function() {
 };
 
 // Fire a fake packet every second
-setInterval(() => { telemetryEmitter.sendPacket(); }, 1000);
+//setInterval(() => { telemetryEmitter.sendPacket(); }, 1000);
+
+dataEmitter.on('data', function(data) {
+	var mode = -1;
+	var altitude = -1;
+	var latitude = -1;
+	var longitude = -1;
+	var accelerometer_x = -1;
+	var accelerometer_y = -1;
+	var accelerometer_z = -1;
+	var yaw = -1;
+	var pitch = -1;
+	var roll = -1;
+
+	// mode
+	mode = data.readUInt8(0);
+	// altimeter
+	altitude = data.readUInt16LE(1);
+	altitude += data.readUInt8(3) * 65536;
+	// lat
+	latitude = data.readFloatLE(4);
+	// long
+	longitude = data.readFloatLE(8);
+	// accel x
+	accelerometer_x = data.readInt16LE(12);
+	// accel y
+	accelerometer_y = data.readInt16LE(14);
+	// accel z
+	accelerometer_z = data.readInt16LE(16);
+	// gyro x
+	yaw = data.readInt16LE(18);
+	// gyro y
+	pitch = data.readInt16LE(20);
+	// gyro z
+	roll = data.readInt16LE(22);
+
+	telemetryEmitter.emit('newPacket', {
+		"part": "sustainer",
+		"altimeter": altitude,
+		"latitude": latitude,
+		"longitude": longitude,
+		"accelerometer_x": accelerometer_x,
+		"accelerometer_y": accelerometer_y,
+		"accelerometer_z": accelerometer_z,
+		"magnetometer_x": accelerometer_x,
+		"magnetometer_y": accelerometer_y,
+		"magnetometer_z": accelerometer_z,
+		"yaw": yaw,
+		"pitch": pitch,
+		"roll": roll,
+		"timestamp": 0
+	});
+
+	//console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
+});
 
 module.exports = telemetryEmitter;
+//
+//usb.on('attach', function(device) {
+//	console.log(device);
+//	device.open();
+//	var iface = device.interface(1);
+//	iface.detachKernelDriver();
+//	iface.claim();
+//	console.log();
+//	console.log(iface.endpoints[0]);
+//	console.log();
+//	console.log(iface.endpoints[1]);
+//	var endpoint = iface.endpoints[1];
+//
+//	endpoint.startPoll();
+//	endpoint.on('data', function(d) {
+//		console.log(d);
+//	});
+//});
+//
