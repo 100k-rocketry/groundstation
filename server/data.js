@@ -5,6 +5,8 @@ var usb = require('usb');
 
 var dataEmitter = new EventEmitter();
 
+var recoveryMode = false;
+
 dataEmitter.altitude = 0;
 dataEmitter.latitude = 45.0;
 dataEmitter.longitude = 100;
