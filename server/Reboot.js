@@ -1,10 +1,10 @@
-#Level to run in
+//Level to run in
 id:3:initdefault:
 
-#what to do in single user mode?
+//what to do in single user mode?
 ~:S:wait:/sbin/sulogin
 
-# /etc/init.d executes the S and K scripts upon change
+/* /etc/init.d executes the S and K scripts upon change
 # of runlevel.
 #
 # Default runlevel. The runlevels used by RHS are:
@@ -16,7 +16,7 @@ id:3:initdefault:
 #   5 - X11
 #   6 - reboot (Do NOT set initdefault to this)
 	
-# Boot-time system configuration/initialization script.
+Boot-time system configuration/initialization script.*/
 si::sysinit:/etc/rc.d/rc.sysinit
 
 l0:0:wait:/etc/rc 0
@@ -27,10 +27,10 @@ l4:4:wait:/etc/rc 4
 l5:5:wait:/etc/rc 5
 l6:6:wait:/etc/rc 6
 
-# Things to run in every runlevel.
+// Things to run in every runlevel.
 ud::once:/sbin/update
 
-# Trap CTRL-ALT-DELETE
+// Trap CTRL-ALT-DELETE
 ca::ctrlaltdel:/sbin/shutdown -t3 -r now
 
 
