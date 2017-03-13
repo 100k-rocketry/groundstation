@@ -1,7 +1,7 @@
 // Layer that abstracts getting data from the USB port
 var EventEmitter = require("events").EventEmitter;
 var usb = require('usb');
-//var Buffer = quire('buffer');
+var globals = require('./globals');
 
 var dataEmitter = new EventEmitter();
 
@@ -62,41 +62,44 @@ module.exports = dataEmitter;
 
 var dataBuffer = Buffer.alloc(0);
 
-usb.on('attach', function(device) {
-	console.log(device);
-	device.open();
-	var iface = device.interface(1);
-	iface.detachKernelDriver();
-	iface.claim();
-	console.log();
-	console.log(iface.endpoints[0]);
-	console.log();
-	console.log(iface.endpoints[1]);
-	var endpoint = iface.endpoints[1];
+if(globals.useUSB) {
 
-	endpoint.startPoll();
+	usb.on('attach', function(device) {
+		console.log(device);
+		device.open();
+		var iface = device.interface(1);
+		iface.detachKernelDriver();
+		iface.claim();
+		console.log();
+		console.log(iface.endpoints[0]);
+		console.log();
+		console.log(iface.endpoints[1]);
+		var endpoint = iface.endpoints[1];
 
-	endpoint.on('data', function(d) {
-		dataBuffer = Buffer.concat([dataBuffer, d]);
+		endpoint.startPoll();
 
-		if(dataBuffer.length > 23) {
-			//console.log(dataBuffer);
-			dataPacket = dataBuffer.slice(0, 24);
+		endpoint.on('data', function(d) {
+			dataBuffer = Buffer.concat([dataBuffer, d]);
 
-			// Normal packet
-			if(dataPacket[0] == 2 && recoveryMode == false) {
-				dataEmitter.emit("data", dataPacket);
-				dataBuffer = dataBuffer.slice(24);
-				console.log(dataPacket);
-			} else { // Enter recovery mode
-				recoveryMode = true;
-				for(var i = 0; i < dataBuffer.length; i++) {
-					if(dataBuffer[i] == 2) {
-						dataBuffer = dataBuffer.slice(i);
-						recoveryMode = false;
+			if(dataBuffer.length > 23) {
+				//console.log(dataBuffer);
+				dataPacket = dataBuffer.slice(0, 24);
+
+				// Normal packet
+				if(dataPacket[0] == 2 && recoveryMode == false) {
+					dataEmitter.emit("data", dataPacket);
+					dataBuffer = dataBuffer.slice(24);
+					console.log(dataPacket);
+				} else { // Enter recovery mode
+					recoveryMode = true;
+					for(var i = 0; i < dataBuffer.length; i++) {
+						if(dataBuffer[i] == 2) {
+							dataBuffer = dataBuffer.slice(i);
+							recoveryMode = false;
+						}
 					}
 				}
 			}
-		}
+		});
 	});
-});
+}

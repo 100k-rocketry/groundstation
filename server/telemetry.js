@@ -1,5 +1,6 @@
 var EventEmitter = require("events").EventEmitter;
 var dataEmitter = require("./data");
+var globals = require("./globals");
 
 var telemetryEmitter = new EventEmitter();
 
@@ -42,7 +43,12 @@ telemetryEmitter.sendPacket = function() {
 };
 
 // Fire a fake packet every second
-//setInterval(() => { telemetryEmitter.sendPacket(); }, 1000);
+
+console.log("XXX" + globals.useUSB + "XXX");
+
+if(!globals.useUSB) {
+	setInterval(() => { telemetryEmitter.sendPacket(); }, 1000);
+}
 
 dataEmitter.on('data', function(data) {
 	var mode = -1;
