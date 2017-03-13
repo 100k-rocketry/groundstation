@@ -80,17 +80,18 @@ usb.on('attach', function(device) {
 		dataBuffer = Buffer.concat([dataBuffer, d]);
 
 		if(dataBuffer.length > 23) {
-			console.log(dataBuffer);
+			//console.log(dataBuffer);
 			dataPacket = dataBuffer.slice(0, 24);
 
 			// Normal packet
 			if(dataPacket[0] == 2 && recoveryMode == false) {
 				dataEmitter.emit("data", dataPacket);
 				dataBuffer = dataBuffer.slice(24);
+				console.log(dataPacket);
 			} else { // Enter recovery mode
 				recoveryMode = true;
 				for(var i = 0; i < dataBuffer.length; i++) {
-					if(buffer[i] == 0 || buffer[i] == 1 || buffer[i] == 2) {
+					if(dataBuffer[i] == 2) {
 						dataBuffer = dataBuffer.slice(i);
 						recoveryMode = false;
 					}
