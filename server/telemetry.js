@@ -1,6 +1,5 @@
 var EventEmitter = require("events").EventEmitter;
 var dataEmitter = require("./data");
-var usb = require('usb');
 
 var telemetryEmitter = new EventEmitter();
 
@@ -57,6 +56,7 @@ dataEmitter.on('data', function(data) {
 	var pitch = -1;
 	var roll = -1;
 
+	console.log("Reading data");
 	// mode
 	mode = data.readUInt8(0);
 	// altimeter
@@ -100,22 +100,3 @@ dataEmitter.on('data', function(data) {
 });
 
 module.exports = telemetryEmitter;
-//
-//usb.on('attach', function(device) {
-//	console.log(device);
-//	device.open();
-//	var iface = device.interface(1);
-//	iface.detachKernelDriver();
-//	iface.claim();
-//	console.log();
-//	console.log(iface.endpoints[0]);
-//	console.log();
-//	console.log(iface.endpoints[1]);
-//	var endpoint = iface.endpoints[1];
-//
-//	endpoint.startPoll();
-//	endpoint.on('data', function(d) {
-//		console.log(d);
-//	});
-//});
-//
