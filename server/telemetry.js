@@ -40,11 +40,10 @@ telemetryEmitter.sendPacket = function() {
 	this.yaw += 0.0134;
 	this.pitch += 0.01934;
 	this.roll += 0.014343;
+	console.log("Sendint a packet");
 };
 
 // Fire a fake packet every second
-
-console.log("XXX" + globals.useUSB + "XXX");
 
 if(!globals.useUSB) {
 	setInterval(() => { telemetryEmitter.sendPacket(); }, 1000);

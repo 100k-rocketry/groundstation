@@ -5,7 +5,7 @@ var path = require('path');
 var logger = require('./logger');
 var telemetryEmitter = require('./telemetry');
 
-telemetryEmitter.on('newPacket', logger.logPacket);
+//telemetryEmitter.on('newPacket', logger.logPacket);
 
 
 /*
