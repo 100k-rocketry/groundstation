@@ -6,7 +6,6 @@ id:3:initdefault:
 
 /* /etc/init.d executes the S and K scripts upon change
 # of runlevel.
-#
 # Default runlevel. The runlevels used by RHS are:
 #   0 - halt (Do NOT set initdefault to this)
 #   1 - Single user mode
