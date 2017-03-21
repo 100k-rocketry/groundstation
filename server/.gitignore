@@ -1,4 +1,5 @@
 gs.log
+*.csv
 log*
 node_modules/
 
