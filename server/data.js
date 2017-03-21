@@ -2,6 +2,7 @@
 var EventEmitter = require("events").EventEmitter;
 var usb = require('usb');
 var globals = require('./globals');
+var fs = require('fs');
 
 var dataEmitter = new EventEmitter();
 
@@ -64,19 +65,8 @@ var dataBuffer = Buffer.alloc(0);
 
 if(globals.useUSB) {
 
-	usb.on('attach', function(device) {
-		console.log(device);
-		device.open();
-		var iface = device.interface(1);
-		iface.detachKernelDriver();
-		iface.claim();
-		console.log();
-		console.log(iface.endpoints[0]);
-		console.log();
-		console.log(iface.endpoints[1]);
-		var endpoint = iface.endpoints[1];
 
-		endpoint.startPoll();
+		endpoint = fs.createReadStream('/dev/ttyACM0');
 
 		endpoint.on('data', function(d) {
 			dataBuffer = Buffer.concat([dataBuffer, d]);
@@ -101,5 +91,4 @@ if(globals.useUSB) {
 				}
 			}
 		});
-	});
 }
