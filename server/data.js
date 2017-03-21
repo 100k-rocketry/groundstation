@@ -57,38 +57,65 @@ dataEmitter.sendPacket = function() {
 };
 
 // Fire a fake packet every second
-//setInterval(() => { dataEmitter.sendPacket(); }, 1000);
+// setInterval(() => { dataEmitter.sendPacket(); }, 1000);
 
-module.exports = dataEmitter;
+
+// Tries to open the specified file.
+// Attaches the data callback to the 'data' event.
+// If the file closes for any reason during execution,
+// automatically try to re-open the file
+function createPersistentReadStream(filename, dataCallback) {
+	var stream = fs.createReadStream(filename);
+
+	// Stream opened successfully.
+	stream.on('open', () => {
+		// When we get data, call the data callback.
+		this.on('data', () => {
+			dataCallback();
+		});
+		callback(stream);
+	});
+
+	// The stream didn't open correctly, so try again after a small delay.
+	stream.on('error', () => {
+		setTimeout(() => { createPersistentReadStream(filename, dataCallback); }, 1000);
+	});
+
+	// File closed? That shouldn't happen, so try to re-open the stream.
+	stream.on('close', () => {
+		createPersistentReadStreamv(filename, dataCallback);
+	});
+}
 
 var dataBuffer = Buffer.alloc(0);
 
-if(globals.useUSB) {
+// Appends the data to the buffer. If there is enough data to make a whole
+// packet, then parse it.
+function dataCallback(d) {
+	dataBuffer = Buffer.concat([dataBuffer, d]);
 
+	if(dataBuffer.length > 23) {
+		dataPacket = dataBuffer.slice(0, 24);
 
-		endpoint = fs.createReadStream('/dev/ttyACM0');
-
-		endpoint.on('data', function(d) {
-			dataBuffer = Buffer.concat([dataBuffer, d]);
-
-			if(dataBuffer.length > 23) {
-				//console.log(dataBuffer);
-				dataPacket = dataBuffer.slice(0, 24);
-
-				// Normal packet
-				if(dataPacket[0] == 2 && recoveryMode == false) {
-					dataEmitter.emit("data", dataPacket);
-					dataBuffer = dataBuffer.slice(24);
-					console.log(dataPacket);
-				} else { // Enter recovery mode
-					recoveryMode = true;
-					for(var i = 0; i < dataBuffer.length; i++) {
-						if(dataBuffer[i] == 2) {
-							dataBuffer = dataBuffer.slice(i);
-							recoveryMode = false;
-						}
-					}
+		// Normal packet
+		if(dataPacket[0] == 2 && recoveryMode == false) {
+			dataEmitter.emit("data", dataPacket);
+			dataBuffer = dataBuffer.slice(24);
+			console.log(dataPacket);
+		} else { // Enter recovery mode
+			recoveryMode = true;
+			for(var i = 0; i < dataBuffer.length; i++) {
+				if(dataBuffer[i] == 2) {
+					dataBuffer = dataBuffer.slice(i);
+					recoveryMode = false;
 				}
 			}
-		});
+		}
+	}
 }
+
+if(globals.useUSB) {
+	createPersistentReadStream('/dev/ttyACM0', dataCallback);
+}
+
+module.exports = dataEmitter;
