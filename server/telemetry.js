@@ -1,6 +1,6 @@
-var EventEmitter = require("events").EventEmitter;
-var dataEmitter = require("./data");
-var globals = require("./globals");
+var EventEmitter = require('events').EventEmitter;
+var dataEmitter = require('./data');
+var globals = require('./globals');
 
 var telemetryEmitter = new EventEmitter();
 

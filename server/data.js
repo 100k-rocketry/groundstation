@@ -1,8 +1,8 @@
 // Layer that abstracts getting data from the USB port
-var EventEmitter = require("events").EventEmitter;
-var usb = require('usb');
-var globals = require('./globals');
+var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
+var globals = require('./globals');
+
 
 var dataEmitter = new EventEmitter();
 
@@ -43,7 +43,7 @@ dataEmitter.sendPacket = function() {
 	// gyro z
 	buf.writeInt16LE(this.roll, 22);
 
-	this.emit("data", buf);
+	this.emit('data', buf);
 
 	this.altitude += 7;
 	this.latitude += 0.01;
