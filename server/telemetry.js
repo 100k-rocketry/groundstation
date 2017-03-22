@@ -50,6 +50,7 @@ if(!globals.useUSB) {
 }
 
 dataEmitter.on('data', function(data) {
+	console.log("Data emitter: " + data);
 	var mode = -1;
 	var altitude = -1;
 	var latitude = -1;
@@ -61,7 +62,6 @@ dataEmitter.on('data', function(data) {
 	var pitch = -1;
 	var roll = -1;
 
-	console.log("Reading data");
 	// mode
 	mode = data.readUInt8(0);
 	// altimeter

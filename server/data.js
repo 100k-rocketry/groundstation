@@ -69,21 +69,23 @@ function createPersistentReadStream(filename, dataCallback) {
 
 	// Stream opened successfully.
 	stream.on('open', () => {
+		console.log("Acquired connection to groundstation");
 		// When we get data, call the data callback.
-		this.on('data', () => {
-			dataCallback();
+		stream.on('data', (d) => {
+			dataCallback(d);
 		});
-		callback(stream);
 	});
 
 	// The stream didn't open correctly, so try again after a small delay.
-	stream.on('error', () => {
+	stream.on('error', (err) => {
+		console.log("Stream error: " + err);
 		setTimeout(() => { createPersistentReadStream(filename, dataCallback); }, 1000);
 	});
 
 	// File closed? That shouldn't happen, so try to re-open the stream.
 	stream.on('close', () => {
-		createPersistentReadStreamv(filename, dataCallback);
+		console.log("Lost connection to groundstation.");
+		createPersistentReadStream(filename, dataCallback);
 	});
 }
 
@@ -92,6 +94,7 @@ var dataBuffer = Buffer.alloc(0);
 // Appends the data to the buffer. If there is enough data to make a whole
 // packet, then parse it.
 function dataCallback(d) {
+	console.log(d);
 	dataBuffer = Buffer.concat([dataBuffer, d]);
 
 	if(dataBuffer.length > 23) {
@@ -100,8 +103,8 @@ function dataCallback(d) {
 		// Normal packet
 		if(dataPacket[0] == 2 && recoveryMode == false) {
 			dataEmitter.emit("data", dataPacket);
+			console.log("packet: " + dataPacket);
 			dataBuffer = dataBuffer.slice(24);
-			console.log(dataPacket);
 		} else { // Enter recovery mode
 			recoveryMode = true;
 			for(var i = 0; i < dataBuffer.length; i++) {

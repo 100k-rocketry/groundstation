@@ -1,5 +1,6 @@
 gs.log
 *.csv
 log*
+*.swp
 node_modules/
 
