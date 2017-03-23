@@ -72,7 +72,7 @@ function createPersistentReadStream(filename, dataCallback) {
 		console.log("Acquired connection to groundstation");
 		// When we get data, call the data callback.
 		stream.on('data', (d) => {
-			dataCallback(d);
+			dataCallback(new Buffer(d));
 		});
 	});
 
@@ -94,26 +94,29 @@ var dataBuffer = Buffer.alloc(0);
 // Appends the data to the buffer. If there is enough data to make a whole
 // packet, then parse it.
 function dataCallback(d) {
-	console.log(d);
-	dataBuffer = Buffer.concat([dataBuffer, d]);
+	var newDataBuffer = Buffer.concat([dataBuffer, d]);
+	dataBuffer = newDataBuffer;
 
 	if(dataBuffer.length > 23) {
 		dataPacket = dataBuffer.slice(0, 24);
+		dataBuffer = dataBuffer.slice(24);
 
 		// Normal packet
 		if(dataPacket[0] == 2 && recoveryMode == false) {
 			dataEmitter.emit("data", dataPacket);
-			console.log("packet: " + dataPacket);
 			dataBuffer = dataBuffer.slice(24);
 		} else { // Enter recovery mode
+			console.log("Entering recovery mode");
 			recoveryMode = true;
 			for(var i = 0; i < dataBuffer.length; i++) {
 				if(dataBuffer[i] == 2) {
 					dataBuffer = dataBuffer.slice(i);
 					recoveryMode = false;
+				} else {
+					console.log(dataBuffer[i].toString(16));			
 				}
 			}
-		}
+		} 
 	}
 }
 

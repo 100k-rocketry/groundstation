@@ -50,7 +50,8 @@ if(!globals.useUSB) {
 }
 
 dataEmitter.on('data', function(data) {
-	console.log("Data emitter: " + data);
+	console.log("Data emitter: ");
+	console.log(data);
 	var mode = -1;
 	var altitude = -1;
 	var latitude = -1;
