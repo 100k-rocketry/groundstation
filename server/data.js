@@ -104,7 +104,7 @@ function dataCallback(d) {
 	} else { // Enter recovery mode
 		console.log("Entering recovery mode");
 		recoveryMode = true;
-		for(var i = 0; i < dataBuffer.length; i++) {
+		for(var i = 0; i < dataBuffer.length && recoveryMode == true; i++) {
 			if(dataBuffer[i] == 2) {
 				dataBuffer = dataBuffer.slice(i);
 				recoveryMode = false;
