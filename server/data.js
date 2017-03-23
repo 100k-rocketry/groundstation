@@ -98,13 +98,12 @@ function dataCallback(d) {
 	dataBuffer = newDataBuffer;
 
 	if(dataBuffer.length > 23) {
-		dataPacket = dataBuffer.slice(0, 24);
-		dataBuffer = dataBuffer.slice(24);
 
 		// Normal packet
-		if(dataPacket[0] == 2 && recoveryMode == false) {
-			dataEmitter.emit("data", dataPacket);
+		if(dataBuffer[0] == 2 && recoveryMode == false) {
+			dataPacket = dataBuffer.slice(0, 24);
 			dataBuffer = dataBuffer.slice(24);
+			dataEmitter.emit("data", dataPacket);
 		} else { // Enter recovery mode
 			console.log("Entering recovery mode");
 			recoveryMode = true;
@@ -112,8 +111,6 @@ function dataCallback(d) {
 				if(dataBuffer[i] == 2) {
 					dataBuffer = dataBuffer.slice(i);
 					recoveryMode = false;
-				} else {
-					console.log(dataBuffer[i].toString(16));			
 				}
 			}
 		} 
