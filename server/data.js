@@ -97,23 +97,19 @@ function dataCallback(d) {
 	var newDataBuffer = Buffer.concat([dataBuffer, d]);
 	dataBuffer = newDataBuffer;
 
-	if(dataBuffer.length > 23) {
-
-		// Normal packet
-		if(dataBuffer[0] == 2 && recoveryMode == false) {
-			dataPacket = dataBuffer.slice(0, 24);
-			dataBuffer = dataBuffer.slice(24);
-			dataEmitter.emit("data", dataPacket);
-		} else { // Enter recovery mode
-			console.log("Entering recovery mode");
-			recoveryMode = true;
-			for(var i = 0; i < dataBuffer.length; i++) {
-				if(dataBuffer[i] == 2) {
-					dataBuffer = dataBuffer.slice(i);
-					recoveryMode = false;
-				}
+	if(dataBuffer.length > 23 && dataBuffer[0] == 2 && recoveryMode == false) {
+		dataPacket = dataBuffer.slice(0, 24);
+		dataBuffer = dataBuffer.slice(24);
+		dataEmitter.emit("data", dataPacket);
+	} else { // Enter recovery mode
+		console.log("Entering recovery mode");
+		recoveryMode = true;
+		for(var i = 0; i < dataBuffer.length; i++) {
+			if(dataBuffer[i] == 2) {
+				dataBuffer = dataBuffer.slice(i);
+				recoveryMode = false;
 			}
-		} 
+		}
 	}
 }
 
