@@ -99,7 +99,7 @@ dataEmitter.on('data', function(data) {
 		"yaw": yaw,
 		"pitch": pitch,
 		"roll": roll,
-		"timestamp": 0
+		"timestamp": (new Date()).getTime()
 	});
 
 	//console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
