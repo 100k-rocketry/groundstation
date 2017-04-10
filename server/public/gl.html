@@ -6,6 +6,7 @@
     <canvas id="canvas" width="100%" height="100%"></canvas>
 </body>
 <script language = "javascript" src = "scripts/three.min.js"></script>
+<script language = "javascript" src = "scripts/TrackballControls.js"></script>
 <script>
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -14,20 +15,110 @@
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
 
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    var cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
+    //var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    //var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    //var cube = new THREE.Mesh( geometry, material );
+    //scene.add( cube );
+
+
+    var rocketGeometry = new THREE.SphereGeometry(.1, 32, 32);
+    var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    var rocket = new THREE.Mesh( rocketGeometry, rocketMaterial );
+    scene.add(rocket);
 
     camera.position.z = 5;
 
-
     function render() {
     	requestAnimationFrame( render );
-        cube.rotation.x += 0.1;
-cube.rotation.y += 0.1;
+        //cube.rotation.x += 0.1;
+        //cube.rotation.y += 0.1;
+        rocket.translateZ(0.00001);
+
     	renderer.render( scene, camera );
     }
+
+	function animate() {
+		requestAnimationFrame( animate );
+		controls.update();
+	}
+
+    controls = new THREE.TrackballControls( camera );
+    controls.target.set( 0, 0, 0 );
+
+	controls.rotateSpeed = 1.0;
+	controls.zoomSpeed = 1.2;
+	controls.panSpeed = 0.8;
+
+	controls.noZoom = false;
+	controls.noPan = false;
+
+	controls.staticMoving = true;
+	controls.dynamicDampingFactor = 0.3;
+
+    controls.addEventListener('change', render);
+
+
+THREE.ImageUtils.crossOrigin = "";
+
+    var loader = new THREE.TextureLoader();
+
+    // load a resource
+    loader.load(
+    	// resource URL
+    	'out.bmp',
+    	// Function when resource is loaded
+    	function ( texture ) {
+    		// do something with the texture
+    		var material = new THREE.MeshBasicMaterial( {
+    			map: texture
+            });
+
+
+                 var geometry = new THREE.PlaneGeometry( 2, 1, 1, 1);
+                 //var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+                 var plane = new THREE.Mesh( geometry, material );
+                 scene.add(plane);
+
+
+    	},
+    	// Function called when download progresses
+    	function ( xhr ) {
+    		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+    	},
+    	// Function called when download errors
+    	function ( xhr ) {
+    		console.log( 'An error happened' );
+    	}
+    );
+
+    animate();
     render();
+
+
+    var exampleSocket = new WebSocket("ws://" + window.location.host);
+
+    exampleSocket.onmessage = function(event) {
+    	// Use JSON.parse(event.data) to turn back into an object
+    	console.log(event.data);
+    	packet = JSON.parse(event.data);
+
+    	/*document.getElementById("telemetry").innerHTML +=
+    			"<b>Altimeter:</b> " + packet.altimeter + "<br>" +
+    			"<b>Latitude:</b> " + packet.latitude + "<br>" +
+    			"<b>Timestamp:</b>" + packet.timestamp + "<br><br>";
+
+    		}*/
+    		document.getElementById("telemetryrocket").innerHTML+= '<tr><td>' +packet.altimeter +' </td><td>'
+    		 +packet.latitude +' </td><td>' +packet.longitude +'</td><td>'
+    		 +packet.accelerometer_x +'</td><td>'+packet.accelerometer_y +'</td><td>'
+    		 +packet.accelerometer_z +'</td><td>'+packet.yaw +'</td><td>'
+    		 +packet.pitch +'</td><td>'+packet.roll +'</td><td>'
+    		 +packet.timestamp +'</td></tr>';
+
+    }
+
+
+
+
 </script>
 </html>
