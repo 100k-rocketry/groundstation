@@ -20,7 +20,7 @@ dataEmitter.roll = 0;
 
 dataEmitter.sendPacket = function() {
 
-	var buf = Buffer.alloc(24);
+	var buf = Buffer.alloc(48);
 	// mode
 	buf.writeUInt8(2, 0);
 	// altimeter
@@ -31,17 +31,25 @@ dataEmitter.sendPacket = function() {
 	// long
 	buf.writeFloatLE(this.longitude, 8);
 	// accel x
-	buf.writeInt16LE(this.accelerometer_x, 12);
+	buf.writeFloatLE(this.accelerometer_x, 12);
 	// accel y
-	buf.writeInt16LE(this.accelerometer_y, 14);
+	buf.writeFloatLE(this.accelerometer_y, 16);
 	// accel z
-	buf.writeInt16LE(this.accelerometer_z, 16);
+	buf.writeFloatLE(this.accelerometer_z, 20);
 	// gyro x
-	buf.writeInt16LE(this.yaw, 18);
+	buf.writeFloatLE(this.yaw, 24);
 	// gyro y
-	buf.writeInt16LE(this.pitch, 20);
+	buf.writeFloatLE(this.pitch, 28);
 	// gyro z
-	buf.writeInt16LE(this.roll, 22);
+	buf.writeFloatLE(this.roll, 32);
+
+	// magnetometer
+	// gyro x
+	buf.writeFloatLE(this.yaw, 36);
+	// gyro y
+	buf.writeFloatLE(this.pitch, 40);
+	// gyro z
+	buf.writeFloatLE(this.roll, 44);
 
 	this.emit('data', buf);
 
@@ -57,7 +65,8 @@ dataEmitter.sendPacket = function() {
 };
 
 // Fire a fake packet every second
- setInterval(() => { dataEmitter.sendPacket(); }, 1000);
+setInterval(() => { dataEmitter.sendPacket(); }, 1000);
+
 
 
 // Tries to open the specified file.

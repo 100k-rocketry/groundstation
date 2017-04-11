@@ -81,7 +81,7 @@ dataEmitter.on('data', function(data) {
 		var roll = data.readFloatLE(32);
 		var magnetometer_x = data.readFloatLE(36);
 		var magnetometer_y = data.readFloatLE(40);
-		var magnetometer_z = data.readFLoatLE(44);
+		var magnetometer_z = data.readFloatLE(44);
 
 		telemetryEmitter.emit('newPacket', {
 			"mode": "Armed",
