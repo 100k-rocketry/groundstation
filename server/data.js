@@ -57,7 +57,7 @@ dataEmitter.sendPacket = function() {
 };
 
 // Fire a fake packet every second
-// setInterval(() => { dataEmitter.sendPacket(); }, 1000);
+ setInterval(() => { dataEmitter.sendPacket(); }, 1000);
 
 
 // Tries to open the specified file.

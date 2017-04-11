@@ -273,6 +273,9 @@ window.onclick = function(event) {
 			}
 	}
 
+	//var VSHADER_SOURCE = null;
+	//var FSHADER_SOURCE = null;
+
 	function InitializeWebGL(){
 		var canvas = document.getElementById("canvas");
 		var gl = canvas.getContext("webgl") ||
@@ -288,6 +291,14 @@ window.onclick = function(event) {
 						gl.viewportHeight = canvas.height;
 						gl.clearColor( 0.0, 0.0, 0.0, 1.0);
 						gl.clear(gl.COLOR_BUFFER_BIT);
+
+						var gl = getWebGLContext(canvas);
+
+						//Load the shaders from files
+						//loadShaderFile(gl, 'terrain.vert', gl.VERTEX_SHADER);
+						//loadShaderFile(gl, 'terrain.frag', gl.FRAGMENT_SHADER);
+
+						//var geometry = new THREE.PlaneGeometry(640000,10,50000,5);
 		}
 		else {
 			console.log("Your browser does not support OpenGL")
@@ -338,4 +349,5 @@ window.onclick = function(event) {
 <canvas id = "canvas" width = "680" height = "480"></canvas>
 </body>
 <script src="/scripts/index.js"></script>
+
 </html>
