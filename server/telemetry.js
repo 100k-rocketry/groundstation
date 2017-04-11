@@ -50,57 +50,72 @@ if(!globals.useUSB) {
 }
 
 dataEmitter.on('data', function(data) {
-	console.log("Data emitter: ");
-	console.log(data);
-	var mode = -1;
-	var altitude = -1;
-	var latitude = -1;
-	var longitude = -1;
-	var accelerometer_x = -1;
-	var accelerometer_y = -1;
-	var accelerometer_z = -1;
-	var yaw = -1;
-	var pitch = -1;
-	var roll = -1;
-
 	// mode
 	mode = data.readUInt8(0);
-	// altimeter
-	altitude = data.readUInt16LE(1);
-	altitude += data.readUInt8(3) * 65536;
-	// lat
-	latitude = data.readFloatLE(4);
-	// long
-	longitude = data.readFloatLE(8);
-	// accel x
-	accelerometer_x = data.readInt16LE(12);
-	// accel y
-	accelerometer_y = data.readInt16LE(14);
-	// accel z
-	accelerometer_z = data.readInt16LE(16);
-	// gyro x
-	yaw = data.readInt16LE(18);
-	// gyro y
-	pitch = data.readInt16LE(20);
-	// gyro z
-	roll = data.readInt16LE(22);
 
-	telemetryEmitter.emit('newPacket', {
-		"part": "sustainer",
-		"altimeter": altitude,
-		"latitude": latitude,
-		"longitude": longitude,
-		"accelerometer_x": accelerometer_x,
-		"accelerometer_y": accelerometer_y,
-		"accelerometer_z": accelerometer_z,
-		"magnetometer_x": accelerometer_x,
-		"magnetometer_y": accelerometer_y,
-		"magnetometer_z": accelerometer_z,
-		"yaw": yaw,
-		"pitch": pitch,
-		"roll": roll,
-		"timestamp": (new Date()).getTime()
-	});
+	if(mode === 1) {
+		var boosterEMatch = data.readUInt8(1);
+		var sustainerEMatch = data.readUInt8(2);
+		var temperature = data.readUInt8(3);
+
+		telemetryEmitter.emit('newPacket', {
+			"mode": "Testings",
+			"part": "sustainer",
+			"booster_e_match": boosterEMatch,
+			"sustainer_e_match": sustainerEMatch,
+			"temperature": temperature,
+			"timestamp": (new Date()).getTime()
+		});
+	}
+
+	if(mode === 2) {
+		var altitude = data.readUInt16LE(1);
+		altitude += data.readUInt8(3) * 65536;
+		var latitude = data.readFloatLE(4);
+		var longitude = data.readFloatLE(8);
+		var accelerometer_x = data.readFloatLE(12);
+		var accelerometer_y = data.readFloatLE(16);
+		var accelerometer_z = data.readFloatLE(20);
+		var yaw = data.readFloatLE(24);
+		var pitch = data.readFloatLE(28);
+		var roll = data.readFloatLE(32);
+		var magnetometer_x = data.readFloatLE(36);
+		var magnetometer_y = data.readFloatLE(40);
+		var magnetometer_z = data.readFLoatLE(44);
+
+		telemetryEmitter.emit('newPacket', {
+			"mode": "Armed",
+			"part": "sustainer",
+			"altimeter": altitude,
+			"latitude": latitude,
+			"longitude": longitude,
+			"accelerometer_x": accelerometer_x,
+			"accelerometer_y": accelerometer_y,
+			"accelerometer_z": accelerometer_z,
+			"magnetometer_x": magnetometer_x,
+			"magnetometer_y": magnetometer_z,
+			"magnetometer_z": magnetometer_x,
+			"yaw": yaw,
+			"pitch": pitch,
+			"roll": roll,
+			"timestamp": (new Date()).getTime()
+		});
+	}
+
+	if(mode === 4) {
+		latitude = data.readFloatLE(1);
+		longitude = data.readFloatLE(5);
+
+		telemetryEmitter.emit('newPacket', {
+			"mode": "Low Power",
+			"part": "sustainer",
+			"latitude": latitude,
+			"longitude": longitude,
+			"timestamp": (new Date()).getTime()
+		});
+	}
+
+
 
 	//console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
 });
