@@ -86,6 +86,8 @@
 
 				var textureLoader = new THREE.TextureLoader();
 				textureLoader.load( "textures/hardwood2_diffuse.jpg", function ( map ) {
+				
+					console.log("Loaded texture");
 
 					map.anisotropy = 8;
 

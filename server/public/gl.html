@@ -93,19 +93,35 @@ THREE.ImageUtils.crossOrigin = "";
 		
 		
 		// instantiate a loader
-	var loader = new THREE.JSONLoader();
+	var loader2 = new THREE.ObjectLoader();
 
+	console.log("KLSDJFLSKJDFLKSJDFLKSJDF");
+	console.log(JSON.stringify(loader2));
 	// load a resource
-	loader.load(
+	loader2.load(
 		// resource URL
-		'models/animated/monster/monster.js',
+		'foo.js',
 		// Function when resource is loaded
-		function ( geometry, materials ) {
-			var material = new THREE.MultiMaterial( materials );
-			var object = new THREE.Mesh( geometry, material );
-			scene.add( object );
+		function ( obj ) {
+			alert('added foo');
+			scene.add( obj );
+		},
+		function ( xhr) {
+			console.log(xhr.loaded);
+		},
+		function ( err ) {
+			console.log("ERROROROROR");
+			console.log(err); 	
 		}
 	);
+	
+	
+	var loader = new THREE.ObjectLoader();
+    loader.load( "foo.js", function(geometry){
+      var material = new THREE.MeshLambertMaterial({color: 0x55B663});
+      mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+    });
 
     animate();
     render();
@@ -115,7 +131,7 @@ THREE.ImageUtils.crossOrigin = "";
 
     exampleSocket.onmessage = function(event) {
     	// Use JSON.parse(event.data) to turn back into an object
-    	console.log(event.data);
+    	//console.log(event.data);
     	packet = JSON.parse(event.data);
 
     	/*document.getElementById("telemetry").innerHTML +=
