@@ -5,8 +5,9 @@
 <body>
     <canvas id="canvas" width="100%" height="100%"></canvas>
 </body>
-<script language = "javascript" src = "scripts/three.min.js"></script>
-<script language = "javascript" src = "scripts/TrackballControls.js"></script>
+<script language = "javascript" src = "scripts/three/build/three.min.js"></script>
+<script language = "javascript" src = "scripts/three/examples/js/controls/TrackballControls.js"></script>
+<script language = "javascript" src = "scripts/three/examples/js/loaders/OBJLoader.js"></script>
 <script>
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -30,10 +31,7 @@
 
     function render() {
     	requestAnimationFrame( render );
-        //cube.rotation.x += 0.1;
-        //cube.rotation.y += 0.1;
-        rocket.translateZ(0.00001);
-
+      rocket.translateZ(0.00001);
     	renderer.render( scene, camera );
     }
 
@@ -62,92 +60,61 @@ THREE.ImageUtils.crossOrigin = "";
 
     var loader = new THREE.TextureLoader();
 
-    // load a resource
-    loader.load(
-    	// resource URL
-    	'out.bmp',
-    	// Function when resource is loaded
-    	function ( texture ) {
-    		// do something with the texture
-    		var material = new THREE.MeshBasicMaterial( {
-    			map: texture
-            });
-
-
-                 var geometry = new THREE.PlaneGeometry( 2, 1, 1, 1);
-                 //var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-                 var plane = new THREE.Mesh( geometry, material );
-                 scene.add(plane);
-
-
-    	},
-    	// Function called when download progresses
-    	function ( xhr ) {
-    		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-    	},
-    	// Function called when download errors
-    	function ( xhr ) {
-    		console.log( 'An error happened' );
-    	}
-    );
-		
-		
-		// instantiate a loader
-	var loader2 = new THREE.ObjectLoader();
-
-	console.log("KLSDJFLSKJDFLKSJDFLKSJDF");
-	console.log(JSON.stringify(loader2));
-	// load a resource
-	loader2.load(
-		// resource URL
-		'foo.js',
-		// Function when resource is loaded
-		function ( obj ) {
-			alert('added foo');
-			scene.add( obj );
-		},
-		function ( xhr) {
-			console.log(xhr.loaded);
-		},
-		function ( err ) {
-			console.log("ERROROROROR");
-			console.log(err); 	
-		}
-	);
 	
+				var ambientLight = new THREE.AmbientLight ( 0xffffff , .5);
+				scene.add ( ambientLight );
+				
+				//var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+				//directionalLight.position.set( 0, 0, 1 );
+				//scene.add( directionalLight );
 	
-	var loader = new THREE.ObjectLoader();
-    loader.load( "foo.js", function(geometry){
-      var material = new THREE.MeshLambertMaterial({color: 0x55B663});
-      mesh = new THREE.Mesh(geometry, material);
-      scene.add(mesh);
-    });
+					var manager = new THREE.LoadingManager();
+				manager.onProgress = function ( item, loaded, total ) {
 
+					console.log( item, loaded, total );
+
+				};
+
+	
+	var onProgress = function ( xhr ) {
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( Math.round(percentComplete, 2) + '% downloaded' );
+					}
+				};
+
+	var onError = function ( xhr ) {
+	};
+
+					//var texture = new THREE.Texture();
+	
+	var loader = new THREE.OBJLoader( manager );
+				loader.load( 'm.obj', function ( object ) {
+
+					object.traverse( function ( child ) {
+
+						if ( child instanceof THREE.Mesh ) {
+
+							//child.material.map = texture;
+
+						}
+
+					} );
+					
+					object.position.y = 0;
+					object.position.x = 0;
+					object.position.z = 0;
+					scene.add( object );
+					
+					render();
+
+				}, onProgress, onError );
+	
+				
+				
     animate();
     render();
 
-
-    var exampleSocket = new WebSocket("ws://" + window.location.host);
-
-    exampleSocket.onmessage = function(event) {
-    	// Use JSON.parse(event.data) to turn back into an object
-    	//console.log(event.data);
-    	packet = JSON.parse(event.data);
-
-    	/*document.getElementById("telemetry").innerHTML +=
-    			"<b>Altimeter:</b> " + packet.altimeter + "<br>" +
-    			"<b>Latitude:</b> " + packet.latitude + "<br>" +
-    			"<b>Timestamp:</b>" + packet.timestamp + "<br><br>";
-
-    		}*/
-    		document.getElementById("telemetryrocket").innerHTML+= '<tr><td>' +packet.altimeter +' </td><td>'
-    		 +packet.latitude +' </td><td>' +packet.longitude +'</td><td>'
-    		 +packet.accelerometer_x +'</td><td>'+packet.accelerometer_y +'</td><td>'
-    		 +packet.accelerometer_z +'</td><td>'+packet.yaw +'</td><td>'
-    		 +packet.pitch +'</td><td>'+packet.roll +'</td><td>'
-    		 +packet.timestamp +'</td></tr>';
-
-    }
 
 
 
