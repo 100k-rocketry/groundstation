@@ -2,7 +2,7 @@
 var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
 var globals = require('./globals');
-
+var xbee_api = require('xbee-api');
 
 var dataEmitter = new EventEmitter();
 
@@ -98,12 +98,68 @@ function createPersistentReadStream(filename, dataCallback) {
 	});
 }
 
+// A collection of all the bytes that we have read from the serial port
+// This is unescaped.
 var dataBuffer = Buffer.alloc(0);
+// The packet that we are building up from the dataBuffer
+// This data is escaped.
+var dataPacket;
+// Whether the next byte should be escaped.
+// This is declared in this scope because we may need to hold on
+// to this information between packets.
+var isEscape = false;
+
 
 // Appends the data to the buffer. If there is enough data to make a whole
 // packet, then parse it.
 function dataCallback(d) {
-	var newDataBuffer = Buffer.concat([dataBuffer, d]);
+
+	// Count the number of characters that need to be escaped
+	var escapedCharacters = 0;
+	for (var i = 0; i < d.length; i++) {
+		if (d[i] === 0x7D) {
+			escapedCharacters++;
+		}
+	}
+
+	// Create a new buffer to hold all of the data after the
+	// characters have been escaped
+	var escapedData = Buffer.alloc(d.length - escapedCharacters);
+	var escapedIndex = 0;
+
+	// Apply the escape-character logic to the incoming data
+	for (var i = 0; i < d.length; i++) {
+		if (isEscape) {
+			escapedCharacters[escapedIndex++] = d[i] ^ 0x20;
+			isEscape = false;
+		} else if (d[i] == 0x7D) {
+			isEscape = true;
+		} else {
+			escapedCharacters[escapedIndex++] = d[i];
+		}
+	}
+
+	// Add the escaped data to the
+	dataBuffer = Buffer.concat([dataBuffer, d]);
+
+	// We need at least three bytes.
+	// The first two bytes should always be 0x7e00 to denote
+	// the start of a new packet. The third byte is the length.
+	// Once we have the length we can grab the whole packet and
+	// process it.
+	if (dataBuffer.length >= 3) {
+		var length = dataBuffer[2];
+		// If we have the first two bytes (0x7e00 + the length byte)
+		// and the checksum (for a total of four bytes), plus
+		// the data
+		if (dataBuffer.length >= length + 4)
+	}
+
+
+
+
+
+	/*var newDataBuffer = Buffer.concat([dataBuffer, d]);
 	dataBuffer = newDataBuffer;
 
 	if(dataBuffer.length > 23 && dataBuffer[0] == 2 && recoveryMode == false) {
@@ -118,8 +174,8 @@ function dataCallback(d) {
 				dataBuffer = dataBuffer.slice(i);
 				recoveryMode = false;
 			}
+		}*/
 		}
-	}
 }
 
 if(globals.useUSB) {
