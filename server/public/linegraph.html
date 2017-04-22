@@ -8,7 +8,7 @@
 		// dataPoints
 		var dataPoints1 = [];
 		var dataPoints2 = [];
-		var dataPoints3 = [];
+		//var dataPoints3 = [];
 		var chart = new CanvasJS.Chart("chartContainer",{
 			zoomEnabled: true,
 			title: {
@@ -48,16 +48,16 @@
 				showInLegend: true,
 				name: "Booster" ,
 				dataPoints: dataPoints2
-			},
+			}//,
           
-          {				
-				// dataSeries test series for parachute
+          //{				
+				/* dataSeries test series for parachute
 				type: "line",
 				xValueType: "dateTime",
 				showInLegend: true,
 				name: "Drogue Booster" ,
 				dataPoints: dataPoints3
-			}],
+			}*/],
           legend:{
             cursor:"pointer",
             itemclick : function(e) {
@@ -78,7 +78,7 @@
 		// initial value
 		var yValue1 = 000; 
 		var yValue2 = 000;
-        var yValue3 = 000;
+        //var yValue3 = 000;
 
 		var time = new Date;
       //time.setHours(9);
@@ -101,12 +101,12 @@
 				// generating random values
 				var deltaY1 = .5 + Math.random() *(-.5-.5);
 				var deltaY2 = .5 + Math.random() *(-.5-.5);
-              	var deltaY3 = .5 + Math.random() *(-.5-.5);
+              //	var deltaY3 = .5 + Math.random() *(-.5-.5);
 
 				// adding random value and rounding it to two digits. 
 				yValue1 = Math.round((yValue1 + deltaY1)*100)/100;
 				yValue2 = Math.round((yValue2 + deltaY2)*100)/100;
-                		yValue3 = Math.round((yValue3 + deltaY2)*100)/100;
+                		//yValue3 = Math.round((yValue3 + deltaY2)*100)/100;
 				
 				// pushing the new values
 				dataPoints1.push({
@@ -117,10 +117,10 @@
 					x: time.getTime(),
 					y: yValue2
 				});
-              dataPoints3.push({
+             /* dataPoints3.push({
 					x: time.getTime(),
 					y: yValue3
-				});
+				});*/
 
 
 			};
@@ -128,7 +128,7 @@
 			// updating legend text with  updated with y Value 
 			chart.options.data[0].legendText = " Sustainer " + yValue1 + " ft";
 			chart.options.data[1].legendText = " Booster " + yValue2 + " ft"; 
-            chart.options.data[2].legendText = " d " + yValue3 + " ft";
+           // chart.options.data[2].legendText = " drogue booster " + yValue3 + " ft";
           
 
 			chart.render();
