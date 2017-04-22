@@ -69,19 +69,19 @@ dataEmitter.on('data', function(data) {
 	}
 
 	if(mode === 2) {
-		var altitude = data.readUInt16LE(1);
-		altitude += data.readUInt8(3) * 65536;
-		var latitude = data.readFloatLE(4);
-		var longitude = data.readFloatLE(8);
-		var accelerometer_x = data.readFloatLE(12);
-		var accelerometer_y = data.readFloatLE(16);
-		var accelerometer_z = data.readFloatLE(20);
-		var yaw = data.readFloatLE(24);
-		var pitch = data.readFloatLE(28);
-		var roll = data.readFloatLE(32);
-		var magnetometer_x = data.readFloatLE(36);
-		var magnetometer_y = data.readFloatLE(40);
-		var magnetometer_z = data.readFloatLE(44);
+		var altitude = data.readUInt16LE(15);
+		altitude += data.readUInt8(17) * 65536;
+		var latitude = data.readFloatLE(18);
+		var longitude = data.readFloatLE(22);
+		var accelerometer_x = data.readFloatLE(26);
+		var accelerometer_y = data.readFloatLE(30);
+		var accelerometer_z = data.readFloatLE(34);
+		var yaw = data.readFloatLE(38);
+		var pitch = data.readFloatLE(42);
+		var roll = data.readFloatLE(46);
+		var magnetometer_x = data.readFloatLE(50);
+		var magnetometer_y = data.readFloatLE(54);
+		var magnetometer_z = data.readFloatLE(58);
 
 		telemetryEmitter.emit('newPacket', {
 			"mode": "Armed",
