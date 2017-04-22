@@ -1,6 +1,7 @@
 // Layer that abstracts getting data from the USB port
 var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
+var tty = require('tty');
 var globals = require('./globals');
 
 
@@ -57,8 +58,7 @@ dataEmitter.sendPacket = function() {
 };
 
 // Fire a fake packet every second
-// setInterval(() => { dataEmitter.sendPacket(); }, 1000);
-
+//setInterval(() => { dataEmitter.sendPacket(); }, 1000);
 
 // Tries to open the specified file.
 // Attaches the data callback to the 'data' event.
@@ -96,18 +96,19 @@ var dataBuffer = Buffer.alloc(0);
 function dataCallback(d) {
 	var newDataBuffer = Buffer.concat([dataBuffer, d]);
 	dataBuffer = newDataBuffer;
-
-	if(dataBuffer.length > 23 && dataBuffer[0] == 2 && recoveryMode == false) {
-		dataPacket = dataBuffer.slice(0, 24);
-		dataBuffer = dataBuffer.slice(24);
-		dataEmitter.emit("data", dataPacket);
-	} else { // Enter recovery mode
-		console.log("Entering recovery mode");
-		recoveryMode = true;
-		for(var i = 0; i < dataBuffer.length && recoveryMode == true; i++) {
-			if(dataBuffer[i] == 2) {
-				dataBuffer = dataBuffer.slice(i);
-				recoveryMode = false;
+	if(dataBuffer.length >= 48) {
+		if(dataBuffer[0] == 2 && recoveryMode == false) {
+			dataPacket = dataBuffer.slice(0, 48);
+			dataBuffer = dataBuffer.slice(48);
+			dataEmitter.emit("data", dataPacket);
+		} else { // Enter recovery mode
+			console.log("Entering recovery mode");
+			recoveryMode = true;
+			for(var i = 0; i < dataBuffer.length && recoveryMode == true; i++) {
+				if(dataBuffer[i] == 2) {
+					dataBuffer = dataBuffer.slice(i);
+					recoveryMode = false;
+				}
 			}
 		}
 	}
