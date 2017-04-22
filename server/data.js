@@ -2,7 +2,6 @@
 var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
 var globals = require('./globals');
-var xbee_api = require('xbee-api');
 
 var dataEmitter = new EventEmitter();
 
@@ -115,6 +114,10 @@ var insidePacket = false;
 // packet, then parse it.
 function dataCallback(d) {
 
+	if (insidePacket === false && dataBuffer.length > 0 && dataBuffer[0] === 0x7e) {
+		insidePacket = true;
+	}
+
 	// We're not inside a packet and we're not looking at a packet
 	// header, so something went wrong. Look for the 7e.
 	if (insidePacket === false && d[0] != 0x7e) {
@@ -158,17 +161,19 @@ function dataCallback(d) {
 	// Apply the escape-character logic to the incoming data
 	for (var i = 0; i < d.length; i++) {
 		if (isEscape) {
-			escapedCharacters[escapedIndex++] = d[i] ^ 0x20;
+			escapedData[escapedIndex] = d[i] ^ 0x20;
+			escapedIndex++;
 			isEscape = false;
 		} else if (d[i] === 0x7D) {
 			isEscape = true;
 		} else {
-			escapedCharacters[escapedIndex++] = d[i];
+			escapedData[escapedIndex] = d[i];
+			escapedIndex++;
 		}
 	}
 
 	// Add the escaped data to the data buffer
-	dataBuffer = Buffer.concat([dataBuffer, escapedCharacters]);
+	dataBuffer = Buffer.concat([dataBuffer, escapedData]);
 
 	// We need at least three bytes.
 	// The first two bytes should always be 0x7e to denote
@@ -176,43 +181,23 @@ function dataCallback(d) {
 	// Once we have the length we can grab the whole packet and
 	// process it.
 	if (dataBuffer.length >= 3) {
-		var length = dataBuffer[2] + 15;
+		var length = dataBuffer[2] + 4;
+		console.log("Found total packet length ", length);
 		// We have the entire RF data (the length attribute)
 		// and the 15 bytes of header data, so we can process
 		// the packet.
 		if (dataBuffer.length >= length) {
+			console.log("SENDING");
 			var dataPacket = dataBuffer.slice(0, length);
 			dataBuffer = dataBuffer.slice(length);
-			console.log(dataPacket.length);
 			dataEmitter.emit("data", dataPacket);
+			insidePacket = false;
 		}
 	}
-
-
-
-
-
-	/*var newDataBuffer = Buffer.concat([dataBuffer, d]);
-	dataBuffer = newDataBuffer;
-
-	if(dataBuffer.length > 23 && dataBuffer[0] == 2 && recoveryMode == false) {
-		dataPacket = dataBuffer.slice(0, 24);
-		dataBuffer = dataBuffer.slice(24);
-		dataEmitter.emit("data", dataPacket);
-	} else { // Enter recovery mode
-		console.log("Entering recovery mode");
-		recoveryMode = true;
-		for(var i = 0; i < dataBuffer.length && recoveryMode == true; i++) {
-			if(dataBuffer[i] == 2) {
-				dataBuffer = dataBuffer.slice(i);
-				recoveryMode = false;
-			}
-		}*/
-		//}
 }
 
 if(globals.useUSB) {
-	createPersistentReadStream('/dev/ttyACM0', dataCallback);
+	createPersistentReadStream('/dev/ttyUSB0', dataCallback);
 }
 
 module.exports = dataEmitter;

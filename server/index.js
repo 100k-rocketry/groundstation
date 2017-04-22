@@ -12,6 +12,11 @@ var app = express();
 // Start up the websocket events
 var expressWs = require('express-ws')(app);
 
+telemetryEmitter.on("newPacket", (packet) => {
+	console.log(packet);
+});
+
+
 app.ws('/', function(ws, req) {
 
 	console.log('Acquired new connection from ' + ws.upgradeReq.headers.origin);
