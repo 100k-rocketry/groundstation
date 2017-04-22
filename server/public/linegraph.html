@@ -34,7 +34,7 @@
 				includeZero: true
 			}, 
 			data: [{ 
-				// dataSeries1
+				// dataSeries for Sustainer
 				type: "line",
 				xValueType: "dateTime",
 				showInLegend: true,
@@ -42,7 +42,7 @@
 				dataPoints: dataPoints1
 			},
 			{					
-				// dataSeries2
+				// dataSeries for Booster
 				type: "line",
 				xValueType: "dateTime",
 				showInLegend: true,
@@ -51,11 +51,11 @@
 			},
           
           {				
-				// dataSeries2
+				// dataSeries test series for parachute
 				type: "line",
 				xValueType: "dateTime",
 				showInLegend: true,
-				name: "dr" ,
+				name: "Drogue Booster" ,
 				dataPoints: dataPoints3
 			}],
           legend:{
@@ -106,7 +106,7 @@
 				// adding random value and rounding it to two digits. 
 				yValue1 = Math.round((yValue1 + deltaY1)*100)/100;
 				yValue2 = Math.round((yValue2 + deltaY2)*100)/100;
-                yValue2 = Math.round((yValue2 + deltaY2)*100)/100;
+                		yValue3 = Math.round((yValue3 + deltaY2)*100)/100;
 				
 				// pushing the new values
 				dataPoints1.push({
