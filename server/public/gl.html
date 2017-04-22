@@ -135,7 +135,7 @@ THREE.ImageUtils.crossOrigin = "";
 //var material = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
 
 //////////////////////////////////
-	var loader = new THREE.OBJLoader( manager );
+	/*var loader = new THREE.OBJLoader( manager );
   //Loading object here
 				loader.load( 'usub2.obj', function ( object ) {
 
@@ -156,7 +156,7 @@ THREE.ImageUtils.crossOrigin = "";
 
 					render();
 
-				}, onProgress, onError );
+				}, onProgress, onError );*/
 /////////////////////////////////////////////// loading rocket
         var loader2 = new THREE.OBJLoader( manager );
         //Loading object here
@@ -181,7 +181,38 @@ THREE.ImageUtils.crossOrigin = "";
 
       				}, onProgress, onError );
 ////////////////////////////////////////////////////
+group = new THREE.Group();
+				scene.add( group );
+				// earth
+				var loader = new THREE.TextureLoader();
+				loader.load( 'heightmap.jpg', function ( texture ) {
+					//var geometry = new THREE.SphereGeometry( 200, 20, 20 );
+          var loader = new THREE.OBJLoader( manager );
+          //Loading object here
+                loader.load( 'usub2.obj', function ( object ) {
 
+                  object.traverse( function ( child ) {
+
+                    if ( child instanceof THREE.Mesh ) {
+
+                      child.material.map = texture;
+
+                    }
+
+                  } );
+
+                  object.position.y = 0;
+                  object.position.x = 0;
+                  object.position.z = 0;
+                  scene.add( object );
+
+                  render();
+
+                }, onProgress, onError );
+					var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+					var mesh = new THREE.Mesh( object, material );
+					group.add( mesh );
+				} );
 
     animate();
     render();
