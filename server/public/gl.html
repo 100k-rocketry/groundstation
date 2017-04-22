@@ -12,8 +12,10 @@
 
 
   var exampleSocket = new WebSocket("ws://" + window.location.host);
-
-
+  //var startTime = Date.now();
+  var container;
+  var stats;
+  var skyboxMesh;
 
     var scene = new THREE.Scene();
     scene.background = new THREE.Color(0x84C5F0);
@@ -22,6 +24,30 @@
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( renderer.domElement );
+    //Skybox texture
+    /*var text1 = loader.load('scripts/textures/miramar_bk.tga');
+    var text2 = loader.load('scripts/textures/miramar_dn.tga');
+    var text3 = loader.load('scripts/textures/miramar_ft.tga');
+    var text4 = loader.load('scripts/textures/miramar_lf.tga');
+    var text5 = loader.load('scripts/textures/miramar_rt.tga');
+    var text6 = loader.load('scripts/textures/miramar_up.tga');
+    var urls = [text1 + text2 + text3 + text4 + text5 + text6];
+
+    var textureCube = THREE.ImageUtils.loadTextureCube(urls);
+    var shader  = THREE.ShaderUtils.lib["cube"];
+    shader.uniforms["tCube"].texture = textureCube;
+    var material = new THREE.MeshShaderMaterial({
+      fragmentShader : shader.fragmentShader,
+      vertexShader  : shader.vertexShader,
+      uniforms  : shader.uniforms
+    });
+
+    skyboxMesh = new THREE.Mesh(new THREE.CubeGeometry(100000, 100000, 100000, 1, 1, 1, null, true), material);
+
+    scene.addObject(skyboxMesh);*/
+////////////////end of sky Mesh code
+
+
 
     //var geometry = new THREE.BoxGeometry( 1, 1, 1 );
     //var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
@@ -30,7 +56,7 @@
 
 
     var rocketGeometry = new THREE.SphereGeometry(.1, 32, 32);
-    var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
     var rocket = new THREE.Mesh( rocketGeometry, rocketMaterial );
 
     //var rocket = rockobject;
@@ -237,12 +263,12 @@ exampleSocket.onmessage = function(event) {
 		 +packet.timestamp +'</td></tr>';
 		*/
 
-		var x = packet.longitude - (-106.97305) * 92;
-		var y = packet.latitude - (32.9893) * 111;
-		var z = packet.altitude / 1000;
+		var x = (packet.longitude - (-106.97305)) * 92;
+		var y = (packet.latitude - (32.9893)) * 111;
+		var z = packet.altimeter / 1000;
 
-		rockobject.position.set(x, y, z);
-
+		rocket.position.set(x, z, y);
+    console.log(x, y, z);
 }
 
 

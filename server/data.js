@@ -8,15 +8,16 @@ var dataEmitter = new EventEmitter();
 
 var recoveryMode = false;
 
-dataEmitter.altitude = 0;
-dataEmitter.latitude = 45.0;
-dataEmitter.longitude = 100;
+dataEmitter.altitude = 1300;
+dataEmitter.longitude = (-106.97305);
+dataEmitter.latitude = (32.9893);
 dataEmitter.accelerometer_x = 0;
 dataEmitter.accelerometer_y = 0;
 dataEmitter.accelerometer_z = 0;
 dataEmitter.yaw = 0;
 dataEmitter.pitch = 90;
 dataEmitter.roll = 0;
+dataEmitter.numpackets = 0;
 
 dataEmitter.sendPacket = function() {
 
@@ -50,12 +51,18 @@ dataEmitter.sendPacket = function() {
 	buf.writeFloatLE(this.pitch, 40);
 	// gyro z
 	buf.writeFloatLE(this.roll, 44);
-
+	if(this.numpackets == 10){
+		this.numpackets = 0;
+		this.longitude = (-106.97305);
+		this.latitude = (32.9893);
+		this.altitude = 1300;
+	}
+	this.numpackets +=1;
 	this.emit('data', buf);
 
-	this.altitude += 7;
-	this.latitude += 0.01;
-	this.longitude -= 0.01;
+	this.altitude += 500;
+	this.latitude += 0.00001;
+	this.longitude -= 0.00001;
 	this.accelerometer_x += 1;
 	this.accelerometer_y -= 2;
 	this.accelerometer_z += 3;
