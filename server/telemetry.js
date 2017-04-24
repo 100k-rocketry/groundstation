@@ -49,43 +49,65 @@ if(!globals.useUSB) {
 	setInterval(() => { telemetryEmitter.sendPacket(); }, 1000);
 }
 
+var sustainerAddress = Buffer.from([0x00,0x13,0xA2,0x00,0x41,0x5A,0xD2,0x0B]);
+var boosterAddress = Buffer.from([0x00,0x13,0xA2,0x00,0x41,0x25,0xD1,0xF6]);
+var offset = 14;
+
 dataEmitter.on('data', function(data) {
+	console.log(data);
+	try {
 	// mode
-	mode = data.readUInt8(0);
+	mode = data.readUInt8(1 + offset);
+
+	var part;
+	console.log("WHIDF");
+	console.log(data.slice(4, 12));
+	console.log(sustainerAddress);
+	if (sustainerAddress.compare(data, 4, 12) === 0) {
+		part = "Sustainer";
+	}
+	if (boosterAddress.compare(data, 4, 12) === 0) {
+		part = "Booster";
+	}
+
+	console.log("MODE " + mode);
+	console.log(data);
 
 	if(mode === 1) {
-		var boosterEMatch = data.readUInt8(1);
-		var sustainerEMatch = data.readUInt8(2);
-		var temperature = data.readUInt8(3);
+		var ematchStatus = data.readUInt8(2 + offset);
+		var temperature = data.readUInt8(2 + offset);
 
 		telemetryEmitter.emit('newPacket', {
 			"mode": "Testings",
-			"part": "sustainer",
-			"booster_e_match": boosterEMatch,
-			"sustainer_e_match": sustainerEMatch,
+			"part": part,
+			"ematch_status": ematchStatus,
 			"temperature": temperature,
 			"timestamp": (new Date()).getTime()
 		});
 	}
 
 	if(mode === 2) {
-		var altitude = data.readUInt16LE(1);
-		altitude += data.readUInt8(3) * 65536;
-		var latitude = data.readFloatLE(4);
-		var longitude = data.readFloatLE(8);
-		var accelerometer_x = data.readFloatLE(12);
-		var accelerometer_y = data.readFloatLE(16);
-		var accelerometer_z = data.readFloatLE(20);
-		var yaw = data.readFloatLE(24);
-		var pitch = data.readFloatLE(28);
-		var roll = data.readFloatLE(32);
-		var magnetometer_x = data.readFloatLE(36);
-		var magnetometer_y = data.readFloatLE(40);
-		var magnetometer_z = data.readFloatLE(44);
+		var altitude = data.readUInt8(2 + offset) * 65536;
+		altitude += data.readUInt16BE(3 + offset);
+		var latitude = data.readFloatBE(5 + offset);
+		var longitude = data.readFloatBE(9 + offset);
+		var accelerometer_x = data.readFloatBE(13 + offset);
+		var accelerometer_y = data.readFloatBE(17 + offset);
+		var accelerometer_z = data.readFloatBE(21 + offset);
+		var yaw = data.readFloatBE(25 + offset);
+		var pitch = data.readFloatBE(29 + offset);
+		var roll = data.readFloatBE(33 + offset);
+		var magnetometer_x = data.readFloatBE(37 + offset);
+		var magnetometer_y = data.readFloatBE(41 + offset);
+		var magnetometer_z = data.readFloatBE(45 + offset);
+		var gps_altitude = data.readUInt16BE(49 + offset);
+		var kalman_altitude = data.readUInt16BE(51 + offset);
+		var kalman_velocity = data.readUInt16BE(53 + offset);
+		var ematch_status = data.readUInt8(55 + offset);
 
 		telemetryEmitter.emit('newPacket', {
 			"mode": "Armed",
-			"part": "sustainer",
+			"part": part,
 			"altimeter": altitude,
 			"latitude": latitude,
 			"longitude": longitude,
@@ -98,26 +120,35 @@ dataEmitter.on('data', function(data) {
 			"yaw": yaw,
 			"pitch": pitch,
 			"roll": roll,
+			"gps_altitude": gps_altitude,
+			"kalman_altitude": kalman_altitude,
+			"kalman_velocity": kalman_velocity,
+			"ematch_status": ematch_status,			
 			"timestamp": (new Date()).getTime()
 		});
 	}
 
+	// Low power
 	if(mode === 4) {
-		latitude = data.readFloatLE(1);
-		longitude = data.readFloatLE(5);
+		latitude = data.readFloatBE(2 + offset);
+		longitude = data.readFloatBE(6 + offset);
 
 		telemetryEmitter.emit('newPacket', {
 			"mode": "Low Power",
-			"part": "sustainer",
+			"part": part,
 			"latitude": latitude,
 			"longitude": longitude,
 			"timestamp": (new Date()).getTime()
 		});
 	}
+	} catch (err) {
+		console.log("Could not parse packet data.");
+		console.log(err);
+	}
 
 
 
-	//console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
+	console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
 });
 
 module.exports = telemetryEmitter;
