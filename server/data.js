@@ -4,7 +4,6 @@ var fs = require('fs');
 var tty = require('tty');
 var globals = require('./globals');
 
-
 var dataEmitter = new EventEmitter();
 
 var recoveryMode = false;
@@ -21,7 +20,7 @@ dataEmitter.roll = 0;
 
 dataEmitter.sendPacket = function() {
 
-	var buf = Buffer.alloc(24);
+	var buf = Buffer.alloc(48);
 	// mode
 	buf.writeUInt8(2, 0);
 	// altimeter
@@ -32,17 +31,25 @@ dataEmitter.sendPacket = function() {
 	// long
 	buf.writeFloatLE(this.longitude, 8);
 	// accel x
-	buf.writeInt16LE(this.accelerometer_x, 12);
+	buf.writeFloatLE(this.accelerometer_x, 12);
 	// accel y
-	buf.writeInt16LE(this.accelerometer_y, 14);
+	buf.writeFloatLE(this.accelerometer_y, 16);
 	// accel z
-	buf.writeInt16LE(this.accelerometer_z, 16);
+	buf.writeFloatLE(this.accelerometer_z, 20);
 	// gyro x
-	buf.writeInt16LE(this.yaw, 18);
+	buf.writeFloatLE(this.yaw, 24);
 	// gyro y
-	buf.writeInt16LE(this.pitch, 20);
+	buf.writeFloatLE(this.pitch, 28);
 	// gyro z
-	buf.writeInt16LE(this.roll, 22);
+	buf.writeFloatLE(this.roll, 32);
+
+	// magnetometer
+	// gyro x
+	buf.writeFloatLE(this.yaw, 36);
+	// gyro y
+	buf.writeFloatLE(this.pitch, 40);
+	// gyro z
+	buf.writeFloatLE(this.roll, 44);
 
 	this.emit('data', buf);
 
@@ -89,33 +96,107 @@ function createPersistentReadStream(filename, dataCallback) {
 	});
 }
 
+// A collection of all the bytes that we have read from the serial port
+// This is unescaped.
 var dataBuffer = Buffer.alloc(0);
+// Whether the next byte should be escaped.
+// This is declared in this scope because we may need to hold on
+// to this information between packets.
+var isEscape = false;
+// insidePacket is set to true if we are currently inside
+// (processing a packet). It should pretty much always be
+// true unless we are at the first byte of a packet or
+// something went wrong.
+var insidePacket = false;
 
 // Appends the data to the buffer. If there is enough data to make a whole
 // packet, then parse it.
 function dataCallback(d) {
-	var newDataBuffer = Buffer.concat([dataBuffer, d]);
-	dataBuffer = newDataBuffer;
-	if(dataBuffer.length >= 48) {
-		if(dataBuffer[0] == 2 && recoveryMode == false) {
-			dataPacket = dataBuffer.slice(0, 48);
-			dataBuffer = dataBuffer.slice(48);
-			dataEmitter.emit("data", dataPacket);
-		} else { // Enter recovery mode
-			console.log("Entering recovery mode");
-			recoveryMode = true;
-			for(var i = 0; i < dataBuffer.length && recoveryMode == true; i++) {
-				if(dataBuffer[i] == 2) {
-					dataBuffer = dataBuffer.slice(i);
-					recoveryMode = false;
-				}
+
+	if (insidePacket === false && dataBuffer.length > 0 && dataBuffer[0] === 0x7e) {
+		insidePacket = true;
+	}
+
+	// We're not inside a packet and we're not looking at a packet
+	// header, so something went wrong. Look for the 7e.
+	if (insidePacket === false && d[0] != 0x7e) {
+		var startPosition = -1;
+		for (var i = 0; i < d.length; i++) {
+			if (d[i] === 0x7e) {
+				startPosition = i;
+				break;
 			}
+		}
+
+		// If we found a 0x7e, then cut the packet so that's the
+		// new start. If not, then just return from the callback,
+		// because there's nothing we can do until the next
+		// packet comes in.
+		if (startPosition !== -1) {
+			d = d.slice(startPosition);
+		} else {
+			return;
+		}
+	}
+
+	// If we are at the beginning of a packet, then note that fact.
+	if (d[0] === 0x7e) {
+		insidePacket = true;
+	}
+
+	// Count the number of characters that need to be escaped
+	var escapedCharacters = 0;
+	for (var i = 0; i < d.length; i++) {
+		if (d[i] === 0x7D) {
+			escapedCharacters++;
+		}
+	}
+
+	// Create a new buffer to hold all of the data after the
+	// characters have been escaped
+	var escapedData = Buffer.alloc(d.length - escapedCharacters);
+	var escapedIndex = 0;
+
+	// Apply the escape-character logic to the incoming data
+	for (var i = 0; i < d.length; i++) {
+		if (isEscape) {
+			escapedData[escapedIndex] = d[i] ^ 0x20;
+			escapedIndex++;
+			isEscape = false;
+		} else if (d[i] === 0x7D) {
+			isEscape = true;
+		} else {
+			escapedData[escapedIndex] = d[i];
+			escapedIndex++;
+		}
+	}
+
+	// Add the escaped data to the data buffer
+	dataBuffer = Buffer.concat([dataBuffer, escapedData]);
+
+	// We need at least three bytes.
+	// The first two bytes should always be 0x7e to denote
+	// the start of a new packet. The third byte is the length.
+	// Once we have the length we can grab the whole packet and
+	// process it.
+	if (dataBuffer.length >= 3) {
+		var length = dataBuffer[2] + 4;
+		console.log("Found total packet length ", length);
+		// We have the entire RF data (the length attribute)
+		// and the 15 bytes of header data, so we can process
+		// the packet.
+		if (dataBuffer.length >= length) {
+			console.log("SENDING");
+			var dataPacket = dataBuffer.slice(0, length);
+			dataBuffer = dataBuffer.slice(length);
+			dataEmitter.emit("data", dataPacket);
+			insidePacket = false;
 		}
 	}
 }
 
 if(globals.useUSB) {
-	createPersistentReadStream('/dev/ttyACM0', dataCallback);
+	createPersistentReadStream('/dev/ttyUSB0', dataCallback);
 }
 
 module.exports = dataEmitter;

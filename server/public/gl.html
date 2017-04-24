@@ -11,11 +11,19 @@
 <script>
 
 
+<<<<<<< HEAD
 var exampleSocket = new WebSocket("ws://" + window.location.host);
+=======
+  var exampleSocket = new WebSocket("ws://" + window.location.host);
+>>>>>>> xbee
 
 
 
     var scene = new THREE.Scene();
+<<<<<<< HEAD
+=======
+    scene.background = new THREE.Color(0x84C5F0);
+>>>>>>> xbee
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
     var renderer = new THREE.WebGLRenderer();
@@ -31,9 +39,15 @@ var exampleSocket = new WebSocket("ws://" + window.location.host);
     var rocketGeometry = new THREE.SphereGeometry(.1, 32, 32);
     var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     var rocket = new THREE.Mesh( rocketGeometry, rocketMaterial );
+<<<<<<< HEAD
 		
 		rocket.position.set(0, 1.4, 0);
 		
+=======
+
+		rocket.position.set(0, 1.4, 0);
+
+>>>>>>> xbee
     scene.add(rocket);
 
     camera.position.z = 5;
@@ -69,6 +83,7 @@ THREE.ImageUtils.crossOrigin = "";
 
     var loader = new THREE.TextureLoader();
 
+<<<<<<< HEAD
 	
 				var ambientLight = new THREE.AmbientLight ( 0xffffff , .1);
 				scene.add ( ambientLight );
@@ -78,13 +93,48 @@ THREE.ImageUtils.crossOrigin = "";
 				scene.add( directionalLight );
 	
 					var manager = new THREE.LoadingManager();
+=======
+
+
+				//var ambientLight = new THREE.AmbientLight ( 0xffffff , .5);
+
+				//scene.add ( ambientLight );
+
+				//var directionalLight = new THREE.DirectionalLight( 0xffeedd, 1.);
+				//directionalLight.position.set( 0, 0, 7 );
+				//scene.add( directionalLight );
+        /*var shaderMaterial = new THREE.ShaderMaterial({
+        uniforms: uniforms,
+        vertexShader: phongShader.vertexShader,
+        fragmentShader: phongShader.fragmentShader,
+        lights:true,
+        fog: true
+      });*/
+
+
+
+
+				var ambientLight = new THREE.AmbientLight ( 0xffffff , .5);
+				scene.add ( ambientLight );
+
+				var directionalLight = new THREE.DirectionalLight( 0xffeedd, 1.);
+				directionalLight.position.set( 10, 1.3, 0 );
+				scene.add( directionalLight );
+
+
+				var manager = new THREE.LoadingManager();
+>>>>>>> xbee
 				manager.onProgress = function ( item, loaded, total ) {
 
 					console.log( item, loaded, total );
 
 				};
 
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> xbee
 	var onProgress = function ( xhr ) {
 					if ( xhr.lengthComputable ) {
 						var percentComplete = xhr.loaded / xhr.total * 100;
@@ -96,8 +146,14 @@ THREE.ImageUtils.crossOrigin = "";
 	};
 
 					//var texture = new THREE.Texture();
+<<<<<<< HEAD
 	
 	var loader = new THREE.OBJLoader( manager );
+=======
+
+	var loader = new THREE.OBJLoader( manager );
+  //Loading object here
+>>>>>>> xbee
 				loader.load( 'usub2.obj', function ( object ) {
 
 					object.traverse( function ( child ) {
@@ -109,11 +165,16 @@ THREE.ImageUtils.crossOrigin = "";
 						}
 
 					} );
+<<<<<<< HEAD
 					
+=======
+
+>>>>>>> xbee
 					object.position.y = 0;
 					object.position.x = 0;
 					object.position.z = 0;
 					scene.add( object );
+<<<<<<< HEAD
 					
 					render();
 
@@ -121,6 +182,15 @@ THREE.ImageUtils.crossOrigin = "";
 	
 				
 				
+=======
+
+					render();
+
+				}, onProgress, onError );
+
+
+
+>>>>>>> xbee
     animate();
     render();
 
@@ -143,6 +213,7 @@ exampleSocket.onmessage = function(event) {
 		 +packet.pitch +'</td><td>'+packet.roll +'</td><td>'
 		 +packet.timestamp +'</td></tr>';
 		*/
+<<<<<<< HEAD
 		
 		var x = (packet.longitude - (-106.97305)) * 92;
 		var y = (packet.latitude - (32.9893)) * 111;
@@ -156,6 +227,15 @@ console.log(z);
 		
 		rocket.position.set(x, y, z);
 		
+=======
+
+		var x = packet.longitude - (-106.97305) * 92;
+		var y = packet.latitude - (32.9893) * 111;
+		var z = packet.altitude / 1000;
+
+		rocket.position.set(x, y, z);
+
+>>>>>>> xbee
 }
 
 
