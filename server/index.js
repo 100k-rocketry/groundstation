@@ -2,6 +2,7 @@
 var express = require('express');
 var path = require('path');
 var telemetryEmitter = require('./telemetry');
+var mocker = require('./mocker');
 
 // Get environment variables
 var port = process.env.GROUNDSTATION_PORT || 8080
@@ -62,3 +63,5 @@ app.get('*', function(req, res) {
 app.listen(port, function () {
 	console.log("Listening on port", port);
 });
+
+mocker.beginMock();

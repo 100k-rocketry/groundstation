@@ -6,71 +6,6 @@ var globals = require('./globals');
 
 var dataEmitter = new EventEmitter();
 
-var recoveryMode = false;
-
-dataEmitter.altitude = 1300;
-dataEmitter.longitude = (-106.97305);
-dataEmitter.latitude = (32.9893);
-dataEmitter.accelerometer_x = 0;
-dataEmitter.accelerometer_y = 0;
-dataEmitter.accelerometer_z = 0;
-dataEmitter.yaw = 0;
-dataEmitter.pitch = 90;
-dataEmitter.roll = 0;
-dataEmitter.numpackets = 0;
-
-dataEmitter.sendPacket = function() {
-
-	var buf = Buffer.alloc(48);
-	// mode
-	buf.writeUInt8(2, 0);
-	// altimeter
-	buf.writeUInt16LE(this.altitude, 1);
-	buf.writeUInt8(0, 3);
-	// lat
-	buf.writeFloatLE(this.latitude, 4);
-	// long
-	buf.writeFloatLE(this.longitude, 8);
-	// accel x
-	buf.writeFloatLE(this.accelerometer_x, 12);
-	// accel y
-	buf.writeFloatLE(this.accelerometer_y, 16);
-	// accel z
-	buf.writeFloatLE(this.accelerometer_z, 20);
-	// gyro x
-	buf.writeFloatLE(this.yaw, 24);
-	// gyro y
-	buf.writeFloatLE(this.pitch, 28);
-	// gyro z
-	buf.writeFloatLE(this.roll, 32);
-
-	// magnetometer
-	// gyro x
-	buf.writeFloatLE(this.yaw, 36);
-	// gyro y
-	buf.writeFloatLE(this.pitch, 40);
-	// gyro z
-	buf.writeFloatLE(this.roll, 44);
-	if(this.numpackets == 10){
-		this.numpackets = 0;
-		this.longitude = (-106.97305);
-		this.latitude = (32.9893);
-		this.altitude = 1300;
-	}
-	this.numpackets +=1;
-	this.emit('data', buf);
-
-	this.altitude += 500;
-	this.latitude += 0.00001;
-	this.longitude -= 0.00001;
-	this.accelerometer_x += 1;
-	this.accelerometer_y -= 2;
-	this.accelerometer_z += 3;
-	this.yaw += 1;
-	this.pitch += 2;
-	this.roll += 3;
-};
-
 // Fire a fake packet every second
 //setInterval(() => { dataEmitter.sendPacket(); }, 1000);
 
@@ -188,12 +123,10 @@ function dataCallback(d) {
 	// process it.
 	if (dataBuffer.length >= 3) {
 		var length = dataBuffer[2] + 4;
-		console.log("Found total packet length ", length);
 		// We have the entire RF data (the length attribute)
 		// and the 15 bytes of header data, so we can process
 		// the packet.
 		if (dataBuffer.length >= length) {
-			console.log("SENDING");
 			var dataPacket = dataBuffer.slice(0, length);
 			dataBuffer = dataBuffer.slice(length);
 			dataEmitter.emit("data", dataPacket);
@@ -202,6 +135,7 @@ function dataCallback(d) {
 	}
 }
 
+// If we are actually connecting to the physical groundstation, then open the device.
 if(globals.useUSB) {
 	createPersistentReadStream('/dev/ttyUSB0', dataCallback);
 }
