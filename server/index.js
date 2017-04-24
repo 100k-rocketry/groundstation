@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var telemetryEmitter = require('./telemetry');
 var mocker = require('./mocker');
+var globals = require('./globals');
 
 // Get environment variables
 var port = process.env.GROUNDSTATION_PORT || 8080
@@ -64,4 +65,7 @@ app.listen(port, function () {
 	console.log("Listening on port", port);
 });
 
-mocker.beginMock();
+// If we aren't getting data from the real groundstation, then do data mocking
+if (!globals.useUSB) {
+	mocker.beginMock();
+}
