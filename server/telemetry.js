@@ -102,7 +102,7 @@ dataEmitter.on('data', function(data) {
 		"timestamp": (new Date()).getTime()
 	});
 
-	//console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
+	console.log(mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll);
 });
 
 module.exports = telemetryEmitter;
