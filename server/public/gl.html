@@ -59,7 +59,7 @@
     var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
     var rocket = new THREE.Mesh( rocketGeometry, rocketMaterial );
 
-    //var rocket = rockobject;
+    var rocketfinal;
 
 		rocket.position.set(0, 1.4, 0);//was rocket
 
@@ -186,7 +186,7 @@ THREE.ImageUtils.crossOrigin = "";
 /////////////////////////////////////////////// loading rocket
         var loader2 = new THREE.OBJLoader( manager );
         //Loading object here
-      				loader2.load( 'rocketmodel.obj', function ( rockobject ) {
+      				loader2.load( 'untitled2.obj', function ( rockobject ) {
                 rockobject.traverse( function ( child ) {
 
       				      if ( child instanceof THREE.Mesh ) {
@@ -200,7 +200,11 @@ THREE.ImageUtils.crossOrigin = "";
       					//rockobject.position.y = 0;
       					//rockobject.position.x = 0;
       					//rockobject.position.z = 0;
-                rocket.position.set(0, 1.4, 0);//was rocket
+                //var rocketMaterials = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+                //rocketfinal = new THREE.Mesh( rocketGeometry, rocketMaterials );
+
+                rocketfinal = rockobject;
+                rocketfinal.position.set(0, 1.4, 0);//was rocket
       					scene.add( rockobject );
 
       					render();
@@ -267,7 +271,7 @@ exampleSocket.onmessage = function(event) {
 		var y = (packet.latitude - (32.9893)) * 111;
 		var z = packet.altimeter / 1000;
 
-		rocket.position.set(x, z, y);
+		rocketfinal.position.set(x, z, y);
     console.log(x, y, z);
 }
 
