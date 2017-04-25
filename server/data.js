@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
 var tty = require('tty');
 var globals = require('./globals');
+var spawn = require('child_process');
 
 var dataEmitter = new EventEmitter();
 
@@ -14,6 +15,17 @@ var dataEmitter = new EventEmitter();
 // If the file closes for any reason during execution,
 // automatically try to re-open the file
 function createPersistentReadStream(filename, dataCallback) {
+	
+	// If the file doesn't exist, then try again in one second
+	if (!fs.existsSync(filename)) {
+		console.log("Could not open file: " + filename);
+		setTimeout(() => { createPersistentReadStream(filename, dataCallback); }, 1000);
+		return;
+	}
+
+	// Set the device to raw mode
+	spawn.spawnSync('/bin/stty', ['-F', filename, 'raw']);
+
 	var stream = fs.createReadStream(filename);
 
 	// Stream opened successfully.
