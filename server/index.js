@@ -15,10 +15,17 @@ var app = express();
 // Start up the websocket events
 var expressWs = require('express-ws')(app);
 
+var allPackets = [];
+
+
 telemetryEmitter.on("newPacket", (packet) => {
-	console.log(packet);
+	//console.log(packet);
 });
 
+telemetryEmitter.on("newPacket", (packet) => {
+	// Really dirty way to deep copy the packet
+	allPackets.push(JSON.parse(JSON.stringify(packet)));
+});
 
 app.ws('/', function(ws, req) {
 
@@ -39,6 +46,12 @@ app.ws('/', function(ws, req) {
 			telemetryEmitter.removeListener('newPacket', clientListener);
 		}
 	}
+	
+	// Send all the existing data to the client.	
+	allPackets.forEach(function(packet) {
+			clientListener(packet);
+	});
+	
 
 	// When we get a new packet, send it to this client
 	telemetryEmitter.on('newPacket', clientListener);

@@ -4,7 +4,6 @@
 <head>
 	<script type="text/javascript">
 	window.onload = function () {
-
 		// dataPoints
 		var dataPoints1 = [];
 		var dataPoints2 = [];
@@ -30,7 +29,7 @@
 				title: "chart updates every 1 secs"
 			},
 			axisY:{
-				suffix: 'ft',
+				suffix: 'm',
 				includeZero: true
 			}, 
 			data: [{ 
@@ -72,74 +71,33 @@
           }
 		});
 
-
-
-		var updateInterval = 1000;
-		// initial value
-		var yValue1 = 000; 
-		var yValue2 = 000;
-        //var yValue3 = 000;
-
-		var time = new Date;
-      //time.setHours(9);
-      //time.setMinutes(30);
-		time.setSeconds(00);
-      //time.setMilliseconds(00);
-		// starting at 9.30 am
-
-		var updateChart = function (count) {
-			count = count || 1;
-
-			// count is number of times loop runs to generate random dataPoints. 
-
-			for (var i = 0; i < count; i++) {
-				
-				// add interval duration to time				
-				time.setTime(time.getTime()+ updateInterval);
-
-
-				// generating random values
-				var deltaY1 = .5 + Math.random() *(-.5-.5);
-				var deltaY2 = .5 + Math.random() *(-.5-.5);
-              //	var deltaY3 = .5 + Math.random() *(-.5-.5);
-
-				// adding random value and rounding it to two digits. 
-				yValue1 = Math.round((yValue1 + deltaY1)*100)/100;
-				yValue2 = Math.round((yValue2 + deltaY2)*100)/100;
-                		//yValue3 = Math.round((yValue3 + deltaY2)*100)/100;
-				
+		
+		// Make the websocket connection
+		var webSocket = new WebSocket("ws://" + window.location.host);	
+		
+		webSocket.onmessage = function(event) {
+			// Use JSON.parse(event.data) to turn back into an object
+			console.log(event.data);
+			packet = JSON.parse(event.data);
+			
+			console.log(packet);
+			
 				// pushing the new values
-				dataPoints1.push({
-					x: time.getTime(),
-					y: yValue1
-				});
-				dataPoints2.push({
-					x: time.getTime(),
-					y: yValue2
-				});
-             /* dataPoints3.push({
-					x: time.getTime(),
-					y: yValue3
-				});*/
-
-
-			};
-
-			// updating legend text with  updated with y Value 
-			chart.options.data[0].legendText = " Sustainer " + yValue1 + " ft";
-			chart.options.data[1].legendText = " Booster " + yValue2 + " ft"; 
-           // chart.options.data[2].legendText = " drogue booster " + yValue3 + " ft";
-          
-
+				
+				if (packet.part === "Booster") {				
+					dataPoints1.push({
+						x: new Date(packet.timestamp),
+						y: packet.altitude
+					});
+				} else if (packet.part === "Sustainer") {
+					dataPoints2.push({
+						x: new Date(packet.timestamp),
+						y: packet.altitude
+					});
+				}
+				
 			chart.render();
-
-		};
-
-		// generates first set of dataPoints 
-		updateChart(1000);	
-		 
-		// update chart after specified interval 
-		setInterval(function(){updateChart()}, updateInterval);
+		}
 	}
 	</script>
 	<script type="text/javascript" src="canvasjs-1.9.8/canvasjs.min.js"></script>
