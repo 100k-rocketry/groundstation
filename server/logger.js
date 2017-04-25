@@ -13,11 +13,11 @@ fs.open(globals.logFilename, 'a+', function(err, fd) {
 		console.log(globals.logFilename + ' already exists.');
 	} else {
 		// Write the headers to the file
-		fs.write("part, mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll, magnetometer_x, magnetometer_y, magnetometer_z, gps_altitude, kalman_altitude, kalman_velocity, ematch_status, temperature");
+		fs.write(fd, "part, mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll, magnetometer_x, magnetometer_y, magnetometer_z, gps_altitude, kalman_altitude, kalman_velocity, ematch_status, temperature, timestamp" + os.EOL);
 		// Attach an event handler that writes new packet data
 		telemetryEmitter.on('newPacket', function(packet) {
 			fs.write(fd, packet.part + ', ' + packet.mode + ', ' + packet.altitude + ', ' + packet.latitude + ', ' + packet.longitude + ', ' + packet.accelerometer_x + ', ' + packet.accelerometer_y + ', '
-			+ packet.accelerometer_z + ', ' + packet.yaw + ', ' + packet.pitch + ', ' + packet.roll + ', ' + packet.magnetometer_x + ', ' + packet.magnetometer_y + ', ' + packet.magnetometer_z + ', ' + packet.gps_altitude + ', ' + packet.kalman_altitude + ', ' + packet.kalman_velocity + ', ' + packet.ematch_status + ', ' + packet.temperature + ', '  packet.packet.timestamp + ', ' + os.EOL);
+			+ packet.accelerometer_z + ', ' + packet.yaw + ', ' + packet.pitch + ', ' + packet.roll + ', ' + packet.magnetometer_x + ', ' + packet.magnetometer_y + ', ' + packet.magnetometer_z + ', ' + packet.gps_altitude + ', ' + packet.kalman_altitude + ', ' + packet.kalman_velocity + ', ' + packet.ematch_status + ', ' + packet.temperature + ', ' + packet.timestamp + ', ' + os.EOL);
 		});
 	}
 });

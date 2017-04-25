@@ -1,7 +1,7 @@
 var now = new Date();
 
 module.exports = {
-	useUSB: true,
+	useUSB: false,
 	time: now.toISOString(),
 	logFilename: ('log-' + now.toISOString() + '.csv').replace(/:/g, '.'),
 	// The MAC addresses of the sustainer and booster

@@ -4,6 +4,7 @@ var path = require('path');
 var telemetryEmitter = require('./telemetry');
 var mocker = require('./mocker');
 var globals = require('./globals');
+require('./logger');
 
 // Get environment variables
 var port = process.env.GROUNDSTATION_PORT || 8080
