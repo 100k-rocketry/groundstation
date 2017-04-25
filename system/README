@@ -1,0 +1,7 @@
+Copy the service file to /etc/systemd/system
+Run:
+
+	sudo systemctl daemon-reload
+	sudo systemctl enable gs
+
+Reboot the server and enjoy.
