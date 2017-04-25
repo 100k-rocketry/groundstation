@@ -65,6 +65,10 @@ app.ws('/', function(ws, req) {
 	});
 });
 
+app.get('/log', function(req, res) {
+	res.sendFile(globals.logFilename);
+});
+
 // Set up the static routes for the web server
 app.use('/', express.static(path.join(__dirname, 'public')));
 
