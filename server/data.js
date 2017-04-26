@@ -7,9 +7,6 @@ var spawn = require('child_process');
 
 var dataEmitter = new EventEmitter();
 
-// Fire a fake packet every second
-//setInterval(() => { dataEmitter.sendPacket(); }, 1000);
-
 // Tries to open the specified file.
 // Attaches the data callback to the 'data' event.
 // If the file closes for any reason during execution,
@@ -23,7 +20,7 @@ function createPersistentReadStream(filename, dataCallback) {
 		return;
 	}
 
-	// Set the device to raw mode
+	// Set the device to raw mode and set the appropriate baud
 	spawn.spawnSync('/bin/stty', ['-F', filename, globals.baud, 'raw']);
 
 	var stream = fs.createReadStream(filename);
