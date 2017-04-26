@@ -7,7 +7,7 @@ var globals = require('./globals');
 require('./logger');
 
 // Get environment variables
-var port = process.env.GROUNDSTATION_PORT || 8080
+var port = process.env.GROUNDSTATION_PORT || 80
 
 // Set up the express app
 var app = express();
