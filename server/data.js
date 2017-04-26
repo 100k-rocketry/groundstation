@@ -24,7 +24,7 @@ function createPersistentReadStream(filename, dataCallback) {
 	}
 
 	// Set the device to raw mode
-	spawn.spawnSync('/bin/stty', ['-F', filename, 'raw']);
+	spawn.spawnSync('/bin/stty', ['-F', filename, globals.baud, 'raw']);
 
 	var stream = fs.createReadStream(filename);
 
@@ -149,7 +149,7 @@ function dataCallback(d) {
 
 // If we are actually connecting to the physical groundstation, then open the device.
 if(globals.useUSB) {
-	createPersistentReadStream('/dev/ttyUSB0', dataCallback);
+	createPersistentReadStream(globals.deviceName, dataCallback);
 }
 
 module.exports = dataEmitter;
