@@ -1,6 +1,6 @@
 gs.log
 *.csv
-log*
+logs/*.csv
 *.swp
 node_modules/
 
