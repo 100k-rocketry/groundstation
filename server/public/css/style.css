@@ -1,0 +1,53 @@
+header {
+	background-color: yellow;
+}
+
+header h1 {
+	font-size: 60px;
+	margin: 0;
+	padding: 7px 0px 7px 22px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+header a {
+	text-decoration: none;
+	color: black;
+}
+ 
+/* Nav bar */
+ 
+nav {
+	background-color: #333333;
+	margin: 0;
+}
+
+.navbar-item {
+  padding: 10px;
+  font-size: 35px;
+  text-decoration: none;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav li a {
+	color: white;
+	text-decoration: none;
+	padding: 10px;
+}
+
+nav li a:hover {
+	background-color: #444444;
+}
+
+nav .navbar-right {
+	float: right;
+}
+
+nav a:visited {
+	color: white;
+}
+
+.navbar-list {
+	list-style-type: none;
+	margin: 0;
+}
