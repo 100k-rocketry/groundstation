@@ -1,0 +1,104 @@
+<script type="text/javascript" src="scripts/canvasjs-1.9.8/canvasjs.min.js"></script>
+
+<div id="chartContainer" style="height: 300px; width: 100%;">
+</div>
+	
+	
+	<script type="text/javascript">
+	window.onload = function () {
+		// dataPoints
+		var dataPoints1 = [];
+		var dataPoints2 = [];
+		//var dataPoints3 = [];
+		var chart = new CanvasJS.Chart("chartContainer",{
+			zoomEnabled: true,
+			title: {
+				text: "HART Stages"		
+			},
+			toolTip: {
+				shared: true
+				
+			},
+			legend: {
+				verticalAlign: "top",
+				horizontalAlign: "center",
+                                fontSize: 14,
+				fontWeight: "bold",
+				fontFamily: "calibri",
+				fontColor: "dimGrey"
+			},
+			axisX: {
+				title: "chart updates every 1 secs"
+			},
+			axisY:{
+				suffix: 'm',
+				includeZero: true
+			}, 
+			data: [{ 
+				// dataSeries for Sustainer
+				type: "line",
+				xValueType: "dateTime",
+				showInLegend: true,
+				name: "Sustainer",
+				dataPoints: dataPoints1
+			},
+			{					
+				// dataSeries for Booster
+				type: "line",
+				xValueType: "dateTime",
+				showInLegend: true,
+				name: "Booster" ,
+				dataPoints: dataPoints2
+			}//,
+          
+          //{				
+				/* dataSeries test series for parachute
+				type: "line",
+				xValueType: "dateTime",
+				showInLegend: true,
+				name: "Drogue Booster" ,
+				dataPoints: dataPoints3
+			}*/],
+          legend:{
+            cursor:"pointer",
+            itemclick : function(e) {
+              if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+              }
+              else {
+                e.dataSeries.visible = true;
+              }
+              chart.render();
+            }
+          }
+		});
+
+		
+		// Make the websocket connection
+		var webSocket = new WebSocket("ws://" + window.location.host);	
+		
+		webSocket.onmessage = function(event) {
+			// Use JSON.parse(event.data) to turn back into an object
+			console.log(event.data);
+			packet = JSON.parse(event.data);
+			
+			console.log(packet);
+			
+				// pushing the new values
+				
+				if (packet.part === "Booster") {				
+					dataPoints1.push({
+						x: new Date(packet.timestamp),
+						y: packet.altitude
+					});
+				} else if (packet.part === "Sustainer") {
+					dataPoints2.push({
+						x: new Date(packet.timestamp),
+						y: packet.altitude
+					});
+				}
+				
+			chart.render();
+		}
+	}
+	</script>
