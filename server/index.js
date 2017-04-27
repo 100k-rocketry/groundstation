@@ -75,21 +75,17 @@ app.ws('/', function(ws, req) {
 app.get('/pages/:page', function (req, res, next) {
 	var page = req.params.page + '.html';
 
-	if (page) {
-		var content = header;
-		fs.readFile(path.join(__dirname, 'templates', page), (err, data) => {
-			if(!err) {
-				res.write(header);
-				res.write(data);
-				res.write(footer);
-				res.end();
-			} else {
-				next();
-			}
-		});
-	} else {
-		next();
-	}
+	var content = header;
+	fs.readFile(path.join(__dirname, 'templates', page), (err, data) => {
+		if(!err) {
+			res.write(header);
+			res.write(data);
+			res.write(footer);
+			res.end();
+		} else {
+			next();
+		}
+	});
 });
 
 
