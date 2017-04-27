@@ -23,7 +23,7 @@ nav {
 
 .navbar-item {
   padding: 10px;
-  font-size: 35px;
+  font-size: 25px;
   text-decoration: none;
   display: inline-block;
   font-family: Arial, Helvetica, sans-serif;
@@ -51,3 +51,32 @@ nav a:visited {
 	list-style-type: none;
 	margin: 0;
 }
+
+#telemetryrocket {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#telemetryrocket td, #telemetryrocket th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#telemetryrocket tr:nth-child(even){background-color: #f2f2f2;}
+
+#telemetryrocket tr:hover {background-color: #ddd;}
+
+#telemetryrocket th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #C34500;
+    color: white;
+}
+
+.w3-center {
+	text-align: center;
+}
+
+.mySlides {display: none}

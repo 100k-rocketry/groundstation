@@ -22,10 +22,6 @@ var header = fs.readFileSync(path.join(__dirname, 'templates', 'header.html'), '
 var footer = fs.readFileSync(path.join(__dirname, 'templates', 'footer.html'), 'utf8');
 
 telemetryEmitter.on("newPacket", (packet) => {
-	//console.log(packet);
-});
-
-telemetryEmitter.on("newPacket", (packet) => {
 	// Really dirty way to deep copy the packet
 	allPackets.push(JSON.parse(JSON.stringify(packet)));
 	console.log(packet);
@@ -69,6 +65,10 @@ app.ws('/', function(ws, req) {
 	});
 });
 
+app.get('/', function(req, res, next) {
+	res.redirect('/pages/index');
+});
+
 // If the client navigates to 'pages/page_nm', open the appropriate page
 // from the templates folder and send it. If it's not found, then next()
 // to the 404.
@@ -90,12 +90,14 @@ app.get('/pages/:page', function (req, res, next) {
 
 
 app.get('/logs', function (req, res, next) {
+	res.write(header);
 	fs.readdir('logs', function(err, files) {
 		files.forEach(function(f) {
 			res.write('<a href="logs/' + f + '">' + f + '</a><br>');
 		});
-		res.end();
 	});
+	res.write(footer);
+	res.end();
 });
 
 
