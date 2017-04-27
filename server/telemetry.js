@@ -7,6 +7,9 @@ var telemetryEmitter = new EventEmitter();
 // The offset that the payload 
 var offset = 14;
 
+var ADDRESS_START = 4
+var ADDRESS_END = ADDRESS_START + 8
+
 // Parses the response payload from the XBEE XCTU packet and triggers a "newPacket" event.
 dataEmitter.on('data', function(data) {
 	try {
@@ -15,11 +18,14 @@ dataEmitter.on('data', function(data) {
 	
 		// Figure out whether this packet is coming from the booster or the sustainer
 		var part;
-		if (globals.sustainerAddress.compare(data, 4, 12) === 0) {
+		if (globals.sustainerAddress.compare(data, ADDRESS_START, ADDRESS_END) === 0) {
 			part = "Sustainer";
 		}
-		if (globals.boosterAddress.compare(data, 4, 12) === 0) {
+		if (globals.boosterAddress.compare(data, ADDRESS_START, ADDRESS_END) === -1) {
 			part = "Booster";
+		}
+		else {
+			console.log("Invalid part address.");
 		}
 	
 		// Mode 1 = Testing
@@ -39,21 +45,21 @@ dataEmitter.on('data', function(data) {
 		// Mode 2 = Armed
 		if(mode === 2) {
 			var altitude = data.readUInt8(2 + offset) * 65536;
-			altitude += data.readUInt16BE(3 + offset);
-			var latitude = data.readFloatBE(5 + offset);
-			var longitude = data.readFloatBE(9 + offset);
-			var accelerometer_x = data.readFloatBE(13 + offset);
-			var accelerometer_y = data.readFloatBE(17 + offset);
-			var accelerometer_z = data.readFloatBE(21 + offset);
-			var yaw = data.readFloatBE(25 + offset);
-			var pitch = data.readFloatBE(29 + offset);
-			var roll = data.readFloatBE(33 + offset);
-			var magnetometer_x = data.readFloatBE(37 + offset);
-			var magnetometer_y = data.readFloatBE(41 + offset);
-			var magnetometer_z = data.readFloatBE(45 + offset);
-			var gps_altitude = data.readUInt16BE(49 + offset);
-			var kalman_altitude = data.readUInt16BE(51 + offset);
-			var kalman_velocity = data.readUInt16BE(53 + offset);
+			altitude += data.readUInt16LE(3 + offset);
+			var latitude = data.readFloatLE(5 + offset);
+			var longitude = data.readFloatLE(9 + offset);
+			var accelerometer_x = data.readFloatLE(13 + offset);
+			var accelerometer_y = data.readFloatLE(17 + offset);
+			var accelerometer_z = data.readFloatLE(21 + offset);
+			var yaw = data.readFloatLE(25 + offset);
+			var pitch = data.readFloatLE(29 + offset);
+			var roll = data.readFloatLE(33 + offset);
+			var magnetometer_x = data.readFloatLE(37 + offset);
+			var magnetometer_y = data.readFloatLE(41 + offset);
+			var magnetometer_z = data.readFloatLE(45 + offset);
+			var gps_altitude = data.readUInt16LE(49 + offset);
+			var kalman_altitude = data.readUInt16LE(51 + offset);
+			var kalman_velocity = data.readUInt16LE(53 + offset);
 			var ematch_status = data.readUInt8(55 + offset);
 	
 			telemetryEmitter.emit('newPacket', {
@@ -81,8 +87,8 @@ dataEmitter.on('data', function(data) {
 	
 		// Mode 3 = Low power
 		if(mode === 4) {
-			var latitude = data.readFloatBE(2 + offset);
-			var longitude = data.readFloatBE(6 + offset);
+			var latitude = data.readFloatLE(2 + offset);
+			var longitude = data.readFloatLE(6 + offset);
 	
 			telemetryEmitter.emit('newPacket', {
 				"mode": "Low Power",
@@ -91,6 +97,8 @@ dataEmitter.on('data', function(data) {
 				"longitude": longitude,
 				"timestamp": (new Date()).getTime()
 			});
+		} else {
+			console.log("Invalid mode: " + mode);
 		}
 	} catch (err) {
 		console.log("Could not parse packet data.");

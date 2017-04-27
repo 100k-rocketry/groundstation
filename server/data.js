@@ -24,7 +24,7 @@ function createPersistentReadStream(filename, dataCallback) {
 	}
 
 	// Set the device to raw mode
-	spawn.spawnSync('/bin/stty', ['-F', filename, 'raw']);
+	spawn.spawnSync('/bin/stty', ['-F', filename, '115200', 'raw']);
 
 	var stream = fs.createReadStream(filename);
 

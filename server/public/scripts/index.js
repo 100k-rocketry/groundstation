@@ -11,7 +11,7 @@ exampleSocket.onmessage = function(event) {
 			"<b>Timestamp:</b>" + packet.timestamp + "<br><br>";
 
 		}*/
-		document.getElementById("telemetryrocket").innerHTML+= '<tr><td>' +packet.altimeter +' </td><td>'
+		document.getElementById("telemetryrocket").innerHTML+= '<tr><td>' +packet.altitude +' </td><td>'
 		 +packet.latitude +' </td><td>' +packet.longitude +'</td><td>'
 		 +packet.accelerometer_x +'</td><td>'+packet.accelerometer_y +'</td><td>'
 		 +packet.accelerometer_z +'</td><td>'+packet.yaw +'</td><td>'
