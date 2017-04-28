@@ -1,0 +1,57 @@
+<table id="telemetryrocket">
+	<thead>
+	<tr>
+		<th class="table-mode">Mode</th>
+		<th class="table-part">Part</th>
+		<th class="table-alitude">Altitude</th>
+		<th class="table-latlong">Latitude</th>
+		<th class="table-latlong">Longitude</th>
+		<th class="table-accel">Accel X (m/s)</th>
+		<th class="table-accel">Accel Y (m/s)</th>
+		<th class="table-accel">Accel Z (m/s)</th>
+		<th class="table-gyro">Yaw (m/s></th>
+		<th class="table-gyro">Pitch (m/s></th>
+		<th class="table-gyro">Roll (m/s></th>
+		<th class="table-magnetometer">Magnetometer X (m)</th>
+		<th class="table-magnetometer">Magnetometer Y (m)</th>
+		<th class="table-magnetometer">Magnetometer Z (m)</th>
+		<th class="table-gps-altitude">GPS Altitude (m)</th>
+		<th class="table-kalman-altitude">Kalman Altitude (m)</th>
+		<th class="table-kalman-altitude">Kalman Velocity (m)</th>
+		<th class="table-kalman-altitude">E match status</th>
+		<th class="table-timestamp">Timestamp</th>
+	</tr>
+	</thead>
+</table>
+
+<script>
+	var exampleSocket = new WebSocket("ws://" + window.location.host);
+	
+	exampleSocket.onmessage = function(event) {
+		packet = JSON.parse(event.data);
+	
+	
+			document.getElementById("telemetryrocket").innerHTML += '<tr>' 
+				+ '<td class="table-mode">' + packet.mode + '</td>'
+				+ '<td class="table-part">'+ packet.part + '</td>'
+				+ '<td class="table-alitude">' + packet.altitude + '</td>'
+				+ '<td class="table-latlong">' + packet.latitude + '</td>'
+				+ '<td class="table-latlong">' + packet.longitude + '</td>'
+				+ '<td class="table-accel">' + packet.accelerometer_x + '</td>'
+				+ '<td class="table-accel">' + packet.accelerometer_y + '</td>'
+				+ '<td class="table-accel">' + packet.accelerometer_x + '</td>'
+				+ '<td class="table-gyro">' + packet.yaw + '</td>'
+				+ '<td class="table-gyro">' + packet.pitch + '</td>'
+				+ '<td class="table-gyro">' + packet.roll + '</td>'
+				+ '<td class="table-magnetometer">' + packet.magnetometer_x + '</td>'
+				+ '<td class="table-magnetometer">' + packet.magnetometer_y + '</td>'
+				+ '<td class="table-magnetometer">' + packet.magnetometer_z + '</td>'
+				+ '<td class="table-gps-altitude">' + packet.gps_altitude + '</td>'
+				+ '<td class="table-kalman-altitude">' + packet.kalman_altitude + '</td>'
+				+ '<td class="table-kalman-altitude">' + packet.kalman_velocity + '</td>'
+				+ '<td class="table-kalman-altitude">' + packet.ematch_status + '</td>'
+				+ '<td class="table-timestamp">' + packet.timestamp + '</td>'
+				+ '</tr>';			
+			}
+</script>
+

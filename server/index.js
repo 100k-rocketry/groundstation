@@ -95,9 +95,8 @@ app.get('/logs', function (req, res, next) {
 		files.forEach(function(f) {
 			res.write('<a href="logs/' + f + '">' + f + '</a><br>');
 		});
+		res.write(footer);
 	});
-	res.write(footer);
-	res.end();
 });
 
 
@@ -111,8 +110,9 @@ app.get('/logs/:log', function (req, res, next) {
 	}
 });
 
-app.get('/log', function(req, res) {
-	res.sendFile(__dirname + globals.logFilename);
+// Gets the current log
+app.get('/currentlog', function(req, res) {
+	res.sendFile(path.join(__dirname, 'logs', globals.logFilename));
 });
 
 // Set up the static routes for the web server
