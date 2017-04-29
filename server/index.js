@@ -24,7 +24,7 @@ var footer = fs.readFileSync(path.join(__dirname, 'templates', 'footer.html'), '
 telemetryEmitter.on("newPacket", (packet) => {
 	// Really dirty way to deep copy the packet
 	allPackets.push(JSON.parse(JSON.stringify(packet)));
-	console.log(packet);
+	//console.log(packet);
 });
 
 app.ws('/', function(ws, req) {
@@ -46,12 +46,12 @@ app.ws('/', function(ws, req) {
 			telemetryEmitter.removeListener('newPacket', clientListener);
 		}
 	}
-	
-	// Send all the existing data to the client.	
+
+	// Send all the existing data to the client.
 	allPackets.forEach(function(packet) {
 			clientListener(packet);
 	});
-	
+
 
 	// When we get a new packet, send it to this client
 	telemetryEmitter.on('newPacket', clientListener);
@@ -113,6 +113,13 @@ app.get('/logs/:log', function (req, res, next) {
 // Gets the current log
 app.get('/currentlog', function(req, res) {
 	res.sendFile(path.join(__dirname, 'logs', globals.logFilename));
+});
+
+app.post('/controls/shutdown', function(req, res) {
+	console.log('Shutting down');
+	var spawn = require('child_process');
+	spawn.spawnSync('/sbin/shutdown', ['-h', 'now']);
+
 });
 
 // Set up the static routes for the web server
