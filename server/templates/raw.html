@@ -1,0 +1,81 @@
+<div id="booster-current">
+</div>
+
+<div id="sustainer-current">
+</div>
+
+
+<script>
+	var exampleSocket = new WebSocket("ws://" + window.location.host);
+
+	exampleSocket.onmessage = function(event) {
+		packet = JSON.parse(event.data);
+		/*
+		var text = '' +
+			+ "Mode: " + packet.mode
+			+ ' Part: ' + packet.part
+			+ ' Altitude: ' + ((packet.gps_altitude != 0) ? packet.gps_altitude: packet.kalman_altitude)
+			+ ' Latitude: ' + packet.latitude
+			+ ' Longitude: ' + packet.longitude
+			+ ' Accelerometer: ' + packet.accelerometer_x
+			+ ', ' + packet.accelerometer_y
+			+ ', ' + packet.accelerometer_x
+			+ ' Gyro: ' + packet.yaw
+			+ ', ' + packet.pitch
+			+ ', ' + packet.roll
+			+ ' Magnetometer: ' + packet.magnetometer_x
+			+ ', ' + packet.magnetometer_y
+			+ ', ' + packet.magnetometer_z
+			+ ' Velocity: ' + packet.kalman_velocity
+			+ ' Timestamp: ' + packet.timestamp
+			+ '<br>';
+
+			var newDiv = document.createElement('div');
+
+			var textNode = document.createTextNode(text);
+			newDiv.appendChild(textNode);
+			document.body.appendChild(newDiv);
+			*/
+
+			var text = '';
+			text += "Mode: " + packet.mode + '<br>'
+				+ ' Part: ' + packet.part + '<br>'
+				+ ' Altitude: ' + ((packet.gps_altitude != 0) ? packet.gps_altitude: packet.kalman_altitude) + '<br>'
+				+ ' Latitude: ' + packet.latitude + '<br>'
+				+ ' Longitude: ' + packet.longitude + '<br>'
+				+ ' Accelerometer X: ' + packet.accelerometer_x + '<br>'
+				+ ' Accelerometer Y: ' + packet.accelerometer_y + '<br>'
+				+ ' Accelerometer X: ' + packet.accelerometer_x + '<br>'
+				+ ' Gyro X: ' + packet.yaw + '<br>'
+				+ ' Gyro Y: ' + packet.pitch + '<br>'
+				+ ' Gyro Z: ' + packet.roll + '<br>'
+				+ ' Magnetometer X: ' + packet.magnetometer_x + '<br>'
+				+ ' Magnetometer Y: ' + packet.magnetometer_y + '<br>'
+				+ ' Magnetometer Z: ' + packet.magnetometer_z + '<br>'
+				+ ' Velocity: ' + packet.kalman_velocity + '<br>'
+				+ ' Timestamp: ' + packet.timestamp + '<br>'
+				+ '<br><br>';
+
+			//var newDiv = document.createElement('div');
+
+			//var textNode = document.createTextNode(text);
+			//newDiv.innerHtml = text;
+			//newDiv.appendChild(textNode);
+			//document.body.appendChild(newDiv);
+
+			// beforebegin, afterbegin, beforeend, afterend
+			//document.body.insertAdjacentHTML('afterbegin', text);
+
+			if (packet.part === "Booster") {
+				document.getElementById("booster-current").innerHTML = text;
+			} else if (packet.part === "Sustainer") {
+				document.getElementById("sustainer-current").innerHTML = text;
+			}
+
+			//document.body.innerHTML += text;
+
+		}
+
+
+
+</script>

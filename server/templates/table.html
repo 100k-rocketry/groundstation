@@ -1,3 +1,7 @@
+<div style="height:50px;width:100%;position:fixed;bottom:0px;background-color:blue;z-index:100">
+</div>
+
+
 <table id="telemetryrocket">
 	<thead>
 	<tr>
@@ -9,9 +13,9 @@
 		<th class="table-accel">Accel X (m/s)</th>
 		<th class="table-accel">Accel Y (m/s)</th>
 		<th class="table-accel">Accel Z (m/s)</th>
-		<th class="table-gyro">Yaw (m/s></th>
-		<th class="table-gyro">Pitch (m/s></th>
-		<th class="table-gyro">Roll (m/s></th>
+		<th class="table-gyro">Yaw (m/s)</th>
+		<th class="table-gyro">Pitch (m/s)</th>
+		<th class="table-gyro">Roll (m/s)</th>
 		<th class="table-magnetometer">Magnetometer X (m)</th>
 		<th class="table-magnetometer">Magnetometer Y (m)</th>
 		<th class="table-magnetometer">Magnetometer Z (m)</th>
@@ -26,12 +30,26 @@
 
 <script>
 	var exampleSocket = new WebSocket("ws://" + window.location.host);
-	
+	var lastSustainerPacket = 0;
+	var lastBoosterPacket = 0;
+
 	exampleSocket.onmessage = function(event) {
 		packet = JSON.parse(event.data);
-	
-	
-			document.getElementById("telemetryrocket").innerHTML += '<tr>' 
+
+			if (packet.part === "Sustainer") {
+				if (packet.timestamp - lastSustainerPacket < 1000) {
+					return;
+				}
+				lastSustainerPacket = packet.timestamp;
+			} else if (packet.part === "Booster") {
+				if (packet.timestamp - lastBoosterPacket < 1000) {
+					return;
+				}
+				lastBoosterPacket = packet.timestamp;
+			}
+
+			//document.getElementById("telemetryrocket").innerHTML
+			text = '<tr>'
 				+ '<td class="table-mode">' + packet.mode + '</td>'
 				+ '<td class="table-part">'+ packet.part + '</td>'
 				+ '<td class="table-alitude">' + packet.altitude + '</td>'
@@ -51,7 +69,8 @@
 				+ '<td class="table-kalman-altitude">' + packet.kalman_velocity + '</td>'
 				+ '<td class="table-kalman-altitude">' + packet.ematch_status + '</td>'
 				+ '<td class="table-timestamp">' + packet.timestamp + '</td>'
-				+ '</tr>';			
+				+ '</tr>';
+
+			document.getElementById("telemetryrocket").insertAdjacentHTML('beforeend', text);
 			}
 </script>
-

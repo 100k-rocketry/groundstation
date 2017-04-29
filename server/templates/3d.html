@@ -51,7 +51,7 @@
 
 	}
 	</script>
-<script src="/scripts/index.js"></script>
+<!--<script src="/scripts/index.js"></script>-->
 
     <canvas id="canvas" width="100%" height="100%"></canvas>
 </body>
@@ -60,6 +60,9 @@
 
 
   var exampleSocket = new WebSocket("ws://" + window.location.host);
+  var lastSustainerPacket = 0;
+  var lastBoosterPacket = 0;
+
   //var startTime = Date.now();
   var container;
   var stats;
@@ -297,31 +300,38 @@ group = new THREE.Group();
     render();
 
 
+
 exampleSocket.onmessage = function(event) {
 	// Use JSON.parse(event.data) to turn back into an object
-	console.log(event.data);
+	//console.log(event.data);
 	packet = JSON.parse(event.data);
 
-	/*document.getElementById("telemetry").innerHTML +=
-			"<b>Altimeter:</b> " + packet.altimeter + "<br>" +
-			"<b>Latitude:</b> " + packet.latitude + "<br>" +
-			"<b>Timestamp:</b>" + packet.timestamp + "<br><br>";
+	// Don't update more than once per second in order to not overload the client
+	if (packet.part === "Sustainer") {
+		if (packet.timestamp - lastSustainerPacket < 1000) {
+			return;
+		}
+		lastSustainerPacket = packet.timestamp;
+	} else if (packet.part === "Booster") {
+		if (packet.timestamp - lastBoosterPacket < 1000) {
+			return;
+		}
+		lastBoosterPacket = packet.timestamp;
+	}
 
-		}*/
-		/*document.getElementById("telemetryrocket").innerHTML+= '<tr><td>' +packet.altimeter +' </td><td>'
-		 +packet.latitude +' </td><td>' +packet.longitude +'</td><td>'
-		 +packet.accelerometer_x +'</td><td>'+packet.accelerometer_y +'</td><td>'
-		 +packet.accelerometer_z +'</td><td>'+packet.yaw +'</td><td>'
-		 +packet.pitch +'</td><td>'+packet.roll +'</td><td>'
-		 +packet.timestamp +'</td></tr>';
-		*/
+	var x = (packet.longitude - (-106.97305)) * 92;
+	var y = (packet.latitude - (32.9893)) * 111;
+	var z = packet.altitude / 1000;
 
-		var x = (packet.longitude - (-106.97305)) * 92;
-		var y = (packet.latitude - (32.9893)) * 111;
-		var z = packet.altimeter / 1000;
 
-		rocketfinal.position.set(x, z, y);
-    console.log(x, y, z);
+	var rocketGeometry = new THREE.SphereGeometry(.1, 32, 32);
+	var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+	var rocket = new THREE.Mesh( rocketGeometry, rocketMaterial );
+	scene.add(rocket);
+
+
+	rocketfinal.position.set(x, z, y);
+	console.log(x, z, y);
 }
 
 

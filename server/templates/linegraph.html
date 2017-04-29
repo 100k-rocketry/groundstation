@@ -4,6 +4,7 @@
 </div>
 
 
+
 	<script type="text/javascript">
 	window.onload = function () {
 		// dataPoints
@@ -64,11 +65,25 @@
 
 		// Make the websocket connection
 		var webSocket = new WebSocket("ws://" + window.location.host);
+		var lastSustainerPacket = 0;
+		var lastBoosterPacket = 0;
 
 		webSocket.onmessage = function(event) {
 			// Use JSON.parse(event.data) to turn back into an object
 			console.log(event.data);
 			packet = JSON.parse(event.data);
+
+			if (packet.part === "Sustainer") {
+				if (packet.timestamp - lastSustainerPacket < 1000) {
+					return;
+				}
+				lastSustainerPacket = packet.timestamp;
+			} else if (packet.part === "Booster") {
+				if (packet.timestamp - lastBoosterPacket < 1000) {
+					return;
+				}
+				lastBoosterPacket = packet.timestamp;
+			}
 
 			console.log(packet);
 

@@ -44,9 +44,9 @@ var sustainer = {
 };
 
 function tick() {
-	booster.altitude += 100;
-	booster.latitude += 0.00001;
-	booster.longitude += 0.00001;
+	booster.altitude += .0100;
+	booster.latitude += 0.0000001;
+	booster.longitude += 0.0000001;
 	booster.accelerometer_x += 1;
 	booster.accelerometer_y += 2;
 	booster.accelerometer_z += 3;
@@ -63,9 +63,9 @@ function tick() {
 	booster.timestamp = (new Date()).getTime();
 	telemetryEmitter.emit('newPacket', booster);
 
-	sustainer.altitude += 100;
-	sustainer.latitude += 0.00001;
-	sustainer.longitude += 0.00001;
+	sustainer.altitude += .00100;
+	sustainer.latitude += 0.0000001;
+	sustainer.longitude += 0.0000001;
 	sustainer.accelerometer_x += 1;
 	sustainer.accelerometer_y += 2;
 	sustainer.accelerometer_z += 3;
@@ -93,6 +93,6 @@ function tick() {
 
 module.exports = {
 	beginMock: function() {
-		setInterval(() => { tick(); }, 1000);
+		setInterval(() => { tick(); }, 20);
 	}
 }
