@@ -9,7 +9,6 @@
 		// dataPoints
 		var dataPoints1 = [];
 		var dataPoints2 = [];
-		//var dataPoints3 = [];
 		var chart = new CanvasJS.Chart("chartContainer",{
 			zoomEnabled: true,
 			title: {
@@ -17,7 +16,6 @@
 			},
 			toolTip: {
 				shared: true
-
 			},
 			legend: {
 				verticalAlign: "top",
@@ -64,8 +62,6 @@
           }
 		});
 
-
-
 		// Make the websocket connection
 		var webSocket = new WebSocket("ws://" + window.location.host);
 
@@ -77,15 +73,15 @@
 			console.log(packet);
 
 				// pushing the new values
-				if (packet.part === "Booster") {
+				if (packet.part === "Sustainer") {
 					dataPoints1.push({
 						x: new Date(packet.timestamp),
-						y: packet.altitude != 0 ? packet.altitude: packet.kalman_altitude;
+						y: packet.gps_altitude != 0 ? packet.gps_altitude: packet.kalman_altitude
 					});
-				} else if (packet.part === "Sustainer") {
+				} else if (packet.part === "Booster") {
 					dataPoints2.push({
 						x: new Date(packet.timestamp),
-						y: packet.altitude != 0 ? packet.altitude: packet.kalman_altitude;
+						y: packet.gps_altitude != 0 ? packet.gps_altitude: packet.kalman_altitude
 					});
 				}
 

@@ -115,6 +115,8 @@ app.get('/currentlog', function(req, res) {
 	res.sendFile(path.join(__dirname, 'logs', globals.logFilename));
 });
 
+// When a post request is sent to this URL,
+// it shuts down the server.
 app.post('/controls/shutdown', function(req, res) {
 	console.log('Shutting down');
 	var spawn = require('child_process');
