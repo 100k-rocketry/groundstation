@@ -1,5 +1,8 @@
 var telemetryEmitter = require('./telemetry');
 var globals = require('./globals');
+var fs = require('fs');
+
+var lastTimestamp = 0;
 
 var booster = {
 	"mode": "Armed",
@@ -89,10 +92,75 @@ function tick() {
 	}
 	telemetryEmitter.emit('newPacket', sustainer);
 }
+//part, mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll, magnetometer_x, magnetometer_y, magnetometer_z, gps_altitude, kalman_altitude, kalman_velocity, ematch_status, temperature, timestamp
+function replayPacket(lines, index) {
+	var line = lines[index].split(',');
+	if (line.length > 0) {
+		var packet = {
+			"mode": line[1].trim(),
+			"part": line[0].trim(),
+			"altitude": line[2].trim(),
+			"latitude": line[3].trim(),
+			"longitude": line[4].trim(),
+			"accelerometer_x": line[5].trim(),
+			"accelerometer_y": line[6].trim(),
+			"accelerometer_z": line[7].trim(),
+			"magnetometer_x": line[11].trim(),
+			"magnetometer_y": line[12].trim(),
+			"magnetometer_z": line[13].trim(),
+			"yaw": line[8].trim(),
+			"pitch": line[9].trim(),
+			"roll": line[10].trim(),
+			"gps_altitude": line[14].trim(),
+			"kalman_altitude": line[15].trim(),
+			"kalman_velocity": line[16].trim(),
+			"ematch_status": line[17].trim(),
+			"temperature": line[18].trim(),
+			"timestamp": line[19].trim()
+		};
 
+		lastTimestamp = packet.timestamp;
+		//console.log(packet);
 
-module.exports = {
-	beginMock: function() {
-		setInterval(() => { tick(); }, 20);
+		//setTimeout(packet.timeout)
+
+		if (index < lines.length - 2) {
+			var nextLine = lines[index + 1].split(',');
+			var delay = nextLine[19] - line[19];
+			console.log(delay);
+			//replayPacket(lines, index + 1);
+			telemetryEmitter.emit('newPacket', packet);
+			setTimeout(replayPacket, delay, lines, index + 1);
+		} else {
+			//console.log(lines[index]);
+		}
+
+	}
+}
+
+if (globals.replayFile === "") {
+			setInterval(() => { tick(); }, 20);
+			module.exports = {
+				beginMock: function() {
+		}
+	}
+} else {
+	module.exports = {
+		beginMock: function() {
+			var csv = fs.readFile(globals.replayFile, 'utf8', function(err, data) {
+				if (!err) {
+					replayPacket(data.split('\n'), 1);
+				} else {
+					console.log(err);
+				}
+				/*data.split('\n').forEach(function(line) {
+						var values = line.split(',');
+						// If all 21 telemetry values are present
+						if (values.length === 21) {
+
+						}
+				})*/;
+			});
+		}
 	}
 }

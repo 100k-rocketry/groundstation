@@ -18,7 +18,7 @@ fs.open(path.join(__dirname, 'logs', globals.logFilename), 'a+', function(err, f
 		// Attach an event handler that writes new packet data
 		telemetryEmitter.on('newPacket', function(packet) {
 			fs.write(fd, packet.part + ', ' + packet.mode + ', ' + packet.altitude + ', ' + packet.latitude + ', ' + packet.longitude + ', ' + packet.accelerometer_x + ', ' + packet.accelerometer_y + ', '
-			+ packet.accelerometer_z + ', ' + packet.yaw + ', ' + packet.pitch + ', ' + packet.roll + ', ' + packet.magnetometer_x + ', ' + packet.magnetometer_y + ', ' + packet.magnetometer_z + ', ' + packet.gps_altitude + ', ' + packet.kalman_altitude + ', ' + packet.kalman_velocity + ', ' + packet.ematch_status + ', ' + packet.temperature + ', ' + packet.timestamp + ', ' + os.EOL);
+			+ packet.accelerometer_z + ', ' + packet.yaw + ', ' + packet.pitch + ', ' + packet.roll + ', ' + packet.magnetometer_x + ', ' + packet.magnetometer_y + ', ' + packet.magnetometer_z + ', ' + packet.gps_altitude + ', ' + packet.kalman_altitude + ', ' + packet.kalman_velocity + ', ' + packet.ematch_status + ', ' + packet.temperature + ', ' + packet.timestamp + os.EOL);
 		});
 	}
 });
