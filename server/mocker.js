@@ -130,7 +130,11 @@ function replayPacket(lines, index) {
 			console.log(delay);
 			//replayPacket(lines, index + 1);
 			telemetryEmitter.emit('newPacket', packet);
-			setTimeout(replayPacket, delay, lines, index + 1);
+			if (line[19] < globals.replayStartTime) {
+				setTimeout(replayPacket, 1, lines, index + 1)
+			} else {
+				setTimeout(replayPacket, delay, lines, index + 1);
+			}
 		} else {
 			//console.log(lines[index]);
 		}

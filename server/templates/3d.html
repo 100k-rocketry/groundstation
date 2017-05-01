@@ -112,11 +112,11 @@
 
     var rocketfinal;
 
-		rocket.position.set(0, 1.4, 0);//was rocket
+	rocket.position.set(0, 1.4, 0);//was rocket
 
     scene.add(rocket);
 
-		camera.position.y = 3;
+	camera.position.y = 3;
     camera.position.z = 4;
 
     function render() {
@@ -259,7 +259,7 @@ THREE.ImageUtils.crossOrigin = "";
 	//	rocketfinal.scale.set(1, .1, 1);
                 rocketfinal.position.set(0, 1.4, 0);//was rocket
 		rocketfinal.rotation.set(0, 0, 0);
-      		scene.add( rocketfinal );
+      		//scene.add( rocketfinal );
 
 
       					render();
@@ -304,6 +304,12 @@ group = new THREE.Group();
 
 
 
+var lastSustainerDot = {
+	x: 0,
+	y: 0,
+	z: 0
+}
+
 exampleSocket.onmessage = function(event) {
 	// Use JSON.parse(event.data) to turn back into an object
 	//console.log(event.data);
@@ -331,18 +337,31 @@ exampleSocket.onmessage = function(event) {
 	var y = (packet.latitude - (43.479453125)) * 111;
 	var z = packet.altitude / 1000;
 
+	// Only draw a new dot if we've moved more than 10m in any direction since last time.
+	// This will prevent us from drawing a LOT of dots on top of eachother while the
+	// rocket sits on the launch rail
+	if (Math.abs(x - lastSustainerDot.x > 10) || Math.abs(y - lastSustainerDot.y < 10) || Math.abs(z - lastSustainerDot.z < 10)) {
+		var rocketGeometry = new THREE.SphereGeometry(.02, 2, 2);
+		var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
+		var rocket2 = new THREE.Mesh( rocketGeometry, rocketMaterial );
+		rocket2.position.set(x, z, y);
+		scene.add(rocket2);
+		lastSustainetDot.x = x;
+		lastSustainetDot.y = y;
+		lastSustainetDot.z = z;
+	}
 
-	var rocketGeometry = new THREE.SphereGeometry(.02, 2, 2);
-	var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
-	var rocket2 = new THREE.Mesh( rocketGeometry, rocketMaterial );
-	rocket2.position.set(x, z, y);
-	scene.add(rocket2);
+
+	//var rocketGeometry = new THREE.SphereGeometry(.02, 2, 2);
+	//var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
+	//var rocket2 = new THREE.Mesh( rocketGeometry, rocketMaterial );
+	//rocket2.position.set(x, z, y);
+	//scene.add(rocket2);
 
 
 	rocketfinal.position.set(x, z, y);
 	console.log(x, z, y);
 }
-
 
 
 </script>

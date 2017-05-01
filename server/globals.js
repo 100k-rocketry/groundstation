@@ -4,6 +4,8 @@ module.exports = {
 	// Set this to false to use the mocked data instead of trying to connect to the actual telemtry device
 	useUSB: false,
 	replayFile: 'logs/log-2017-04-27T19.53.51.120Z.csv',
+	// When replaying a file, the replay will fast forward to this timestamp
+	replayStartTime: 1493323082006,
 	// The time that the server started up (used for the log filename)
 	time: now.toISOString(),
 	logFilename: ('log-' + now.toISOString() + '.csv').replace(/:/g, '.'),
