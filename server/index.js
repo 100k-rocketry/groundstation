@@ -25,6 +25,7 @@ telemetryEmitter.on("newPacket", (packet) => {
 telemetryEmitter.on("newPacket", (packet) => {
 	// Really dirty way to deep copy the packet
 	allPackets.push(JSON.parse(JSON.stringify(packet)));
+	console.log(packet);
 });
 
 app.ws('/', function(ws, req) {
@@ -66,7 +67,7 @@ app.ws('/', function(ws, req) {
 });
 
 app.get('/log', function(req, res) {
-	res.sendFile(globals.logFilename);
+	res.sendFile('/home/pi/groundstation/server/' + globals.logFilename);
 });
 
 // Set up the static routes for the web server

@@ -1,14 +1,10 @@
 // Layer that abstracts getting data from the USB port
 var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
-var tty = require('tty');
 var globals = require('./globals');
 var spawn = require('child_process');
 
 var dataEmitter = new EventEmitter();
-
-// Fire a fake packet every second
-//setInterval(() => { dataEmitter.sendPacket(); }, 1000);
 
 // Tries to open the specified file.
 // Attaches the data callback to the 'data' event.
@@ -23,9 +19,8 @@ function createPersistentReadStream(filename, dataCallback) {
 		return;
 	}
 
-	// Set the device to raw mode
-	spawn.spawnSync('/bin/stty', ['-F', filename, 'raw']);
-
+	// Set the device to raw mode and set the appropriate baud
+	spawn.spawnSync('/bin/stty', ['-F', filename, globals.baud, 'raw']);
 	var stream = fs.createReadStream(filename);
 
 	// Stream opened successfully.
@@ -149,7 +144,7 @@ function dataCallback(d) {
 
 // If we are actually connecting to the physical groundstation, then open the device.
 if(globals.useUSB) {
-	createPersistentReadStream('/dev/ttyUSB0', dataCallback);
+	createPersistentReadStream(globals.deviceName, dataCallback);
 }
 
 module.exports = dataEmitter;
