@@ -81,14 +81,12 @@ function tick() {
 	sustainer.ematch_status += 2;
 	sustainer.timestamp = (new Date()).getTime();
 
-	/*if ((sustainer.altitude / 100) % 2 == 0) {
+	if ((sustainer.altitude / 100) % 2 == 0) {
 		sustainer.gps_altitude = 0;
 
 	} else {
 		sustainer.gps_altitude = sustainer.kalman_altitude + 1000;
 	}
-
-*/
 	telemetryEmitter.emit('newPacket', sustainer);
 }
 

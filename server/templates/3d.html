@@ -256,8 +256,11 @@ THREE.ImageUtils.crossOrigin = "";
                 //rocketfinal = new THREE.Mesh( rocketGeometry, rocketMaterials );
 
                 rocketfinal = rockobject;
+	//	rocketfinal.scale.set(1, .1, 1);
                 rocketfinal.position.set(0, 1.4, 0);//was rocket
-      					scene.add( rockobject );
+		rocketfinal.rotation.set(0, 0, 0);
+      		scene.add( rocketfinal );
+
 
       					render();
 
@@ -319,25 +322,27 @@ exampleSocket.onmessage = function(event) {
 		lastBoosterPacket = packet.timestamp;
 	}
 
-	var x = (packet.longitude - (-106.97305)) * 92;
-	var y = (packet.latitude - (32.9893)) * 111;
+	//var x = (packet.longitude - (-106.97305)) * 92;
+	//var y = (packet.latitude - (32.9893)) * 111;
+	//var z = packet.altitude / 1000;
+
+
+	var x = (packet.longitude - (-120.390205078125)) * 92;
+	var y = (packet.latitude - (43.479453125)) * 111;
 	var z = packet.altitude / 1000;
 
 
-	var rocketGeometry = new THREE.SphereGeometry(.1, 32, 32);
-	var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-	var rocket = new THREE.Mesh( rocketGeometry, rocketMaterial );
-	scene.add(rocket);
+	var rocketGeometry = new THREE.SphereGeometry(.02, 2, 2);
+	var rocketMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
+	var rocket2 = new THREE.Mesh( rocketGeometry, rocketMaterial );
+	rocket2.position.set(x, z, y);
+	scene.add(rocket2);
 
 
 	rocketfinal.position.set(x, z, y);
-	console.log(x, packet.altitude, z, y);
+	console.log(x, z, y);
 }
 
 
 
 </script>
-
-
-
-3

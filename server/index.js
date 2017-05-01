@@ -118,9 +118,9 @@ app.get('/currentlog', function(req, res) {
 // When a post request is sent to this URL,
 // it shuts down the server.
 app.post('/controls/shutdown', function(req, res) {
-	console.log('Shutting down');
-	var spawn = require('child_process');
-	spawn.spawnSync('/sbin/shutdown', ['-h', 'now']);
+//	console.log('Shutting down');
+//	var spawn = require('child_process');
+//	spawn.spawnSync('/sbin/shutdown', ['-h', 'now']);
 
 });
 

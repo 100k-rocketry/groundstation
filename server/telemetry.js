@@ -21,7 +21,7 @@ dataEmitter.on('data', function(data) {
 		if (globals.sustainerAddress.compare(data, ADDRESS_START, ADDRESS_END) === 0) {
 			part = "Sustainer";
 		}
-		if (globals.boosterAddress.compare(data, ADDRESS_START, ADDRESS_END) === -1) {
+		else if (globals.boosterAddress.compare(data, ADDRESS_START, ADDRESS_END) === 0) {
 			part = "Booster";
 		}
 		else {
@@ -66,8 +66,8 @@ dataEmitter.on('data', function(data) {
 				"mode": "Armed",
 				"part": part,
 				"altitude": altitude,
-				"latitude": latitude,
-				"longitude": longitude,
+				"latitude": latitude / 100.0,
+				"longitude": longitude / 100.0,
 				"accelerometer_x": accelerometer_x,
 				"accelerometer_y": accelerometer_y,
 				"accelerometer_z": accelerometer_z,
@@ -93,12 +93,10 @@ dataEmitter.on('data', function(data) {
 			telemetryEmitter.emit('newPacket', {
 				"mode": "Low Power",
 				"part": part,
-				"latitude": latitude,
-				"longitude": longitude,
+				"latitude": latitude / 100.0,
+				"longitude": longitude / 100.0,
 				"timestamp": (new Date()).getTime()
 			});
-		} else {
-			console.log("Invalid mode: " + mode);
 		}
 	} catch (err) {
 		console.log("Could not parse packet data.");

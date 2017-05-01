@@ -7,6 +7,9 @@
 
 <script>
 	var exampleSocket = new WebSocket("ws://" + window.location.host);
+	var lastSustainerPacket = 0;
+	var lastBoosterPacket = 0;
+
 
 	exampleSocket.onmessage = function(event) {
 		packet = JSON.parse(event.data);
@@ -28,6 +31,7 @@
 			+ ', ' + packet.magnetometer_z
 			+ ' Velocity: ' + packet.kalman_velocity
 			+ ' Timestamp: ' + packet.timestamp
+			+ ' Age: ' + packet.timestamp -
 			+ '<br>';
 
 			var newDiv = document.createElement('div');
@@ -37,15 +41,28 @@
 			document.body.appendChild(newDiv);
 			*/
 
+			var timeSinceLast = 0;		
+	
+			if (packet.part === "Booster") {
+				timeSinceLast = packet.timestamp - lastBoosterPacket;
+				lastBoosterPacket = packet.timestamp;
+			} else if (packet.part === "Sustainer") {
+				timeSinceLast = packet.timestamp - lastSustainerPacket;
+				lastSustainerPacket = packet.timestamp;
+			}
+			
+
 			var text = '';
 			text += "Mode: " + packet.mode + '<br>'
 				+ ' Part: ' + packet.part + '<br>'
-				+ ' Altitude: ' + ((packet.gps_altitude != 0) ? packet.gps_altitude: packet.kalman_altitude) + '<br>'
+				+ ' Raw altitude: ' + packet.altitude + '<br>'
+				+ ' GPS altitude: ' + packet.gps_altitude + '<br>'
+				+ ' Kalman altitude: ' + packet.kalman_altitude + '<br>'
 				+ ' Latitude: ' + packet.latitude + '<br>'
 				+ ' Longitude: ' + packet.longitude + '<br>'
 				+ ' Accelerometer X: ' + packet.accelerometer_x + '<br>'
 				+ ' Accelerometer Y: ' + packet.accelerometer_y + '<br>'
-				+ ' Accelerometer X: ' + packet.accelerometer_x + '<br>'
+				+ ' Accelerometer Z: ' + packet.accelerometer_z + '<br>'
 				+ ' Gyro X: ' + packet.yaw + '<br>'
 				+ ' Gyro Y: ' + packet.pitch + '<br>'
 				+ ' Gyro Z: ' + packet.roll + '<br>'
@@ -54,6 +71,8 @@
 				+ ' Magnetometer Z: ' + packet.magnetometer_z + '<br>'
 				+ ' Velocity: ' + packet.kalman_velocity + '<br>'
 				+ ' Timestamp: ' + packet.timestamp + '<br>'
+				+ ' Age: ' + ((new Date()).getTime() - packet.timestamp) + '<br>'
+				+ ' Time between packets: ' + timeSinceLast + 'ms<br>'
 				+ '<br><br>';
 
 			//var newDiv = document.createElement('div');
