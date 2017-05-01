@@ -23,7 +23,10 @@ module.exports = {
 	sustainerAddress: Buffer.from([0x00,0x13,0xA2,0x00,0x41,0x5A,0xD2,0x0B]),
 	boosterAddress: Buffer.from([0x00,0x13,0xA2,0x00,0x41,0x25,0xD1,0xF6]),
 	// Baud rate for the USB device
-	baud: 115200,
+	radioBaud: 115200,
+	panelBaud: 9600,
 	// The device that we are receiving telemetry from
-	deviceName: '/dev/ttyUSB0'
+	radioDeviceName: '/dev/ttyUSB0',
+	// The device that controls the panel blinkenlights
+	panelDeviceName: '/dev/ttyACM0'
 }

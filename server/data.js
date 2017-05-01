@@ -10,7 +10,7 @@ var dataEmitter = new EventEmitter();
 // Attaches the data callback to the 'data' event.
 // If the file closes for any reason during execution,
 // automatically try to re-open the file
-function createPersistentReadStream(filename, dataCallback) {
+function createPersistentReadStream(filename, dataCallback, baud) {
 	
 	// If the file doesn't exist, then try again in one second
 	if (!fs.existsSync(filename)) {
@@ -20,7 +20,7 @@ function createPersistentReadStream(filename, dataCallback) {
 	}
 
 	// Set the device to raw mode and set the appropriate baud
-	spawn.spawnSync('/bin/stty', ['-F', filename, globals.baud, 'raw']);
+	spawn.spawnSync('/bin/stty', ['-F', filename, baud, 'raw']);
 	var stream = fs.createReadStream(filename);
 
 	// Stream opened successfully.
@@ -142,9 +142,11 @@ function dataCallback(d) {
 	}
 }
 
+
+
 // If we are actually connecting to the physical groundstation, then open the device.
 if(globals.useUSB) {
-	createPersistentReadStream(globals.deviceName, dataCallback);
+	createPersistentReadStream(globals.radioDeviceName, dataCallback, globals.radioBaud);
 }
 
 module.exports = dataEmitter;
