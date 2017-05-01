@@ -1,26 +1,27 @@
-<!DOCTYPE HTML>
-<html>
+<script type="text/javascript" src="scripts/canvasjs-1.9.8/canvasjs.min.js"></script>
 
-<head>
-z	<script type="text/javascript">
+<div id="chartContainer" style="height: 300px; width: 100%;">
+</div>
+
+
+
+	<script type="text/javascript">
 	window.onload = function () {
 		// dataPoints
 		var dataPoints1 = [];
 		var dataPoints2 = [];
-		//var dataPoints3 = [];
 		var chart = new CanvasJS.Chart("chartContainer",{
 			zoomEnabled: true,
 			title: {
-				text: "HART Stages"		
+				text: "HART Stages"
 			},
 			toolTip: {
 				shared: true
-				
 			},
 			legend: {
 				verticalAlign: "top",
 				horizontalAlign: "center",
-                                fontSize: 14,
+                fontSize: 14,
 				fontWeight: "bold",
 				fontFamily: "calibri",
 				fontColor: "dimGrey"
@@ -31,8 +32,8 @@ z	<script type="text/javascript">
 			axisY:{
 				suffix: 'm',
 				includeZero: true
-			}, 
-			data: [{ 
+			},
+			data: [{
 				// dataSeries for Sustainer
 				type: "line",
 				xValueType: "dateTime",
@@ -40,23 +41,14 @@ z	<script type="text/javascript">
 				name: "Sustainer",
 				dataPoints: dataPoints1
 			},
-			{					
+			{
 				// dataSeries for Booster
 				type: "line",
 				xValueType: "dateTime",
 				showInLegend: true,
 				name: "Booster" ,
 				dataPoints: dataPoints2
-			}//,
-          
-          //{				
-				/* dataSeries test series for parachute
-				type: "line",
-				xValueType: "dateTime",
-				showInLegend: true,
-				name: "Drogue Booster" ,
-				dataPoints: dataPoints3
-			}*/],
+			}],
           legend:{
             cursor:"pointer",
             itemclick : function(e) {
@@ -71,41 +63,44 @@ z	<script type="text/javascript">
           }
 		});
 
-		
 		// Make the websocket connection
-		var webSocket = new WebSocket("ws://" + window.location.host);	
-		
+		var webSocket = new WebSocket("ws://" + window.location.host);
+		var lastSustainerPacket = 0;
+		var lastBoosterPacket = 0;
+
 		webSocket.onmessage = function(event) {
 			// Use JSON.parse(event.data) to turn back into an object
 			console.log(event.data);
 			packet = JSON.parse(event.data);
-			
+
+			if (packet.part === "Sustainer") {
+				if (packet.timestamp - lastSustainerPacket < 1000) {
+					return;
+				}
+				lastSustainerPacket = packet.timestamp;
+			} else if (packet.part === "Booster") {
+				if (packet.timestamp - lastBoosterPacket < 1000) {
+					return;
+				}
+				lastBoosterPacket = packet.timestamp;
+			}
+
 			console.log(packet);
-			
+
 				// pushing the new values
-				
-				if (packet.part === "Booster") {				
+				if (packet.part === "Sustainer") {
 					dataPoints1.push({
 						x: new Date(packet.timestamp),
-						y: packet.altitude
+						y: packet.gps_altitude != 0 ? packet.gps_altitude: packet.kalman_altitude
 					});
-				} else if (packet.part === "Sustainer") {
+				} else if (packet.part === "Booster") {
 					dataPoints2.push({
 						x: new Date(packet.timestamp),
-						y: packet.altitude
+						y: packet.gps_altitude != 0 ? packet.gps_altitude: packet.kalman_altitude
 					});
 				}
-				
+
 			chart.render();
 		}
 	}
 	</script>
-	<script type="text/javascript" src="canvasjs-1.9.8/canvasjs.min.js"></script>
-</head>
-<body>
-	<div id="chartContainer" style="height: 300px; width: 100%;">
-	</div>
-</body>
-
-
-</html>

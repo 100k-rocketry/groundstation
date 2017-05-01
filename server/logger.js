@@ -1,5 +1,6 @@
 var fs = require('fs');
 var os = require('os');
+var path = require('path');
 var globals = require('./globals');
 var telemetryEmitter = require('./telemetry');
 
@@ -7,7 +8,7 @@ var fd = -1;
 
 // Open the log file and attach an event handler that writes the telemetry to the log
 // when a new packet is received.
-fs.open(globals.logFilename, 'a+', function(err, fd) {
+fs.open(path.join(__dirname, 'logs', globals.logFilename), 'a+', function(err, fd) {
 	if (err) {
 		console.log(err);
 		console.log(globals.logFilename + ' already exists.');
@@ -22,4 +23,4 @@ fs.open(globals.logFilename, 'a+', function(err, fd) {
 	}
 });
 
-console.log('Log file ' + globals.logFilename + 'opened.');
+console.log('Log file ' + globals.logFilename + ' opened.');

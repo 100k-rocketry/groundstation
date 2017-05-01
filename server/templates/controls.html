@@ -1,0 +1,13 @@
+<a href="#" id="shutdownLink">Shutdown</a>
+<script>
+
+
+function doShutdown() {
+    var xhr =  new XMLHttpRequest();
+    xhr.open("POST", '/controls/shutdown', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    xhr.send();
+}
+
+document.getElementById("shutdownLink").addEventListener('click', doShutdown);
+</script>

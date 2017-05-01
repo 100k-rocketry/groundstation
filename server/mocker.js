@@ -17,7 +17,7 @@ var booster = {
 	"pitch": 0,
 	"roll": 0,
 	"gps_altitude": 1300,
-	"kalman_altitude": 1300,
+	"kalman_altitude": 300,
 	"kalman_velocity": 0,
 	"ematch_status": 0
 };
@@ -44,9 +44,9 @@ var sustainer = {
 };
 
 function tick() {
-	booster.altitude += 100;
-	booster.latitude += 0.00001;
-	booster.longitude += 0.00001;
+	booster.altitude += .0100;
+	booster.latitude += 0.0000001;
+	booster.longitude += 0.0000001;
 	booster.accelerometer_x += 1;
 	booster.accelerometer_y += 2;
 	booster.accelerometer_z += 3;
@@ -63,9 +63,9 @@ function tick() {
 	booster.timestamp = (new Date()).getTime();
 	telemetryEmitter.emit('newPacket', booster);
 
-	sustainer.altitude += 100;
-	sustainer.latitude += 0.00001;
-	sustainer.longitude += 0.00001;
+	sustainer.altitude += .00100;
+	sustainer.latitude += 0.0000001;
+	sustainer.longitude += 0.0000001;
 	sustainer.accelerometer_x += 1;
 	sustainer.accelerometer_y += 2;
 	sustainer.accelerometer_z += 3;
@@ -79,13 +79,22 @@ function tick() {
 	sustainer.kalman_altitude += 998;
 	sustainer.kalman_velocity += 1;
 	sustainer.ematch_status += 2;
-	sustainer.timestamp = (new Date()).getTime();	
-	telemetryEmitter.emit('newPacket', sustainer);	
+	sustainer.timestamp = (new Date()).getTime();
+
+	/*if ((sustainer.altitude / 100) % 2 == 0) {
+		sustainer.gps_altitude = 0;
+
+	} else {
+		sustainer.gps_altitude = sustainer.kalman_altitude + 1000;
+	}
+
+*/
+	telemetryEmitter.emit('newPacket', sustainer);
 }
 
 
 module.exports = {
-	beginMock: function() {	
-		setInterval(() => { tick(); }, 1000);
+	beginMock: function() {
+		setInterval(() => { tick(); }, 20);
 	}
 }

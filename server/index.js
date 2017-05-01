@@ -4,6 +4,7 @@ var path = require('path');
 var telemetryEmitter = require('./telemetry');
 var mocker = require('./mocker');
 var globals = require('./globals');
+var fs = require('fs');
 require('./logger');
 
 // Get environment variables
@@ -17,15 +18,13 @@ var expressWs = require('express-ws')(app);
 
 var allPackets = [];
 
-
-telemetryEmitter.on("newPacket", (packet) => {
-	//console.log(packet);
-});
+var header = fs.readFileSync(path.join(__dirname, 'templates', 'header.html'), 'utf8');
+var footer = fs.readFileSync(path.join(__dirname, 'templates', 'footer.html'), 'utf8');
 
 telemetryEmitter.on("newPacket", (packet) => {
 	// Really dirty way to deep copy the packet
 	allPackets.push(JSON.parse(JSON.stringify(packet)));
-	console.log(packet);
+	//console.log(packet);
 });
 
 app.ws('/', function(ws, req) {
@@ -47,12 +46,12 @@ app.ws('/', function(ws, req) {
 			telemetryEmitter.removeListener('newPacket', clientListener);
 		}
 	}
-	
-	// Send all the existing data to the client.	
+
+	// Send all the existing data to the client.
 	allPackets.forEach(function(packet) {
 			clientListener(packet);
 	});
-	
+
 
 	// When we get a new packet, send it to this client
 	telemetryEmitter.on('newPacket', clientListener);
@@ -66,8 +65,63 @@ app.ws('/', function(ws, req) {
 	});
 });
 
-app.get('/log', function(req, res) {
-	res.sendFile('/home/pi/groundstation/server/' + globals.logFilename);
+app.get('/', function(req, res, next) {
+	res.redirect('/pages/index');
+});
+
+// If the client navigates to 'pages/page_nm', open the appropriate page
+// from the templates folder and send it. If it's not found, then next()
+// to the 404.
+app.get('/pages/:page', function (req, res, next) {
+	var page = req.params.page + '.html';
+
+	var content = header;
+	fs.readFile(path.join(__dirname, 'templates', page), (err, data) => {
+		if(!err) {
+			res.write(header);
+			res.write(data);
+			res.write(footer);
+			res.end();
+		} else {
+			next();
+		}
+	});
+});
+
+
+app.get('/logs', function (req, res, next) {
+	res.write(header);
+	fs.readdir('logs', function(err, files) {
+		files.forEach(function(f) {
+			res.write('<a href="logs/' + f + '">' + f + '</a><br>');
+		});
+		res.write(footer);
+	});
+});
+
+
+app.get('/logs/:log', function (req, res, next) {
+	var log = req.params.log;
+
+	if (req.params.log) {
+		res.download (path.join(__dirname, 'logs', log));
+	} else {
+		next();
+	}
+});
+
+// Gets the current log
+app.get('/currentlog', function(req, res) {
+	res.sendFile(path.join(__dirname, 'logs', globals.logFilename));
+});
+
+// When a post request is sent to this URL,
+// it shuts down the server.
+app.post('/controls/shutdown', function(req, res) {
+	console.log('Shutting down');
+	var spawn = require('child_process');
+	spawn.spawnSync('/sbin/shutdown', ['-h', 'now']);
+
 });
 
 // Set up the static routes for the web server
