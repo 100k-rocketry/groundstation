@@ -143,7 +143,7 @@ function replayPacket(lines, index) {
 }
 
 if (globals.replayFile === "") {
-			setInterval(() => { tick(); }, 20);
+			setInterval(() => { tick(); }, 100);
 			module.exports = {
 				beginMock: function() {
 		}
@@ -157,13 +157,6 @@ if (globals.replayFile === "") {
 				} else {
 					console.log(err);
 				}
-				/*data.split('\n').forEach(function(line) {
-						var values = line.split(',');
-						// If all 21 telemetry values are present
-						if (values.length === 21) {
-
-						}
-				})*/;
 			});
 		}
 	}
