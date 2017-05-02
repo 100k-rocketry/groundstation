@@ -143,6 +143,10 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 			spherical.theta += sphericalDelta.theta;
 			spherical.phi += sphericalDelta.phi;
+			console.log(spherical.phi);
+			if (spherical.phi > 1.2) {
+				spherical.phi = 1.2;
+			}
 
 			// restrict theta to be between desired limits
 			spherical.theta = Math.max( scope.minAzimuthAngle, Math.min( scope.maxAzimuthAngle, spherical.theta ) );
@@ -284,7 +288,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 	function rotateUp( angle ) {
 
 		sphericalDelta.phi -= angle;
-
 	}
 
 	var panLeft = function () {
