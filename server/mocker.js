@@ -97,7 +97,7 @@ function replayPacket(lines, index) {
 	var line = lines[index].split(',');
 	if (line.length > 0) {
 		var packet = {
-			"mode": parseInt(line[1]),
+			"mode": line[1].trim(),
 			"part": line[0].trim(),
 			"altitude": parseInt(line[2]),
 			"latitude": parseFloat(line[3]),
