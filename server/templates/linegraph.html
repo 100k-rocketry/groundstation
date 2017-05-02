@@ -89,14 +89,14 @@
 
 				// pushing the new values
 				if (packet.part === "Sustainer") {
-					dataPoints1.push({
-						x: new Date(packet.timestamp),
-						y: packet.gps_altitude != 0 ? packet.gps_altitude: packet.kalman_altitude
-					});
-				} else if (packet.part === "Booster") {
 					dataPoints2.push({
 						x: new Date(packet.timestamp),
-						y: packet.gps_altitude != 0 ? packet.gps_altitude: packet.kalman_altitude
+						y: packet.altitude != 0 ? packet.altitude: packet.kalman_altitude
+					});
+				} else if (packet.part === "Booster") {
+					dataPoints1.push({
+						x: new Date(packet.timestamp),
+						y: packet.altitude != 0 ? packet.altitude: packet.kalman_altitude
 					});
 				}
 
