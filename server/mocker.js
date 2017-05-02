@@ -1,5 +1,8 @@
 var telemetryEmitter = require('./telemetry');
 var globals = require('./globals');
+var fs = require('fs');
+
+var lastTimestamp = 0;
 
 var booster = {
 	"mode": "Armed",
@@ -90,9 +93,64 @@ function tick() {
 	telemetryEmitter.emit('newPacket', sustainer);
 }
 
+function replayPacket(lines, index) {
+	var line = lines[index].split(',');
+	if (line.length > 0) {
+		var packet = {
+			"mode": line[1].trim(),
+			"part": line[0].trim(),
+			"altitude": parseInt(line[2]),
+			"latitude": parseFloat(line[3]),
+			"longitude": parseFloat(line[4]),
+			"accelerometer_x": parseFloat(line[5]),
+			"accelerometer_y": parseFloat(line[6]),
+			"accelerometer_z": parseFloat(line[7]),
+			"magnetometer_x": parseFloat(line[11]),
+			"magnetometer_y": parseFloat(line[12]),
+			"magnetometer_z": parseFloat(line[13]),
+			"yaw": parseFloat(line[8]),
+			"pitch": parseFloat(line[9]),
+			"roll": parseFloat(line[10]),
+			"gps_altitude": parseFloat(line[14]),
+			"kalman_altitude": parseInt(line[15]),
+			"kalman_velocity": parseInt(line[16]),
+			"ematch_status": parseInt(line[17]),
+			"temperature": parseInt(line[18]),
+			"timestamp": parseInt(line[19])
+		};
 
-module.exports = {
-	beginMock: function() {
-		setInterval(() => { tick(); }, 20);
+		lastTimestamp = packet.timestamp;
+
+		if (index < lines.length - 2) {
+			var nextLine = lines[index + 1].split(',');
+			var delay = nextLine[19] - line[19];
+			//replayPacket(lines, index + 1);
+			telemetryEmitter.emit('newPacket', packet);
+			if (line[19] < globals.replayStartTime) {
+				setTimeout(replayPacket, 1, lines, index + 1)
+			} else {
+				setTimeout(replayPacket, delay, lines, index + 1);
+			}
+		} 
+	}
+}
+
+if (globals.replayFile === "") {
+			setInterval(() => { tick(); }, 100);
+			module.exports = {
+				beginMock: function() {
+		}
+	}
+} else {
+	module.exports = {
+		beginMock: function() {
+			var csv = fs.readFile(globals.replayFile, 'utf8', function(err, data) {
+				if (!err) {
+					replayPacket(data.split('\n'), 1);
+				} else {
+					console.log(err);
+				}
+			});
+		}
 	}
 }

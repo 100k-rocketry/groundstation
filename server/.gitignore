@@ -3,4 +3,3 @@ gs.log
 logs/*.csv
 *.swp
 node_modules/
-
