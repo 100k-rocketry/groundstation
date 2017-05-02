@@ -11,7 +11,8 @@ Installation instructions
 7.  Copy 'groundstation/system/gs.service' to '/etc/systemd/system'
 8.  Run 'systemctl enable gs' to enable the groundstation service
 9.  Restart the Rasberry Pi. The service should now be started.
-10. Open your web browser (supports Chrome, Firefox, Edge, and Safari) and connect to the Raspberry
+10. Connect the avionics radio's USB cable to the Raspberry Pi.
+11. Open your web browser (supports Chrome, Firefox, Edge, and Safari) and connect to the Raspberry
     Pi's IP address.
 
 
