@@ -92,42 +92,38 @@ function tick() {
 	}
 	telemetryEmitter.emit('newPacket', sustainer);
 }
-//part, mode, altitude, latitude, longitude, accelerometer_x, accelerometer_y, accelerometer_z, yaw, pitch, roll, magnetometer_x, magnetometer_y, magnetometer_z, gps_altitude, kalman_altitude, kalman_velocity, ematch_status, temperature, timestamp
+
 function replayPacket(lines, index) {
 	var line = lines[index].split(',');
 	if (line.length > 0) {
 		var packet = {
-			"mode": line[1].trim(),
+			"mode": parseInt(line[1]),
 			"part": line[0].trim(),
-			"altitude": line[2].trim(),
-			"latitude": line[3].trim(),
-			"longitude": line[4].trim(),
-			"accelerometer_x": line[5].trim(),
-			"accelerometer_y": line[6].trim(),
-			"accelerometer_z": line[7].trim(),
-			"magnetometer_x": line[11].trim(),
-			"magnetometer_y": line[12].trim(),
-			"magnetometer_z": line[13].trim(),
-			"yaw": line[8].trim(),
-			"pitch": line[9].trim(),
-			"roll": line[10].trim(),
-			"gps_altitude": line[14].trim(),
-			"kalman_altitude": line[15].trim(),
-			"kalman_velocity": line[16].trim(),
-			"ematch_status": line[17].trim(),
-			"temperature": line[18].trim(),
-			"timestamp": line[19].trim()
+			"altitude": parseInt(line[2]),
+			"latitude": parseFloat(line[3]),
+			"longitude": parseFloat(line[4]),
+			"accelerometer_x": parseFloat(line[5]),
+			"accelerometer_y": parseFloat(line[6]),
+			"accelerometer_z": parseFloat(line[7]),
+			"magnetometer_x": parseFloat(line[11]),
+			"magnetometer_y": parseFloat(line[12]),
+			"magnetometer_z": parseFloat(line[13]),
+			"yaw": parseFloat(line[8]),
+			"pitch": parseFloat(line[9]),
+			"roll": parseFloat(line[10]),
+			"gps_altitude": parseFloat(line[14]),
+			"kalman_altitude": parseInt(line[15]),
+			"kalman_velocity": parseInt(line[16]),
+			"ematch_status": parseInt(line[17]),
+			"temperature": parseInt(line[18]),
+			"timestamp": parseInt(line[19])
 		};
 
 		lastTimestamp = packet.timestamp;
-		//console.log(packet);
-
-		//setTimeout(packet.timeout)
 
 		if (index < lines.length - 2) {
 			var nextLine = lines[index + 1].split(',');
 			var delay = nextLine[19] - line[19];
-			console.log(delay);
 			//replayPacket(lines, index + 1);
 			telemetryEmitter.emit('newPacket', packet);
 			if (line[19] < globals.replayStartTime) {
@@ -135,10 +131,7 @@ function replayPacket(lines, index) {
 			} else {
 				setTimeout(replayPacket, delay, lines, index + 1);
 			}
-		} else {
-			//console.log(lines[index]);
-		}
-
+		} 
 	}
 }
 
