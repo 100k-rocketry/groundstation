@@ -96,6 +96,7 @@ app.get('/logs', function (req, res, next) {
 			res.write('<a href="logs/' + f + '">' + f + '</a><br>');
 		});
 		res.write(footer);
+		res.end();
 	});
 });
 
