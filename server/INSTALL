@@ -1,0 +1,17 @@
+Installation instructions
+
+1.  Install Raspbian Jesse Lite on your Raspberry Pi 3 model B.
+2.  Open a shell on the Raspberry Pi and follow steps 3-9 in that shell.
+3.  Install Node version 6. Apt-get may install the wrong version, so a manual install may be necessary.
+    Follow the instructions here: https://nodejs.org/en/download/package-manager/
+4.  Install npm: apt-get install npm
+5.  From the groundstation/server directory, run 'npm install' to populate the node_modules directory
+6.  Clone or otherwise transfer the 'groundstation' repository to the Raspberry Pi.
+    Repository location: https://github.com/100k-rocketry/groundstation
+7.  Copy 'groundstation/system/gs.service' to '/etc/systemd/system'
+8.  Run 'systemctl enable gs' to enable the groundstation service
+9.  Restart the Rasberry Pi. The service should now be started.
+10. Open your web browser (supports Chrome, Firefox, Edge, and Safari) and connect to the Raspberry
+    Pi's IP address.
+
+
