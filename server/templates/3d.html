@@ -1,6 +1,6 @@
 
 <script language = "javascript" src = "scripts/three/build/three.min.js"></script>
-<script language = "javascript" src = "scripts/three/examples/js/controls/TrackballControls.js"></script>
+<script language = "javascript" src = "scripts/three/examples/js/controls/OrbitControls.js"></script>
 <script language = "javascript" src = "scripts/three/examples/js/loaders/OBJLoader.js"></script>
 	<script language = "javascript">
 	function resize(canvas) {
@@ -70,7 +70,7 @@
 
     var scene = new THREE.Scene();
     scene.background = new THREE.Color(0x84C5F0);
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.00001, 1000 );
 
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
@@ -130,7 +130,7 @@
 		controls.update();
 	}
 
-    controls = new THREE.TrackballControls( camera );
+    controls = new THREE.OrbitControls( camera );
     controls.target.set( 0, 0, 0 );
 
 	controls.rotateSpeed = 10.0;
