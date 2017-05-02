@@ -78,27 +78,20 @@
 					return;
 				}
 				lastSustainerPacket = packet.timestamp;
+				dataPoints1.push({
+						x: new Date(packet.timestamp),
+						y: packet.altitude != 0 ? packet.altitude: packet.kalman_altitude
+				});
 			} else if (packet.part === "Booster") {
 				if (packet.timestamp - lastBoosterPacket < 1000) {
 					return;
 				}
 				lastBoosterPacket = packet.timestamp;
+				dataPoints2.push({
+						x: new Date(packet.timestamp),
+						y: packet.altitude != 0 ? packet.altitude: packet.kalman_altitude
+				});
 			}
-
-			console.log(packet);
-
-				// pushing the new values
-				if (packet.part === "Sustainer") {
-					dataPoints2.push({
-						x: new Date(packet.timestamp),
-						y: packet.altitude != 0 ? packet.altitude: packet.kalman_altitude
-					});
-				} else if (packet.part === "Booster") {
-					dataPoints1.push({
-						x: new Date(packet.timestamp),
-						y: packet.altitude != 0 ? packet.altitude: packet.kalman_altitude
-					});
-				}
 
 			chart.render();
 		}
