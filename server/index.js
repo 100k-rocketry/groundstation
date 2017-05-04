@@ -4,6 +4,7 @@ var path = require('path');
 var telemetryEmitter = require('./telemetry');
 var mocker = require('./mocker');
 var globals = require('./globals');
+var panel = require('./panel');
 var fs = require('fs');
 require('./logger');
 
@@ -21,11 +22,134 @@ var allPackets = [];
 var header = fs.readFileSync(path.join(__dirname, 'templates', 'header.html'), 'utf8');
 var footer = fs.readFileSync(path.join(__dirname, 'templates', 'footer.html'), 'utf8');
 
+var panelStats = {
+	booster: {
+		lat: 0,
+		long: 0,
+		alt: 0,
+		accel: 0, // in gravities
+		ematch: false, // False when ematch has not been ignited, true otherwise
+	},
+	sustainer: {
+		lat: 0,
+		long: 0,
+		alt: 0,
+		accel: 0,
+		ematch: false,
+	}
+};
+
+function updatePanelStat(panelStat, packet) {
+	panelStat.lat = packet.latitude;
+	panelStat.long = packet.longitude;
+	panelStat.alt = packet.altitude;
+	panelStat.accel = Math.sqrt(Math.pow(packet.accelerometer_x, 2) + Math.pow(packet.accelerometer_y, 2) + Math.pow(packet.accelerometer_z, 2)) / 9.8;
+}
+
+var lastPanelUpdate = 0;
+var lastBoosterTimestamp = 0;
+var lastSustainerTimestamp = 0;
+
+// Booster ematch = 0x0f
+// Sustainer ematch = 0x7f
+
+// Every time we get a new packet, set the comms light to
+// (for the appropriate booster/sustainer light)
+// and if the ematch status equals the special n
 telemetryEmitter.on("newPacket", (packet) => {
 	// Really dirty way to deep copy the packet
 	allPackets.push(JSON.parse(JSON.stringify(packet)));
-	//console.log(packet);
+	var now = (new Date()).getTime();
+	
+	if (packet.part === "Booster") {
+		updatePanelStat(panelStats.booster, packet);
+		if (packet.ematch_status < 0x0F && panelStats.booster.ematch === false) {
+			panelStats.booster.ematch = true;
+			panel.setLight("bignition", "on");
+		}
+		lastBoosterTimestamp = now;
+	} else if (packet.part === "Sustainer") {
+		updatePanelStat(panelStats.sustainer, packet); 
+		if (packet.ematch_status < 0x7F && panelStats.sustainerematch === false) {
+			panelStats.sustainer.ematch = true;	
+			panel.setLight("signition", "on");
+		}
+		lastSustainerTimestamp = now;
+	}	
 });
+
+
+// Turns the lights off if we haven't received a packet in a second or so
+function turnLightsOnOff() {
+	var now = (new Date()).getTime();
+
+	if (now - lastBoosterTimestamp > 2000) {
+		panel.setLight("bcomm", "off");
+		//panel.setLight("bignition", "off");
+	} else {
+		panel.setLight("bcomm", "on");
+	}
+
+
+	if (now - lastSustainerTimestamp > 2000) {
+		panel.setLight("scomm", "off");
+		//panel.setLight("signition", "off");
+	} else {
+		panel.setLight("scomm", "on");
+	}
+}
+
+
+// For testing the LCD
+var kirbyState = 0;
+
+var kirbyDanceStates = [
+	" (>'-')>",
+	"<('-'<)",
+	" (>'-')>",
+	"<('-'<)",
+	"^('-')^",
+	"v('-')v",
+	" (^-^)"
+];
+
+function kirbyDance() {
+	panel.setLine('4', '      ' + kirbyDanceStates[kirbyState]);
+	kirbyState += 1;
+	if (kirbyState >= kirbyDanceStates.length) {
+		kirbyState = 0;
+	}
+}
+
+function updatePanel(part, line) {
+	try {
+		var latStr = part.lat.toFixed(8);
+		latStr = ' '.repeat(13 - latStr.length) + latStr;
+		var longStr = part.long.toFixed(8);
+		longStr = ' '.repeat(13 - longStr.length) + longStr;
+		var altStr = String(part.alt);
+		altStr = ' '.repeat(5 - altStr.length) + altStr;
+		var accelStr = part.accel.toFixed(2);
+		accelStr = ' '.repeat(5 - accelStr.length) + accelStr;
+
+		var line1 = latStr + ' ' + altStr + 'm';
+		var line2 = longStr + ' ' + accelStr + 'g';
+
+		panel.setLine(line, line1);
+		panel.setLine(line + 1, line2);	
+	} catch (err) {
+		console.log("Error formatting panel string.");
+		console.log(err);		
+	}
+}
+
+
+// Every 100ms, check if we should turn the sustainer lights off
+setInterval(turnLightsOnOff, 100);
+setInterval(updatePanel, 1000, panelStats.sustainer, 1);
+setInterval(updatePanel, 1000, panelStats.booster, 3);
+
+//setInterval(kirbyDance, 500);
 
 app.ws('/', function(ws, req) {
 

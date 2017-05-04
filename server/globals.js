@@ -25,5 +25,7 @@ module.exports = {
 	// Baud rate for the USB device
 	baud: 115200,
 	// The device that we are receiving telemetry from
-	deviceName: '/dev/ttyUSB0'
+	deviceName: '/dev/ttyUSB0',
+	panelDeviceName: '/dev/ttyACM0',
+	panelBaud: 9600
 }
