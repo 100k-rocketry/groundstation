@@ -1,7 +1,6 @@
 // Layer that abstracts getting data from the USB port
 var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
-var panel = require('./panel');
 var globals = require('./globals');
 var spawn = require('child_process');
 
