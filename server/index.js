@@ -112,7 +112,7 @@ function turnLightsOnOff() {
 
 
 	if (now - lastSustainerTimestamp > 2000) {
-		panel.setLight("scomm", "off");
+		//panel.setLight("scomm", "off");
 		//panel.setLight("signition", "off");
 	} else {
 		panel.setLight("scomm", "on");
@@ -171,6 +171,12 @@ setInterval(updatePanel, 1000, panelStats.sustainer, 1);
 setInterval(updatePanel, 1000, panelStats.booster, 3);
 
 //setInterval(kirbyDance, 500);
+
+
+// Test the sustainer comm light
+setTimeout(() => {
+	panel.setLight("scomm", "on");
+}, 30000);
 
 
 app.ws('/', function(ws, req) {

@@ -59,12 +59,14 @@ function launchPinOff() {
 					//console.log("Write callback");
 					console.log("launch code pin low sent.");
 				} else {
+					console.log("Launch pin off write error.");
 					console.log(err);
 				}
 			});
 				
 			fs.close(fd);
 		} else {
+			console.log("Launch pin off device open error.");
 			console.log(err);
 		}
 	});
@@ -90,11 +92,12 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 						fs.write(fd, code, 0, 22, function(err, written, buffer) {
 							if (!err) {
 								launchSent = true;
-								console.log("Launch code pin high sent.");
+								console.log("Launch code pin high sent. " + written + " bytes written.");
 								// Send the launch off code in 100 ms
 								setTimeout(launchPinOff, 1000);
 								//console.log("Write callback");
 							} else {
+								console.log("Launch code write error.");
 								console.log(err);
 							}
 						});
@@ -102,6 +105,7 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 						fs.close(fd);
 	
 					} else {
+						cosole.log("Launch code device open error.");
 						console.log(err);
 					}
 				});
