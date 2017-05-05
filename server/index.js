@@ -6,6 +6,7 @@ var mocker = require('./mocker');
 var globals = require('./globals');
 var panel = require('./panel');
 var fs = require('fs');
+var pstream = require('./persistentstream');
 require('./logger');
 
 // Get environment variables

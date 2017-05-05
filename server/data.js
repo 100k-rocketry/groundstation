@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var fs = require('fs');
 var globals = require('./globals');
 var spawn = require('child_process');
+var pstream = require('./persistentstream');
 
 var dataEmitter = new EventEmitter();
 
@@ -10,40 +11,6 @@ var dataEmitter = new EventEmitter();
 // Attaches the data callback to the 'data' event.
 // If the file closes for any reason during execution,
 // automatically try to re-open the file
-function createPersistentReadStream(filename, dataCallback) {
-	
-	// If the file doesn't exist, then try again in one second
-	if (!fs.existsSync(filename)) {
-		console.log("Could not open file: " + filename);
-		setTimeout(() => { createPersistentReadStream(filename, dataCallback); }, 1000);
-		return;
-	}
-
-	// Set the device to raw mode and set the appropriate baud
-	spawn.spawnSync('/bin/stty', ['-F', filename, globals.baud, 'raw']);
-	var stream = fs.createReadStream(filename);
-
-	// Stream opened successfully.
-	stream.on('open', () => {
-		console.log("Acquired connection to groundstation");
-		// When we get data, call the data callback.
-		stream.on('data', (d) => {
-			dataCallback(new Buffer(d));
-		});
-	});
-
-	// The stream didn't open correctly, so try again after a small delay.
-	stream.on('error', (err) => {
-		console.log("Stream error: " + err);
-		setTimeout(() => { createPersistentReadStream(filename, dataCallback); }, 1000);
-	});
-
-	// File closed? That shouldn't happen, so try to re-open the stream.
-	stream.on('close', () => {
-		console.log("Lost connection to groundstation.");
-		createPersistentReadStream(filename, dataCallback);
-	});
-}
 
 // A collection of all the bytes that we have read from the serial port
 // This is unescaped.
@@ -144,7 +111,7 @@ function dataCallback(d) {
 
 // If we are actually connecting to the physical groundstation, then open the device.
 if(globals.useUSB) {
-	createPersistentReadStream(globals.deviceName, dataCallback);
+	pstream.createPersistentReadStream(globals.deviceName, globals.baud, dataCallback);
 }
 
 module.exports = dataEmitter;

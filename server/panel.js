@@ -1,13 +1,14 @@
 var fs = require('fs');
 var spawn = require('child_process');
 var globals = require('./globals');
+var pstream = require('./persistentstream');
 
 var panelFd = -1;
 var numSustainerErrors = 0;
 var numBoosterErrors = 0;
 
 function tryOpenPanelDevice() {
-	
+
 	console.log("Trying to make connection to panel.");
 
 	if (panelFd !== -1) {
@@ -36,6 +37,16 @@ function tryOpenPanelDevice() {
 }
 
 tryOpenPanelDevice();
+
+pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, function(d) {
+	for (var i = 0; i < d.length; i++) {
+		if (d[i] == 'a') {
+			console.log("armed off");
+		} else if (d[i] == 'A') {
+			console.log("armed on");
+		}
+	}
+});
 
 
 function writeHandler(err, written, buffer) {
@@ -80,7 +91,7 @@ module.exports = {
 				console.log("Error in setLine.");
 				console.log(err);
 				panelFd = -1;
-				tryOpenPanelDevice();	
+				tryOpenPanelDevice();
 			}
 		}
 	},
