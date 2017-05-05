@@ -8,7 +8,8 @@ var panelFd = -1;
 var numSustainerErrors = 0;
 var numBoosterErrors = 0;
 var armed = false;
-
+var launch = false;
+var depressTimestamp = 0;
 
 function tryOpenPanelDevice() {
 
@@ -28,8 +29,10 @@ function tryOpenPanelDevice() {
 		spawn.spawnSync('/dev/stty', ['-F', globals.panelDeviceName, globals.panelBaud, 'raw']);
 		fs.open(globals.panelDeviceName, 'r+', function(err, fd) {
 			if (!err) {
+				console.log("Opened write stream to panel.");
 				panelFd = fd;
 			} else {
+				console.log(err);
 				panelFd = -1;
 			}
 		});
@@ -47,11 +50,43 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 	var length = 0;
 
 	for (var i = 0; i < d.length; i++) {
+
+		// 76 = 'L' = launch button down
+		if (d[i] === 76 && armed === true) {
+
+			// If the launch button has been depressed for a certain
+			// amount of time, then launch.
+			if (launch === true && (now - depressTimestamp) > 1000) {
+				// Send the launch code
+				console.log("LAUNCH");
+			}
+
+			// This is the first trigger of the launch button,
+			// so start counting how long it has been depressed.
+			if (launch === false) {
+				console.log("...");
+				depressTimestamp = now;
+			}
+
+			launch = true;
+		// 108 = 'l' = launch button up
+		} else if (d[i] === 108) {
+			launch = false;
+			depressTimestamp = 0;
+		}
+
 		if (d[i] === 97 || d[i] === 65) {
+			// if armed is false, then be sure to stop the launch
+			if (d[i] === 97) {
+				launch = false;
+				depressTimestamp = 0;
+			}
+			
 			var code = "";
 			if (d[i] === 97 && armed === true) {
 				send = true;
 				armed = false;
+				console.log("DISARMED");
 				// sustainer code on top, booster on bottom
 				code = Buffer.from([
 						0x7E, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x5A, 0xD2, 0x0B, 0x01, 0x01, 0xD0,
@@ -61,15 +96,10 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 			} else if (d[i] === 65 && armed === false) {
 				send = true;
 				armed = true;
+				console.log("ARMED");
 				code = Buffer.from([
 						0x7E, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x5A, 0xD2, 0x0B, 0x01, 0x02, 0xCF,
 						0x7E, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x25, 0xD1, 0xF6, 0x01, 0x02, 0x1A]);
-						//0x7E, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x5A, 0xD2, 0x0B, 0x01, 0x02, 0xCE,
-						//0x7E, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x5A, 0xD2, 0x0B, 0x01, 0x02, 0xCE,
-						//0x7E, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x25, 0xD1, 0xF6, 0x01, 0x02, 0x1A,
-						//0x7E, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x25, 0xD1, 0xF6, 0x01, 0x02, 0x1A]);
-
-
 				length = 34;
 			}
 
@@ -109,16 +139,26 @@ function writeHandler(err, written, buffer) {
 
 
 function pollArm() {
+	
+	if (panelFd === -1) {
+		return;
+	}
 	try {
 		fs.write(panelFd, "arm\n");
+		fs.write(panelFd, "launch\n");
 	} catch (err) {
 		console.log(err);
 	}
 }
 
-setInterval(pollArm, 500);
+setInterval(pollArm, 100);
 
 module.exports = {
+	
+	isArmed: function() {
+		return armed;
+	},
+
 	// Sets the appropriate light to the appropriate state.
 	// lightName: scomm, signition, serror, bcomm, bignition, berror, alarm
 	// state: on, off
@@ -155,43 +195,36 @@ module.exports = {
 		}
 	},
 
-	addSustainerError: function() {
-		numSustainerErrors++;
-		if (numSustainerErrors === 1) {
+	setSustainerError: function() {
+		if (numSustainerErrors === 0) {
 			setLight("serror", "on");
 			console.log("Setting error");
-		}
+		}	
+		numSustainerErrors = 1;
 	},
 
 
-	addBoosterError: function() {
-		numBoosterErrors++;
-		if (numBoosterErrors === 1) {
+	setBoosterError: function() {
+		if (numBoosterErrors === 0) {
 			setLight("berror", "on");
 		}
+		numBoosterErrors = 1;
+
 	},
 
 	removeBoosterError: function() {
-		numBoosterErrors--;
-		if (numBoosterErrors < 0) {
-			console.log("Removed nonexistant error indicator.");
-			numBoosterErrors = 0;
-		}
 		if (numBoosterErrors === 0) {
 			setLight("berror", "off");
 		}
+		numBoosterErrors = 0;
 	},
 
 
 	removeSustainerError: function() {
-		numSustainerErrors--;
-		if (numSustainerErrors < 0) {
-			console.log("Removed nonexistant error indicator.");
-			numSustainerErrors = 0;
-		}
 		if (numSustainerErrors === 0) {
-			setLight("berror", "off");
+			setLight("serror", "off");
 		}
+		numSustainerErrors = 0;
 	},
 
 	addError: function() { console.log("S");addSustainerError(); console.log("B");addBoosterError(); },

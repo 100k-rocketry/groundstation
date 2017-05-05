@@ -63,6 +63,7 @@ telemetryEmitter.on("newPacket", (packet) => {
 	// Really dirty way to deep copy the packet
 	allPackets.push(JSON.parse(JSON.stringify(packet)));
 	var now = (new Date()).getTime();
+	var armed = panel.isArmed();
 	
 	if (packet.part === "Booster") {
 		updatePanelStat(panelStats.booster, packet);
@@ -71,13 +72,28 @@ telemetryEmitter.on("newPacket", (packet) => {
 			panelStats.booster.ematch = true;
 			panel.setLight("bignite", "on");
 		}
+
+		if(packet.mode === "Armed" && armed === 0 || packet.mode === "Testing" && armed === 1) {
+			panel.setBoosterError();
+		} else {
+			panel.removeBoosterError();
+		}
+
 		lastBoosterTimestamp = now;
+
 	} else if (packet.part === "Sustainer") {
 		updatePanelStat(panelStats.sustainer, packet); 
 		if (packet.ematch_status === 0x7F && panelStats.sustainer.ematch === false) {
 			panelStats.sustainer.ematch = true;	
 			panel.setLight("signite", "on");
 		}
+
+		if (packet.mode === "Armed" && armed === 0 || packet.mode === "Testing" && armed === 1) {
+			panel.setSustainerError();
+		} else {
+			panel.removeSustainerError();
+		}
+
 		lastSustainerTimestamp = now;
 	}	
 });
@@ -155,6 +171,7 @@ setInterval(updatePanel, 1000, panelStats.sustainer, 1);
 setInterval(updatePanel, 1000, panelStats.booster, 3);
 
 //setInterval(kirbyDance, 500);
+
 
 app.ws('/', function(ws, req) {
 
