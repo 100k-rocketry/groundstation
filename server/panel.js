@@ -51,11 +51,16 @@ tryOpenPanelDevice();
 
 
 function launchPinOff() {
-	var code = Buffer.from([0x7E, 0x00, 0x10, 0x17, 0x01, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x26, 0x47, 0x61, 0xFF, 0xFE, 0x02, 0x70, 0x32, 0x04, 0x7D, 0x5E]);
+	var code = Buffer.from([0x7E, 0x00, 0x10, 0x17, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x26, 0x47, 0x61, 0xFF, 0xFE, 0x03, 0x70, 0x32, 0x04, 0x7D, 0x5E]);
 	fs.open(globals.deviceName, 'w', function(err, fd) {
 		if (!err) {
 			fs.write(fd, code, 0, 22, function(err, written, buffer) {
-				//console.log("Write callback");
+				if (!err) {
+					//console.log("Write callback");
+					console.log("launch code pin low sent.");
+				} else {
+					console.log(err);
+				}
 			});
 				
 			fs.close(fd);
@@ -79,14 +84,19 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 			// amount of time, then launch.
 			if (launch === true && launchSent === false && (now - depressTimestamp) > 1000) {
 				// Send the launch code
-				code = Buffer.from([0x7E, 0x00, 0x10, 0x17, 0x01, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x26, 0x47, 0x61, 0xFF, 0xFE, 0x02, 0x70, 0x32, 0x05, 0x7D, 0x5D]);
+				code = Buffer.from([0x7E, 0x00, 0x10, 0x17, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x26, 0x47, 0x61, 0xFF, 0xFE, 0x03, 0x70, 0x32, 0x05, 0x7D, 0x5D]);
 				fs.open(globals.deviceName, 'w', function(err, fd) {
 					if (!err) {
 						fs.write(fd, code, 0, 22, function(err, written, buffer) {
-							launchSent = true;
-							// Send the launch off code in 100 ms
-							setTimeout(launchPinOff, 100);
-							//console.log("Write callback");
+							if (!err) {
+								launchSent = true;
+								console.log("Launch code pin high sent.");
+								// Send the launch off code in 100 ms
+								setTimeout(launchPinOff, 1000);
+								//console.log("Write callback");
+							} else {
+								console.log(err);
+							}
 						});
 						
 						fs.close(fd);
