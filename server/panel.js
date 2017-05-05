@@ -157,6 +157,7 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 				fs.open(globals.deviceName, 'w', function(err, fd) {
 					if (!err) {
 						fs.write(fd, code, 0, length, function(err, written, buffer) {
+							console.log("Sent radio code");
 							//console.log("Write callback");
 						});
 						
@@ -166,6 +167,7 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 						console.log(err);
 					}
 				});
+				send = false;
 			}
 		} catch (err) {
 			console.log("Could not send arm code");
@@ -244,7 +246,7 @@ module.exports = {
 
 	setSustainerError: function() {
 		if (numSustainerErrors === 0) {
-			setLight("serror", "on");
+			this.setLight("serror", "on");
 			console.log("Setting error");
 		}	
 		numSustainerErrors = 1;
@@ -253,7 +255,7 @@ module.exports = {
 
 	setBoosterError: function() {
 		if (numBoosterErrors === 0) {
-			setLight("berror", "on");
+			this.setLight("berror", "on");
 		}
 		numBoosterErrors = 1;
 
@@ -261,7 +263,7 @@ module.exports = {
 
 	removeBoosterError: function() {
 		if (numBoosterErrors === 0) {
-			setLight("berror", "off");
+			this.setLight("berror", "off");
 		}
 		numBoosterErrors = 0;
 	},
@@ -269,7 +271,7 @@ module.exports = {
 
 	removeSustainerError: function() {
 		if (numSustainerErrors === 0) {
-			setLight("serror", "off");
+			this.setLight("serror", "off");
 		}
 		numSustainerErrors = 0;
 	},

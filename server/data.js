@@ -24,7 +24,7 @@ var insidePacket = false;
 // packet, then parse it.
 function dataCallback(d) {
 
-	console.log(d);
+//	console.log(d);
 
 	if (insidePacket === false && dataBuffer.length > 0 && dataBuffer[0] === 0x7e) {
 		insidePacket = true;

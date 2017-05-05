@@ -44,23 +44,54 @@ dataEmitter.on('data', function(data) {
 	
 		// Mode 2 = Armed
 		if(mode === 2) {
+//			console.log("Packet 2");
 			var altitude = data.readUInt8(2 + offset) * 65536;
+//			console.log("Packet 3");
 			altitude += data.readUInt16LE(3 + offset);
+//			console.log("Packet 5");
 			var latitude = data.readFloatLE(5 + offset);
+
+//			console.log("Packet 9");
 			var longitude = data.readFloatLE(9 + offset);
-			var accelerometer_x = data.readFloatLE(13 + offset);
+			
+//			console.log("Packet 13");
+var accelerometer_x = data.readFloatLE(13 + offset);
+
+//			console.log("Packet 17");
 			var accelerometer_y = data.readFloatLE(17 + offset);
-			var accelerometer_z = data.readFloatLE(21 + offset);
+			
+//			console.log("Packet 21");
+var accelerometer_z = data.readFloatLE(21 + offset);
+
+//			console.log("Packet 25");
 			var yaw = data.readFloatLE(25 + offset);
-			var pitch = data.readFloatLE(29 + offset);
+			
+//			console.log("Packet 29");
+var pitch = data.readFloatLE(29 + offset);
+
+//			console.log("Packet 33");
 			var roll = data.readFloatLE(33 + offset);
-			var magnetometer_x = data.readFloatLE(37 + offset);
+			
+//			console.log("Packet 37");
+var magnetometer_x = data.readFloatLE(37 + offset);
+
+//			console.log("Packet 41");
 			var magnetometer_y = data.readFloatLE(41 + offset);
-			var magnetometer_z = data.readFloatLE(45 + offset);
+			
+//			console.log("Packet 45");
+var magnetometer_z = data.readFloatLE(45 + offset);
+
+//			console.log("Packet 49");
 			var gps_altitude = data.readUInt16LE(49 + offset);
-			var kalman_altitude = data.readUInt16LE(51 + offset);
+			
+//			console.log("Packet 51");
+var kalman_altitude = data.readUInt16LE(51 + offset);
+
+//			console.log("Packet 53");
 			var kalman_velocity = data.readUInt16LE(53 + offset);
-			var ematch_status = data.readUInt8(55 + offset);
+			
+//			console.log("Packet 55");
+var ematch_status = data.readUInt8(55 + offset);
 	
 			telemetryEmitter.emit('newPacket', {
 				"mode": "Armed",

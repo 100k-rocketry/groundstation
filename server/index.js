@@ -67,14 +67,14 @@ telemetryEmitter.on("newPacket", (packet) => {
 	
 	if (packet.part === "Booster") {
 		updatePanelStat(panelStats.booster, packet);
-		console.log(packet.ematch_status, panelStats.booster.ematch);
-		if (packet.ematch_status === 0x0F && panelStats.booster.ematch === false) {
+		if (packet.ematch_status === 0x00 && panelStats.booster.ematch === false) {
 			panelStats.booster.ematch = true;
 			panel.setLight("bignite", "on");
 		}
 
-		if(packet.mode === "Armed" && armed === 0 || packet.mode === "Testing" && armed === 1) {
+		if(packet.mode === "Armed" && armed === false || packet.mode === "Testing" && armed === true) {
 			panel.setBoosterError();
+			console.log("Setting booster error");
 		} else {
 			panel.removeBoosterError();
 		}
@@ -83,12 +83,12 @@ telemetryEmitter.on("newPacket", (packet) => {
 
 	} else if (packet.part === "Sustainer") {
 		updatePanelStat(panelStats.sustainer, packet); 
-		if (packet.ematch_status === 0x7F && panelStats.sustainer.ematch === false) {
+		if (packet.ematch_status === 0x00 && panelStats.sustainer.ematch === false) {
 			panelStats.sustainer.ematch = true;	
 			panel.setLight("signite", "on");
 		}
 
-		if (packet.mode === "Armed" && armed === 0 || packet.mode === "Testing" && armed === 1) {
+		if (packet.mode === "Armed" && armed === false || packet.mode === "Testing" && armed === true) {
 			panel.setSustainerError();
 		} else {
 			panel.removeSustainerError();
