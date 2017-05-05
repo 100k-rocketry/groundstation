@@ -9,6 +9,7 @@ var numSustainerErrors = 0;
 var numBoosterErrors = 0;
 var armed = false;
 var launch = false;
+var launchSent = false;
 var depressTimestamp = 0;
 
 function tryOpenPanelDevice() {
@@ -44,6 +45,26 @@ function tryOpenPanelDevice() {
 
 tryOpenPanelDevice();
 
+
+// Code to turn the launch code OFF
+// 7E, 00, 10, 17, 01, 00, 7D, 33, A2, 00, 41, 26, 47, 61, FF, FE, 02, 70, 32, 04, 7D, 5E
+
+
+function launchPinOff() {
+	var code = Buffer.from([0x7E, 0x00, 0x10, 0x17, 0x01, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x26, 0x47, 0x61, 0xFF, 0xFE, 0x02, 0x70, 0x32, 0x04, 0x7D, 0x5E]);
+	fs.open(globals.deviceName, 'w', function(err, fd) {
+		if (!err) {
+			fs.write(fd, code, 0, 22, function(err, written, buffer) {
+				//console.log("Write callback");
+			});
+				
+			fs.close(fd);
+		} else {
+			console.log(err);
+		}
+	});
+}
+
 pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, function(d) {
 	var now = (new Date()).getTime();
 	var send = false;
@@ -56,8 +77,24 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 
 			// If the launch button has been depressed for a certain
 			// amount of time, then launch.
-			if (launch === true && (now - depressTimestamp) > 1000) {
+			if (launch === true && launchSent === false && (now - depressTimestamp) > 1000) {
 				// Send the launch code
+				code = Buffer.from([0x7E, 0x00, 0x10, 0x17, 0x01, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x26, 0x47, 0x61, 0xFF, 0xFE, 0x02, 0x70, 0x32, 0x05, 0x7D, 0x5D]);
+				fs.open(globals.deviceName, 'w', function(err, fd) {
+					if (!err) {
+						fs.write(fd, code, 0, 22, function(err, written, buffer) {
+							launchSent = true;
+							// Send the launch off code in 100 ms
+							setTimeout(launchPinOff, 100);
+							//console.log("Write callback");
+						});
+						
+						fs.close(fd);
+	
+					} else {
+						console.log(err);
+					}
+				});
 				console.log("LAUNCH");
 			}
 
@@ -72,6 +109,7 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 		// 108 = 'l' = launch button up
 		} else if (d[i] === 108) {
 			launch = false;
+			launchSent = false;
 			depressTimestamp = 0;
 		}
 
@@ -102,27 +140,26 @@ pstream.createPersistentReadStream(globals.panelDeviceName, globals.panelBaud, f
 						0x7E, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x7D, 0x33, 0xA2, 0x00, 0x41, 0x25, 0xD1, 0xF6, 0x01, 0x02, 0x1A]);
 				length = 34;
 			}
+		}
 
-			try {
-				if (send) {
-					fs.open(globals.deviceName, 'w', function(err, fd) {
-						if (!err) {
-							fs.write(fd, code, 0, length, function(err, written, buffer) {
-								//console.log("Write callback");
-							});
-							
-							fs.close(fd);
-		
-						} else {
-							console.log(err);
-						}
-
-					});
-				}
-			} catch (err) {
-				console.log("Could not send arm code");
-				console.log(err);
+		try {
+			if (send) {
+				fs.open(globals.deviceName, 'w', function(err, fd) {
+					if (!err) {
+						fs.write(fd, code, 0, length, function(err, written, buffer) {
+							//console.log("Write callback");
+						});
+						
+						fs.close(fd);
+	
+					} else {
+						console.log(err);
+					}
+				});
 			}
+		} catch (err) {
+			console.log("Could not send arm code");
+			console.log(err);
 		}
 	}
 });
