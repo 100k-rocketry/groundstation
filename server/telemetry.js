@@ -97,8 +97,8 @@ var ematch_status = data.readUInt8(55 + offset);
 				"mode": "Armed",
 				"part": part,
 				"altitude": altitude,
-				"latitude": latitude / 100.0,
-				"longitude": longitude / 100.0,
+				"latitude": latitude,
+				"longitude": longitude,
 				"accelerometer_x": accelerometer_x,
 				"accelerometer_y": accelerometer_y,
 				"accelerometer_z": accelerometer_z,
@@ -124,8 +124,8 @@ var ematch_status = data.readUInt8(55 + offset);
 			telemetryEmitter.emit('newPacket', {
 				"mode": "Low Power",
 				"part": part,
-				"latitude": latitude / 100.0,
-				"longitude": longitude / 100.0,
+				"latitude": latitude,
+				"longitude": longitude,
 				"timestamp": (new Date()).getTime()
 			});
 		}
