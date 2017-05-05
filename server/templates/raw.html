@@ -13,33 +13,6 @@
 
 	exampleSocket.onmessage = function(event) {
 		packet = JSON.parse(event.data);
-		/*
-		var text = '' +
-			+ "Mode: " + packet.mode
-			+ ' Part: ' + packet.part
-			+ ' Altitude: ' + ((packet.gps_altitude != 0) ? packet.gps_altitude: packet.kalman_altitude)
-			+ ' Latitude: ' + packet.latitude
-			+ ' Longitude: ' + packet.longitude
-			+ ' Accelerometer: ' + packet.accelerometer_x
-			+ ', ' + packet.accelerometer_y
-			+ ', ' + packet.accelerometer_x
-			+ ' Gyro: ' + packet.yaw
-			+ ', ' + packet.pitch
-			+ ', ' + packet.roll
-			+ ' Magnetometer: ' + packet.magnetometer_x
-			+ ', ' + packet.magnetometer_y
-			+ ', ' + packet.magnetometer_z
-			+ ' Velocity: ' + packet.kalman_velocity
-			+ ' Timestamp: ' + packet.timestamp
-			+ ' Age: ' + packet.timestamp -
-			+ '<br>';
-
-			var newDiv = document.createElement('div');
-
-			var textNode = document.createTextNode(text);
-			newDiv.appendChild(textNode);
-			document.body.appendChild(newDiv);
-			*/
 
 			var timeSinceLast = 0;		
 	
@@ -53,8 +26,8 @@
 			
 
 			var text = '';
-			text += "Mode: " + packet.mode + '<br>'
-				+ ' Part: ' + packet.part + '<br>'
+			text += ' Part: ' + packet.part + '<br>'
+				+ 'Mode: ' + packet.mode + '<br>'
 				+ ' Raw altitude: ' + packet.altitude + '<br>'
 				+ ' GPS altitude: ' + packet.gps_altitude + '<br>'
 				+ ' Kalman altitude: ' + packet.kalman_altitude + '<br>'
@@ -70,6 +43,8 @@
 				+ ' Magnetometer Y: ' + packet.magnetometer_y + '<br>'
 				+ ' Magnetometer Z: ' + packet.magnetometer_z + '<br>'
 				+ ' Velocity: ' + packet.kalman_velocity + '<br>'
+				+ ' Temperature: ' + packet.temperature + '<br>'
+				+ ' E-match status: ' + packet.ematch_status + '<br>'
 				+ ' Timestamp: ' + packet.timestamp + '<br>'
 				+ ' Age: ' + ((new Date()).getTime() - packet.timestamp) + '<br>'
 				+ ' Time between packets: ' + timeSinceLast + 'ms<br>'

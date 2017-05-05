@@ -29,22 +29,24 @@ var panelStats = {
 		long: 0,
 		alt: 0,
 		accel: 0, // in gravities
-		ematch: false, // False when ematch has not been ignited, true otherwise
+		ematch: false // False when ematch has not been ignited, true otherwise
 	},
 	sustainer: {
 		lat: 0,
 		long: 0,
 		alt: 0,
 		accel: 0,
-		ematch: false,
+		ematch: false
 	}
 };
 
 function updatePanelStat(panelStat, packet) {
-	panelStat.lat = packet.latitude;
-	panelStat.long = packet.longitude;
-	panelStat.alt = packet.altitude;
-	panelStat.accel = Math.sqrt(Math.pow(packet.accelerometer_x, 2) + Math.pow(packet.accelerometer_y, 2) + Math.pow(packet.accelerometer_z, 2)) / 9.8;
+	if (packet.mode === "Armed") {
+		panelStat.lat = packet.latitude;
+		panelStat.long = packet.longitude;
+		panelStat.alt = packet.altitude;
+		panelStat.accel = Math.sqrt(Math.pow(packet.accelerometer_x, 2) + Math.pow(packet.accelerometer_y, 2) + Math.pow(packet.accelerometer_z, 2)) / 9.8;
+	}
 }
 
 var lastPanelUpdate = 0;
@@ -64,16 +66,17 @@ telemetryEmitter.on("newPacket", (packet) => {
 	
 	if (packet.part === "Booster") {
 		updatePanelStat(panelStats.booster, packet);
-		if (packet.ematch_status < 0x0F && panelStats.booster.ematch === false) {
+		console.log(packet.ematch_status, panelStats.booster.ematch);
+		if (packet.ematch_status === 0x0F && panelStats.booster.ematch === false) {
 			panelStats.booster.ematch = true;
-			panel.setLight("bignition", "on");
+			panel.setLight("bignite", "on");
 		}
 		lastBoosterTimestamp = now;
 	} else if (packet.part === "Sustainer") {
 		updatePanelStat(panelStats.sustainer, packet); 
-		if (packet.ematch_status < 0x7F && panelStats.sustainerematch === false) {
+		if (packet.ematch_status === 0x7F && panelStats.sustainer.ematch === false) {
 			panelStats.sustainer.ematch = true;	
-			panel.setLight("signition", "on");
+			panel.setLight("signite", "on");
 		}
 		lastSustainerTimestamp = now;
 	}	
@@ -123,6 +126,7 @@ function kirbyDance() {
 }
 
 function updatePanel(part, line) {
+	var now = (new Date()).getTime();
 	try {
 		var latStr = part.lat.toFixed(8);
 		latStr = ' '.repeat(13 - latStr.length) + latStr;

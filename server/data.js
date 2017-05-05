@@ -7,11 +7,6 @@ var pstream = require('./persistentstream');
 
 var dataEmitter = new EventEmitter();
 
-// Tries to open the specified file.
-// Attaches the data callback to the 'data' event.
-// If the file closes for any reason during execution,
-// automatically try to re-open the file
-
 // A collection of all the bytes that we have read from the serial port
 // This is unescaped.
 var dataBuffer = Buffer.alloc(0);
@@ -28,6 +23,8 @@ var insidePacket = false;
 // Appends the data to the buffer. If there is enough data to make a whole
 // packet, then parse it.
 function dataCallback(d) {
+
+	console.log(d);
 
 	if (insidePacket === false && dataBuffer.length > 0 && dataBuffer[0] === 0x7e) {
 		insidePacket = true;

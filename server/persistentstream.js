@@ -1,4 +1,5 @@
 var fs = require('fs');
+var spawn = require('child_process');
 
 module.exports = {
     createPersistentReadStream: function (filename, baud, dataCallback) {

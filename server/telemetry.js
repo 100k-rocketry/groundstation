@@ -31,7 +31,7 @@ dataEmitter.on('data', function(data) {
 		// Mode 1 = Testing
 		if(mode === 1) {
 			var ematchStatus = data.readUInt8(2 + offset);
-			var temperature = data.readUInt8(2 + offset);
+			var temperature = data.readUInt8(3 + offset);
 	
 			telemetryEmitter.emit('newPacket', {
 				"mode": "Testing",
