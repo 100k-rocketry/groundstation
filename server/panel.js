@@ -47,12 +47,23 @@ function writeHandler(err, written, buffer) {
 	}
 }
 
+
+function pollArm() {
+	try {
+		console.log("Polling arm");
+		fs.write(panelFd, "arm\n");
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+setInterval(pollArm, 500);
+
 module.exports = {
 	// Sets the appropriate light to the appropriate state.
 	// lightName: scomm, signition, serror, bcomm, bignition, berror, alarm
 	// state: on, off
 	setLight: function (lightName, state) {
-		console.log(panelFd);
 		if (panelFd != -1) {
 			try {
 				var lightString = lightName + ' ' + state + '\n';
