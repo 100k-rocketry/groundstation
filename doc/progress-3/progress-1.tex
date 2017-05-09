@@ -1,0 +1,424 @@
+\documentclass[10pt,draftclsnofoot,onecolumn]{IEEEtran}
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\usepackage[margin=.75in]{geometry}
+\usepackage{courier}
+\usepackage{ifthen}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{tabularx}
+\usepackage[strict]{chngpage}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{acronym}
+\usepackage{color}
+\usepackage{makeidx}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{verbatim}
+
+\makeindex
+
+\acrodef{NPM}[NPM]{Node Package Manager}
+\acrodef{OSU}[OSU]{Oregon State University}
+\acrodef{AIAA}[AIAA]{American Institute of Aeronautics and Astronautics}
+\acrodef{COCOM}[COCOM]{Coordinating Committee for Multilateral Export Controls}
+\acrodef{AGL}[AGL]{Above Ground Level}
+
+\lstset {
+	language=C,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue}\ttfamily,
+	stringstyle=\color{red}\ttfamily,
+	commentstyle=\color{OliveGreen}\ttfamily,
+	morecomment=[l][\color{magenta}]{\#}
+	showstringspaces=false,
+	showspaces=false,
+	frame=single,
+	captionpos=b
+}
+
+\newcommand{\commandline}[2][\empty] {
+	\begin{quote}
+		\texttt{#2}
+		\ifthenelse{\equal{#1}{\empty}}{}{\begin{quote}#1\end{quote}}
+	\end{quote}
+}
+
+\newcommand{\sigline}[1][\empty] {
+	\vspace{1in}
+	\hrule width0.5\textwidth
+	\vspace{1mm}
+	\noindent #1	
+}
+
+\newcommand*{\SignatureAndDate}[1]{
+	\vspace{1in}
+	\par\noindent\makebox[2.5in]{\hrulefill} \hspace{.5in} \makebox[2.0in]{\hrulefill}
+	\par\noindent\makebox[2.5in][l]{#1}      \hspace{.5in} \makebox[2.0in][l]{Date}
+}
+
+
+\begin{document}
+	\singlespace
+	
+	\title{\vspace{2in}Design}
+	
+	\author {
+		Anisimova, Natasha
+		\and
+		Lee, Terrance
+		\and
+		Morgan, Albert
+	}
+	
+	\markboth{CS Capstone 2016-2017}{Groundstation}
+	
+	\pagestyle{empty}
+	\vspace*{2in}
+	\begin{center}
+		\huge
+		Groundstation: Progress\\
+		\normalsize
+		\vspace{5mm}
+		\textbf{
+			Team \#25\\
+			High-Altitude Rocketry Challenge\\
+		}
+		\vspace{1mm}
+		Natasha Anisimova\\
+		Terrance Lee\\
+		Albert Morgan
+	\end{center}
+	
+	\vspace{5mm}
+	
+	\begin{center}
+		\textbf{Abstract}
+	\end{center}
+	
+	%\begin{adjustwidth}{0.75in}{0.75in}
+	
+	%Abstract goes here
+	The \textit{Groundstation} software will collect telemetry from a rocket while it is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
+	display of data.
+	This document will describe the progress that was made by the Groundstation software team over the course between September and December of 2016.
+	%\end{adjustwidth}
+		
+	\pagestyle{headings}
+	
+	\newpage
+
+	% Uncomment this to make the table of contents	
+	\tableofcontents
+	\newpage
+
+\section{Purpose and Goals}
+	In June 2017, the \ac{OSU} chapter of the
+	\ac{AIAA} will launch a rocket in the Black Rock Desert.
+	This rocket will ascend to one hundred thousand feet \ac{AGL}.
+	Designing, building, and launching the rocket will require the
+	collaboration and expertise of dozens of engineers from a variety
+	of disciplines, including mechanical, electrical, computer, and
+	software.
+	
+	Many rockets record data during the flight. This data may include
+	altitude, latitude, longitude, and more.
+	Latitude and longitude
+	data is helpful for locating the rocket after it lands, but
+	if the data is located on the rocket, then it is useless
+	for this task.
+	Altitude data will tell the rocketry team if we have
+	met the objective of one hundred thousand feet, but if the rocket
+	is damaged or cannot be located for any reason, then the record
+	of this achievement may be lost.
+	
+	However, the chicken-and-egg problem of not being able to access
+	the location data before the rocket is found may be avoided by sending
+	telemetry from the rocket in real-time.
+	Telemetry may be received wirelessly
+	by the rocketry team while the rocket is in flight, giving them
+	access to useful information such as the rocket's last known location
+	and the highest altitude reached. This telemetry will aid in the
+	rocket's recovery and provide a log of the rocket's flight even if
+	recovery is impossible.
+
+\section{Current Progress}
+Currently, we have fully designed the system. However, very little development with has begun.
+Natasha has done some proof-of-concepts with 3.js to ensure that it will work on everyone's systems,
+but no work has begun on the backend or final user interface.
+
+\section{Retrospective}
+
+\begin{tabular}{| p{0.3\linewidth} | p{0.3\linewidth} | p{0.3\linewidth} |}
+\hline
+Positives & Deltas & Actions\\
+\hline
+
+& After reviewing the development log for the last ten weeks, it was clear that we barely met most of our deadlines.
+Instead of doing a large amount of work at the last minute, we should do a little bit of work over the course of the time we have on an assignment.
+& In order to better meet our deadlines, we will institute an internal timeline in addition to the due-dates provided by the assignment description. We will use Git issues and milestones to set deadlines and assign tasks.
+These tasks will break up the whole assignment into bitesized pieces that can be completed throughout the work period.
+If this is not sufficient, we will look at more feature-rich options such as waffle.io or Git projects.
+\\
+
+\hline
+\end{tabular}
+
+\section{Development Log}
+
+
+\subsection{Week 3}
+\subsubsection{Anisimova, Natasha}
+\begin{itemize}
+	\item \textbf{Plans: For the following weeks we are hoping to communicate more with the Electircal Engineers so that 
+	we know what type of equipment we have to work with. Another bonus is that we will be getting recruits that could 
+	help us with creating the software.}
+	\item \textbf{Progress: We created our first set of blog posts. Also, we created a problem statement that our team
+	and our client agreed with. Meeting with the entire rocket team gave us a good idea how the work was going to split up 
+	between the individual teams. }
+	\item \textbf{Problems: Knowing that we would not have Wi-Fi connection at the site, we would have to create our own
+	solution as to how we were going to get the software to everyone on the team.}
+\end{itemize}
+\subsubsection{Morgan, Albert}
+\begin{itemize}
+	\item \textbf{Plans: }
+The plans for the coming week are to:
+\begin{itemize}
+	\item discuss a proposed architecture and scope for our project
+	\item collect user stories from the rest of the rocketry team
+\end{itemize}
+\item \textbf{Progress: }
+Progress is going well. Our client, Dr. Squires, was very pleased with our problem statement. Currently, we are working with the avionics team to hammer out the details of the project.
+\item \textbf{Problems: }
+Git is an amazing tool, but it does not excel in fast, remote, simultaneous collaboration. Compounding this with the large size of the rocketry team has made it difficult to produce the documentation in a timely manner.
+\end{itemize}
+\subsubsection{Lee, Terrance}
+\begin{itemize}
+	\item \textbf{Plans: }Next week we should meet a couple of more underclass men that couldn't make it to the meetings last week. Also we hope to get a little bit more precise information from each team. They should know more about the competition, materials, and so on that pertains to us. I personally will be joining the AIAA by the end of this week because they are one of our main sponsors plus they are helping me get my class one certification. Also meeting our TA for the first time next week.
+	\item \textbf{Progress: }This week we were able to finish our problem statement. Do to my previous plans I had the job of redoing our abstract from when we had another group read our abstract and read it. I also did some proofreading and had the ability to allow someone who knows nothing about computer science or rocketry read it. They were able to understand what we were trying to get a crossed with our problem statement. We got a general idea of what each team from the project wants from us software wise. What the teams needs and their wants. That way we have primary and secondary objectives.
+	\item \textbf{Problems: }I personally had some issues with some prior engagements. So I wasn't able to contribute as much until late Wednesday. That shouldn't happen again. My teammates were great to help with that. I had some issues with GitHub. I haven't had to use the command line ever. I am used to using source tree but I noticed I have more control with the command line. Keeping up with all the information of all the teams for the project is tough. They have information that can help us understand what is good for designing the software even if we aren't working directly with them. That's why it is good to know the verbiage of aerospace, rocketry, mechanical engineers and electrical engineers. I don't need to know everything but I should know at least what they are speaking so that I am not asking them to explain everything every time we have a conversation.
+\end{itemize}
+\subsection{Week 4}
+\subsubsection{Anisimova, Natasha}
+\begin{itemize}
+	\item \textbf{Plans: }
+	At the moment we have decided to create proof of concepts each week that we and the recruits will
+	focus on in order to continue to progress further.
+	\item \textbf{Progress: }
+	We were able to recruit a few students to help us conduct research.
+	\item \textbf{Problems: }
+	So far we are unsure of how the Avionics team will be formatting the data and what protocol they
+	will be using.
+\end{itemize}
+\subsubsection{Morgan, Albert}
+\begin{itemize}
+	\item \textbf{Plans: }
+	The plans for the coming week are to:
+	
+	\begin{enumerate}
+	\item	Figure out some of the details about our architecture, especially exactly how the application server should interact with the web server.
+	\item Make a list of proof-of-concepts that need to be done
+	\item Bring the rest of the students up to date on the overall architecture, and find some tasks for them.
+	\item Write the requirements document.
+	\end{enumerate}
+	\item \textbf{Progress: }
+	Progress is going well. We haven't started any development work yet, and there are still some critical pieces of the architecture that still need to be detailed, but we have a very good high-level view of what the architecture should look like. We have a number of other students who are involved in the rocket team that should be a terrific asset to our project.
+	\item \textbf{Problems: }
+	No particular problems this week, but after doing some research about application/web server integration, there appears to be a lot of different ways we could design our architecture, and I'm not sure how to decide which one is best for us.
+\end{itemize}
+\subsubsection{Lee, Terrance}
+\begin{itemize}
+	\item \textbf{Plans: }We were going to ask the team leads for some glossary terms and Dr. Squires for requirements. With the glossary terms we were going to take the ones that we felt pertained to our document and use them.
+	\item \textbf{Progress: } We came to agreement that we needed to speak to get some terms from the whole team for the glossary because this wasn't just a CS project. Since this a project that takes collaborate of teams to succeed in this project we should need some of their terms too.
+	\item \textbf{Problems: }After Speaking with Dr. Winters she said that our problem statement was at what she called level 2. That we needed to be just a little be higher on our overview to where we started. I had also ran into our TA and had him look at our problem statement for formatting errors since he has been an instructor to make sure we weren't doing anything wrong there. He said it was fine and gave me some feedback about the problem statement but it was the same as Dr. Winters.
+\end{itemize}
+\subsection{Week 5}
+\subsubsection{Anisimova, Natasha}
+\begin{itemize}
+	\item \textbf{Plans: }
+	We will have to finish the requirements document and have a separate meeting for the recruits.
+	\item \textbf{Progress: }
+	We created a draft for the requirements document.
+	\item \textbf{Problems: }
+	Researching how to create a Gantt chart for free took a lot more time than expected. We also were
+	having a problem with boring our recruits with senior design work, so we created a separate time to meet with them.
+\end{itemize}
+\subsubsection{Morgan, Albert}
+\begin{itemize}
+	\item \textbf{Plans: }
+	The plans for the coming week are to:
+	\begin{itemize}
+		\item finish the requirements document
+		\item develop a better workflow process to prevent near-disasters during busy weeks
+	\end{itemize}
+	\item \textbf{Progress: }
+	This week, we wrote the draft for the requirements document. Given the open-ended nature of our project, it was difficult to decide what should go in this document and what should go in a design document. We ended up leaving many implementation details, which are already planned but not part of the actual requirements of the project, for the design document.
+	\item \textbf{Problems: }
+	It was a crazy week with the career fairs, and we almost didn't get everything done that we needed to. We managed to pull through, though.
+\end{itemize}
+\subsubsection{Lee, Terrance}
+\begin{itemize}
+	\item \textbf{Plans: }
+	Next week do a little more research for the final product of the requirements document. This way it will be clean and concise. When that is finished start thinking about the next document if we have time.
+	\item \textbf{Progress: }
+	We were able to get some feedback from the other sub-teams about what they require from us on the software side. Did some research about about what is needed from real software engineers just to get a little more familiar on how it works when dealing with multiple teams. I found out the biggest issue is communication and everyone wants their section to come first at the beginning. What successful teams do is come to a realization on one overall plan and do what is best for the overall team not for themselves.
+	\item \textbf{Problems: }
+	The requirements document was more difficult then I thought it would be. Since we are getting request from other sections of the team. We have to decipher what should and what should not go into this. Also it makes you actually think about what needs to go into something that needs to work not just for you or your team but for a whole project on a big scale. Since this is something that no other collegiate team has done we don't have much to go with so we are thinking about this should work at this moment but we may research something later and it may not work later. It kind of sticks a little bit in the back of your mind is this a waste of time or is this the right thing that we are doing. The nice thing about research type things like this you will never know until you try.
+\end{itemize}
+\subsection{Week 6}
+\subsubsection{Anisimova, Natasha}
+\begin{itemize}
+	\item \textbf{Plans: }
+	GS is the name of our software. I am planning on creating some kind of logo for it that way we can put it up into our web application. 
+	\item \textbf{Progress: }
+	We finished the requirements document. I also spoke with a Computer Visualization person, Nik, that Winters introduced me to. He mentioned that we could get the topology and satellite images of the area from Professor Mike Bailey. The texture image can be mapped to the topology and we can use that for our web application. He also mentioned that it would be cool if we could get an PC to actually have the web server on. Kirsten added that there could be possible funding for this as well. We also realized that we pretty much have four months before the test launch. A lot needs to happen before now and then. 
+	\item \textbf{Problems: }
+	We do not have a lot of time left before the test launch.
+\end{itemize}
+\subsubsection{Morgan, Albert}
+\begin{itemize}
+	\item \textbf{Plans: }
+	We've been so busy with the requirements document the last couple weeks, I have no idea what we are going to bring to the meeting on Monday. The current plan is to make a plan.
+	\item \textbf{Progress: }
+	This week, we finished the requirements document. Because of the amount of work the requirements document needed, we did not progress in any of our other areas.
+	\item \textbf{Problems: }
+	The requirements document needed extensive revisions, and I think we could have used another week to make it even better. We don't have a customer who dictates exactly what they want, so we had to make a lot of decisions about where to take the software before we could write the requirements for it.
+\end{itemize}
+\subsubsection{Lee, Terrance}
+\begin{itemize}
+	\item \textbf{Plans: }Next week we are going to do more research on the software as well as the parts that we are in particular charge of for the technical document.
+	\item \textbf{Progress: }We finished our requirements document this week. I originally had to take care of the availability, reliability, and Design constraints. We came to an understanding that we didn’t need availability and to shorten the reliability to what it’s base of what needs to really do. Natasha came up with a beautiful Gantt chart. We also came up with a name for our software too which we are all really happy about. We used the extra day to proofread our document to make sure we had it in order too.
+	\item \textbf{Problems: }I think the biggest issue with the requirement document was trying to choose what was needed and what wasn’t need for our project. Our project is a little different because we get requirements that there one week but then the next week we find out that is not going to work and we have to change it. So we had to generalize what is going to needed.
+\end{itemize}
+\subsection{Week 7}
+\subsubsection{Anisimova, Natasha}
+\begin{itemize}
+	\item \textbf{Plans: }
+	Up until Monday we will be finishing the technical document and after that we will be moving on to the design document. So far we have a lot of ideas from the team with the user stories. There will be several stretch goals we can pull from them but some that we can actually implement.
+	\item \textbf{Progress: }
+	When speaking to Professor Bailey about visualization, on behalf of the technical document, he mentioned that a GoPro Dual Hero System could be placed on the rocket as an interesting addition. This 3D capturing camera would give a new and innovative way of looking at space. It would also be the first time that it has been used on a rocket, but it has been used in skydiving in the past. 
+	\item \textbf{Problems: }
+	We have also found out that getting to 100k ft will not be a challenge anymore from the ME teams. Our problem now is staying under 135k ft. It sounds like that will not be too much of a problem considering the fact that weight can always be added to slow down the rocket. Due to the overshot we also have to account for that when considering the type of data, we will still be receiving at that height. Thankfully we can still come up with an estimated altitude, velocity, and location from the other sensors.
+\end{itemize}
+\subsubsection{Morgan, Albert}
+\begin{itemize}
+	\item \textbf{Plans: }
+	This week we will work on the technical review and start making some decisions about the components we will use in our software. We also need to start making some decisions soon so we can keep the interest of the rest of the people in our team.
+	\item \textbf{Progress: }
+	This last week we finished the requirements document. It was difficult to nail down specific requirements for this project. Our job is to work with the rest of the rocketry team to make a piece of software that we are all happy with, and didn't start out with a lot of hard requirements from the client.
+		
+	One of the non-capstone members of our team has decided to work on a predictive positioning system that will show an estimate of where the rocket is in the case that we lose GPS data. The event of a data loss is likely due to restrictions put on GPS devices to prevent people from building missile guidance systems. During certain portions of the rocket's flight, we will be going too fast or too high for a civilian GPS to work due to these restrictions.
+	\item \textbf{Problems: }
+	There were no problems this week. The technical review is a straightforward document and I do not anticipate any problems.
+\end{itemize}
+\subsubsection{Lee, Terrance}
+\begin{itemize}
+	\item \textbf{Plans: }
+	I want to finish the technical document this weekend so that we can look forward to the design document phase. I believe that will be really interesting with this team I really cannot wait to see what we come up with.
+	\item \textbf{Progress: }
+	This week we our TA told us we did well on the requirements document. This lead us to be able to split the technical document up easily. We decide first to split the document up in a way that were each one of us chose things that we would enjoy. That way it would be easier on each other to do our part of this document. For my part I have been doing research to make sure that they are the best for each section. Also since we are working with other disciplines I have spoken to the others that are involved in with each of my part to make sure that this is what we are doing and these are the sensors that they are using.
+	\item \textbf{Problems: }
+	The main problem that I have ran into is the research on retrieval. The reason I say that is because I am looking at the different languages and there are so many different ways that people code. I am just trying to find which one would be the best in this case.
+\end{itemize}
+\subsection{Week 8}
+\subsubsection{Anisimova, Natasha}
+\begin{itemize}
+	\item \textbf{Plans: }
+	This Monday we are going to have to make sure we agree with everything that is in the technical document so what we can actually start programming. Also a lot of work needs to go into how we will be able to calculate the rocket's location based off the other sensors on the rocket. The GPS signal will be cutting out during the initial launch and after it reaches a certain height. I want to simple create demo with WebGL and put it up. This would be a good little test to see if everyone on the team has browsers that support WebGL. We also have a chance to get our capstone group interviewed and filmed by Rachel. Kirsten Winters sent me an email about the opportunity and now we are waiting on the okay from Dr. Squires.
+	\item \textbf{Progress: }
+	Technical document got submitted on time. We did get an extension from Kirsten but thankfully we didn't end up needing it.
+	\item \textbf{Problems: }
+	We did have a problem with working on the technical document and making sure that it flowed. Also if we start earlier on it, it would help with making sure that we are all on the same page. I definitely need to work on putting up a draft of my work early on so that the rest of the group knows what I am thinking.
+\end{itemize}
+\subsubsection{Morgan, Albert}
+\begin{itemize}
+	\item \textbf{Plans: }
+	This week we need to begin work on the design document. The design document is very precise and complete, and I anticipate that this document will be a lot of work, so we should get started early. Additionally, we finally need to make some decisions about the technologies we are going to use, so we need to have a discussion as a group to finalize these decisions.
+	
+	Additionally, we need to figure out a better workflow so we don't have any last-minute problems (see "problems", below).
+	\item \textbf{Progress: }
+	This week we finished the technology review. It barely got done in time, and Natasha and I spent a lot of time fixing it for the final submission.
+	\item \textbf{Problems: }
+	We had problems with this week with last-minute work that didn't follow the existing template, and also from lack of communication. We need to set up a more rigorous method for quality assurance with our documents. I believe that I need to personally start the documents early and set up the sections for people to fill in to prevent situations where I have to manually edit other people's work to conform to standards in the future.
+\end{itemize}
+\subsubsection{Lee, Terrance}
+\begin{itemize}
+	\item \textbf{Plans: }Next week to catch up with my team from everything I missed with being out of town. Also I am going to recommend that we have more than one meeting a week while working on this design document since our meeting is so early during the week.
+	\item \textbf{Progress: }We finished the technical document this week. We are now onto the design document. Since I missed class on Tuesday from being out of town and missing our meeting with our TA I made an extra appointment with him. I went over a what I missed and how should the design document be approached. I wanted to make sure that this is done well so that we go into the programming part of this with a good design and we have less debugging.
+	\item \textbf{Problems: }I had an issue with having a interview in another state but I feel that with these more precise documents that one meeting a week isn't enough. We had some issues with the technical document that due to being out of town that I haven't been able to speak to my team about but I feel if we have more meetings to go over the design document as we work on it we can fix those issues.
+\end{itemize}
+\subsection{Week 9}
+\subsubsection{Anisimova, Natasha}
+\begin{itemize}
+	\item \textbf{Plans: }
+	This last Monday we went over what should be in the design document, making sure to cover what we had already written.
+	\item \textbf{Progress: }
+	\begin{table}[htbp!]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{lll}
+\hline
+\multicolumn{1}{|l|}{Tech Review} & \multicolumn{1}{l|}{Requirements Review} & \multicolumn{1}{l|}{Viewpoints}  \\ \hline
+\multicolumn{1}{|l|}{Web Server}  & \multicolumn{1}{l|}{Raspberry Pi}        & \multicolumn{1}{l|}{Interaction} \\ \hline
+Web Backend                       & Real-Time                                & Resource Management              \\
+Logging                           & Reliability                              & Interface                        \\
+Data Visualization                & Corruption                               &                                  \\
+UI Interaction Model              & Accuracy                                 &                                  \\
+UI Interface Organization         & Redundant Sensors                        &                                  \\
+Retrieval                         & Storage                                  &                                  \\
+UI Toolkit                        & Internet/HAM                             &                                 
+\end{tabular}
+\end{table}
+	
+	\item \textbf{Problems: }
+	Splitting up the work seems like the most difficult thing. Also it being Thanksgiving break it is hard to know when everyone is free or available to work on the assignment.
+\end{itemize}
+\subsubsection{Morgan, Albert}
+\begin{itemize}
+	\item \textbf{Plans: }
+	This week we are going to hammer out the design document, as well as any other things we need to do. We have a pretty good idea of what the design is going to be, but we may change our mind as we start writing it, so it's important here to be flexible.
+	\item \textbf{Progress: }
+	This week we actually starting working on the design of our software. On Monday we went over, in detail, how we are going to write the design document, and which viewpoints we should use.
+	\item \textbf{Problems: }
+	Due to the nature of the design document assignment description, I'm still not sure exactly how we are going to divide the work up. It would be fairly trivial to just divide the work evenly, but because we all have to do the sections that we did in the technology review, some elements, such as relationships between two different technologies that were described by two different group members.
+\end{itemize}
+\subsubsection{Lee, Terrance}
+\begin{itemize}
+	\item \textbf{Plans: }As I have started early on the design document and have read the template a little more in detail. It seems that some of the design viewpoints are not fit for certain components and we should talk about this on our Meeting with our TA on Monday as well as our team meeting.
+	\item \textbf{Progress: }This week we broke down the design document before the Thanksgiving Break. That way we knew which areas of the document we were going to use and could get an early start on it. We did notice that not all components have the same areas. I have started some research and a rough draft on this document. We ran into an issue on the last one and I do not want us to run into the same thing again so I started early.
+	\item \textbf{Problems: }As I read over our technical document and have read over the IEEE design document I have noticed that some of us are going to be writing more than others. I know that this is supposed to be split up into an individual sections but it does not seem fair that way. I do not think that if I finish early that I should not be able to help my other team members finish there component if they need it. I feel that this is what teams are here for.
+\end{itemize}
+\subsection{Week 10}
+\subsubsection{Anisimova, Natasha}
+\begin{itemize}
+	\item \textbf{Plans: }
+	Now that we have the Design Document out of the way, we can focus on the progress report. I got a very simple outline of what it will look like in PowerPoint but we still have a lot of work to do. The weekend will be dedicated to finishing that up as well as studying for final exams. Over the break I want to spend a lot of time creating the 3D environment that will be hosted on our website for the launch/tracking of the rocket.
+	\item \textbf{Progress: }
+	We had Dr. Squires sign the Design Document which was thankfully finished on time. Also, I think everyone is on the same page about using JavaScript for our software (node.js, three.js, etc.).
+	\item \textbf{Problems: }
+	Finishing the Design was a bit stressful. I had a couple errors with making sure the figures showed up on the right page. Spacing of pages was a big issue. I got a detailed email from Jon, the TA, about how all of that worked so my hope is that it will not ever happen in the future. Now that this term is almost over and future terms will not be as heavily loaded, I want to be able to finish things earlier than we have been in the past.
+\end{itemize}
+\subsubsection{Morgan, Albert}
+\begin{itemize}
+	\item \textbf{Plans: }
+	The weekly rocket meeting has been canceled, so there is no coordination with the larger group that needs to be done. However, we plan to get at least some work done over the break. We should be able to get at least a basic running version of our software up in that time.
+	
+	Over the weekend we should be able to finish the content of our video and record it on Monday. We plan to break the presentation into bite-sized pieces for ease of recording and editing. Additionally, this will allow us to reuse some of the pieces for later presentations.
+	\item \textbf{Progress: }
+	This week we finished the design document. We've created the framework of our presentation, but we haven't started recording anything yet. The bones of our presentation has been created, but much of the content remains to be filled in.
+	\item \textbf{Problems: }
+	We only finished the design document at the last minute, which lead to some difficulties. If you ever find yourself in a situation where you are making GitHub commits before you have had your coffee, something has gone terribly, terribly, wrong. In order to prevent this in the future, I believe our team should institute a rigid internal timeline that ensures that work isn't being done hours before our deadlines. Over the break, I will look more into GitHub issues to see if they would be a useful tool for this kind of thing.
+\end{itemize}
+\subsubsection{Lee, Terrance}
+\begin{itemize}
+	\item \textbf{Plans: }Monday we plan to meet up to get the video done for the progress report.
+We plan on doing some coding over the break. My personal goal over the break is to learn node because I have never used it before and since that is our language for everything I figure it would be good to know how to use it.
+	\item \textbf{Progress: }We got the design document done. Also Al made the base for the progress report.
+	\item \textbf{Problems: }The design document took longer to finish than expected. Even though we had two weeks to do it. After reading it over the holiday many times it was still confusing and it seemed that we had many questions that never got quite answered. To prevent this we should probably meet up and have a group work session on documents, code, or whatever at least once a week where we are just working on the what needs to be done together in the same room. That way if things change or if we have questions we can solve them with each other. Also we are knocking a big chunk out right there with each other.
+\end{itemize}
+
+
+\end{document}
