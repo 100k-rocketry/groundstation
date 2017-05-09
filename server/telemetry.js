@@ -66,8 +66,8 @@ dataEmitter.on('data', function(data) {
 				"mode": "Armed",
 				"part": part,
 				"altitude": altitude,
-				"latitude": latitude / 100.0,
-				"longitude": longitude / 100.0,
+				"latitude": latitude,
+				"longitude": longitude,
 				"accelerometer_x": accelerometer_x,
 				"accelerometer_y": accelerometer_y,
 				"accelerometer_z": accelerometer_z,
@@ -93,8 +93,8 @@ dataEmitter.on('data', function(data) {
 			telemetryEmitter.emit('newPacket', {
 				"mode": "Low Power",
 				"part": part,
-				"latitude": latitude / 100.0,
-				"longitude": longitude / 100.0,
+				"latitude": latitude,
+				"longitude": longitude,
 				"timestamp": (new Date()).getTime()
 			});
 		}
