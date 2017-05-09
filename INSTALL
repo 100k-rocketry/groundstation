@@ -1,18 +1,22 @@
 Installation instructions
 
 1.  Install Raspbian Jesse Lite on your Raspberry Pi 3 model B.
-2.  Open a shell on the Raspberry Pi and follow steps 3-9 in that shell.
-3.  Install Node version 6. Apt-get may install the wrong version, so a manual install may be necessary.
+2.  Open a shell on the Raspberry Pi and follow steps 3-9 in that shell. The default Raspberry Pi
+    username is "pi" and password is "raspberry"
+3.  Configure the Raspberry Pi connect to the Internet. The specific steps for this will greatly
+    depend on your specific method of connecting and which network you are using.
+4.  Install git: sudo apt-get install git
+5.  Install Node version 6 and npm. Apt-get may install the wrong version, so a manual install may be necessary.
     Follow the instructions here: https://nodejs.org/en/download/package-manager/
-4.  Install npm: apt-get install npm
-5.  From the groundstation/server directory, run 'npm install' to populate the node_modules directory
-6.  Clone or otherwise transfer the 'groundstation' repository to the Raspberry Pi.
-    Repository location: https://github.com/100k-rocketry/groundstation
-7.  Copy 'groundstation/system/gs.service' to '/etc/systemd/system'
-8.  Run 'systemctl enable gs' to enable the groundstation service
-9.  Restart the Rasberry Pi. The service should now be started.
-10. Connect the avionics radio's USB cable to the Raspberry Pi.
-11. Open your web browser (supports Chrome, Firefox, Edge, and Safari) and connect to the Raspberry
+6.  From the home directory (/home/pi), Clone or otherwise transfer the 'groundstation'
+    repository to the Raspberry Pi. Repository location: https://github.com/100k-rocketry/groundstation
+    Command to clone: git clone https://github.com/100k-rocketry/groundstation
+7.  From the /home/pi/groundstation/server directory, run 'npm install' to populate the node_modules directory
+8.  Copy '/home/pispi/groundstation/system/gs.service /etc/systemd/system
+9.  Run 'sudo systemctl enable gs' to enable the groundstation service
+10. Restart the Rasberry Pi. The service should now be started.
+11. Connect the avionics radio's USB cable to the Raspberry Pi.
+12. Open your web browser (supports Chrome, Firefox, Edge, and Safari) and connect to the Raspberry
     Pi's IP address.
 
 
