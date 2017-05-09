@@ -172,34 +172,46 @@ If this is not sufficient, we will look at more feature-rich options such as waf
 \subsection{Week 1}
 \subsubsection{Anisimova, Natasha}
 \begin{itemize}
-	\item \textbf{Plans: For this next week I need to figure out the scale and load the terrain into the webpage. Colorizing it would be good as well. The Avionics and Recovery Team want to do an integration test soon as well so we need to keep that in mind. }
-	\item \textbf{Progress: Now that we have the height map and Al was able to get an image out of the .xtr file, I was able to get a 3D model of the terrain around Spaceport America. Scaling is now our biggest concern. }
-	\item \textbf{Problems: Figuring out the longitude and latitude scale compared to miles for the model. It seems like the 3D model is skewed a bit. The east and west were elongated slightly. The webpage needs to be re-organized as well. Having the 3D terrain be the first thing that a person sees would be ideal. }
+	\item \textbf{Plans: }
+	For this next week I need to figure out the scale and load the terrain into the webpage. Colorizing it would be good as well. The Avionics and Recovery Team want to do an integration test soon as well so we need to keep that in mind. 
+	\item \textbf{Progress: }
+	Now that we have the height map and Al was able to get an image out of the .xtr file, I was able to get a 3D model of the 	terrain around Spaceport America. Scaling is now our biggest concern. 
+	\item \textbf{Problems: }
+	Figuring out the longitude and latitude scale compared to miles for the model. It seems like the 3D model is skewed a bit. The east and west were elongated slightly. The webpage needs to be re-organized as well. Having the 3D terrain be the first thing that a person sees would be ideal. 
 \end{itemize}
 
 \subsection{Week 1}
 \subsubsection{Lee, Terrance}
 \begin{itemize}
-	\item \textbf{Plans:I have a meeting with Ben Brewster who knows more about networking next week. I want to get systemd implemented into inittab. Get the layout for the line graph layout at minimum if not more so that we can get that setup. Also want to get our final link setup or at least a link setup that we can use for expo so that I have a network that I can use for the line graph setup. }
-	\item \textbf{Progress: I found a good resource for our Live Line Graph for the rocket and I found what was need for Systemd and inittab to work together. I also went to a meeting with avionics and recovery about a couple of things that they wanted to get covered and make sure everybody was on the right page. We were originally not needed for this meeting but I am glad I went but cause there was a few things that we should know about and somethings that we might want to talk about as well in our next meeting that we may want to put into our code. }
-	\item \textbf{Problems: Having a issue with line graph that I am using. I can hook it up to a network but it used to using websites but since we are using a raspberry pi as our network I have to ask others who know more about networking for help on this. This is why I have a meeting with Ben Brewster next week. }
+	\item \textbf{Plans: }
+	I have a meeting with Ben Brewster who knows more about networking next week. I want to get systemd implemented into inittab. Get the layout for the line graph layout at minimum if not more so that we can get that setup. Also want to get our final link setup or at least a link setup that we can use for expo so that I have a network that I can use for the line graph setup. 
+	\item \textbf{Progress: }
+	I found a good resource for our Live Line Graph for the rocket and I found what was need for Systemd and inittab to work together. I also went to a meeting with avionics and recovery about a couple of things that they wanted to get covered and make sure everybody was on the right page. We were originally not needed for this meeting but I am glad I went but cause there was a few things that we should know about and somethings that we might want to talk about as well in our next meeting that we may want to put into our code. 
+	\item \textbf{Problems: }
+	Having a issue with line graph that I am using. I can hook it up to a network but it used to using websites but since we are using a raspberry pi as our network I have to ask others who know more about networking for help on this. This is why I have a meeting with Ben Brewster next week. 
 \end{itemize}
 
 
 \subsection{Week 1}
 \subsubsection{Morgan, Al}
 \begin{itemize}
-	\item \textbf{Plans: Over the course of the next week I hope to finish the 3D interface and get it into something resembling its final form. Additionally, the avionics team is ready for integration testing, so I will ensure that our software is ready to interact with their hardware. the protocol has changed since we began to the project, so a few minor changes will need to be made before the software is ready to integrate, but since the framework of the protocol is already in place I do not believe that this will cause any major issues. }
-	\item \textbf{Progress: This week we began integrating the 3D model into the web interface. We took the new, higher resolution height map data and turned it into an image, which we then used to construct a 3D model (a .obj file) that we can import into the WebGL canvas using Three.js. I also got some very basic objects to move around the scene to represent the rocket. I haven't actually hooked the moving objects into the telemetry data yet, but all of the pieces are in place to do so. }
-	\item \textbf{Problems: We had a minor hiccup when we realized that the Earth is round and one degree of latitude does not equal one degree of longitude in terms of distance. However, some quick and easy trigonometry fixed this issue.}
+	\item \textbf{Plans: } 
+	Over the course of the next week I hope to finish the 3D interface and get it into something resembling its final form. Additionally, the avionics team is ready for integration testing, so I will ensure that our software is ready to interact with their hardware. the protocol has changed since we began to the project, so a few minor changes will need to be made before the software is ready to integrate, but since the framework of the protocol is already in place I do not believe that this will cause any major issues. 
+	\item \textbf{Progress: }
+	This week we began integrating the 3D model into the web interface. We took the new, higher resolution height map data and turned it into an image, which we then used to construct a 3D model (a .obj file) that we can import into the WebGL canvas using Three.js. I also got some very basic objects to move around the scene to represent the rocket. I haven't actually hooked the moving objects into the telemetry data yet, but all of the pieces are in place to do so. 
+	\item \textbf{Problems: }
+	We had a minor hiccup when we realized that the Earth is round and one degree of latitude does not equal one degree of longitude in terms of distance. However, some quick and easy trigonometry fixed this issue.
 \end{itemize}
 
 \subsection{Week 2}
 \subsubsection{Anisimova, Natasha}
 \begin{itemize}
-	\item \textbf{Plans: Getting the atmospheres to be at the correct height will be a problem since everything has to be scaled correctly according to the data that we are receiving. The 3.js transparency works, we just need to make sure that we have all the correct libraries for it and that it is set up correctly in the environment. }
-	\item \textbf{Progress: Originally the terrain that I had created was off in terms of scale to longitude and latitude compared to Google Earth. Al was able to figure out the math behind it and alter it. The terrain also had a distorted height values due to how Blender was adding the modifier for height of the height map image to the flat plane. After speaking to the rest of the mechanical engineers, they said they wanted it to be as close to the realistic area as possible. This lead us to having a quite a flat plane. I have also been working on transparency since that will be useful for showing the different atmospheres that the rocket is going through. }
-	\item \textbf{Problems: }
+	\item \textbf{Plans: }
+	Getting the atmospheres to be at the correct height will be a problem since everything has to be scaled correctly according to the data that we are receiving. The 3.js transparency works, we just need to make sure that we have all the correct libraries for it and that it is set up correctly in the environment. 
+	\item \textbf{Progress: }
+	Originally the terrain that I had created was off in terms of scale to longitude and latitude compared to Google Earth. Al was able to figure out the math behind it and alter it. The terrain also had a distorted height values due to how Blender was adding the modifier for height of the height map image to the flat plane. After speaking to the rest of the mechanical engineers, they said they wanted it to be as close to the realistic area as possible. This lead us to having a quite a flat plane. I have also been working on transparency since that will be useful for showing the different atmospheres that the rocket is going through. 
+	\item \textbf{Problems: } 
+	
 \end{itemize}
 
 \subsection{Week 2}
