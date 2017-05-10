@@ -32,7 +32,10 @@ function tryOpenPanelDevice() {
 			if (!err) {
 				console.log("Opened write stream to panel.");
 				panelFd = fd;
-			} else {
+				var lightString = "bcomm off\nscomm off\nsignite off\nbignite off\nberror off\nserror off\n";
+				console.log(lightString);
+				fs.write(panelFd, lightString, writeHandler);
+		} else {
 				console.log(err);
 				panelFd = -1;
 			}
@@ -223,6 +226,16 @@ module.exports = {
 				tryOpenPanelDevice();
 			}
 		}
+	},
+
+	resetLights: function() {
+		console.log("Resetting lights");
+		this.setLight("serror", "off");
+		this.setLight("berror", "off");	
+		this.setLight("bcomm", "off");
+		this.setLight("scomm", "off");
+		this.setLight("signite", "off");
+		this.setLight("bignite", "off");
 	},
 
 	// Sets the text of the line number

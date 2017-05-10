@@ -7,6 +7,7 @@ var globals = require('./globals');
 var panel = require('./panel');
 var fs = require('fs');
 var pstream = require('./persistentstream');
+
 require('./logger');
 
 // Get environment variables
@@ -67,7 +68,7 @@ telemetryEmitter.on("newPacket", (packet) => {
 	
 	if (packet.part === "Booster") {
 		updatePanelStat(panelStats.booster, packet);
-		if (packet.ematch_status === 0x00 && panelStats.booster.ematch === false) {
+		if (packet.ematch_status !== 0 && panelStats.booster.ematch === false) {
 			panelStats.booster.ematch = true;
 			panel.setLight("bignite", "on");
 		}
@@ -83,7 +84,7 @@ telemetryEmitter.on("newPacket", (packet) => {
 
 	} else if (packet.part === "Sustainer") {
 		updatePanelStat(panelStats.sustainer, packet); 
-		if (packet.ematch_status === 0x00 && panelStats.sustainer.ematch === false) {
+		if (packet.ematch_status !== 0 && panelStats.sustainer.ematch === false) {
 			panelStats.sustainer.ematch = true;	
 			panel.setLight("signite", "on");
 		}
@@ -105,6 +106,8 @@ function turnLightsOnOff() {
 
 	if (now - lastBoosterTimestamp > 2000) {
 		panel.setLight("bcomm", "off");
+		panel.setLight("bignite", "off");
+		panelStats.booster.ematch = false;
 		//panel.setLight("bignition", "off");
 	} else {
 		panel.setLight("bcomm", "on");
@@ -113,6 +116,9 @@ function turnLightsOnOff() {
 
 	if (now - lastSustainerTimestamp > 2000) {
 		panel.setLight("scomm", "off");
+
+		panel.setLight("signite", "off");
+		panelStats.sustainer.ematch = false;
 		//panel.setLight("signition", "off");
 	} else {
 		panel.setLight("scomm", "on");
