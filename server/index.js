@@ -239,7 +239,9 @@ app.get('/logs', function (req, res, next) {
 	res.write(header);
 	fs.readdir('logs', function(err, files) {
 		files.forEach(function(f) {
-			res.write('<a href="logs/' + f + '">' + f + '</a><br>');
+			if (f.indexOf('.csv') > -1) {
+				res.write('<a href="logs/' + f + '">' + f + '</a><br>');
+			}
 		});
 		res.write(footer);
 		res.end();
@@ -249,8 +251,8 @@ app.get('/logs', function (req, res, next) {
 
 app.get('/logs/:log', function (req, res, next) {
 	var log = req.params.log;
-
-	if (req.params.log) {
+	
+	if (req.params.log && log.indexOf('.csv') > -1) {
 		res.download (path.join(__dirname, 'logs', log));
 	} else {
 		next();
