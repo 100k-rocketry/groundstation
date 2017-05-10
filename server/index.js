@@ -251,7 +251,6 @@ app.get('/logs', function (req, res, next) {
 
 app.get('/logs/:log', function (req, res, next) {
 	var log = req.params.log;
-	
 	if (req.params.log && log.indexOf('.csv') > -1) {
 		res.download (path.join(__dirname, 'logs', log));
 	} else {
