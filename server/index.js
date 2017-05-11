@@ -43,8 +43,12 @@ var panelStats = {
 
 function updatePanelStat(panelStat, packet) {
 	if (packet.mode === "Armed") {
-		panelStat.lat = packet.latitude;
-		panelStat.long = packet.longitude;
+		if (packet.latitude !== 0) {
+			panelStat.lat = packet.latitude;	
+		}
+		if (packet.longitude !== 0) {
+			panelStat.long = packet.longitude;
+		}
 		panelStat.alt = packet.altitude;
 		panelStat.accel = Math.sqrt(Math.pow(packet.accelerometer_x, 2) + Math.pow(packet.accelerometer_y, 2) + Math.pow(packet.accelerometer_z, 2)) / 9.8;
 	}
@@ -62,6 +66,11 @@ var lastSustainerTimestamp = 0;
 // and if the ematch status equals the special n
 telemetryEmitter.on("newPacket", (packet) => {
 	// Really dirty way to deep copy the packet
+	if (packet.latitude !== 0 && packet.longitude !== 0 && packet.latitude !== undefined && packet.longitude !== undefined) {
+		console.log(packet);
+	}
+	
+
 	allPackets.push(JSON.parse(JSON.stringify(packet)));
 	var now = (new Date()).getTime();
 	var armed = panel.isArmed();
@@ -149,6 +158,9 @@ function kirbyDance() {
 
 function updatePanel(part, line) {
 	var now = (new Date()).getTime();
+	if (part.lat === 0 && part.long === 0) {
+		return;
+	}
 	try {
 		var latStr = part.lat.toFixed(8);
 		latStr = ' '.repeat(13 - latStr.length) + latStr;

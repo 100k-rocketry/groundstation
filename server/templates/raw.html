@@ -9,6 +9,10 @@
 	var exampleSocket = new WebSocket("ws://" + window.location.host);
 	var lastSustainerPacket = 0;
 	var lastBoosterPacket = 0;
+	var susLat = 0;
+	var susLong = 0;
+	var boostLat = 0;
+	var boostLong = 0;
 
 
 	exampleSocket.onmessage = function(event) {
@@ -19,9 +23,24 @@
 			if (packet.part === "Booster") {
 				timeSinceLast = packet.timestamp - lastBoosterPacket;
 				lastBoosterPacket = packet.timestamp;
+				if (packet.latitude !== 0) {
+					boostLat = packet.latitude;
+				}
+				if (packet.longitude !== 0) {
+					boostLong = packet.longitude;	
+				}
 			} else if (packet.part === "Sustainer") {
 				timeSinceLast = packet.timestamp - lastSustainerPacket;
+
 				lastSustainerPacket = packet.timestamp;
+
+				if (packet.latitude !== 0) {
+					susLat = packet.latitude;
+				}
+				if (packet.longitude !== 0) {
+					susLong = packet.longitude;	
+				}
+
 			}
 			
 
@@ -33,6 +52,8 @@
 				+ ' Kalman altitude: ' + packet.kalman_altitude + '<br>'
 				+ ' Latitude: ' + packet.latitude + '<br>'
 				+ ' Longitude: ' + packet.longitude + '<br>'
+				+ ' Last lat: ' + (packet.part === "Booster"? boostLat: susLat) + '<br>'
+				+ ' Last long: ' + (packet.part === "Booster"? boostLong: susLong) + '<br>'
 				+ ' Accelerometer X: ' + packet.accelerometer_x + '<br>'
 				+ ' Accelerometer Y: ' + packet.accelerometer_y + '<br>'
 				+ ' Accelerometer Z: ' + packet.accelerometer_z + '<br>'
