@@ -46,8 +46,18 @@ var sustainer = {
 	"ematch_status": 0
 };
 
+var boosterVelocity = 0;
+var sustainerVelocity = 0;
+var ticks = 0;
+
 function tick() {
-	booster.altitude += .0100;
+	if (booster.altitude >= 1299) {
+		booster.altitude += boosterVelocity;
+	}
+	boosterVelocity -= .98;
+	if (ticks < 110) {
+		boosterVelocity += 1.5;
+	}
 	booster.latitude += 0.0000001;
 	booster.longitude += 0.0000001;
 	booster.accelerometer_x += 1;
@@ -66,7 +76,13 @@ function tick() {
 	booster.timestamp = (new Date()).getTime();
 	telemetryEmitter.emit('newPacket', booster);
 
-	sustainer.altitude += .00100;
+	if (sustainer.altitude > 1299) {
+		sustainer.altitude += sustainerVelocity;
+	}
+	sustainerVelocity -= .98;
+	if (ticks < 220) {
+		sustainerVelocity += 1.5;
+	}
 	sustainer.latitude += 0.0000001;
 	sustainer.longitude += 0.0000001;
 	sustainer.accelerometer_x += 1;
@@ -91,6 +107,8 @@ function tick() {
 		sustainer.gps_altitude = sustainer.kalman_altitude + 1000;
 	}
 	telemetryEmitter.emit('newPacket', sustainer);
+	
+	ticks++;
 }
 
 function replayPacket(lines, index) {
