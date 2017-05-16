@@ -9,7 +9,7 @@ var now = new Date();
 
 module.exports = {
 	// Set this to false to use the mocked data instead of trying to connect to the actual telemtry device
-	useUSB: true,
+	useUSB: false,
 	// Replays the specified log file.
 	// If set to '', then creates fake data instead of replaying.
 	// If useUSB is set to true, then replayFile and replayStartTime are ignored
