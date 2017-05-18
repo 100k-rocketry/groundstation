@@ -3,6 +3,7 @@ var globals = require('./globals');
 var fs = require('fs');
 
 var lastTimestamp = 0;
+var resetIt = false;
 
 var booster = {
 	"mode": "Armed",
@@ -49,6 +50,8 @@ var sustainer = {
 var boosterVelocity = 0;
 var sustainerVelocity = 0;
 var ticks = 0;
+
+var nextTimeout;
 
 function tick() {
 	if (booster.altitude >= 1299) {
@@ -112,6 +115,7 @@ function tick() {
 }
 
 function replayPacket(lines, index) {
+	console.log(index);
 	var line = lines[index].split(',');
 	if (line.length > 0) {
 		var packet = {
@@ -145,11 +149,24 @@ function replayPacket(lines, index) {
 			//replayPacket(lines, index + 1);
 			telemetryEmitter.emit('newPacket', packet);
 			if (line[19] < globals.replayStartTime) {
-				setTimeout(replayPacket, 1, lines, index + 1)
+				nextTimout = setTimeout(replayPacket, 1, lines, index + 1)
 			} else {
-				setTimeout(replayPacket, delay, lines, index + 1);
+				nextTimeout = setTimeout(replayPacket, delay, lines, index + 1);
 			}
-		} 
+		} else {
+			console.log('Resetting');
+			telemetryEmitter.emit('reset');
+			clearTimeout(nextTimeout);
+			nextTimeout = setTimeout(replayPacket, delay, lines, 0);
+		}
+		
+		if (resetIt === true) {
+			console.log('Resetting');
+			telemetryEmitter.emit('reset');
+			clearTimeout(nextTimeout);
+			nextTimeout = setTimeout(replayPacket, delay, lines, 0);
+			resetIt = false;
+		}
 	}
 }
 
@@ -169,6 +186,10 @@ if (globals.replayFile === "") {
 					console.log(err);
 				}
 			});
+		},
+		
+		resetMocker: function() {
+			resetIt = true;
 		}
 	}
 }

@@ -27,6 +27,12 @@ telemetryEmitter.on("newPacket", (packet) => {
 	//console.log(packet);
 });
 
+telemetryEmitter.on("reset", () => {
+	console.log("Resetting on index.js");
+	allPackets = [];
+	console.log(allPackets);
+});
+
 app.ws('/', function(ws, req) {
 
 	console.log('Acquired new connection from ' + ws.upgradeReq.headers.origin);
@@ -117,6 +123,17 @@ app.get('/logs/:log', function (req, res, next) {
 // Gets the current log
 app.get('/currentlog', function(req, res) {
 	res.sendFile(path.join(__dirname, 'logs', globals.logFilename));
+});
+
+app.get('/reset', function(req, res) {
+	console.log("Resetting on index.js");
+	allPackets = [];
+	mocker.resetMocker();
+	console.log(allPackets);
+	res.write(header);
+	res.write('RESET');
+	res.write(footer);
+	res.end();
 });
 
 // When a post request is sent to this URL,

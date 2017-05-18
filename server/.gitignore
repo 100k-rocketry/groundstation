@@ -1,5 +1,3 @@
 gs.log
-*.csv
-logs/*.csv
 *.swp
 node_modules/
