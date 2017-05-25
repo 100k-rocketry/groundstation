@@ -85,4 +85,10 @@ nav a:visited {
 	display: none;
 }
 
+.Booster {
+	background-color: #FFAAAA;
+}
 
+.Sustainer {
+	background-color: #AAAAFF;
+}

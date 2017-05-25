@@ -66,6 +66,7 @@ var lastSustainerTimestamp = 0;
 // and if the ematch status equals the special n
 telemetryEmitter.on("newPacket", (packet) => {
 	// Really dirty way to deep copy the packet
+	
 	if (packet.latitude !== 0 && packet.longitude !== 0 && packet.latitude !== undefined && packet.longitude !== undefined) {
 		console.log(packet);
 	}
@@ -158,9 +159,9 @@ function kirbyDance() {
 
 function updatePanel(part, line) {
 	var now = (new Date()).getTime();
-	if (part.lat === 0 && part.long === 0) {
-		return;
-	}
+	//if (part.lat === 0 && part.long === 0) {
+	//	return;
+	//}
 	try {
 		var latStr = part.lat.toFixed(8);
 		latStr = ' '.repeat(13 - latStr.length) + latStr;

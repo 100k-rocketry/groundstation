@@ -13,6 +13,8 @@
 	var susLong = 0;
 	var boostLat = 0;
 	var boostLong = 0;
+	var susApogee = 0;
+	var boostApogee = 0;
 
 
 	exampleSocket.onmessage = function(event) {
@@ -29,6 +31,9 @@
 				if (packet.longitude !== 0) {
 					boostLong = packet.longitude;	
 				}
+				if (packet.altitude > boostApogee) {
+					boostApogee = packet.altitude;
+				}
 			} else if (packet.part === "Sustainer") {
 				timeSinceLast = packet.timestamp - lastSustainerPacket;
 
@@ -40,6 +45,9 @@
 				if (packet.longitude !== 0) {
 					susLong = packet.longitude;	
 				}
+				if (packet.altitude > susApogee) {
+					susApogee = packet.altitude;
+				}
 
 			}
 			
@@ -49,6 +57,7 @@
 				+ 'Mode: ' + packet.mode + '<br>'
 				+ ' Raw altitude: ' + packet.altitude + '<br>'
 				+ ' GPS altitude: ' + packet.gps_altitude + '<br>'
+				+ ' Apogee: ' + (packet.part === "Booster"? boostApogee: susApogee) + '<br>'
 				+ ' Kalman altitude: ' + packet.kalman_altitude + '<br>'
 				+ ' Latitude: ' + packet.latitude + '<br>'
 				+ ' Longitude: ' + packet.longitude + '<br>'

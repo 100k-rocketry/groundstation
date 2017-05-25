@@ -53,6 +53,8 @@ dataEmitter.on('data', function(data) {
 
 //			console.log("Packet 9");
 			var longitude = data.readFloatLE(9 + offset);
+
+			console.log(latitude, longitude);
 			
 //			console.log("Packet 13");
 var accelerometer_x = data.readFloatLE(13 + offset);
