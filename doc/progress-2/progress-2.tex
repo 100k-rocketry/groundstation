@@ -66,7 +66,7 @@
 	\title{\vspace{2in}Design}
 	
 	\author {
-		Individual Progress Report: Anisimova, Natasha 
+		Anisimova, Natasha
 		\and
 		Lee, Terrance
 		\and
@@ -145,20 +145,11 @@
 	recovery is impossible.
 
 \section{Current Progress}
-It is spring term and we have a design and a good framework for the entire system.
+We have a design and a good framework for the entire system.
 We have a way to receive packets, fire events that send those packets to the client,
 log the packets, start the web server, show the packets on the client's browser, etc.
-We have begun on the details of the system, such as implementing the specific telemetry packet protocol and making the user interface look like its final form. It feels like it is close to being done.
+Now we begin on the details of the system, such as implementing the specific telemetry packet protocol and making the user interface look like its final form.
 
-\section{Team Overview}
-\subsection{Natasha Anisimova}
-I am the visualization person of our team. Everything that the High-Altitude Rocketry team gets to see, is what I display to them based off of the information that I receive from the protocol. The code for handling the communication protocol between the receiver that the ECE team has and the client was mainly written by Albert and Terrance. If problems or errors occurred, I would do what I could to help debug it. Often times, I am the one that does the presentation slides for our weekly meetings with our client and starts off the presentation but everyone chips in. There have been some problems with the graphics card on my personal computer and well as family emergencies. Due to this, I am often suggesting to go work in the Computer Graphics Lab located in BAT Hall.
-
-\subsection{Terrance Lee}
-Terrance works with Al mainly. We do have our weekly team meetings with just our group of three, the Teaching Assistant, and the all of the High-Altitude Rocketry Team. During that time we all work together. Now that we are in the six month of our development and working as a team, I believe that Terrance and I have contributed an equal amount to the project.
-
-\subsection{Albert Morgan}
-Al is definitely our team lead. He was the one that suggested we separate out our branches so that I was able to continue my visualization work even if the communication protocol breaks. Every week we then merge our branches and handle any merge conflicts in that three to five hour block of time on Mondays. Albert came up with this idea and so far it has worked well, I only wish we had this idea early on. Looking back on the last six months, I believe Albert has contributed the most out of all of us to the Groundstation Software.
 
 \section{Retrospective}
 
@@ -166,9 +157,9 @@ Al is definitely our team lead. He was the one that suggested we separate out ou
 \hline
 Positives & Deltas & Actions\\
 \hline
-The ECE team is close to being finished so we will be able to integrate our software with their hardware soon.
+
 & Now that serious development work as begun, we already have had some problems with one person's work conflicting with another person's.
-Specifically, a commit that broke one part of the code prevented another team member from doing their work. A serious setback for me was being gone on dead week for an international conference. It left me scrambling to finish up with all of my classes. Since everyone has been going through finals, I have not had a chance to meet up with the rest of the team to go over changes that have been made in explicit detail but I do have an overview.
+Specifically, a commit that broke one part of the code prevented another team member from doing their work.
 & We have already started being more rigorous about our branches. We have two branches: frontend-dev and backend-dev.
 If the backend breaks, development cannot continue on the frontend, so keeping the development efforts separate is necessary.
 Every Monday, during our weekly meetings, the first thing we do is merge the work we did in both branches into master, then merge master
@@ -594,62 +585,7 @@ Additionally, it looks like the 'usb' library will be better suited than the 'se
 	\item \textbf{Problems: }
 	The only real issue was with One note but that is because I am not an expert with the online one and also I have not used one note in a while. I think my issues is that I just have not used it in a while and have to get back in the flow of it. My issue was get used to where stuff was and forgetting little things. Besides that nothing really major on the coding side so far. 
 \end{itemize}
-\section{Development Log: Rest of Winter 2017}
-\subsection{Week 6}
-\subsubsection{Anisimova, Natasha}
-\begin{itemize}
-	\item \textbf{Plans: }
-	The tables are now updating each time a packet is sent. We have a test launch in March so we will get plenty of data to test with once that happens and see if we have any hiccups in our code. Revisions were made to the technical and design document. We also created a PowerPoint presentation with our progress thus far. OneNote is currently holding all the revisions and brief biographies about all the team members.
-	\item \textbf{Progress: }
-	I will be adding another table for the second set of telemetry packets we will be receiving for the rocket. It will be easier to read if it is split up that way. Also, I am planning on asking the Rocketry Team if they would like only certain variables displayed because currently the amount of information we have clutters the screen. It may be useful for the test launch though to ensure everything is working properly.
-	
-	\item \textbf{Problems: }
-	The propulsion team has not heard back from the airport about testing there. Unfortunately, this may mess with the test launch dates. We can still use data from previous launches if needed.
-\end{itemize}
-\subsection{Week 7}
-\subsubsection{Anisimova, Natasha}
-\begin{itemize}
-	\item \textbf{Plans: }
-	The ECE team has put a magnetometer on the rocket so it will be easier to know which direction is magnetic North, making sure that the display actual flies in the same direction that the real version does. The rocketry team is planning on doing a test launch soon. This will give us a good idea of what kind of data we will be receiving and what the display will look like. At the same time we can also take a lot of feedback from the rest of the team about our interface.
-	\item \textbf{Progress: }
-	We have the correct height map and Albert was able to help me deal with opening the .xtr file I received from Professor Mike Bailey. I was also able to create a demo with Oregon's terrain. Unfortunately, I have not been able to find suitable satellite images of Spaceport America and Google Maps is being quite difficult with downloading high definition images of the area. Due to this I have decided to just do the color of the area based off of height. Also, I have a final version of the patch created for the High-Altitude Rocketry Team.
-	
-	\item \textbf{Problems: }
-	I had a problem opening the .xtr file but Albert helped me out. Finding high definition satellite images has been quite near impossible of Spaceport America, Truth or Consequences, New Mexico. Due to this I want to just colorize the area based off of purely height data.
-\end{itemize}
-\subsection{Week 8}
-\subsubsection{Anisimova, Natasha}
-\begin{itemize}
-	\item \textbf{Plans: }
-	While waiting for the ECE team to finalize everything, I may work on optimizing the code that I currently have for the WebGL and the layout of the website. Since there is a sustain-er and booster, data will be provided for both but they will not have exactly the same protocols.
-	\item \textbf{Progress: }
-	We now have a final design of the patch for our entire team. A final design of the t-shirt logo is going to be up soon as well. Now that we have the magnetometer with the GPS, gyroscope, and accelerometer we have to finalize everything with the ECE Team. Unfortunately things have been going back and forth about what is going to be happening. Floats or integer values and how they will be manipulated before they are stored to make sure we are able to get the most out of the data. Until all of that is finalized I can not make changes to fit with the data entirely. Currently I have terrain data working for Oregon at a high definition.
-	
-	\item \textbf{Problems: }
-	The main problem is that the communication protocol is not staying consistent.
-\end{itemize}
-\subsection{Week 9}
-\subsubsection{Anisimova, Natasha}
-\begin{itemize}
-	\item \textbf{Plans: }
-	We want begin testing with the actual hardware that will be provided by the avionics team. This will also give me a good idea of what information they are providing so that I know what needs to be displayed in the table. Also, I want to get feedback from the rest of the team about the website so far.
-	\item \textbf{Progress: }
-	Added a lot more CSS code to the website as well as some information about the team. This will give a better understanding as to what this software should actually be used for and what we are trying to do. Once I have brief paragraphs about the rest of the sub-teams in the High Altitude Rocketry Team, I'll be able to put that in there as well.
-	
-	\item \textbf{Problems: }
-	Collecting a large amount of height data is taking a long time. We may just have to make due with what we have now and if we get the rest, use it. Also, the ECE team has been changing up the communication protocol, hopefully for the better though.
-\end{itemize}
-\subsection{Week 10}
-\subsubsection{Anisimova, Natasha}
-\begin{itemize}
-	\item \textbf{Plans: }
-	Due to my international graphics conference, I was unable to get much work done. I will be catching up with the rest of the team over spring break and spring term.
-	\item \textbf{Progress: }
-	Got the new high resolution data for the height map.
-	
-	\item \textbf{Problems: }
-	I have been away this whole week for a conference in Atlanta, Georgia for my other major. I notified my team and professors in advance.
-\end{itemize}
+
 \newpage
 \begin{minipage}{\textwidth}	
 	\SignatureAndDate{Nancy Squires}
