@@ -50,7 +50,7 @@
 	\vspace{1in}
 	\hrule width0.5\textwidth
 	\vspace{1mm}
-	\noindent #1	
+	\noindent #1
 }
 
 \newcommand*{\SignatureAndDate}[1]{
@@ -62,9 +62,9 @@
 
 \begin{document}
 	\singlespace
-	
+
 	\title{\vspace{2in}Design}
-	
+
 	\author {
 		Anisimova, Natasha
 		\and
@@ -72,9 +72,9 @@
 		\and
 		Morgan, Albert
 	}
-	
+
 	\markboth{CS Capstone 2016-2017}{Groundstation}
-	
+
 	\pagestyle{empty}
 	\vspace*{2in}
 	\begin{center}
@@ -91,26 +91,26 @@
 		Terrance Lee\\
 		Albert Morgan
 	\end{center}
-	
+
 	\vspace{5mm}
-	
+
 	\begin{center}
 		\textbf{Abstract}
 	\end{center}
-	
+
 	%\begin{adjustwidth}{0.75in}{0.75in}
-	
+
 	%Abstract goes here
-	The \textit{Groundstation} software will collect telemetry from a rocket while it is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and 
+	The \textit{Groundstation} software will collect telemetry from a rocket while it is in flight and graphically display the telemetry in real-time. Groundstation is made up several different components: collection of data, storage of data, interpolation of data, and
 	display of data.
 	This document is a compilation of most of the documents that were created over the course of the project.
 	%\end{adjustwidth}
-		
+
 	\pagestyle{headings}
-	
+
 	\newpage
 
-	% Uncomment this to make the table of contents	
+	% Uncomment this to make the table of contents
 	\tableofcontents
 	\newpage
 
@@ -122,7 +122,7 @@
 	collaboration and expertise of dozens of engineers from a variety
 	of disciplines, including mechanical, electrical, computer, and
 	software.
-	
+
 	Many rockets record data during the flight. This data may include
 	altitude, latitude, longitude, and more.
 	Latitude and longitude
@@ -133,7 +133,7 @@
 	met the objective of one hundred thousand feet, but if the rocket
 	is damaged or cannot be located for any reason, then the record
 	of this achievement may be lost.
-	
+
 	However, the chicken-and-egg problem of not being able to access
 	the location data before the rocket is found may be avoided by sending
 	telemetry from the rocket in real-time.
@@ -165,12 +165,12 @@
 
 
 	\section{Introduction}
-	
+
 	\index{Purpose}
 	\subsection{Purpose}
 	This document will specify the requirements for the Groundstation (GS) software.
 	It is intended for use by the OSU High-Altitude Rocketry Team.
-	
+
 	\index{Scope}
 	\subsection{Scope}
 	GS will gather telemetry from a rocket during flight.
@@ -182,11 +182,11 @@
 		\item The graphical display will make the data easy to interpret.
 		\item Logging will allow the data to be analyzed at a later date.
 		\item Altitude data will give evidence of whether the objective of one hundred thousand feet was met.
-	\end{enumerate}	
-			
+	\end{enumerate}
+
 	\index{Definitions}
 	\subsection{Definitions}
-	
+
 	\begin{itemize}
 		\index{Accuracy}
 		\item \textbf{Accuracy:} The absence of errors in the telemetry GS receives, logs, and displays.
@@ -219,7 +219,7 @@
 		%\index{Lean angle}
 		%\item \textbf{Lean angle:} The angle relative to the vertical that the rocket is currently traveling.
 		\index{Raspberry Pi}
-		\item \textbf{Raspberry Pi:} A small, inexpensive computing platform.		
+		\item \textbf{Raspberry Pi:} A small, inexpensive computing platform.
 		\index{Real-time}
 		\item \textbf{Real-time:} Each telemetry datum received from the rocket must be processed and
 		displayed in under one second.
@@ -232,7 +232,7 @@
 		\item \textbf{Robustness:} In the event that GS receives data that is garbled or otherwise does adhere
 		to the protocol, it must continue to receive and display data and not break the real-time requirement.
 		\index{Storage}
-		\item \textbf{Storage:} A device where data is logged.		
+		\item \textbf{Storage:} A device where data is logged.
 		\index{Telemetry}
 		\item \textbf{Telemetry:} Data received from the rocket while the rocket is in flight.
 		\index{Telemetry packet}
@@ -240,34 +240,34 @@
 		\item \textbf{Telemetry packet:} The rocket will send a telemetry update once per second. Each one of these updates is a ``telemetry packet.''
 		\index{Vizualation}
 		\item \textbf{Visualization:} Information or data, transformed into an visual context.
-	\end{itemize}	
-	
+	\end{itemize}
+
 	\subsection{Overview}
 	The rest of this document contains specific requirements about the functionality and constraints of GS. This includes
 	the needs of the entire rocketry team, the physical constraints of the system, and the limitations of the launch site.
-	
+
 	\textit{Overall description} gives a high-level view of the functions of the software and describes any constraints.
 	\textit{Specific requirements} gives a detailed list of requirements that were proposed by the OSU High-Altitude
 	Rocketry Team and describes specific requirements and constraints.
-		
-	
+
+
 	\section{Overall description}
 	\index{Product perspective}
 	\subsection{Product perspective}
 	GS will receive data from a serial interface, via hardware and a protocol provided by the avionics team.
 	Due to the launch site not having any connection to the Internet or mobile service, GS will not interact with
-	any outside systems. 
+	any outside systems.
 	Additionally, GS will provide a software interface that allows users to view the telemetry,
 	graphically, in real-time.
 	\subsection{Product functions}
 	GS provides two major functions while the rocket is in flight:
-	
+
 	\begin{enumerate}
 		\index{Logging}
 		\item Telemetry logging to non-volatile storage.
-		\item Display of real-time graphical data. 
+		\item Display of real-time graphical data.
 	\end{enumerate}
-	
+
 	\subsection{User characteristics}
 	\index{Users}
 	The users of this software will be limited to engineering students and advisors who are part of the OSU High-Altitude
@@ -275,13 +275,13 @@
 	These users will be expected to be familiar with the software and the rocket launch.
 	Because the software team works closely with the rest of the rocketry team on regular basis,
 	any training necessary will be conducted in-person.
-	
+
 	\subsection{Constraints}
 	\index{Constraints}
 	\begin{itemize}
 		\item Because of the remote nature of launch sites, the software must operate without an Internet connection.
 		\item The software must be as reliable as is reasonably possible, and additional features must not compromise the reliability.
-		\item Groundstation will receive telemetry via a protocol that is to-be-determined by the avionics team.	
+		\item Groundstation will receive telemetry via a protocol that is to-be-determined by the avionics team.
 	\index{Browser}
 	\index{Web browser}
 	GS will support most modern desktop web browsers, including:
@@ -291,7 +291,7 @@
 			\item Firefox version 49 or higher.
 			\item Safari version 10 and or higher.
 		\end{itemize}
-	
+
 	\end{itemize}
 
 	\index{Assumptions and dependencies}
@@ -300,21 +300,21 @@
 	\index{Internet}
 	\index{Raspberry Pi}
 	Groundstation will run on a Raspberry Pi with no Internet connectivity.
-	
+
 	\subsection{Apportioning of requirements}
-	
+
 	\begin{figure}
 		\includegraphics[width=\linewidth]{ganttchart.eps}
 		\caption{A Gantt chart outlining the work to be done over the next nine months.}
 		\label{fig:gantt}
 	\end{figure}
-	
+
 	Figure \ref{fig:gantt} shows a gantt chart outlining our schedule from now until the first test rocket launch.
 	Although the final rocket launch is on 23 June, all core systems of GS should be finished by the test launch in mid-May.
-		
+
 	\index{Specific requirements}
 	\section{Specific requirements}
-	
+
 	\index{External interface requirements}
 	\subsection{External interface requirements}
 	\index{User interfaces}
@@ -323,17 +323,17 @@
 	to be provided by the avionics team,
 	will broadcast a wireless network that users will connect to and access GS through a web browser.
 	From this page, users will be able to access the graphical display of the telemetry.
-	
+
 	\index{Hardware interfaces}
 	\subsubsection{Hardware interfaces}
 	GS will run on a Raspberry Pi broadcasting a wireless network. Users will connect to GS with their personal computers
 	via the wireless network.
 
 	Data is received from a serial interface using a protocol that will be determined by the avionics team.
-	
+
 	\index{System Features}
 	\subsection{System Features}
-	
+
 	The stimulus for all specific requirements is receiving a telemetry packet. The specific responses to each telemetry packet are:
 	\begin{itemize}
 		\item GS will collect data from a serial interface using a yet-to-be-determined protocol designed by the High-Altitude Rocketry Team's avionics section.
@@ -346,10 +346,10 @@
 		\item GS will support a live line graph visualization for altitude data.
 		\item GS will have the ability to show the most recently recorded latitude and longitude in a numerical format.
 	\end{itemize}
-	
+
 	\index{Performance requirements}
 	\subsection{Performance requirements}
-	
+
 	\begin{itemize}
 		\item When a new telemetry packet is received, GS will log the telemetry and update all visualizations in under one second.
 		\item GS will support a minimum of 20 concurrent users.
@@ -394,11 +394,11 @@
 \subsection{Week 3}
 \subsubsection{Anisimova, Natasha}
 \begin{itemize}
-	\item \textbf{Plans: For the following weeks we are hoping to communicate more with the Electircal Engineers so that 
-		we know what type of equipment we have to work with. Another bonus is that we will be getting recruits that could 
+	\item \textbf{Plans: For the following weeks we are hoping to communicate more with the Electircal Engineers so that
+		we know what type of equipment we have to work with. Another bonus is that we will be getting recruits that could
 		help us with creating the software.}
 	\item \textbf{Progress: We created our first set of blog posts. Also, we created a problem statement that our team
-		and our client agreed with. Meeting with the entire rocket team gave us a good idea how the work was going to split up 
+		and our client agreed with. Meeting with the entire rocket team gave us a good idea how the work was going to split up
 		between the individual teams. }
 	\item \textbf{Problems: Knowing that we would not have Wi-Fi connection at the site, we would have to create our own
 		solution as to how we were going to get the software to everyone on the team.}
@@ -438,7 +438,7 @@
 \begin{itemize}
 	\item \textbf{Plans: }
 	The plans for the coming week are to:
-	
+
 	\begin{enumerate}
 		\item	Figure out some of the details about our architecture, especially exactly how the application server should interact with the web server.
 		\item Make a list of proof-of-concepts that need to be done
@@ -493,9 +493,9 @@
 \subsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
-	GS is the name of our software. I am planning on creating some kind of logo for it that way we can put it up into our web application. 
+	GS is the name of our software. I am planning on creating some kind of logo for it that way we can put it up into our web application.
 	\item \textbf{Progress: }
-	We finished the requirements document. I also spoke with a Computer Visualization person, Nik, that Winters introduced me to. He mentioned that we could get the topology and satellite images of the area from Professor Mike Bailey. The texture image can be mapped to the topology and we can use that for our web application. He also mentioned that it would be cool if we could get an PC to actually have the web server on. Kirsten added that there could be possible funding for this as well. We also realized that we pretty much have four months before the test launch. A lot needs to happen before now and then. 
+	We finished the requirements document. I also spoke with a Computer Visualization person, Nik, that Winters introduced me to. He mentioned that we could get the topology and satellite images of the area from Professor Mike Bailey. The texture image can be mapped to the topology and we can use that for our web application. He also mentioned that it would be cool if we could get an PC to actually have the web server on. Kirsten added that there could be possible funding for this as well. We also realized that we pretty much have four months before the test launch. A lot needs to happen before now and then.
 	\item \textbf{Problems: }
 	We do not have a lot of time left before the test launch.
 \end{itemize}
@@ -520,7 +520,7 @@
 	\item \textbf{Plans: }
 	Up until Monday we will be finishing the technical document and after that we will be moving on to the design document. So far we have a lot of ideas from the team with the user stories. There will be several stretch goals we can pull from them but some that we can actually implement.
 	\item \textbf{Progress: }
-	When speaking to Professor Bailey about visualization, on behalf of the technical document, he mentioned that a GoPro Dual Hero System could be placed on the rocket as an interesting addition. This 3D capturing camera would give a new and innovative way of looking at space. It would also be the first time that it has been used on a rocket, but it has been used in skydiving in the past. 
+	When speaking to Professor Bailey about visualization, on behalf of the technical document, he mentioned that a GoPro Dual Hero System could be placed on the rocket as an interesting addition. This 3D capturing camera would give a new and innovative way of looking at space. It would also be the first time that it has been used on a rocket, but it has been used in skydiving in the past.
 	\item \textbf{Problems: }
 	We have also found out that getting to 100k ft will not be a challenge anymore from the ME teams. Our problem now is staying under 135k ft. It sounds like that will not be too much of a problem considering the fact that weight can always be added to slow down the rocket. Due to the overshot we also have to account for that when considering the type of data, we will still be receiving at that height. Thankfully we can still come up with an estimated altitude, velocity, and location from the other sensors.
 \end{itemize}
@@ -530,7 +530,7 @@
 	This week we will work on the technical review and start making some decisions about the components we will use in our software. We also need to start making some decisions soon so we can keep the interest of the rest of the people in our team.
 	\item \textbf{Progress: }
 	This last week we finished the requirements document. It was difficult to nail down specific requirements for this project. Our job is to work with the rest of the rocketry team to make a piece of software that we are all happy with, and didn't start out with a lot of hard requirements from the client.
-	
+
 	One of the non-capstone members of our team has decided to work on a predictive positioning system that will show an estimate of where the rocket is in the case that we lose GPS data. The event of a data loss is likely due to restrictions put on GPS devices to prevent people from building missile guidance systems. During certain portions of the rocket's flight, we will be going too fast or too high for a civilian GPS to work due to these restrictions.
 	\item \textbf{Problems: }
 	There were no problems this week. The technical review is a straightforward document and I do not anticipate any problems.
@@ -558,7 +558,7 @@
 \begin{itemize}
 	\item \textbf{Plans: }
 	This week we need to begin work on the design document. The design document is very precise and complete, and I anticipate that this document will be a lot of work, so we should get started early. Additionally, we finally need to make some decisions about the technologies we are going to use, so we need to have a discussion as a group to finalize these decisions.
-	
+
 	Additionally, we need to figure out a better workflow so we don't have any last-minute problems (see "problems", below).
 	\item \textbf{Progress: }
 	This week we finished the technology review. It barely got done in time, and Natasha and I spent a lot of time fixing it for the final submission.
@@ -591,10 +591,10 @@
 			UI Interaction Model              & Accuracy                                 &                                  \\
 			UI Interface Organization         & Redundant Sensors                        &                                  \\
 			Retrieval                         & Storage                                  &                                  \\
-			UI Toolkit                        & Internet/HAM                             &                                 
+			UI Toolkit                        & Internet/HAM                             &
 		\end{tabular}
 	\end{table}
-	
+
 	\item \textbf{Problems: }
 	Splitting up the work seems like the most difficult thing. Also it being Thanksgiving break it is hard to know when everyone is free or available to work on the assignment.
 \end{itemize}
@@ -627,7 +627,7 @@
 \begin{itemize}
 	\item \textbf{Plans: }
 	The weekly rocket meeting has been canceled, so there is no coordination with the larger group that needs to be done. However, we plan to get at least some work done over the break. We should be able to get at least a basic running version of our software up in that time.
-	
+
 	Over the weekend we should be able to finish the content of our video and record it on Monday. We plan to break the presentation into bite-sized pieces for ease of recording and editing. Additionally, this will allow us to reuse some of the pieces for later presentations.
 	\item \textbf{Progress: }
 	This week we finished the design document. We've created the framework of our presentation, but we haven't started recording anything yet. The bones of our presentation has been created, but much of the content remains to be filled in.
@@ -650,7 +650,7 @@
 	We hope to meet up with the rest of the team soon just to find out where everyone is since we last met and make sure that we are all on track. Also, I plan on working on the code and getting the images for the buttons we will have for the buttons and dials we will be using.
 	\item \textbf{Progress: }
 	Al wrote some code over break. I researched a bit more about the details of the user interface that we are trying to create. Unfortunately, I did not get as much as I wanted to over break.
-	
+
 	\item \textbf{Problems: }
 	Snow days have set us behind in meeting with the entire team but we will have a chance to meet up with them this next Tuesday.
 \end{itemize}
@@ -660,7 +660,7 @@
 	The plan for this week is to get everybody on track for winter term. Last quarter, we had a lot of written assignments to complete, so it was easy to know what we were supposed to be doing at any given time. This quarter, we will need to be much more proactive and self-directed, so we will need to come up with a solid plan for how we will finish our project.
 	\item \textbf{Progress: }
 	Over the break I looked into task tracking and wrote a little bit of code for the groundstation backend. The most important feature for a task tracking system is ease of use. Much like source control, the best task tracker is the one that you use. An overly complicated or inconvenient task tracker won't do anyone any good, because no one (including me) will check their tasks. I looked into waffle.io, but it didn't seem to add any features that GitHub Projects didn't have or could easily replicate. Because we use already GitHub for everything else in our project, including source code, documentation, and blogging, GitHub Projects is the best option.
-	
+
 	I also started writing some of the backend over the break. It would make sense to use the node package manager (npm) to track client-side JavaScript libraries as well as server side, but making them accessible from the default /node\_modules path is tricky. I wrote some code that takes a list of JavaScript libraries, automatically finds them in the /node\_modules directory, and makes them available on the /scripts route.
 	\item \textbf{Problems: }
 	We usually do our meetings on Mondays, so the snow day on the first day of class and now MLK Jr. Day have set us behind. Hopefully we can meet on the Tuesday after MLK Jr. Day and start some real progress.
@@ -670,9 +670,9 @@
 	\item \textbf{Plans: }
 	Monday Al and I plan on meeting during MLK day to start going over the server and hopefully start some coding. I believe we will also have our meeting with the rest of the High Altitude Rocket team as well.
 	\item \textbf{Progress: }
-	Over the break I started to learn more about Node JS because we came to a consensus that it would be easier to use one language instead of multiple for the server. I have never used it so I figured it would be good to do research and learn as much as I can so I wouldn't be behind when we got into the guts of coding during this term. 
+	Over the break I started to learn more about Node JS because we came to a consensus that it would be easier to use one language instead of multiple for the server. I have never used it so I figured it would be good to do research and learn as much as I can so I wouldn't be behind when we got into the guts of coding during this term.
 	\item \textbf{Problems: }
-	Due to the Snow and the MLK day trying to get our Rocket team meetings has been tough. Monday the normal days for all our meetings. We have been trying to be adjustable so that we can get on schedule and get this thing going. 
+	Due to the Snow and the MLK day trying to get our Rocket team meetings has been tough. Monday the normal days for all our meetings. We have been trying to be adjustable so that we can get on schedule and get this thing going.
 \end{itemize}
 
 \subsection{Week 2}
@@ -699,7 +699,7 @@
 	\item \textbf{Plans: }
 	We have a laptop computer that we are getting on Tuesday to use for testing. After speaking with Al he suggested to ask Mr. McGrath for another Raspberry PI because he had a great Idea for testing it and the computer in one place. A type of Endurance testing to make sure if works the program will work for hours.
 	\item \textbf{Progress: }
-	We met with the rest of the team to get updated and we had our updated meeting with John Dodge our TA. We were able to get some feedback about our video and last report. I was able to speak to both Instructors about how we are doing in our project. I was able to get us a Raspberry PI so that we can test on from Mr. McGrath. 
+	We met with the rest of the team to get updated and we had our updated meeting with John Dodge our TA. We were able to get some feedback about our video and last report. I was able to speak to both Instructors about how we are doing in our project. I was able to get us a Raspberry PI so that we can test on from Mr. McGrath.
 	\item \textbf{Problems: }
 	The main problem this week was the holiday. Almost all of our meetings are on Monday and changing schedules to make meetings to fit around each others schedule so that we could meet with each other and the TA as well with the High Altitude group was very difficult.
 \end{itemize}
@@ -708,9 +708,9 @@
 \subsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
-	I have a gyroscope and Arduino 101 that we can use for testing. For this upcoming week I plan on getting the height map to display in a web browser and possibly integrate it with what Terrance and Albert have done so far with the interface. Satellite images have proven to be more difficult to find. Professor Bailey agreed to help me since all I have found so far are lithography maps of the area with strange legends. We also have an undergraduate that is doing research on predicting where the rocket will land based off the initial data that we get from the sensors before takeoff. 
+	I have a gyroscope and Arduino 101 that we can use for testing. For this upcoming week I plan on getting the height map to display in a web browser and possibly integrate it with what Terrance and Albert have done so far with the interface. Satellite images have proven to be more difficult to find. Professor Bailey agreed to help me since all I have found so far are lithography maps of the area with strange legends. We also have an undergraduate that is doing research on predicting where the rocket will land based off the initial data that we get from the sensors before takeoff.
 	\item \textbf{Progress: }
-	In the next couple days I'll have the height map of the area that we will be launching from and I'll be able to put it into the code that we currently have. This will give us a better display. We got the communication protocol from the ECE team today as well. 
+	In the next couple days I'll have the height map of the area that we will be launching from and I'll be able to put it into the code that we currently have. This will give us a better display. We got the communication protocol from the ECE team today as well.
 	\item \textbf{Problems: }
 	I do not have the right satellite images for the area but I will be working with Professor Bailey to find them. It also looks like I will be the only one from the CS capstone team that will be able to go and stay for our launch.
 \end{itemize}
@@ -728,9 +728,9 @@
 	\item \textbf{Plans: }
 	Since we have a Laptop and a second Raspberry PI we are can test parts of the software as we build it to see how robust it really is. Code then test. Code then test. That way we if find a bug we can find it early then later in the program.
 	\item \textbf{Progress: }
-	This week we got some actually code working where the client can connect to the server. AL did that part. I was able to get us a Laptop for testing as well as another Raspberry PI. Also I have contacted the Avionics ECE team. They are supposed to be emailing me the protocol for all the components of what the rocket sensors are going to be sending back and the times. 
+	This week we got some actually code working where the client can connect to the server. AL did that part. I was able to get us a Laptop for testing as well as another Raspberry PI. Also I have contacted the Avionics ECE team. They are supposed to be emailing me the protocol for all the components of what the rocket sensors are going to be sending back and the times.
 	\item \textbf{Problems: }
-	I am having an issue with getting the protocol from the ECE team. They said they were going to give it to me on Thursday but they did not send it to me. Luckly I know most of them from being an ECE previously so I was able to ask for it. Hopefully if I do not get it tonight I can get it this weekend. 
+	I am having an issue with getting the protocol from the ECE team. They said they were going to give it to me on Thursday but they did not send it to me. Luckly I know most of them from being an ECE previously so I was able to ask for it. Hopefully if I do not get it tonight I can get it this weekend.
 \end{itemize}
 
 \subsection{Week 4}
@@ -739,7 +739,7 @@
 	\item \textbf{Plans: }
 	We will be needing to create the OneNote document this upcoming week and register for the engineering expo. Any revisions that need to be done will be discussed during our Monday meetings. During that time, I am also hoping we will be able to select a team captain. We are planning on getting an SD card as well.
 	\item \textbf{Progress: }
-	I made a demo of the bump-mapping and displacement mapping in order to get a good understanding of what was happening in the code. I also have started to code with WebGL and will be slowly integrating it with what the rest of the group has up on Github. We are now all able to edit and add on to the code since Al made a small tutorial on how to allow extremely long file path names. 
+	I made a demo of the bump-mapping and displacement mapping in order to get a good understanding of what was happening in the code. I also have started to code with WebGL and will be slowly integrating it with what the rest of the group has up on Github. We are now all able to edit and add on to the code since Al made a small tutorial on how to allow extremely long file path names.
 	\item \textbf{Problems: }
 	There are a couple problems with trying to test the Web Server at the university over its network. Al talked to Kevin about it and unfortunately it looks like we will be needing to go through the IT department and wait for them to approve us (let us past OSU's firewalls). Since Kevin is on the committee we hope that we have pretty high chances of them granting the permissions for our team.
 \end{itemize}
@@ -755,11 +755,11 @@
 \subsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
-	We got work from the instructors on putting our "paperwork" in one note file. We have not voted on a team captain but I hope by Monday of next week we should have that done. With the Logging we are transferring it to a CSV file. It seem that the rest of team really liked that Idea. Also Natasha said she can work with that as well. I should have that done by Sunday at the latest unless some serious problem shows up. 
+	We got work from the instructors on putting our "paperwork" in one note file. We have not voted on a team captain but I hope by Monday of next week we should have that done. With the Logging we are transferring it to a CSV file. It seem that the rest of team really liked that Idea. Also Natasha said she can work with that as well. I should have that done by Sunday at the latest unless some serious problem shows up.
 	\item \textbf{Progress: }
-	This week I am doing some additions to the Logging of the server. Al also found out why we could not log onto the server at OSU. It has something to do with the college's firewall. It works fine from his house so we should not have an issue when we are at the launch site. 
+	This week I am doing some additions to the Logging of the server. Al also found out why we could not log onto the server at OSU. It has something to do with the college's firewall. It works fine from his house so we should not have an issue when we are at the launch site.
 	\item \textbf{Problems: }
-	I believe that their was a problem with One Note. We got an Email from Dr. Winters about holding off on sending her our link. Also Al had an issue with the Rasberry PI not having a micro SD card. He asked Mr. McGrath for one. If he does not have one we are just going to have to pick one up ourselves. 
+	I believe that their was a problem with One Note. We got an Email from Dr. Winters about holding off on sending her our link. Also Al had an issue with the Rasberry PI not having a micro SD card. He asked Mr. McGrath for one. If he does not have one we are just going to have to pick one up ourselves.
 \end{itemize}
 
 \subsection{Week 5}
@@ -768,25 +768,25 @@
 	\item \textbf{Plans: }
 	Every Monday we are going to be putting everything that each of the separate branches has, take care of any conflicts, and merge everything into the master branch. This way both sides have an updated version of the project. We will have to revise some documents since several of our design decisions have changed since we wrote the document back in Fall term. I will be added more code over the weekend, unfortunately this week was a bit hectic with exams.
 	\item \textbf{Progress: }
-	The code for the WebGL Canvas now co-exists with the rest of the server. Due to the fact that everything needs to be integrated, we have split the project into two branches. There is a separate demo where the width of the WebGL Canvas changes depending on the user's browser size. This will insure that the user will not be missing anything. Vertex and fragment code for displacement mapping can be divided up into separate files so the code is more manageable. 
+	The code for the WebGL Canvas now co-exists with the rest of the server. Due to the fact that everything needs to be integrated, we have split the project into two branches. There is a separate demo where the width of the WebGL Canvas changes depending on the user's browser size. This will insure that the user will not be missing anything. Vertex and fragment code for displacement mapping can be divided up into separate files so the code is more manageable.
 	\item \textbf{Problems: }
-	One problem that I have run into is making sure that my code does not have any web dependencies. In the end it seems like most things we can just download but then that means just filling up more memory on the Raspberry Pi. 
+	One problem that I have run into is making sure that my code does not have any web dependencies. In the end it seems like most things we can just download but then that means just filling up more memory on the Raspberry Pi.
 \end{itemize}
 \subsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This week I have two things I would like to get done:
-	
+
 	\begin{enumerate}
 		\item Write the telemetry reader and telemetry mocking code to read the data.
 		\item Get the Raspberry Pi set up (operating system installed, node.js set up, etc.)
 	\end{enumerate}
-	
+
 	\item \textbf{Progress: }
 	This week Terrance and I worked on some of the logging together. We looked at using a library that converts JSON to CSV, but in the end we decided not to use it, because it added far too much complexity for a simple task (what took 40 lines of code using the library, setting up the exact way the JSON should be converted to CSV took 1 line of code without the library). We don't really need the flexibility that using the library offers. Additionally, the library entered the data in the CSV strangely: added headers to every single row.
-	
+
 	I bought a mess of USB cables and an SD card this week, so we can get started actually using the Raspberry Pi. This should also aid in the development of the telemetry reading code, because we can easily mock the data coming in the USB port.
-	
+
 	Additionally, it looks like the 'usb' library will be better suited than the 'serialport' library for data acquisition. Unsurprisingly, usb handles USB devices better than serialport.
 	\item \textbf{Problems: }
 	No major problems, although I'm not sure how we can verify that the USB device connected to the Raspberry Pi is actual data from the rocket, and not someone's phone or something. I don't think this should be an issue, because there should be exactly one device connected: the telemetry receiver.
@@ -796,9 +796,9 @@
 	\item \textbf{Plans: }
 	I want to look more into how to setup if a stage stops transmitting. Also work on updating our paperwork that needs to be done. I have a midterm on Monday so I will have to do my updates after that. I want to have them done by Wednesday so if there are any mistakes I have plenty of time to fix them.
 	\item \textbf{Progress: }
-	Al and I have been playing around with logging. We got some more specifics with how the packets are coming in from the rocket but not really which order they are coming in from the EE team. They will not know until they turn on the radio. I found a basic template to help with the logging conversion from JSON to CSV but for some reason it was setup wrong. So Al and I came up with a much simpler way to do this. I also spoke to my old networking teacher about an issue that we may come across because how the EEs have the radio receiving. They have one receiver for both stages so we receive one packet from one stage then the next. If one stage blows up or crashes or stops transmitting if we do not prepare a code in there that after a certain amount of time doesn't receive that packet to move on and keep collecting the packets it will just sit there waiting. 
+	Al and I have been playing around with logging. We got some more specifics with how the packets are coming in from the rocket but not really which order they are coming in from the EE team. They will not know until they turn on the radio. I found a basic template to help with the logging conversion from JSON to CSV but for some reason it was setup wrong. So Al and I came up with a much simpler way to do this. I also spoke to my old networking teacher about an issue that we may come across because how the EEs have the radio receiving. They have one receiver for both stages so we receive one packet from one stage then the next. If one stage blows up or crashes or stops transmitting if we do not prepare a code in there that after a certain amount of time doesn't receive that packet to move on and keep collecting the packets it will just sit there waiting.
 	\item \textbf{Problems: }
-	The only real issue was with One note but that is because I am not an expert with the online one and also I have not used one note in a while. I think my issues is that I just have not used it in a while and have to get back in the flow of it. My issue was get used to where stuff was and forgetting little things. Besides that nothing really major on the coding side so far. 
+	The only real issue was with One note but that is because I am not an expert with the online one and also I have not used one note in a while. I think my issues is that I just have not used it in a while and have to get back in the flow of it. My issue was get used to where stuff was and forgetting little things. Besides that nothing really major on the coding side so far.
 \end{itemize}
 \subsection{Week 6}
 \subsubsection{Anisimova, Natasha}
@@ -807,7 +807,7 @@
 	The tables are now updating each time a packet is sent. We have a test launch in March so we will get plenty of data to test with once that happens and see if we have any hiccups in our code. Revisions were made to the technical and design document. We also created a PowerPoint presentation with our progress thus far. OneNote is currently holding all the revisions and brief biographies about all the team members.
 	\item \textbf{Progress: }
 	I will be adding another table for the second set of telemetry packets we will be receiving for the rocket. It will be easier to read if it is split up that way. Also, I am planning on asking the Rocketry Team if they would like only certain variables displayed because currently the amount of information we have clutters the screen. It may be useful for the test launch though to ensure everything is working properly.
-	
+
 	\item \textbf{Problems: }
 	The propulsion team has not heard back from the airport about testing there. Unfortunately, this may mess with the test launch dates. We can still use data from previous launches if needed.
 \end{itemize}
@@ -818,7 +818,7 @@
 	The ECE team has put a magnetometer on the rocket so it will be easier to know which direction is magnetic North, making sure that the display actual flies in the same direction that the real version does. The rocketry team is planning on doing a test launch soon. This will give us a good idea of what kind of data we will be receiving and what the display will look like. At the same time we can also take a lot of feedback from the rest of the team about our interface.
 	\item \textbf{Progress: }
 	We have the correct height map and Albert was able to help me deal with opening the .xtr file I received from Professor Mike Bailey. I was also able to create a demo with Oregon's terrain. Unfortunately, I have not been able to find suitable satellite images of Spaceport America and Google Maps is being quite difficult with downloading high definition images of the area. Due to this I have decided to just do the color of the area based off of height. Also, I have a final version of the patch created for the High-Altitude Rocketry Team.
-	
+
 	\item \textbf{Problems: }
 	I had a problem opening the .xtr file but Albert helped me out. Finding high definition satellite images has been quite near impossible of Spaceport America, Truth or Consequences, New Mexico. Due to this I want to just colorize the area based off of purely height data.
 \end{itemize}
@@ -829,7 +829,7 @@
 	While waiting for the ECE team to finalize everything, I may work on optimizing the code that I currently have for the WebGL and the layout of the website. Since there is a sustain-er and booster, data will be provided for both but they will not have exactly the same protocols.
 	\item \textbf{Progress: }
 	We now have a final design of the patch for our entire team. A final design of the t-shirt logo is going to be up soon as well. Now that we have the magnetometer with the GPS, gyroscope, and accelerometer we have to finalize everything with the ECE Team. Unfortunately things have been going back and forth about what is going to be happening. Floats or integer values and how they will be manipulated before they are stored to make sure we are able to get the most out of the data. Until all of that is finalized I can not make changes to fit with the data entirely. Currently I have terrain data working for Oregon at a high definition.
-	
+
 	\item \textbf{Problems: }
 	The main problem is that the communication protocol is not staying consistent.
 \end{itemize}
@@ -840,7 +840,7 @@
 	We want begin testing with the actual hardware that will be provided by the avionics team. This will also give me a good idea of what information they are providing so that I know what needs to be displayed in the table. Also, I want to get feedback from the rest of the team about the website so far.
 	\item \textbf{Progress: }
 	Added a lot more CSS code to the website as well as some information about the team. This will give a better understanding as to what this software should actually be used for and what we are trying to do. Once I have brief paragraphs about the rest of the sub-teams in the High Altitude Rocketry Team, I'll be able to put that in there as well.
-	
+
 	\item \textbf{Problems: }
 	Collecting a large amount of height data is taking a long time. We may just have to make due with what we have now and if we get the rest, use it. Also, the ECE team has been changing up the communication protocol, hopefully for the better though.
 \end{itemize}
@@ -851,7 +851,7 @@
 	Due to my international graphics conference, I was unable to get much work done. I will be catching up with the rest of the team over spring break and spring term.
 	\item \textbf{Progress: }
 	Got the new high resolution data for the height map.
-	
+
 	\item \textbf{Problems: }
 	I have been away this whole week for a conference in Atlanta, Georgia for my other major. I notified my team and professors in advance.
 \end{itemize}
@@ -863,32 +863,32 @@
 \subsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
-	For this next week I need to figure out the scale and load the terrain into the webpage. Colorizing it would be good as well. The Avionics and Recovery Team want to do an integration test soon as well so we need to keep that in mind. 
+	For this next week I need to figure out the scale and load the terrain into the webpage. Colorizing it would be good as well. The Avionics and Recovery Team want to do an integration test soon as well so we need to keep that in mind.
 	\item \textbf{Progress: }
-	Now that we have the height map and Al was able to get an image out of the .xtr file, I was able to get a 3D model of the 	terrain around Spaceport America. Scaling is now our biggest concern. 
+	Now that we have the height map and Al was able to get an image out of the .xtr file, I was able to get a 3D model of the 	terrain around Spaceport America. Scaling is now our biggest concern.
 	\item \textbf{Problems: }
-	Figuring out the longitude and latitude scale compared to miles for the model. It seems like the 3D model is skewed a bit. The east and west were elongated slightly. The webpage needs to be re-organized as well. Having the 3D terrain be the first thing that a person sees would be ideal. 
+	Figuring out the longitude and latitude scale compared to miles for the model. It seems like the 3D model is skewed a bit. The east and west were elongated slightly. The webpage needs to be re-organized as well. Having the 3D terrain be the first thing that a person sees would be ideal.
 \end{itemize}
 
 \subsection{Week 1}
 \subsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
-	I have a meeting with Ben Brewster who knows more about networking next week. I want to get systemd implemented into inittab. Get the layout for the line graph layout at minimum if not more so that we can get that setup. Also want to get our final link setup or at least a link setup that we can use for expo so that I have a network that I can use for the line graph setup. 
+	I have a meeting with Ben Brewster who knows more about networking next week. I want to get systemd implemented into inittab. Get the layout for the line graph layout at minimum if not more so that we can get that setup. Also want to get our final link setup or at least a link setup that we can use for expo so that I have a network that I can use for the line graph setup.
 	\item \textbf{Progress: }
-	I found a good resource for our Live Line Graph for the rocket and I found what was need for Systemd and inittab to work together. I also went to a meeting with avionics and recovery about a couple of things that they wanted to get covered and make sure everybody was on the right page. We were originally not needed for this meeting but I am glad I went but cause there was a few things that we should know about and somethings that we might want to talk about as well in our next meeting that we may want to put into our code. 
+	I found a good resource for our Live Line Graph for the rocket and I found what was need for Systemd and inittab to work together. I also went to a meeting with avionics and recovery about a couple of things that they wanted to get covered and make sure everybody was on the right page. We were originally not needed for this meeting but I am glad I went but cause there was a few things that we should know about and somethings that we might want to talk about as well in our next meeting that we may want to put into our code.
 	\item \textbf{Problems: }
-	Having a issue with line graph that I am using. I can hook it up to a network but it used to using websites but since we are using a raspberry pi as our network I have to ask others who know more about networking for help on this. This is why I have a meeting with Ben Brewster next week. 
+	Having a issue with line graph that I am using. I can hook it up to a network but it used to using websites but since we are using a raspberry pi as our network I have to ask others who know more about networking for help on this. This is why I have a meeting with Ben Brewster next week.
 \end{itemize}
 
 
 \subsection{Week 1}
 \subsubsection{Morgan, Al}
 \begin{itemize}
-	\item \textbf{Plans: } 
-	Over the course of the next week I hope to finish the 3D interface and get it into something resembling its final form. Additionally, the avionics team is ready for integration testing, so I will ensure that our software is ready to interact with their hardware. the protocol has changed since we began to the project, so a few minor changes will need to be made before the software is ready to integrate, but since the framework of the protocol is already in place I do not believe that this will cause any major issues. 
+	\item \textbf{Plans: }
+	Over the course of the next week I hope to finish the 3D interface and get it into something resembling its final form. Additionally, the avionics team is ready for integration testing, so I will ensure that our software is ready to interact with their hardware. the protocol has changed since we began to the project, so a few minor changes will need to be made before the software is ready to integrate, but since the framework of the protocol is already in place I do not believe that this will cause any major issues.
 	\item \textbf{Progress: }
-	This week we began integrating the 3D model into the web interface. We took the new, higher resolution height map data and turned it into an image, which we then used to construct a 3D model (a .obj file) that we can import into the WebGL canvas using Three.js. I also got some very basic objects to move around the scene to represent the rocket. I haven't actually hooked the moving objects into the telemetry data yet, but all of the pieces are in place to do so. 
+	This week we began integrating the 3D model into the web interface. We took the new, higher resolution height map data and turned it into an image, which we then used to construct a 3D model (a .obj file) that we can import into the WebGL canvas using Three.js. I also got some very basic objects to move around the scene to represent the rocket. I haven't actually hooked the moving objects into the telemetry data yet, but all of the pieces are in place to do so.
 	\item \textbf{Problems: }
 	We had a minor hiccup when we realized that the Earth is round and one degree of latitude does not equal one degree of longitude in terms of distance. However, some quick and easy trigonometry fixed this issue.
 \end{itemize}
@@ -896,18 +896,18 @@
 \subsection{Week 2}
 \subsubsection{Anisimova, Natasha}
 \begin{itemize}
-	\item \textbf{Plans: }Getting the atmospheres to be at the correct height will be a problem since everything has to be scaled correctly according to the data that we are receiving. The 3.js transparency works, we just need to make sure that we have all the correct libraries for it and that it is set up correctly in the environment. 
-	\item \textbf{Progress:} Originally the terrain that I had created was off in terms of scale to longitude and latitude compared to Google Earth. Al was able to figure out the math behind it and alter it. The terrain also had a distorted height values due to how Blender was adding the modifier for height of the height map image to the flat plane. After speaking to the rest of the mechanical engineers, they said they wanted it to be as close to the realistic area as possible. This lead us to having a quite a flat plane. I have also been working on transparency since that will be useful for showing the different atmospheres that the rocket is going through. 
-	\item \textbf{Problems: } 
+	\item \textbf{Plans: }Getting the atmospheres to be at the correct height will be a problem since everything has to be scaled correctly according to the data that we are receiving. The 3.js transparency works, we just need to make sure that we have all the correct libraries for it and that it is set up correctly in the environment.
+	\item \textbf{Progress:} Originally the terrain that I had created was off in terms of scale to longitude and latitude compared to Google Earth. Al was able to figure out the math behind it and alter it. The terrain also had a distorted height values due to how Blender was adding the modifier for height of the height map image to the flat plane. After speaking to the rest of the mechanical engineers, they said they wanted it to be as close to the realistic area as possible. This lead us to having a quite a flat plane. I have also been working on transparency since that will be useful for showing the different atmospheres that the rocket is going through.
+	\item \textbf{Problems: }
 	Telemetry protocol is changing. Hopefully this will be the last time.
-	
-	
+
+
 \end{itemize}
 
 \subsection{Week 2}
 \subsubsection{Lee, Terrance}
 \begin{itemize}
-	\item \textbf{Plans: } 
+	\item \textbf{Plans: }
 	I want to have a dynamic graph built by the end of next week and we should be ready to integrate with the log that Al built for the expo.
 	\item \textbf{Progress:  }
 	This week I switched what type of live line graph I was going to use for our demo. The one I found was much simpler. I also spoke to my old network instructor Ben Brewster about how we should go about receiving the call from the sensor whether we would have to setup a network on the graph code or with the through the packet code itself. He explain both ways and suggested that on the website that we would use would need a simple ajax call and just build the graph in html with the javascript. I tested his idea with another dynamic javascript setup I had an it works.
@@ -923,7 +923,7 @@
 	This week I'm going to get the 3D model we made loaded into the web interface and ensure that it is scaled correctly by creating some test data that should map to the corners of the 3D model. We can then see whether or not the model is scaled correctly. Additionally, I will keep up with the avionics team to make sure that we are implementing the correct telemetry protocol.
 	\item \textbf{Progress: }
 	This week I got the 3D model of the terrain at the launch site properly scaled in all axes. The 3D model is very flat when rendered this way because the site is in the middle of the desert. However, we may be able to use some lighting tricks to make it more visually interesting.
-	
+
 	The telemetry protocol has been a moving target, so I ensured that we are implementing the most recent standard from the avionics team. However, the protocol is going to change again in the next week or two, so this work isn't finished.
 	\item \textbf{Problems: }
 	Getting the 3D model scaled took a little longer than I expected, and the telemetry protocol is changing again, so progress was a little slow this week, but there are no significant issues.
@@ -1075,17 +1075,17 @@ We had our test launch this last weekend and it went great. Our telemetry was mo
 	We had a hiccup with the sustain-er GPS (this was on the ECE team's side). While we were out there we created a plan for refactoring it with the ECE team.
 	\item\textbf{Answers to Questions: }
 	If you were to redo the project from Fall term, what would you tell yourself? If I was to redo the project, I would definitely work more closely with the ECE team. They had to write a considerable amount of code that they were not expecting. It would have helped a lot if we had known that from the beginning.
-	
+
 	What's the biggest skill you've learned? The biggest skill I learned was how to work in a large team of around 30 people. The amount of communication that has to happen is considerable.
-	
+
 	What skills do you see yourself using in the future? The skills I would use were working in a large team, as well as a small sub team. The technical writing skills will definitely follow me. Everything that I have learned about rockets since the beginning of this project, especially when it comes to the visualization of its data.
-	
+
 	What did you like about the project, and what did you not? I did not like having to rely on another sub team to make sure we could communicate with the rocket. The telemetry protocol kept changing. I enjoyed watching the rocket launches and seeing the visualization update in real-time.
-	
+
 	What did you learn from your teammates? I learned quite a bit about node.js, telemetry, and rockets.
-	
+
 	If you were the client for this project, would you be satisfied with the work done? I think I would be satisfied. This is the first year that the electronics and communication with the rocket has worked.
-	
+
 	If your project were to be continued next year, what do you think needs to be working on? For next year, I think that if they could have a live version of this website application with some serious security for launch codes, it would be great. Also, they could add a user interface for uploading height maps for areas that they will be launching from as well as satellite imagery. Uploading information about each sub team and possibly resume information would be good for competitions.
 \end{itemize}
 
@@ -1100,31 +1100,31 @@ We had our test launch this last weekend and it went great. Our telemetry was mo
 	Right before the flight the Sustainer went through all the stages and put itself into low power mode which stop sending us a signal, because of that we didn't get any data back from it.
 	\item\textbf{Answers to Questions: }
 	If you were to redo the project from Fall term, what would you tell yourself?
-	
+
 	Make sure all the software and/or coding is what the client and sub-teams is what is wanted and need. Also check with all sub-teams to see if there is any coding that they are going to be doing later on to see what their overall goal or plan is for it. We maybe able to help with the planing for it.
-	
+
 	What's the biggest skill you've learned?
-	
+
 	The biggest skill I learned was to work with other types of engineers outside of computer science and learning from them. Being in a multidisciplinary project goes a long way especially for me. Learning the mechanical and the electrical components of rocketry no matter how large or small will go a long way in my career, working in Aerospace.
-	
+
 	What skills do you see yourself using in the future?
-	
+
 	Honestly the skill I see myself using more in the future is adaptability. The reason why I do not put a technical skill here is because of the fact technical skills depend on what you are doing. One day it may be C or node or openGL but if you are adaptable you can be able to adjust and use these technical components to your liking.
-	
+
 	What did you like about the project, and what did you not?
-	
+
 	I loved that we were doing software for a rocket. Space and flight is my passion and I did not care what it was as long as I had a part in it. What I honestly did not like was how it felt like it was the Mechanical Engineers and the rest. I felt like even if we were not there they would not even care.
-	
+
 	What did you learn from your teammates?
-	
+
 	I learned it takes a whole team to get a project this size done. For example Al and I are not artistic at all and if it was not for Natasha our software would of looked like a table and a graph. It probably would not have looked as beautiful as it did. Also both of them taught me a lot about myself personally how to grow up. I can act like a child sometimes but I learned when to be more professional and when I can be a child.
-	
+
 	If you were the client for this project, would you be satisfied with the work done?
-	
+
 	I would be more than satisfied with this project. We not only are able to fine both stages of the rocket but we allow all the sub-teams to hook up to WiFi so that they do not have to have one computer to see what is going during flight. This has been a problem in the past. We tested this at the test launch and 10 plus devices can hook up but we know more can do it. We will stress test before the competition for 30 plus.
-	
+
 	If your project were to be continued next year, what do you think needs to be working on?
-	
+
 	If the EE can get the electronics working for full control of the rocket which includes separation of the stages, re-ignition, and launching of the parachutes. With this happening we can upgrade the 2D graph so that it let mark when these events happen. Also with the 3D Map we can show the separation of the stages as well.
 \end{itemize}
 
@@ -1139,32 +1139,32 @@ We had our test launch this last weekend and it went great. Our telemetry was mo
 	\item \textbf{Problems: }
 	Writing unit tests for embedded code is hard. You can't just call printf when something goes wrong and check the output. We have developed a system where we run the avionics firmware on a slightly different device that has a serial connection so we can view some results over the serial terminal.
 	\item\textbf{Answers to Questions: }
-	If you were to redo the project from Fall term, what would you tell yourself?
-	
-	We needed to work with the ECE team much earlier than we did. First there, were some miscommunications about what parts of the code would be the responsibility of the software team (us) and which would be the responsibility of the ECE team. This misunderstanding resulting in a lot of code being written at the last minute, and I'm still not happy about the quality of this code. Second, even for the code that is not our responsibility, the ECEs could utilize us much more effectively. Software engineers are trained to design and test large software systems, and although the ECEs are fine programmers, they are not software engineers. I think we should have reined in our requirements in order to spend time lending our skills to the ECE team.
-	
-	What's the biggest skill you've learned?
-	
+	\textit{If you were to redo the project from Fall term, what would you tell yourself?}
+
+	We needed to work with the ECE team much earlier than we did. First there, were some miscommunications about what parts of the code would be the responsibility of the software team (us) and which would be the responsibility of the ECE team. This misunderstanding resulting in a lot of code being written at the last minute, and I'm still not happy about the quality of this code. Second, even for the code that is not our responsibility, the ECEs could utilize us much more effectively. Software engineers are trained to design and test large software systems, and although the ECEs are fine programmers, they are not software engineers. I think we should have reined in our requirements in order to spend time lending our skills to the ECE team.\\
+
+	\textit{What's the biggest skill you've learned?}
+
 	After the aforementioned issues with the ECE team, I believe that the biggest skill I've learned is how to effectively work in a large, multidisciplinary team. I found that a lot of the electrical, computer, and mechanical engineers don't know what we do or what we can bring to the table, so it's important to make sure that our skills are known.
-	
-	What skills do you see yourself using in the future?
-	
+
+	\textit{What skills do you see yourself using in the future?}
+
 	I will definitely use my experience working with interdisciplinary teams in the future. At my future job at Garmin, I'll be working on a product that is designed and built entirely on-site, from the hardware, to the operating system, to the application. Being able to work effectively with different types of engineers will be invaluable. Also, I got a lot of really great practice using Git.
-	
-	What did you like about the project, and what did you not?
-	
+
+	\textit{What did you like about the project, and what did you not?}
+
 	The best part of working on the rocket is that it is something that I am personally invested in. The rocket is not some corporate project that I'm working on for free, it's the product of months of hard work of my fellow students. However, because the project is almost entirely run and managed by students, there have been some problems with some inexperienced leadership. Although, in general, the leadership has done a great job, a lot of plans and dates were made or changed at the last minute. Additionally, the software team seemed to be at the end of the proverbial grapevine with it came to receiving information about anything.
-	
-	What did you learn from your teammates?
-	
+
+	\textit{What did you learn from your teammates?}
+
 	My teammates taught me the most valuable lesson of all... The lesson of friendship. Also, Natasha taught me how to do some simple tasks in Blender.
-	
-	If you were the client for this project, would you be satisfied with the work done?
-	
+
+	\textit{If you were the client for this project, would you be satisfied with the work done?}
+
 	Yes. I already know that our client, Dr. Nancy Squires, is very excited to see how the software and avionics work out, because it will allow the rocketry team to track the rocket at much farther distances than was previously possible.
-	
-	If your project were to be continued next year, what do you think needs to be working on?
-	
+
+	\textit{If your project were to be continued next year, what do you think needs to be working on?}
+
 	There is some code that we wrote at the last minute because no one told us they were expecting us to write it. This code controls the physical part of the groundstation. The code lights up lights, sends arming and launch signals, and writes GPS data to the screen. This component of the software is not nearly as well thought out and tested as the rest of the code, and I believe that a team picking up our code next year should take a good hard look at it.
 \end{itemize}
 
