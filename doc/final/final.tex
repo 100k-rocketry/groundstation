@@ -91,28 +91,28 @@
 }
 
 \newcommand{\newconstraint}[6]{
-	\subsection{Constraint} (Author: #1)
-	\subsubsection{Name}
+	\subsubsection{Constraint} (Author: #1)
+	\subsubsubsection{Name}
 	#2
-	\subsubsection{Type}
+	\subsubsubsection{Type}
 	#3
-	\subsubsection{Source}
+	\subsubsubsection{Source}
 	#4
-	\subsubsection{Target}
+	\subsubsubsection{Target}
 	#5
-	\subsubsection{Contents}
+	\subsubsubsection{Contents}
 	#6
 }
 
 \newcommand{\newattribute}[5]{
-	\subsection{Attribute} (Author: #1)
-	\subsubsection{Name}
+	\subsubsection{Attribute} (Author: #1)
+	\subsubsubsection{Name}
 	#2
-	\subsubsection{Type}
+	\subsubsubsection{Type}
 	#3
-	\subsubsection{Purpose}
+	\subsubsubsection{Purpose}
 	#4
-	\subsubsection{Contents}
+	\subsubsubsection{Contents}
 	#5	
 }
 
@@ -126,6 +126,11 @@
 	\noindent See \textit{#2}
 
 	\vspace{.5cm}
+}
+
+
+\newcommand{\subsubsubsection}[1]{
+	\hfill\break\textit{#1}:
 }
 
 \lstset {
@@ -216,7 +221,7 @@
 	\tableofcontents
 	\newpage
 
-\section{Purpose and Goals}
+\section{Introduction}
 	In June 2017, the \ac{OSU} chapter of the
 	\ac{AIAA} will launch a rocket at Spaceport America.
 	This rocket will ascend to one hundred thousand feet \ac{AGL}.
@@ -249,7 +254,7 @@
 
 
 
-	\section{The client}
+	\subsection{The client}
 	The project was requested by Dr. Nancy Squires, who is a senior
 	instructor of mechanical engineering at Oregon State University.
 	In addition to being a senior instructor, Dr. Squires runs many
@@ -257,6 +262,27 @@
 
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 % CHAPTER
@@ -266,15 +292,15 @@
 
 
 
-	\section{Introduction}
+	\subsection{Introduction}
 
 	\index{Purpose}
-	\subsection{Purpose}
+	\subsubsection{Purpose}
 	This document will specify the requirements for the Groundstation (GS) software.
 	It is intended for use by the OSU High-Altitude Rocketry Team.
 
 	\index{Scope}
-	\subsection{Scope}
+	\subsubsection{Scope}
 	GS will gather telemetry from a rocket during flight.
 	While the telemetry is being gathered, it will be logged and displayed graphically in real-time.
 	This software will provide the following benefits to the users:
@@ -287,7 +313,7 @@
 	\end{enumerate}
 
 	\index{Definitions}
-	\subsection{Definitions}
+	\subsubsection{Definitions}
 
 	\begin{itemize}
 		\index{Accuracy}
@@ -344,7 +370,7 @@
 		\item \textbf{Visualization:} Information or data, transformed into an visual context.
 	\end{itemize}
 
-	\subsection{Overview}
+	\subsubsection{Overview}
 	The rest of this document contains specific requirements about the functionality and constraints of GS. This includes
 	the needs of the entire rocketry team, the physical constraints of the system, and the limitations of the launch site.
 
@@ -353,15 +379,15 @@
 	Rocketry Team and describes specific requirements and constraints.
 
 
-	\section{Overall description}
+	\subsection{Overall description}
 	\index{Product perspective}
-	\subsection{Product perspective}
+	\subsubsection{Product perspective}
 	GS will receive data from a serial interface, via hardware and a protocol provided by the avionics team.
 	Due to the launch site not having any connection to the Internet or mobile service, GS will not interact with
 	any outside systems.
 	Additionally, GS will provide a software interface that allows users to view the telemetry,
 	graphically, in real-time.
-	\subsection{Product functions}
+	\subsubsection{Product functions}
 	GS provides two major functions while the rocket is in flight:
 
 	\begin{enumerate}
@@ -370,7 +396,7 @@
 		\item Display of real-time graphical data.
 	\end{enumerate}
 
-	\subsection{User characteristics}
+	\subsubsection{User characteristics}
 	\index{Users}
 	The users of this software will be limited to engineering students and advisors who are part of the OSU High-Altitude
 	Rocketry Team.
@@ -378,7 +404,7 @@
 	Because the software team works closely with the rest of the rocketry team on regular basis,
 	any training necessary will be conducted in-person.
 
-	\subsection{Constraints}
+	\subsubsection{Constraints}
 	\index{Constraints}
 	\begin{itemize}
 		\item Because of the remote nature of launch sites, the software must operate without an Internet connection.
@@ -397,13 +423,13 @@
 	\end{itemize}
 
 	\index{Assumptions and dependencies}
-	\subsection{Assumptions and dependencies}
+	\subsubsection{Assumptions and dependencies}
 	\index{Raspberry Pi}
 	\index{Internet}
 	\index{Raspberry Pi}
 	Groundstation will run on a Raspberry Pi with no Internet connectivity.
 
-	\subsection{Apportioning of requirements}
+	\subsubsection{Apportioning of requirements}
 
 	\begin{figure}
 		\includegraphics[width=\linewidth]{ganttchart.eps}
@@ -415,26 +441,26 @@
 	Although the final rocket launch is on 23 June, all core systems of GS should be finished by the test launch in mid-May.
 
 	\index{Specific requirements}
-	\section{Specific requirements}
+	\subsection{Specific requirements}
 
 	\index{External interface requirements}
-	\subsection{External interface requirements}
+	\subsubsection{External interface requirements}
 	\index{User interfaces}
-	\subsubsection{User interfaces}
+	\subsubsubsection{User interfaces}
 	Users will interact with GS by connecting via a web browser. The Raspberry Pi and other associated hardware,
 	to be provided by the avionics team,
 	will broadcast a wireless network that users will connect to and access GS through a web browser.
 	From this page, users will be able to access the graphical display of the telemetry.
 	
 	\index{Hardware interfaces}
-	\subsubsection{Hardware interfaces}
+	\subsubsubsection{Hardware interfaces}
 	GS will run on a Raspberry Pi broadcasting a wireless network. Users will connect to GS with their personal computers
 	via the wireless network.
 
 	Data is received from a serial interface using a protocol that will be determined by the avionics team.
 
 	\index{System Features}
-	\subsection{System Features}
+	\subsubsection{System Features}
 
 	The stimulus for all specific requirements is receiving a telemetry packet. The specific responses to each telemetry packet are:
 	\begin{itemize}
@@ -450,7 +476,7 @@
 	\end{itemize}
 
 	\index{Performance requirements}
-	\subsection{Performance requirements}
+	\subsubsection{Performance requirements}
 
 	\begin{itemize}
 		\item When a new telemetry packet is received, GS will log the telemetry and update all visualizations in under one second.
@@ -459,7 +485,7 @@
 
 
 
-	\subsection{Design constraints}
+	\subsubsection{Design constraints}
 	\index{Design contraints}
 	\index{Contraints}
 	\index{Raspberry Pi}
@@ -467,18 +493,18 @@
 	At a minimum, this hardware will be a Raspberry Pi 3 model B, which has a 1.2 GHz quad-core 64-bit ARM Cortex-A53 processor
 	with 1 GB of SDRAM memory.
 
-	\subsection{Software system attributes}
+	\subsubsection{Software system attributes}
 
-	\subsubsection{Reliability}
+	\subsubsubsection{Reliability}
 	\index{Reliability}
 	In the event a GS process dies, a new process should begin and continue operation in under five seconds.
 
-	\subsubsection{Robustness}
+	\subsubsubsection{Robustness}
 	\index{Robustness}
 	If GS receives corrupted or otherwise incorrectly formatted telemetry, it should not crash.
 	Additionally, the users should not be able to crash GS from the web interface.
 
-	\subsubsection{Accuracy}
+	\subsubsubsection{Accuracy}
 	\index{Accuracy}
 	GS should not introduce any errors in the telemetry it recieves.
 	Data should be logged and displayed with 100\% accuracy.
@@ -547,10 +573,6 @@
 %	\pagestyle{empty}
 %	\vspace*{2in}
 	\section{Design}
-	\begin{center}
-		\huge
-		Design\\
-	\end{center}
 	
 %	\vspace{5mm}
 	
@@ -560,22 +582,22 @@
 
 	% Uncomment this to make the table of contents	
 
-	\section{Introduction}
+	\subsection{Introduction}
 
-	\subsection{Identification}
+	\subsubsection{Identification}
 	This document will provide and in-depth software design description of the Groundstation software package.
 	
-	\subsection{Date of Issue}
+	\subsubsection{Date of Issue}
 	This document is issued on December 2, 2016.
 	At this time, the design of the software is complete, but no work has begun on the implementation.
 	
-	\subsection{Scope}
+	\subsubsection{Scope}
 	This document will provide details about the Groundstation software package.
 	The concerns of the software will begin when the telemetry is received via the serial port on the Raspberry Pi.
 	Collecting the data from the rocket and converting it into a protocol readable through the serial port is the
 	concern of the \ac{OSU} \ac{AIAA} High-Alititude Rocketry Team avionics section.
 		
-	\subsection{Stakeholders}
+	\subsubsection{Stakeholders}
 	The stakeholders of the Groundstation software package are members of the \ac{OSU} \ac{AIAA} High-Altitude Rocketry Team.
 	The \ac{OSU} \ac{AIAA} High-altitude rocketry team is a group of multidisciplinary engineering students who are working to together to build the rocket.
 	The stakeholders require the ability to:
@@ -586,7 +608,7 @@
 	\end{itemize}
 
 	\index{Structure view}
-	\section{Structure View}
+	\subsection{Structure View}
 		
 	
 	
@@ -879,7 +901,7 @@
 
 	% INTERACTION SECTION
 	\index{Interaction view}
-	\section{Interaction View}
+	\subsection{Interaction View}
 \newentity
 	{Terrance Lee}
 	{PC}
@@ -959,7 +981,7 @@
 }
 
 	\index{Interface view}
-	\section{Interface View}
+	\subsection{Interface View}
 	
 	\newinterface
 	{Natasha Anisimova}
@@ -1025,7 +1047,7 @@
 	{ Our other concern with JQuery is the interface with the user. We want to build our dials, sliders or buttons using JQuery.  The concern is not whether or not it will work, but if it is right for the sub-teams.  We have at least five sub teams plus their members using them.  JQuery has a vast selection of PC controls. If we select the wrong setup for the team it may make it difficult for the teams to use. To counter this, we have to think about usability.  The first thing we should do is find data each team needs from the rocket.  Next find out if they are going to need PC controls. If so, then find out which ones would suit them best through user stories.  }	
 	
    \index{Resource view}
-	\section{Resource View}
+	\subsection{Resource View}
     
      
    \newentity
@@ -1045,7 +1067,7 @@
 		}
 	
 	
-	\section{Revisions}
+	\subsection{Revisions}
 
 
 	\index{Log}
@@ -1172,7 +1194,7 @@ The id field will inform client which part of the rocket this packet comes from,
 }
 	
 
-\section*{Revision History}
+\subsection*{Revision History}
 \vspace{0.5cm}
 \begin{tabular}{l | l | l}
 Name & Section Title & Date\\ \hline
@@ -1185,7 +1207,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	%\allowdisplaybreaks
 	\clearpage
 	\newpage
-	\section{Glossary}
+	\subsection{Glossary}
 		\begin{itemize}
 		\index{Accuracy}
 		\item \textbf{Accuracy:} The absence of errors in the telemetry GS receives, logs, and displays.
@@ -1275,12 +1297,12 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 
 
 
-
-	\section{Web Server}
+\section{Tech Review}
+	\subsection{Web Server}
 	\index{Web Server}
 	This section will describe the various options for the web server. Author: Albert Morgan.
 
-	\subsection{Apache}
+	\subsubsection{Apache}
 	\index{Apache}
 	\index{Web Server}
 	% Advantages:
@@ -1292,7 +1314,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Because each connection spawns a new thread, if the thread serving one connection crashes, it will not affect the other connections.
 	However, because each connection spawns a new thread, the overhead for that thread must be paid for each new connection.
 
-	\subsection{NGINX}
+	\subsubsection{NGINX}
 	\index{NGINX}
 	\index{Web server}
 	% NGINX advantages:
@@ -1305,14 +1327,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	NGINX solves this issue by having one thread serve many connections.
 	This approach reduces the overhead caused by spawning so many threads, and makes NGINX very lightweight and scalable~\cite{nginx-vs-apache-our-view}.
 	
-	\subsection{Lighttpd}
+	\subsubsection{Lighttpd}
 	\index{Lighttpd}
 	\index{Web server}
 	Lighttpd, pronounced ``lighty'', is a web server that is optimized for low memory footprints and fast response.
 	It is optimized for serving a large number of concurrent keep-alive connections, such as serving high-volume AJAX driven web sites~\cite{lighttpd}. Many web sites use lighttpd for static content delivery while using another web server, such as Apache,
 	for dynamic content~\cite{powered-by-lighttpd}.
 
-	\subsection{Conclusion}
+	\subsubsection{Conclusion}
 	All three web servers listed above have advantages for this project.
 	Apache's one-thread-per-connection approach increases stability.
 	NGINX and Lighttpd are both lightweight, which is important for running an application on a low-power system like a Raspberry Pi.
@@ -1321,10 +1343,10 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	For these reasons, we recommend Apache.
 
 
-	\section{Web Backend}
+	\subsection{Web Backend}
 	This section will describe the options for the web backend. Author: Albert Morgan.
 	
-	\subsection{Node}
+	\subsubsection{Node}
 	\index{Node}
 	\index{V8}
 	\index{JavaScript}
@@ -1340,45 +1362,45 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 		
 	Benchmarks show that Node is over 5 times as fast as PHP, even when using just-in-time compilation~\cite{comparing-node-vs-php-performance}.
 	
-	\subsection{PHP}
+	\subsubsection{PHP}
 	\index{PHP}
 	PHP has been around the web since 1994 and is used in over 80\% of web sites today~\cite{history-of-php}~\cite{usage-of-server-side-programming-languages-for-websites}.
 	Given its maturity and wide adoption, there are a lot of packages, documentation, and example available for developers.
 	PHP's primary advantage is the ease in which is can be incorporated into an static webpage.
 	Using PHP tags, HTML and PHP code can be intertwined seamlessly.
 	
-	\subsection{Ruby}
+	\subsubsection{Ruby}
 	\index{Ruby}
 	Ruby is an open source programming language designed for simplicity and productivity~\cite{ruby}.
 	It is well-known on the web as part of the framework Ruby on Rails, which allows for embedded Ruby to be inserted directly into HTML~\cite{getting-started-with-rails}.
 	However, compared to PHP, Ruby on Rails has a steep learning curve.
 	Ruby's syntax can be hard for a beginner to read, and it draws some concepts from functional programming, which can be difficult for a new user~\cite{ruby-on-rails-vs-php-the-good-the-bad}.	
 
-	\subsection{Conclusion}
+	\subsubsection{Conclusion}
 	Node is fast, which is important for the Groundstation server, which will run on a Raspberry Pi.
 	Node also uses an event driven architecture, which is perfect for our software. Data will be received at regular intervals and need to be pushed out the clients quickly. For these reasons, we recommend using Node.
 
 
-	\section{Logging}
+	\subsection{Logging}
 	\index{Logging}
 	\index{Telemetry}
 	\index{Data}
 	This section will describe how the telemetry will be stored. Author: Albert Morgan.
-	\subsection{Raw data}
+	\subsubsection{Raw data}
 	\index{Raw data}
 	The simplest logging method is to save the raw data stream to a file as it comes in.
 	This method would be very low cost, in terms of development time, processing, and memory usage.
 	The data would simply be read from the serial port and saved to a file, where it could be reconstructed at a later time.
 	Saving the data at this point, before any processing is done, will reduce the chance of any corruption.
 	
-	\subsection{JSON}
+	\subsubsection{JSON}
 	\index{JSON}
 	\ac{JSON} is a data format that is easy for both machines and humans read and write.
 	The telemetry may be stored after it is transformed from its raw form from the serial port to \ac{JSON}.
 	The server will already be converting the raw data to \ac{JSON} in preparation to send it to the client, so there will be no additional overhead in the conversion.
 	However, it is likely that the \ac{JSON} data will take up more space than the raw data due to additional formatting, so it will take up more space in the storage media~\cite{json}.
 	
-	\subsection{Database}
+	\subsubsection{Database}
 	\index{Database}
 	\index{SQL}	
 	Storing the telemetry in a database as it comes in will allow for fast random-access reading and writing of the data.
@@ -1386,7 +1408,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	For example, the server could send the client only data that was generated in the last 2 minutes, or data that comes off of one particular sensor.
 	Data could easily be retrieved using queries in a language such as SQL.
 	
-	\subsection{Conclusion}
+	\subsubsection{Conclusion}
 	Because the system only needs to store data from a single launch, the size of the data set will be relatively small.
 	The overhead of sending all of the data would be minimal, so the benefits of using a queryable database would be small.
 	In the event that the system goes down, it would need to start back up again and begin operation very fast.
@@ -1394,11 +1416,11 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Additionally, if the data is stored in \ac{JSON} format, the server would not need to keep the entirety of it in memory to serve it to a connecting client, freeing up resources on the Raspberry Pi.
 	For these reasons, we recommend that the data be logged after it is converted into \ac{JSON} format.
 
-	\section{Data Visualization}
+	\subsection{Data Visualization}
 	\index{Data Visualzation}
 	This section will describe the various options for the data visualization. Author: Natasha Anisimova.
 	
-	\subsection{2D-Representation}
+	\subsubsection{2D-Representation}
 	2-dimensional representations of maps are usually equal in the x and y dimensions~\cite{2d-is-better-than-3d}. 
 	Graphs and charts are representations that most users are comfortable with, but they can also be a little dull.
 	For displaying the location of a land-bound vehicle or person, a 2D graph is useful~\cite{2ds-company-3ds-a-crowd}. 
@@ -1407,7 +1429,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	The most important aspects of the software project are to find the rocket's location in the end and to be able to tell 
 	if it reached the team's one-hundred-thousand-foot goal. 
 	
-	\subsection{3D-Representation}
+	\subsubsection{3D-Representation}
 	2-dimensional topographic maps are hard to read if one has not had a lot of experience with them. 
 	Considering that most of the team will be mechanical engineer,s and no earth science majors will be participating, a 
 	3-dimensional map makes more sense. 
@@ -1416,14 +1438,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	The extra time that is put into the visualization makes it more appealing to the readers~\cite{evaluating-the-effectiveness-of-2d-vs-3d-trailhead-maps}. 
 	The 3D representation is easy to visualize and understand ~\cite{3d-represenation-for-software-visualization}.
 	
-	\subsection{Numerical Display}
+	\subsubsection{Numerical Display}
 	A numerical display is often used when looking for the longitude and latitude of a specific point on a map. 
 	It would also be useful when displaying the highest altitude of the rocket ~\cite{data-display}. 
 	The numerical display is a number that would constantly be reviewed and needed. 
 	A graph can display the data, but it would still take a second to get that information. 
 	Having a table will show all the most crucial aspects of the project with the values would make the webpage much more usable.
 	
-	\subsection{Conclusion}
+	\subsubsection{Conclusion}
 	3D visualization for the location of the rocket as well as a small numerical display is the best way to go. 
 	Professor Mike Bailey has created software that can create and extract the topology of a certain area, 
 	making it much more manageable. 
@@ -1431,11 +1453,11 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	The images for the area can be pulled from NASA's website, and from there they can be texture mapped to the topology. 
 	The numerical display will be used to give a more accurate and direct way of giving the data to the users. 
 	
-	\section{User Interface Interaction Model}
+	\subsection{User Interface Interaction Model}
 	\index{User Interface Interaction Model}
 	This section will describe the various options for the user interface interaction model. Author: Natasha Anisimova.
 	
-	\subsection{Unity}
+	\subsubsection{Unity}
 	\index{Unity}
 	Unity 3D is an engine, not so much an application. 
 	Groundstation software is going to be used by about thirty to forty people, if not more, and most of them would not have the
@@ -1443,7 +1465,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Unity is a game development tool, and since this project is focusing on just creating a useful visualization of the 
 	data that is collected, Unity is not suitable for this particular case ~\cite{unity}.
 	
-	\subsection{OpenGL}
+	\subsubsection{OpenGL}
 	\index{OpenGL}
 	OpenGL has one of the fastest languages to develop with, C++. 
 	Double buffering also solves any problems with the program being in the middle of plotting data and the user getting
@@ -1451,7 +1473,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Instead it shows the old frame until the new one is ready to be displayed. 
 	Unfortunately, OpenGL does not run on the web ~\cite{why-you-should-use-webgl}.
 	
-	\subsection{WebGL}
+	\subsubsection{WebGL}
 	\index{WebGL}
 	WebGL is the Javascript API that allows you to create 3D graphics in a browser. 
 	Three.js is a tool used on top of WebGL, making it easier to create those 3D graphics. 
@@ -1460,7 +1482,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	WebGL is also the easiest 3D application to use, as well as the best tested and documented ~\cite{webgl-best-practices}. 
 	Performance-wise it is also very fast even though programs are written in JavaScript. 
 	
-	\subsection{Conclusion}
+	\subsubsection{Conclusion}
 	\index{WebGL}
 	\index{OpenGL}
 	WebGL is the most fitting choice to go with for this project.
@@ -1473,11 +1495,11 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	WebGL is supported by mobile devices if the software is expanded to them in the future.
 	
 	
-	\section{User Interface Organization}
+	\subsection{User Interface Organization}
 	\index{User Interface Organization}
 	This section will describe the various options for the user interface organization. Author: Natasha Anisimova.
 	
-	\subsection{Paper Prototypes and User Interviews}
+	\subsubsection{Paper Prototypes and User Interviews}
 	In order to understand what are users are most comfortable with, it would be most cost effective and time efficient
 	to create paper prototypes ~\cite{what-is-prototyping}. 
 	A small sample of the High-Altitude Rocketry Team could be taken through a user study where we would try and figure
@@ -1486,7 +1508,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	In some cases the feedback could be implemented quickly into the paper prototypes so that the user could see how it
 	would affect the layout.
 	
-	\subsection{Flight Simulator Displays}
+	\subsubsection{Flight Simulator Displays}
 	A lot of flight simulator games efficiently display the information of the planes' or rockets' location, altitude,
 	velocity, and status.
 	Simulators are often able to do this with various dials on either side of the screen, much like a dashboard of a car.
@@ -1494,7 +1516,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Units and dials would be labeled for clarity. 
 	Colors would be used to help emphasize important goals and perhaps how close they are to being reached.
 	
-	\subsection{Finnish Astronautical Society}
+	\subsubsection{Finnish Astronautical Society}
 	The Finnish Astronautical Society has launch several different rockets since 2011 and successfully displayed the
 	data that they have received from the rockets while they have been in space. 
 	As mentioned on their website, most of the data is streamed to a ground station in real-time using a radio link and
@@ -1504,7 +1526,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	They have considerably more information about all their launches on their website, making it a bit cluttered, but the 
 	content of their website is something that would be useful to follow.
 	
-	\subsection{Conclusion}
+	\subsubsection{Conclusion}
 	For the organization of the user interface it would be useful to pull inspiration from websites or implementations
 	that already exist but also have the freedom of easily changing it and being creative. 
 	The paper prototypes would be useful for making sure that the software is easily tailored in the early stages of the 
@@ -1515,10 +1537,10 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	This would also ensure that they are not shocked or bewildered when seeing the final product before the launch date
 	or on site.
 	
-	\section{Retrieval}
+	\subsection{Retrieval}
 	\index{Retrieval}
 	This section will compare programming languages for retrieving telemetry from the serial port. Author: Terrance Lee.
-   	\subsection{C}
+   	\subsubsection{C}
    	\index{C}
    	The C language has an extensive library which has many choices we can use. 
 	The main one for the sensors is the extensive math.h library. 
@@ -1528,7 +1550,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	used C~\cite{history-of-unix-part-i}.
 	This has allowed many references including the Internet, books, and instructors. C's disadvantage is that it is a very low level language and can be security flawed.
 
-	\subsection{C++}
+	\subsubsection{C++}
 	\index{C++}
    	The C++ library is just as extensive as the C library except that it has made it so that it can be supported in an
 	object oriented programming language. 
@@ -1539,7 +1561,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	That is its disadvantage: no developer can use its entire set of code that C++ provides.
 	It would take an extremely long time. Just like C, there are many resources for C++ out there if we run into a problem.
 
-	\subsection{Python}
+	\subsubsection{Python}
 	\index{Python}
    	The Python library is very extensive. 
 	The new Python version 3.6 has about 37 main libraries which is sub-sectioned so that when you program you can be more specific~\cite{the-python-standard-library}.
@@ -1551,7 +1573,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Not many companies have given it a chance yet, and it has not had a big breakthrough.  
   
    	
-   	\subsection{Conclusion}
+   	\subsubsection{Conclusion}
    	All of these options are great. They all have extensive libraries and have great references. 
 	If we run into any issues we have plenty of references online, as well as books and actual people we know that we can connect
 	with and speak to about it. 
@@ -1568,31 +1590,31 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	With the amount of resources and references that are available to C, if we have an issue we should be able to find the solution
 	to our problem quickly so that we do not get stalled on it for long.  
     
-    \section{Interaction Modes}
+    \subsection{Interaction Modes}
     \index{Interaction Modes}
  	Support needs to be given for an interaction mode, PC or mobile, so that the High-Altitude Rocketry team can see the data. Author: Terrance Lee.
 
-   	\subsection{PC}
+   	\subsubsection{PC}
    	\index{PC}
    	The PC interaction mode is the most available to the teams. It has the largest screen size and it has the most
 	flexibility when coding. The disadvantage with the PC is that it is larger than mobile so the team will have to carry it around. 
 	It can use up more power than the mobile too, but the battery can be more robust.
 
-   	\subsection{Mobile}
+   	\subsubsection{Mobile}
    	\index{Mobile}
    	The mobile mode is also available to most of the people on the team as long as they have a smart phone. 
 	The mobile option will give them a lighter option to carry around and will not waste as much power. 
 	The disadvantage is that it will have a smaller screen and we have less flexibility when coding.  
 	We will not have cell service when we are out at location.
 
-   	\subsection{PC and Mobile}
+   	\subsubsection{PC and Mobile}
     \index{PC}
     \index{Mobile}
     The third option is using both the PC and mobile. 
 	With this option we will have all the advantages of both. 
 	We will still have a disadvantage which is that we will have to program in multiple languages and formats. 
 
-   	\subsection{Conclusion}
+   	\subsubsection{Conclusion}
    	With the PC, once the team gets the information they will be able to save it right there on their team computers and move it
 	easily through USB or other devices. 
 	With mobile, our biggest issue is not the programming but the lack of cell service.
@@ -1609,14 +1631,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	are compatible with. 
 	That should not be that big of an issue because we only need to have the computers on for launch and test launch.
 	
-    \section{Toolkit to generate the User Interface (UI)}
+    \subsection{Toolkit to generate the User Interface (UI)}
     \index{User Interface}
     \index{Toolkit to generate the User Interface}
  	For the toolkits to generate the UI, the options are Prototyping toolkits, jQuery UI, and the Dojo toolkit.
 	These are all part of the top ten JavaScript Web UI Libraries, Frameworks and Toolkits~\cite{10-javascript-web-ui-libraries-frameworks-and-toolkits}.
 	Author: Terrance Lee.
 
-   	\subsection{Prototype UI}
+   	\subsubsection{Prototype UI}
    	\index{Prototype UI}
    	Our first option is the Prototype UI toolkits. 
 	Their advantages are that they are reliable and have the functionality for our purpose. 
@@ -1627,12 +1649,12 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	features~\cite{pros-and-cons-of-four-prototyping-tools}.
 	One big advantage is that ease of use due to its drag and drop feature.
 
-   	\subsection{jQuery}
+   	\subsubsection{jQuery}
    	\index{jQuery}
    	The second option is jQuery. jQuery is free to use, easy to use, and has great documentation.
 	One disadvantage with jQuery is that it has limited functionality in some cases~\cite{jquery-disadvantages-and-advantages}.
 
-   	\subsection{Dojo}
+   	\subsubsection{Dojo}
    	\index{Dojo}
    	Our last option is the Dojo toolkit.
 	The Dojo toolkit is under the academic free license version 2.1 so the license is free~\cite{dojo-toolkit-license}.
@@ -1640,7 +1662,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Its disadvantages are that it does not have great documentation and functionality for our purpose.
 	Dojo has a great framework, but what we need is something with a good library.
 
-   	\subsection{Conclusion}
+   	\subsubsection{Conclusion}
      	They seem to all have good advantages. 
 	Prototype toolkits are for more professional work.
 	If you were doing a project and you could afford one of the high-end toolkits they seem like the way to go.
@@ -1650,10 +1672,10 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	The limited functionality is a disadvantage only in some cases.
 	We believe that we should not run into that issue because we just need it for some of its basic features.
 	
-	\section{Web Server Revision}
+	\subsection{Web Server Revision}
 	This section will describe revisions to the web server technology. Author: Albert Morgan.
 
-	\subsection{Node}
+	\subsubsection{Node}
 	\index{Web server}
 	\index{Node}
 	Node~\cite{node} has a built in web server.
@@ -1666,7 +1688,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Finally, using Node instead of another technology means less hassle with installation.
 	Using Node instead of a separate web server technology means that there will be less components for our end-users to install.
 
-	\subsection{Revised Conclusion}
+	\subsubsection{Revised Conclusion}
 	Because we don't need the flexibility of Apache or the scalability of NGINX, we have decided to use Node for our web server.
 	Groundstation is designed to be installed and deployed by other engineers in an environment which would not have access to the Internet.
 	This means that if anything goes wrong, support may be hard to get.
@@ -1675,14 +1697,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	``Install node, download the repository, and type 'npm start'.''
 	For these reasons, we have decided to use Node for the web server.
 
-	\section{Logging Revision}
+	\subsection{Logging Revision}
 	\index{Logging}
 	\index{CSV}
 	\index{Comma-separated values}
 	\index{JSON}
 	This section will describe revisions to the logging system. Author: Albert Morgan
 
-	\subsection{Comma-Separated Values}
+	\subsubsection{Comma-Separated Values}
 	Comma-separated values, or CSV, is a simple file format in which a row of data is stored as individual datums separated by columns.
 	This format has many benefits.
 	First, it is easy to read.
@@ -1691,7 +1713,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Keeping the logged data in a file format that is easy to work with will make post-launch analysis of the data much easier.
 
 
-	\subsection{Revised Conclusion}
+	\subsubsection{Revised Conclusion}
 	We initially chose JSON to log the launch data.
 	JSON would make it very easy to import the data into a Node object,
 	making it much easier for the web server to work with the data.
@@ -1705,10 +1727,10 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Considering the ease of working it CSV and the ability to use applications such as Microsoft Excel to work with the data,
 	we have decided to use a CSV file for the log.
 
-	\section{Retrieval Revision}
+	\subsection{Retrieval Revision}
 	This section will describe the revision of the retrieval.  Author:  Terrance Lee
 	\index{Retrieval Revision}
-	\subsection{Node}
+	\subsubsection{Node}
 	\index{Node}
    	Node.js is an open source platform.  Node.js package ecosystem, npm, is the largest ecosystem of open source libraries in the 
 	world~\cite{node}. Node js is written javascript and simplifies how to recieve data as well as to display it.  Node allows us
@@ -1716,7 +1738,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	asynchronous, event driven, highly scalable, no buffering and it is open source.  A disadvantage of Node is that it does not
 	support multithreading programming. 
 	
-	\subsection{Conclusion Revised}
+	\subsubsection{Conclusion Revised}
 	\index{Retrieval Revised}
 	We decided that to use Node.js for retrieval.  The main reason is that we are using Node.js for our server and we want to use
 	the minimumn amount of languages for this project.  Luckly Node is flexible enough that we can use it for both our server and
@@ -1725,7 +1747,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	there is no buffering those two advantages are what we really need during retrieval of the data during flight.
 	
 	
-	\section*{Revision History}
+	\subsection*{Revision History}
 
 	\begin{tabular}{l | l | l}
 	Name & Section Title & Date\\ \hline
@@ -1766,10 +1788,10 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 \section{Weekly Blogs}
 
 
-\section{Development Log Fall 2016}
+\subsection{Development Log Fall 2016}
 
-\subsection{Week 3}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 3}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: For the following weeks we are hoping to communicate more with the Electircal Engineers so that
 		we know what type of equipment we have to work with. Another bonus is that we will be getting recruits that could
@@ -1780,7 +1802,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: Knowing that we would not have Wi-Fi connection at the site, we would have to create our own
 		solution as to how we were going to get the software to everyone on the team.}
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	The plans for the coming week are to:
@@ -1793,14 +1815,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	Git is an amazing tool, but it does not excel in fast, remote, simultaneous collaboration. Compounding this with the large size of the rocketry team has made it difficult to produce the documentation in a timely manner.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }Next week we should meet a couple of more underclass men that couldn't make it to the meetings last week. Also we hope to get a little bit more precise information from each team. They should know more about the competition, materials, and so on that pertains to us. I personally will be joining the AIAA by the end of this week because they are one of our main sponsors plus they are helping me get my class one certification. Also meeting our TA for the first time next week.
 	\item \textbf{Progress: }This week we were able to finish our problem statement. Do to my previous plans I had the job of redoing our abstract from when we had another group read our abstract and read it. I also did some proofreading and had the ability to allow someone who knows nothing about computer science or rocketry read it. They were able to understand what we were trying to get a crossed with our problem statement. We got a general idea of what each team from the project wants from us software wise. What the teams needs and their wants. That way we have primary and secondary objectives.
 	\item \textbf{Problems: }I personally had some issues with some prior engagements. So I wasn't able to contribute as much until late Wednesday. That shouldn't happen again. My teammates were great to help with that. I had some issues with GitHub. I haven't had to use the command line ever. I am used to using source tree but I noticed I have more control with the command line. Keeping up with all the information of all the teams for the project is tough. They have information that can help us understand what is good for designing the software even if we aren't working directly with them. That's why it is good to know the verbiage of aerospace, rocketry, mechanical engineers and electrical engineers. I don't need to know everything but I should know at least what they are speaking so that I am not asking them to explain everything every time we have a conversation.
 \end{itemize}
-\subsection{Week 4}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 4}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	At the moment we have decided to create proof of concepts each week that we and the recruits will
@@ -1811,7 +1833,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	So far we are unsure of how the Avionics team will be formatting the data and what protocol they
 	will be using.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	The plans for the coming week are to:
@@ -1827,14 +1849,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	No particular problems this week, but after doing some research about application/web server integration, there appears to be a lot of different ways we could design our architecture, and I'm not sure how to decide which one is best for us.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }We were going to ask the team leads for some glossary terms and Dr. Squires for requirements. With the glossary terms we were going to take the ones that we felt pertained to our document and use them.
 	\item \textbf{Progress: } We came to agreement that we needed to speak to get some terms from the whole team for the glossary because this wasn't just a CS project. Since this a project that takes collaborate of teams to succeed in this project we should need some of their terms too.
 	\item \textbf{Problems: }After Speaking with Dr. Winters she said that our problem statement was at what she called level 2. That we needed to be just a little be higher on our overview to where we started. I had also ran into our TA and had him look at our problem statement for formatting errors since he has been an instructor to make sure we weren't doing anything wrong there. He said it was fine and gave me some feedback about the problem statement but it was the same as Dr. Winters.
 \end{itemize}
-\subsection{Week 5}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 5}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We will have to finish the requirements document and have a separate meeting for the recruits.
@@ -1844,7 +1866,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Researching how to create a Gantt chart for free took a lot more time than expected. We also were
 	having a problem with boring our recruits with senior design work, so we created a separate time to meet with them.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	The plans for the coming week are to:
@@ -1857,7 +1879,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	It was a crazy week with the career fairs, and we almost didn't get everything done that we needed to. We managed to pull through, though.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Next week do a little more research for the final product of the requirements document. This way it will be clean and concise. When that is finished start thinking about the next document if we have time.
@@ -1866,8 +1888,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	The requirements document was more difficult then I thought it would be. Since we are getting request from other sections of the team. We have to decipher what should and what should not go into this. Also it makes you actually think about what needs to go into something that needs to work not just for you or your team but for a whole project on a big scale. Since this is something that no other collegiate team has done we don't have much to go with so we are thinking about this should work at this moment but we may research something later and it may not work later. It kind of sticks a little bit in the back of your mind is this a waste of time or is this the right thing that we are doing. The nice thing about research type things like this you will never know until you try.
 \end{itemize}
-\subsection{Week 6}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 6}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	GS is the name of our software. I am planning on creating some kind of logo for it that way we can put it up into our web application.
@@ -1876,7 +1898,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	We do not have a lot of time left before the test launch.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We've been so busy with the requirements document the last couple weeks, I have no idea what we are going to bring to the meeting on Monday. The current plan is to make a plan.
@@ -1885,14 +1907,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	The requirements document needed extensive revisions, and I think we could have used another week to make it even better. We don't have a customer who dictates exactly what they want, so we had to make a lot of decisions about where to take the software before we could write the requirements for it.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }Next week we are going to do more research on the software as well as the parts that we are in particular charge of for the technical document.
 	\item \textbf{Progress: }We finished our requirements document this week. I originally had to take care of the availability, reliability, and Design constraints. We came to an understanding that we didn’t need availability and to shorten the reliability to what it’s base of what needs to really do. Natasha came up with a beautiful Gantt chart. We also came up with a name for our software too which we are all really happy about. We used the extra day to proofread our document to make sure we had it in order too.
 	\item \textbf{Problems: }I think the biggest issue with the requirement document was trying to choose what was needed and what wasn’t need for our project. Our project is a little different because we get requirements that there one week but then the next week we find out that is not going to work and we have to change it. So we had to generalize what is going to needed.
 \end{itemize}
-\subsection{Week 7}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 7}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Up until Monday we will be finishing the technical document and after that we will be moving on to the design document. So far we have a lot of ideas from the team with the user stories. There will be several stretch goals we can pull from them but some that we can actually implement.
@@ -1901,7 +1923,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	We have also found out that getting to 100k ft will not be a challenge anymore from the ME teams. Our problem now is staying under 135k ft. It sounds like that will not be too much of a problem considering the fact that weight can always be added to slow down the rocket. Due to the overshot we also have to account for that when considering the type of data, we will still be receiving at that height. Thankfully we can still come up with an estimated altitude, velocity, and location from the other sensors.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This week we will work on the technical review and start making some decisions about the components we will use in our software. We also need to start making some decisions soon so we can keep the interest of the rest of the people in our team.
@@ -1912,7 +1934,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	There were no problems this week. The technical review is a straightforward document and I do not anticipate any problems.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	I want to finish the technical document this weekend so that we can look forward to the design document phase. I believe that will be really interesting with this team I really cannot wait to see what we come up with.
@@ -1921,8 +1943,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	The main problem that I have ran into is the research on retrieval. The reason I say that is because I am looking at the different languages and there are so many different ways that people code. I am just trying to find which one would be the best in this case.
 \end{itemize}
-\subsection{Week 8}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 8}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This Monday we are going to have to make sure we agree with everything that is in the technical document so what we can actually start programming. Also a lot of work needs to go into how we will be able to calculate the rocket's location based off the other sensors on the rocket. The GPS signal will be cutting out during the initial launch and after it reaches a certain height. I want to simple create demo with WebGL and put it up. This would be a good little test to see if everyone on the team has browsers that support WebGL. We also have a chance to get our capstone group interviewed and filmed by Rachel. Kirsten Winters sent me an email about the opportunity and now we are waiting on the okay from Dr. Squires.
@@ -1931,7 +1953,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	We did have a problem with working on the technical document and making sure that it flowed. Also if we start earlier on it, it would help with making sure that we are all on the same page. I definitely need to work on putting up a draft of my work early on so that the rest of the group knows what I am thinking.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This week we need to begin work on the design document. The design document is very precise and complete, and I anticipate that this document will be a lot of work, so we should get started early. Additionally, we finally need to make some decisions about the technologies we are going to use, so we need to have a discussion as a group to finalize these decisions.
@@ -1942,14 +1964,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	We had problems with this week with last-minute work that didn't follow the existing template, and also from lack of communication. We need to set up a more rigorous method for quality assurance with our documents. I believe that I need to personally start the documents early and set up the sections for people to fill in to prevent situations where I have to manually edit other people's work to conform to standards in the future.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }Next week to catch up with my team from everything I missed with being out of town. Also I am going to recommend that we have more than one meeting a week while working on this design document since our meeting is so early during the week.
 	\item \textbf{Progress: }We finished the technical document this week. We are now onto the design document. Since I missed class on Tuesday from being out of town and missing our meeting with our TA I made an extra appointment with him. I went over a what I missed and how should the design document be approached. I wanted to make sure that this is done well so that we go into the programming part of this with a good design and we have less debugging.
 	\item \textbf{Problems: }I had an issue with having a interview in another state but I feel that with these more precise documents that one meeting a week isn't enough. We had some issues with the technical document that due to being out of town that I haven't been able to speak to my team about but I feel if we have more meetings to go over the design document as we work on it we can fix those issues.
 \end{itemize}
-\subsection{Week 9}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 9}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This last Monday we went over what should be in the design document, making sure to cover what we had already written.
@@ -1975,7 +1997,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	Splitting up the work seems like the most difficult thing. Also it being Thanksgiving break it is hard to know when everyone is free or available to work on the assignment.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This week we are going to hammer out the design document, as well as any other things we need to do. We have a pretty good idea of what the design is going to be, but we may change our mind as we start writing it, so it's important here to be flexible.
@@ -1984,14 +2006,14 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	Due to the nature of the design document assignment description, I'm still not sure exactly how we are going to divide the work up. It would be fairly trivial to just divide the work evenly, but because we all have to do the sections that we did in the technology review, some elements, such as relationships between two different technologies that were described by two different group members.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }As I have started early on the design document and have read the template a little more in detail. It seems that some of the design viewpoints are not fit for certain components and we should talk about this on our Meeting with our TA on Monday as well as our team meeting.
 	\item \textbf{Progress: }This week we broke down the design document before the Thanksgiving Break. That way we knew which areas of the document we were going to use and could get an early start on it. We did notice that not all components have the same areas. I have started some research and a rough draft on this document. We ran into an issue on the last one and I do not want us to run into the same thing again so I started early.
 	\item \textbf{Problems: }As I read over our technical document and have read over the IEEE design document I have noticed that some of us are going to be writing more than others. I know that this is supposed to be split up into an individual sections but it does not seem fair that way. I do not think that if I finish early that I should not be able to help my other team members finish there component if they need it. I feel that this is what teams are here for.
 \end{itemize}
-\subsection{Week 10}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 10}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Now that we have the Design Document out of the way, we can focus on the progress report. I got a very simple outline of what it will look like in PowerPoint but we still have a lot of work to do. The weekend will be dedicated to finishing that up as well as studying for final exams. Over the break I want to spend a lot of time creating the 3D environment that will be hosted on our website for the launch/tracking of the rocket.
@@ -2000,7 +2022,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	Finishing the Design was a bit stressful. I had a couple errors with making sure the figures showed up on the right page. Spacing of pages was a big issue. I got a detailed email from Jon, the TA, about how all of that worked so my hope is that it will not ever happen in the future. Now that this term is almost over and future terms will not be as heavily loaded, I want to be able to finish things earlier than we have been in the past.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	The weekly rocket meeting has been canceled, so there is no coordination with the larger group that needs to be done. However, we plan to get at least some work done over the break. We should be able to get at least a basic running version of our software up in that time.
@@ -2011,7 +2033,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	We only finished the design document at the last minute, which lead to some difficulties. If you ever find yourself in a situation where you are making GitHub commits before you have had your coffee, something has gone terribly, terribly, wrong. In order to prevent this in the future, I believe our team should institute a rigid internal timeline that ensures that work isn't being done hours before our deadlines. Over the break, I will look more into GitHub issues to see if they would be a useful tool for this kind of thing.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }Monday we plan to meet up to get the video done for the progress report.
 	We plan on doing some coding over the break. My personal goal over the break is to learn node because I have never used it before and since that is our language for everything I figure it would be good to know how to use it.
@@ -2019,9 +2041,9 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }The design document took longer to finish than expected. Even though we had two weeks to do it. After reading it over the holiday many times it was still confusing and it seemed that we had many questions that never got quite answered. To prevent this we should probably meet up and have a group work session on documents, code, or whatever at least once a week where we are just working on the what needs to be done together in the same room. That way if things change or if we have questions we can solve them with each other. Also we are knocking a big chunk out right there with each other.
 \end{itemize}
 
-\section{Development Log: Winter 2017}
-\subsection{Week 1}
-\subsubsection{Anisimova, Natasha}
+\subsection{Development Log: Winter 2017}
+\subsubsection{Week 1}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We hope to meet up with the rest of the team soon just to find out where everyone is since we last met and make sure that we are all on track. Also, I plan on working on the code and getting the images for the buttons we will have for the buttons and dials we will be using.
@@ -2031,7 +2053,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	Snow days have set us behind in meeting with the entire team but we will have a chance to meet up with them this next Tuesday.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	The plan for this week is to get everybody on track for winter term. Last quarter, we had a lot of written assignments to complete, so it was easy to know what we were supposed to be doing at any given time. This quarter, we will need to be much more proactive and self-directed, so we will need to come up with a solid plan for how we will finish our project.
@@ -2042,7 +2064,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	We usually do our meetings on Mondays, so the snow day on the first day of class and now MLK Jr. Day have set us behind. Hopefully we can meet on the Tuesday after MLK Jr. Day and start some real progress.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Monday Al and I plan on meeting during MLK day to start going over the server and hopefully start some coding. I believe we will also have our meeting with the rest of the High Altitude Rocket team as well.
@@ -2052,8 +2074,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Due to the Snow and the MLK day trying to get our Rocket team meetings has been tough. Monday the normal days for all our meetings. We have been trying to be adjustable so that we can get on schedule and get this thing going.
 \end{itemize}
 
-\subsection{Week 2}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 2}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Currently working on getting a complete 3D model of the rocket from the rest of the team. Some parts are still being changed. Continue working on scaling the 3D environment for the web user interface.
@@ -2062,7 +2084,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	I had a family emergency come up this week. It involved me being away from the university for a few days.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	The one critical part of the software that is still missing is the encoding of the telemetry packet received via USB. We need to communicate with the ECE team to figure out what that is going to be. Additionally, we should be getting some hardware this week that will allow us to run our software on its target platform.
@@ -2071,7 +2093,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	No problems with the software this week. Despite class being canceled on Monday, we managed to have our weekly meeting with everyone there on Tuesday. Scheduling my upcoming wedding around the launch might involve some low-margin-of-error travel plans, but I believe it will work out.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We have a laptop computer that we are getting on Tuesday to use for testing. After speaking with Al he suggested to ask Mr. McGrath for another Raspberry PI because he had a great Idea for testing it and the computer in one place. A type of Endurance testing to make sure if works the program will work for hours.
@@ -2081,8 +2103,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	The main problem this week was the holiday. Almost all of our meetings are on Monday and changing schedules to make meetings to fit around each others schedule so that we could meet with each other and the TA as well with the High Altitude group was very difficult.
 \end{itemize}
 
-\subsection{Week 3}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 3}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	I have a gyroscope and Arduino 101 that we can use for testing. For this upcoming week I plan on getting the height map to display in a web browser and possibly integrate it with what Terrance and Albert have done so far with the interface. Satellite images have proven to be more difficult to find. Professor Bailey agreed to help me since all I have found so far are lithography maps of the area with strange legends. We also have an undergraduate that is doing research on predicting where the rocket will land based off the initial data that we get from the sensors before takeoff.
@@ -2091,7 +2113,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	I do not have the right satellite images for the area but I will be working with Professor Bailey to find them. It also looks like I will be the only one from the CS capstone team that will be able to go and stay for our launch.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This week we got the Raspberry Pi, so we can begin to figure out how we are going to configure the operating system on the final project. Additionally, we should be getting a solid specification for the telemetry protocol from the ECE team this week, so we can begin to build the part of the application that receives that data.
@@ -2100,7 +2122,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	It looks like I may not be able to make the launch. I was told my several different people in the team's leadership that the launch would be on June 23, and I planned my wedding around that date. However, it turns out the launch will be on the 24th, and unless I reschedule my wedding I wouldn't be able to make it back to Oregon in time. This won't affect the timeline of the software, but it is a minor hiccup.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Since we have a Laptop and a second Raspberry PI we are can test parts of the software as we build it to see how robust it really is. Code then test. Code then test. That way we if find a bug we can find it early then later in the program.
@@ -2110,8 +2132,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	I am having an issue with getting the protocol from the ECE team. They said they were going to give it to me on Thursday but they did not send it to me. Luckly I know most of them from being an ECE previously so I was able to ask for it. Hopefully if I do not get it tonight I can get it this weekend.
 \end{itemize}
 
-\subsection{Week 4}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 4}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We will be needing to create the OneNote document this upcoming week and register for the engineering expo. Any revisions that need to be done will be discussed during our Monday meetings. During that time, I am also hoping we will be able to select a team captain. We are planning on getting an SD card as well.
@@ -2120,7 +2142,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	There are a couple problems with trying to test the Web Server at the university over its network. Al talked to Kevin about it and unfortunately it looks like we will be needing to go through the IT department and wait for them to approve us (let us past OSU's firewalls). Since Kevin is on the committee we hope that we have pretty high chances of them granting the permissions for our team.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We got the protocol from the ECE team late last week, so we plan on implementing that soon. Additionally, we finally got a bunch of class related non-code work, such as selecting a team captain, creating a One Note document, and sending team information to the expo organizers.
@@ -2129,7 +2151,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	We had a problem testing the web server on the university Wi-Fi because internal connections are blocked. I believe the simplest way to get around this is to broadcast our own Wi-Fi network to test on. This will be a better solution, anyway, because the final product is designed to run on an isolated Wi-Fi network. This does mean, however, that I will have to haul around more equipment on Mondays, when our team meets.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We got work from the instructors on putting our "paperwork" in one note file. We have not voted on a team captain but I hope by Monday of next week we should have that done. With the Logging we are transferring it to a CSV file. It seem that the rest of team really liked that Idea. Also Natasha said she can work with that as well. I should have that done by Sunday at the latest unless some serious problem shows up.
@@ -2139,8 +2161,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	I believe that their was a problem with One Note. We got an Email from Dr. Winters about holding off on sending her our link. Also Al had an issue with the Rasberry PI not having a micro SD card. He asked Mr. McGrath for one. If he does not have one we are just going to have to pick one up ourselves.
 \end{itemize}
 
-\subsection{Week 5}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 5}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Every Monday we are going to be putting everything that each of the separate branches has, take care of any conflicts, and merge everything into the master branch. This way both sides have an updated version of the project. We will have to revise some documents since several of our design decisions have changed since we wrote the document back in Fall term. I will be added more code over the weekend, unfortunately this week was a bit hectic with exams.
@@ -2149,7 +2171,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	One problem that I have run into is making sure that my code does not have any web dependencies. In the end it seems like most things we can just download but then that means just filling up more memory on the Raspberry Pi.
 \end{itemize}
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This week I have two things I would like to get done:
@@ -2168,7 +2190,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	No major problems, although I'm not sure how we can verify that the USB device connected to the Raspberry Pi is actual data from the rocket, and not someone's phone or something. I don't think this should be an issue, because there should be exactly one device connected: the telemetry receiver.
 \end{itemize}
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	I want to look more into how to setup if a stage stops transmitting. Also work on updating our paperwork that needs to be done. I have a midterm on Monday so I will have to do my updates after that. I want to have them done by Wednesday so if there are any mistakes I have plenty of time to fix them.
@@ -2177,8 +2199,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	The only real issue was with One note but that is because I am not an expert with the online one and also I have not used one note in a while. I think my issues is that I just have not used it in a while and have to get back in the flow of it. My issue was get used to where stuff was and forgetting little things. Besides that nothing really major on the coding side so far.
 \end{itemize}
-\subsection{Week 6}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 6}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	The tables are now updating each time a packet is sent. We have a test launch in March so we will get plenty of data to test with once that happens and see if we have any hiccups in our code. Revisions were made to the technical and design document. We also created a PowerPoint presentation with our progress thus far. OneNote is currently holding all the revisions and brief biographies about all the team members.
@@ -2188,8 +2210,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	The propulsion team has not heard back from the airport about testing there. Unfortunately, this may mess with the test launch dates. We can still use data from previous launches if needed.
 \end{itemize}
-\subsection{Week 7}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 7}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	The ECE team has put a magnetometer on the rocket so it will be easier to know which direction is magnetic North, making sure that the display actual flies in the same direction that the real version does. The rocketry team is planning on doing a test launch soon. This will give us a good idea of what kind of data we will be receiving and what the display will look like. At the same time we can also take a lot of feedback from the rest of the team about our interface.
@@ -2199,8 +2221,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	I had a problem opening the .xtr file but Albert helped me out. Finding high definition satellite images has been quite near impossible of Spaceport America, Truth or Consequences, New Mexico. Due to this I want to just colorize the area based off of purely height data.
 \end{itemize}
-\subsection{Week 8}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 8}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	While waiting for the ECE team to finalize everything, I may work on optimizing the code that I currently have for the WebGL and the layout of the website. Since there is a sustain-er and booster, data will be provided for both but they will not have exactly the same protocols.
@@ -2210,8 +2232,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	The main problem is that the communication protocol is not staying consistent.
 \end{itemize}
-\subsection{Week 9}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 9}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We want begin testing with the actual hardware that will be provided by the avionics team. This will also give me a good idea of what information they are providing so that I know what needs to be displayed in the table. Also, I want to get feedback from the rest of the team about the website so far.
@@ -2221,8 +2243,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	\item \textbf{Problems: }
 	Collecting a large amount of height data is taking a long time. We may just have to make due with what we have now and if we get the rest, use it. Also, the ECE team has been changing up the communication protocol, hopefully for the better though.
 \end{itemize}
-\subsection{Week 10}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 10}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Due to my international graphics conference, I was unable to get much work done. I will be catching up with the rest of the team over spring break and spring term.
@@ -2233,11 +2255,11 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	I have been away this whole week for a conference in Atlanta, Georgia for my other major. I notified my team and professors in advance.
 \end{itemize}
 
-\section{Development Log Spring 2017}
+\subsection{Development Log Spring 2017}
 
 
-\subsection{Week 1}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 1}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	For this next week I need to figure out the scale and load the terrain into the webpage. Colorizing it would be good as well. The Avionics and Recovery Team want to do an integration test soon as well so we need to keep that in mind.
@@ -2247,7 +2269,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Figuring out the longitude and latitude scale compared to miles for the model. It seems like the 3D model is skewed a bit. The east and west were elongated slightly. The webpage needs to be re-organized as well. Having the 3D terrain be the first thing that a person sees would be ideal.
 \end{itemize}
 
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	I have a meeting with Ben Brewster who knows more about networking next week. I want to get systemd implemented into inittab. Get the layout for the line graph layout at minimum if not more so that we can get that setup. Also want to get our final link setup or at least a link setup that we can use for expo so that I have a network that I can use for the line graph setup.
@@ -2258,7 +2280,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 \end{itemize}
 
 
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Over the course of the next week I hope to finish the 3D interface and get it into something resembling its final form. Additionally, the avionics team is ready for integration testing, so I will ensure that our software is ready to interact with their hardware. the protocol has changed since we began to the project, so a few minor changes will need to be made before the software is ready to integrate, but since the framework of the protocol is already in place I do not believe that this will cause any major issues.
@@ -2268,8 +2290,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	We had a minor hiccup when we realized that the Earth is round and one degree of latitude does not equal one degree of longitude in terms of distance. However, some quick and easy trigonometry fixed this issue.
 \end{itemize}
 
-\subsection{Week 2}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 2}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }Getting the atmospheres to be at the correct height will be a problem since everything has to be scaled correctly according to the data that we are receiving. The 3.js transparency works, we just need to make sure that we have all the correct libraries for it and that it is set up correctly in the environment.
 	\item \textbf{Progress:} Originally the terrain that I had created was off in terms of scale to longitude and latitude compared to Google Earth. Al was able to figure out the math behind it and alter it. The terrain also had a distorted height values due to how Blender was adding the modifier for height of the height map image to the flat plane. After speaking to the rest of the mechanical engineers, they said they wanted it to be as close to the realistic area as possible. This lead us to having a quite a flat plane. I have also been working on transparency since that will be useful for showing the different atmospheres that the rocket is going through.
@@ -2279,7 +2301,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 
 \end{itemize}
 
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	I want to have a dynamic graph built by the end of next week and we should be ready to integrate with the log that Al built for the expo.
@@ -2290,7 +2312,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 \end{itemize}
 
 
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This week I'm going to get the 3D model we made loaded into the web interface and ensure that it is scaled correctly by creating some test data that should map to the corners of the 3D model. We can then see whether or not the model is scaled correctly. Additionally, I will keep up with the avionics team to make sure that we are implementing the correct telemetry protocol.
@@ -2302,8 +2324,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Getting the 3D model scaled took a little longer than I expected, and the telemetry protocol is changing again, so progress was a little slow this week, but there are no significant issues.
 \end{itemize}
 
-\subsection{Week 3}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 3}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This weekend we are planning on meeting up with the Avionics team and integrate our work with theirs. I also hope to make the interface a little bit more intuitive, add some more controls and an actual rocket.
@@ -2313,7 +2335,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	I do not have the Arduino so I can only see the data being mocked when with the rest of the team. There is a problem with the table not updating when the user goes to a different part of the website. When the user goes back to the table it is empty. It just starts displaying data from the second that the user goes back to the table, none of the previous data.
 \end{itemize}
 
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We have integration with the electronic team on Saturday. Update our poster and have Dr. Squires to take a look at it. If she approves have the final sent in. Clean up any issues before the code freeze that is coming up. If I finish my part early help my anyone in my group so that we can all finish before the freeze.
@@ -2324,7 +2346,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 \end{itemize}
 
 
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This weekend we are planning to met with the avionics team to do integration testing with their side of the system. There are also some more things to discuss about the final protocol. Later in the week, I hope to smooth the rough edges out of the frontend and get it looking really nice.
@@ -2334,8 +2356,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	The 3D components of the frontend took a little longer to get together than I anticipated, but no major problems.
 \end{itemize}
 
-\subsection{Week 4}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 4}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This weekend there is going to be test launch in Brothers, Oregon. There is a possibility that the rocket will not be retrieved since this is the first time we are testing the recovery with an actual rocket. Luckily the team is prepared to make another board for the Avionics team if that happens.
@@ -2345,7 +2367,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	We had one problem with getting rid of an internet dependencies but after an email it was resolved. We now do not have to worry about creating the line graph that is updating from scratch.
 \end{itemize}
 
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Since I can't make it to brothers I am waiting until Monday to see what data we got back from test launch that we had at brothers. At this point I am going to work on anything that we need to get done for expo. If there is anything major help fix it. Anything minor help fix it. I am going to hold off on the parachute signal until after we have what we need for all our requirements done since that is a extra thing I am doing for the recovery team. Also implement the canvasjs correct platform that we received from them.
@@ -2356,7 +2378,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 \end{itemize}
 
 
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This weekend we are doing a test launch. I am writing this as we are waiting to leave for Brothers, Oregon for the weekend. There, we will launch a rocket similar to the upper stage of our final rocket and ensure that the avionics is functional.
@@ -2366,8 +2388,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Other than the time spent getting everything working with avionics, there were no problems this week.
 \end{itemize}
 
-\subsection{Week 5}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 5}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }This weekend is a huge test launch that most of the HART team will be attending. All the computer scientists in our sub team will be there. I am currently torn between working on the new requirements after code freeze or continuing on with the 3D visualization. Either way, work will continue. Lights and displays on the groundstation (the box full of hardware) is now being integrated.
 	\item \textbf{Progress:  }
@@ -2376,7 +2398,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Huge last-minute changes due to new requirements for locating the rocket. We will be controlling the launch button which requires taking security measures into account. We had designed our software to take lots of data in and be able to handle that in any way, not send data anywhere.
 \end{itemize}
 
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	During this launch on Saturday we are launching our sustainer so I will be able to see how well the live line graph actually works at a higher and faster launch. Also with the new parachute changes that are being put in can be put in next week.
@@ -2386,7 +2408,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	My two midterms and my two quizzes. I had to study for all them took up so much time. I have to thank my great team for their support.
 \end{itemize}
 
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We are leaving to Brothers this weekend for the second test launch. After the launch, I plan on continuing to work on the new groundstation control portion of the code. We have met all of our requirements, and were simply polishing our stretch goals at this point, so I plan on personally halting all work on those stretch goals and working with the avionics team to make sure they are ready for the final launch.
@@ -2396,8 +2418,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	The day before we left for our second test launch, the avionics team revealed to us that they were expecting us to control various aspects of the groundstation. For example, lights, LCD, and the launch button. This is an enormous last-minute change in requirements. We designed our software from the beginning to only collect data and to be extremely stable so that data isn't lost. However, if we are controlling the actual launch codes, our primary concern becomes safety, and the parameters of our entire software package changes. Our software was simply not designed with these concerns in mind, and adding them with one month to go after eight months of work may prove problematic.
 \end{itemize}
 
-\subsection{Week 6}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 6}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 	We got the correct equation for converting the GPS minutes, seconds, into decimals. We now hope to successfully test launch as long as nothing else goes wrong with the power supply.
@@ -2407,7 +2429,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	There were a number of problems that happened with the Avionics Team, as well as weather. There were high winds earlier in the day and even snow. Later in the day the skies cleared though but the team found other errors. One thing I noticed was that the GPS longitude and latitude were being passed as minutes and seconds instead of decimal values like we were expecting.
 \end{itemize}
 
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	This weekend and Monday if needed I plan on doing my part for the video for our midterm progress report and preparing for the expo.
@@ -2418,7 +2440,7 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 \end{itemize}
 
 
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	There is likely to be another test launch next week, after expo. However, there isn't much left for us to do, so I plan on focusing primarily on getting Expo-related tasks done.
@@ -2428,8 +2450,8 @@ Natasha Anisimova & User Interface Revised & 2017-02-17\\
 	Although there were a number of problems with last week's launch, none of them were related to the software that we wrote.
 \end{itemize}
 
-\subsection{Week 7}
-\subsubsection{Anisimova, Natasha}
+\subsubsection{Week 7}
+\subsubsubsection{Anisimova, Natasha}
 \begin{itemize}
 	\item \textbf{Plans: }
 We plan on taking out any additional filters that were in the code for the firmware. Taking this into account, we hope to get the hiccup fixed with the GPS and the timers that the packets were being sent in. The GPS sends packets when it has a connection, when it is below a certain height, and going below a certain speed. Once this is rewritten, I believe our project will be done.
@@ -2454,7 +2476,7 @@ We had our test launch this last weekend and it went great. Our telemetry was mo
 \end{itemize}
 
 
-\subsubsection{Lee, Terrance}
+\subsubsubsection{Lee, Terrance}
 \begin{itemize}
 	\item \textbf{Plans: }
 	Due to some issues with the GPS having to correct itself in mid-flight after apogee and some other issues. We are working with the EE Team to help with their GPS and some of their other code to make sure it is working properly before competition.
@@ -2493,7 +2515,7 @@ We had our test launch this last weekend and it went great. Our telemetry was mo
 \end{itemize}
 
 
-\subsubsection{Morgan, Albert}
+\subsubsubsection{Morgan, Albert}
 \begin{itemize}
 	\item \textbf{Plans: }
 	I will continue to work with the ECE team for as long as I can to ensure that their code is as good as it can be.
