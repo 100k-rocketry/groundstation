@@ -2692,7 +2692,7 @@ The software operated on a piece of hardware developed by the electrical and com
 This hardware includes a radio that receives packets from the rocket.
 The radio protocol that is being used requires some decoding and unescaping of characters, so that is the
 first thing that must be done.
-After the packet is processed and the payload of the packet (the actual telemetry from the rocket) is retreived,
+After the packet is processed and the payload of the packet (the actual telemetry from the rocket) is retrieved,
 this telemetry is sent to another part of the program to extract that information.
 After the data is extracted into a JavaScript object, it is sent to various other parts of the software.
 The logging component keeps a log file open while the groundstation is powered on and writes new line to the log every time a packet is received.
@@ -2782,7 +2782,7 @@ to the present.
 	
 Figure~\ref{gs-home} shows the home screen.
 This screen is the page that is loaded when the user navigates to the web page.
-THe home screen is intentionally lightweight to allow the user to get to
+The home screen is intentionally lightweight to allow the user to get to
 the page they want faster.
 Clicking the various links on the top of the page will navigate to the various views.
 
@@ -2814,7 +2814,7 @@ Hold down the right mouse button to rotate the camera, and use the mouse wheel t
 	\end{figure}
 The table view (figure~\ref{gs-table}) allows the user to view all data that was collected since
 the groundstation was turned on.
-New rows are added to the bottom of the table as packets are recieved.
+New rows are added to the bottom of the table as packets are received.
 In order to prevent browser slow-down, table updating is limited to once per second,
 even if telemetry is being received at a higher rate.
 
@@ -2826,7 +2826,7 @@ even if telemetry is being received at a higher rate.
 	\end{figure}
 The raw view, shown in figure~\ref{gs-raw}, shows all of the most recent telemetry from both the
 booster and the sustainer. All units are in degrees or meters, as appropriate.
-Altitude is listed in meters above sealevel (not groundlevel).
+Altitude is listed in meters above sea level (not ground level).
 ``Raw altitude'' shows the altitude from the barometric sensors onboard the rocket,
 and ``GPS altitude'' reports the altitude from the global positioning system.
 ``Timestamp'' shows the current time in milliseconds since January 1, 1970.
