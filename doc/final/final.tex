@@ -3003,22 +3003,95 @@ with minimal conflicts.
 \newpage
 \appendix[Code Listings]
 
-\begin{lstlisting}[caption=My Javascript Example]
-Name.prototype = {
-  methodName: function(params){
-    var doubleQuoteString = "some text";
-    var singleQuoteString = 'some more text';
-    // this is a comment
-    if(this.confirmed != null && typeof(this.confirmed) == Boolean && this.confirmed == true){
-      document.createElement('h3');
-      $('#system').append("This looks great");
-      return false;
-    } else {
-      throw new Error;
-    }
-  }
+\begin{lstlisting}[caption={Telemetry payload data extraction},label={lst:extract}]
+
+// The offset of the payload
+var offset = 14;
+
+var altitude = data.readUInt8(2 + offset) * 65536;
+altitude += data.readUInt16LE(3 + offset);
+var latitude = data.readFloatLE(5 + offset);
+var longitude = data.readFloatLE(9 + offset);
+var accelerometer_x = data.readFloatLE(13 + offset);
+var accelerometer_y = data.readFloatLE(17 + offset);
+var accelerometer_z = data.readFloatLE(21 + offset);
+var yaw = data.readFloatLE(25 + offset);
+var pitch = data.readFloatLE(29 + offset);
+var roll = data.readFloatLE(33 + offset);
+var magnetometer_x = data.readFloatLE(37 + offset);
+var magnetometer_y = data.readFloatLE(41 + offset);
+var magnetometer_z = data.readFloatLE(45 + offset);
+var gps_altitude = data.readUInt16LE(49 + offset);
+var kalman_altitude = data.readUInt16LE(51 + offset);
+var kalman_velocity = data.readUInt16LE(53 + offset);
+var ematch_status = data.readUInt8(55 + offset);
+\end{lstlisting}
+
+Listing~\ref{lst:extract} shows how the data is extracted from the radio packet.
+The radio uses the XBee protocol API2.
+The payload starts on the 14^{th} bit, so the \texttt{offset} variable skips
+over the header and allows the payload bytes to be referenced in a more readable manner.
+For example, \texttt{2 + offset} represents the 2^{nd} byte of the payload.
+Note that the payload starts at byte 1, not 0, because of the way the protocol was designed by other members of the High-Altitude Rocketry Team.
+
+
+
+
+
+
+
+\begin{lstlisting}[caption={PersistentReadStream class},label={lst:stream}]
+createPersistentReadStream: function (filename, baud, dataCallback) {
+	// If the file doesn't exist, then try again in one second
+	if (!fs.existsSync(filename)) {
+		console.log("Could not open file: " + filename);
+		setTimeout(() => { createPersistentReadStream(filename, baud, dataCallback); }, 1000);
+		return;
+	}
+
+	// Set the device to raw mode and set the appropriate baud
+	spawn.spawnSync('/bin/stty', ['-F', filename, baud, 'raw']);
+	var stream = fs.createReadStream(filename);
+
+	// Stream opened successfully.
+	stream.on('open', () => {
+		console.log("Acquired connection to " + filename);
+		// When we get data, call the data callback.
+		stream.on('data', (d) => {
+			dataCallback(new Buffer(d));
+		});
+	});
+
+	// The stream didn't open correctly, so try again after a small delay.
+	stream.on('error', (err) => {
+		console.log("Stream error: " + err);
+		setTimeout(() => { createPersistentReadStream(filename, baud, dataCallback); }, 1000);
+	});
+
+	// File closed? That shouldn't happen, so try to re-open the stream.
+	stream.on('close', () => {
+		console.log("Lost connection to groundstation.");
+		createPersistentReadStream(filename, baud, dataCallback);
+	});
 }
 \end{lstlisting}
+Listing~\ref{lst:stream} shows the PersistentReadStream class.
+The PersistentReadStream class is a core component of the robustness of our software.
+The Raspberry Pi reads data in through the USB port,
+but it is possible that the connection may be lost if the cable is disconnected or the radio loses power.
+In order to ensure that the software doesn't stop operating because the device temporarily disappears,
+we implemented the PersistentReadStream class.
+After the file is opened, a new event handler is attached to the `close' and `error' events.
+This event handler automatically tries to re-open the file once every second, and when the file is successfully
+opened, the original callback for the `data' event is reattached.
+This process ensures that even if a file is closed or disappears for some reason,
+the software will find it and continue normal operation.
+
+
+
+
+
+
 
 	
 \printindex
