@@ -3029,9 +3029,9 @@ var ematch_status = data.readUInt8(55 + offset);
 
 Listing~\ref{lst:extract} shows how the data is extracted from the radio packet.
 The radio uses the XBee protocol API2.
-The payload starts on the 14^{th} bit, so the \texttt{offset} variable skips
+The payload starts on the 14\textsuperscript{th} bit, so the \texttt{offset} variable skips
 over the header and allows the payload bytes to be referenced in a more readable manner.
-For example, \texttt{2 + offset} represents the 2^{nd} byte of the payload.
+For example, \texttt{2 + offset} represents the 2\textsuperscript{nd} byte of the payload.
 Note that the payload starts at byte 1, not 0, because of the way the protocol was designed by other members of the High-Altitude Rocketry Team.
 
 
