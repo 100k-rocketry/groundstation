@@ -2670,10 +2670,32 @@ We had our test launch this last weekend and it went great. Our telemetry was mo
 \end{enumerate}
 
 
+\subsection{Running}
+The groundstation software should start automatically when the system starts.
+However, there are a number of useful commands to use to control how the operating
+starts and stops the server (Linux only):
 
+\begin{itemize}
+\item\textbf{Restart the server:} \texttt{sudo systemctl restart gs}
+\item\textbf{Stop the server:} \texttt{sudo systemctl stop gs}
+\item\textbf{Start the server:} \texttt{sudo systemctl start gs}
+\item\textbf{Disable the server:} \texttt{sudo systemctl disable gs}
+\end{itemize}
+These commands will change how the Linux operating system handles the server.
+When the server is shut down after issuing the `stop' command above,
+the following command may be used to start the server. First, \texttt{cd} into
+the \texttt{groundstation/server}, and run the command:
 
+\begin{itemize}
+\item\textbf{Manual start (Linux):} \texttt{npm start}
+\item\textbf{Manual start (Windows):} \texttt{npm run win}
+\end{itemize}
 
+On both Windows and Linux, use Ctrl-C to stop the server at any time.
 
+\subsection{User manual}
+After connecting to the 100k-rocketry Wi-Fi network, open any web browser, type '192.168.1.2'
+in the address bar, and press enter.
 
 \printindex
 \bibliography{final}
