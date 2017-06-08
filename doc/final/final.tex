@@ -287,7 +287,7 @@
 	
 	\begin{itemize}
 		\item Visualizing the data in 3D will help create an intuitive understanding of the rocket's trajectory.
-		\iten Even if the rocket can't be recovered, we will know what the highest altitde reached was.
+		\item Even if the rocket can't be recovered, we will know what the highest altitde reached was.
 		\item Tracking the rocket's position will help the recovery team find the rocket faster.
 		\item The custom tracking hardware built by the electrical and computer engineering team has a longer range than existing tracking systems.
 		\item Logging the data in an easy-to-use format will aid in later analysis.
@@ -2624,8 +2624,8 @@ We had our test launch this last weekend and it went great. Our telemetry was mo
 
 
 % INSERT POSTER HERE
-\null\newpage
-\null\newpage
+\newpage
+\section{Poster}
 
 
 
@@ -2634,6 +2634,40 @@ We had our test launch this last weekend and it went great. Our telemetry was mo
 
 
 
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Documentation}
+\subsection{Installation}
+\begin{enumerate}
+
+\item  Install Raspbian Jesse Lite on your Raspberry Pi 3 model B.
+\item  Open a shell on the Raspberry Pi and follow steps 3-9 in that shell. The default Raspberry Pi
+    username is "pi" and password is "raspberry"
+\item  Configure the Raspberry Pi connect to the Internet. The specific steps for this will greatly
+    depend on your specific method of connecting and which network you are using.
+\item  Install git: sudo apt-get install git
+\item  Install Node version 6 and npm. Apt-get may install the wrong version, so a manual install may be necessary.
+    Follow the instructions here: https://nodejs.org/en/download/package-manager/
+\item  From the home directory (/home/pi), Clone or otherwise transfer the 'groundstation'
+    repository to the Raspberry Pi. Repository location: https://github.com/100k-rocketry/groundstation
+    Command to clone: git clone https://github.com/100k-rocketry/groundstation
+\item From the /home/pi/groundstation/server directory, run 'npm install' to populate the node\_modules directory
+\item Copy '/home/pispi/groundstation/system/gs.service /etc/systemd/system
+\item Run 'sudo systemctl enable gs' to enable the groundstation service
+\item Restart the Rasberry Pi. The service should now be started.
+\item Connect the avionics radio's USB cable to the Raspberry Pi.
+\item Open your web browser (supports Chrome, Firefox, Edge, and Safari) and connect to the Raspberry
+    Pi's IP address.
+\end{enumerate}
 
 
 
