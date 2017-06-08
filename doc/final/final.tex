@@ -252,7 +252,7 @@
 	recovery is impossible.
 
 
-	\subsection{The team}
+	\subsection{The Team}
 	The software team is composed of Albert Morgan, who is the lead backend developer,
 	Natasha Anisimova, who lead frontend development,
 	and Terrance Lee, who took charge of system integration and inter-team communication.
@@ -266,7 +266,7 @@
 	and to help build a test suite for the avionics firmware.
 	
 
-	\subsection{The client}
+	\subsection{The Client}
 	The project was requested by Dr. Nancy Squires, who is a senior
 	instructor of mechanical engineering at Oregon State University.
 	In addition to being a senior instructor, Dr. Squires runs many
@@ -275,7 +275,7 @@
 	Students were expected to collaborate and take initiative themselves in building the rocket.
 	
 	
-	\subsection{The task}
+	\subsection{The Task}
 	Dr. Squires asked us to create a telemetry visualization package for the launch
 	of the High-Altitude Rocket.
 	The software team was given a lot of flexibility in how they designed and implemented the project.
@@ -2696,8 +2696,11 @@ On both Windows and Linux, use Ctrl-C to stop the server at any time.
 \subsection{User manual}
 After connecting to the 100k-rocketry Wi-Fi network, open any web browser, type '192.168.1.2'
 in the address bar, and press enter.
+Every time the user navigates to a new page, all data from the time that the groundstation was
+last powered on to the present is sent to the client to allow the visualization to catch up
+to the present.
 
-\subsubsection{Home screen}
+\subsubsection{Home Screen}
 	\begin{figure}[thbp!]
 		\centering\includegraphics[width=170mm]{gs-header}
 		\caption{The home screen}
@@ -2710,7 +2713,7 @@ THe home screen is intentionally lightweight to allow the user to get to
 the page they want faster.
 Clicking the various links on the top of the page will navigate to the various views.
 
-\subsubsection{Line graph}
+\subsubsection{Line Graph}
 	\begin{figure}[thbp!]
 		\centering\includegraphics[width=170mm]{gs-line}
 		\caption{The line graph}
@@ -2720,35 +2723,184 @@ Clicking the various links on the top of the page will navigate to the various v
 Figure~\ref{gs-line} shows the line graph.
 This is a graph of the current altitude for both the booster and the sustainer.
 
-\subsubsection{3D view}
+\subsubsection{3D View}
 	\begin{figure}[thbp!]
 		\centering\includegraphics[width=170mm]{gs-3d}
 		\caption{The 3D view}
 		\label{gs-3d}
 	\end{figure}
+The 3D view, shown in figure~\ref{gs-3d}, plots the rocket's position in three dimensions in real-time.
+The trail of green dots show where the rocket has been, and the red dot shows the position of the launch pad.
+Hold down the right mouse button to rotate the camera, and use the mouse wheel to zoom in and out.
 
-\subsubsection{Table view}
+\subsubsection{Table View}
 	\begin{figure}[thbp!]
 		\centering\includegraphics[width=170mm]{gs-table}
 		\caption{The table view}
 		\label{gs-table}
 	\end{figure}
+The table view (figure~\ref{gs-table}) allows the user to view all data that was collected since
+the groundstation was turned on.
+New rows are added to the bottom of the table as packets are recieved.
+In order to prevent browser slow-down, table updating is limited to once per second,
+even if telemetry is being received at a higher rate.
 
-\subsubsection{Raw view}
+\subsubsection{Raw View}
 	\begin{figure}[thbp!]
 		\centering\includegraphics[width=170mm]{gs-raw}
 		\caption{The raw view}
 		\label{gs-raw}
 	\end{figure}
+The raw view, shown in figure~\ref{gs-raw}, shows all of the most recent telemetry from both the
+booster and the sustainer. All units are in degrees or meters, as appropriate.
+Altitude is listed in meters above sealevel (not groundlevel).
+``Raw altitude'' shows the altitude from the barometric sensors onboard the rocket,
+and ``GPS altitude'' reports the altitude from the global positioning system.
+``Timestamp'' shows the current time in milliseconds since January 1, 1970.
+Note ``Age'' property shows the age of packets, but it calculated by comparing the
+web browser's time to the server's time.
+If the web browser's and server's time are not synchronized, then the ``Age'' field will
+never reach zero.
+However, this field is useful for telling when the data is ``caught up'' to the present,
+and all historical telemetry has been sent.
+If the age is rapidly decreasing, then historical telemetry is still being sent.
 
-\subsubsection{Download logs}
+
+\subsubsection{Download Logs}
 	\begin{figure}[thbp!]
 		\centering\includegraphics[width=170mm]{gs-logs}
 		\caption{The logs download page}
 		\label{gs-logs}
 	\end{figure}
-
+Figure~\ref{gs-logs} shows logs page.
+Every time the groundstation is powered on, a new log file is created.
+The filename of each log is the current time in UTC.
+Users may simply click on the log that corresponds to the time of the launch to download data for that time.
+All log files are in CSV files and may be loaded natively in applications such as Microsoft Excel.
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% CHAPTER
+% LEARNING TECHNOLOGY
+
+\newpage
+\section{How We Learned New Technology}
+
+\subsection{Anisimova, Natasha}
+
+% Natasha's learning stuff here
+
+\subsection{Lee, Terrance}
+
+% An old dog can be taught new tricks
+
+\subsection{Morgan, Albert}
+
+% What I learned in kindergarten today.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% CHAPTER
+% LEARNING TECHNOLOGY
+
+\newpage
+\section{What We Learned}
+
+\subsection{Anisimova, Natasha}
+
+% Natasha's learning stuff here
+
+\subsection{Lee, Terrance}
+
+% An old dog can be taught new tricks
+
+\subsection{Morgan, Albert}
+
+% What I learned in kindergarten today.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% APPENDIX 1
+\newpage
+\appendix[Code Listings]
+
+
+
 	
 \printindex
 \bibliography{final}
